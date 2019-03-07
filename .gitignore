@@ -1,0 +1,5 @@
+.vscode/
+output/
+
+# MarkdownMonster backup files
+*.saved.bak
