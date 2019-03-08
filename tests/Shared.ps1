@@ -1,5 +1,5 @@
 function Reset-GlobalState {
-   $BarSegments.Clear()
+    $BarSegments.Clear()
 }
 
 $modulePath = Convert-Path $PSScriptRoot\..\src
