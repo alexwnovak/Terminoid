@@ -1,4 +1,4 @@
-. $PSScriptRoot\Bar.ps1
+. $PSScriptRoot\Push-BarSegment.ps1
 
 [System.Collections.ArrayList] $BarSegments = @()
 
