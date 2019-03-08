@@ -20,4 +20,12 @@ Describe 'Write-Color' {
 
         Assert-MockCalled -ModuleName Terminoid Write-Host -ParameterFilter { $NoNewline -eq $true } -Times 1
     }
+
+    It 'writes text with a foreground color' {
+        Write-Color 'text' -Foreground 255,0,0
+
+        Assert-MockCalled -ModuleName Terminoid Write-Host -Times 1 -ParameterFilter {
+            $Object -eq "$([char]0x1B)`[0m38;2;255;0;0mtext$([char]0x1B)`[0m"
+        }
+    }
 }
