@@ -28,4 +28,10 @@ Describe 'Write-Color' {
             $Object -eq "$([char]0x1B)`[0m38;2;255;0;0mtext$([char]0x1B)`[0m"
         }
     }
+
+    It 'writes text with a background color' {
+        Write-Color 'text' -Background 255, 0, 0
+
+        $Object -eq "$([char]0x1B)`[0m48;2;255;0;0mtext$([char]0x1B)`[0m"
+    }
 }
