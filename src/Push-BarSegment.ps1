@@ -14,7 +14,10 @@
 
         [Parameter( Mandatory, Position = 2, ParameterSetName = 'WithFunction' )]
         [scriptblock]
-        $Function
+        $Function,
+
+        [Parameter( Position = 3 )]
+        $Tag
     )
 
     if ( $PSBoundParameters.ContainsKey( 'Text' ) ) {
@@ -24,6 +27,7 @@
     $BarSegments.Add( @{
         'BackgroundColor' = $BackgroundColor;
         'ForegroundColor' = $ForegroundColor;
-        'Function' = $Function
+        'Function' = $Function;
+        'Tag' = $Tag
     } )
 }

@@ -25,5 +25,20 @@ Describe "Push-BarSegment" {
             Push-BarSegment -BackgroundColor Black -ForegroundColor Black -Function { 'function-text' }
             & $BarSegments[0].Function | Should -Be 'function-text'
         }
+
+        It 'can record an extra piece of data' {
+            $complexObject = @{
+                'KeyOne' = 'ValueOne';
+                'KeyTwo' = 'ValueTwo';
+            }
+
+            Push-BarSegment -BackgroundColor Black -ForegroundColor Black -Text { 'not-used' } -Tag $complexObject
+            $BarSegments[0].Tag | Should -Be $complexObject
+        }
+
+        It 'has no extra data by default' {
+            Push-BarSegment -BackgroundColor Black -ForegroundColor Black -Text { 'not-used' }
+            $BarSegments[0].Tag | Should -Be $null
+        }
     }
 }
