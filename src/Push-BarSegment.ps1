@@ -23,7 +23,7 @@
         $Function = { $Text }.GetNewClosure()
     }
 
-    $BarSegments.Add( @{
+    [void] $BarSegments.Add( @{
         'BackgroundColor' = $BackgroundColor;
         'ForegroundColor' = $ForegroundColor;
         'Function' = $Function;
