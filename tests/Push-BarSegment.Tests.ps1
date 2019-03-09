@@ -6,23 +6,34 @@ Describe "Push-BarSegment" {
     }
 
     Context 'Adding a new bar segment' {
-        It 'recorded the background color' {
-            Push-BarSegment -BackgroundColor Red -ForegroundColor White -Text 'not-used'
-            $BarSegments[0].BackgroundColor | Should -Be Red
+        It 'records the background color' {
+            Push-BarSegment -BackgroundColor 255,0,0 -ForegroundColor 0,0,0 -Text 'not-used'
+
+            $BarSegments[0].BackgroundColor | Should -Be 255,0,0
         }
 
-        It 'recorded the foreground color' {
-            Push-BarSegment -BackgroundColor Red -ForegroundColor White -Text 'not-used'
-            $BarSegments[0].ForegroundColor | Should -Be White
+        It 'records the foreground color' {
+            Push-BarSegment -BackgroundColor 0,0,0 -ForegroundColor 255,255,255 -Text 'not-used'
+
+            $BarSegments[0].ForegroundColor | Should -Be 255,255,255
+        }
+
+        It 'records both foreground and background color' {
+            Push-BarSegment -BackgroundColor 64,64,64 -ForegroundColor 255,255,255 -Text 'not-used'
+
+            $BarSegments[0].BackgroundColor | Should -Be 64,64,64
+            $BarSegments[0].ForegroundColor | Should -Be 255,255,255
         }
 
         It 'can provide the text from text' {
-            Push-BarSegment -BackgroundColor Black -ForegroundColor Black -Text 'the-text'
+            Push-BarSegment -ForegroundColor 0,0,0 -BackgroundColor 0,0,0 -Text 'the-text'
+
             & $BarSegments[0].Function | Should -Be 'the-text'
         }
 
         It 'can provide the text from a function' {
-            Push-BarSegment -BackgroundColor Black -ForegroundColor Black -Function { 'function-text' }
+            Push-BarSegment -ForegroundColor 0,0,0 -BackgroundColor 0,0,0 -Function { 'function-text' }
+
             & $BarSegments[0].Function | Should -Be 'function-text'
         }
 
@@ -32,12 +43,12 @@ Describe "Push-BarSegment" {
                 'KeyTwo' = 'ValueTwo';
             }
 
-            Push-BarSegment -BackgroundColor Black -ForegroundColor Black -Text { 'not-used' } -Tag $complexObject
+            Push-BarSegment -BackgroundColor 0,0,0 -ForegroundColor 0,0,0 -Text { 'not-used' } -Tag $complexObject
             $BarSegments[0].Tag | Should -Be $complexObject
         }
 
         It 'has no extra data by default' {
-            Push-BarSegment -BackgroundColor Black -ForegroundColor Black -Text { 'not-used' }
+            Push-BarSegment -BackgroundColor 0,0,0 -ForegroundColor 0,0,0 -Text { 'not-used' }
             $BarSegments[0].Tag | Should -Be $null
         }
     }

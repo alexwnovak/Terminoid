@@ -1,22 +1,21 @@
 ﻿function Push-BarSegment {
     param (
-        [Parameter( Mandatory, Position = 0 )]
-        [ConsoleColor]
+        [Parameter( Mandatory )]
+        [byte[]]
         $BackgroundColor,
 
-        [Parameter( Mandatory, Position = 1)]
-        [ConsoleColor]
+        [Parameter( Mandatory )]
+        [byte[]]
         $ForegroundColor,
 
-        [Parameter( Mandatory, Position = 2, ParameterSetName = 'WithText' )]
+        [Parameter( Mandatory, ParameterSetName = 'WithText' )]
         [string]
         $Text,
 
-        [Parameter( Mandatory, Position = 2, ParameterSetName = 'WithFunction' )]
+        [Parameter( Mandatory, ParameterSetName = 'WithFunction' )]
         [scriptblock]
         $Function,
 
-        [Parameter( Position = 3 )]
         $Tag
     )
 
