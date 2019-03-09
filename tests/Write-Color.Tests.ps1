@@ -34,4 +34,12 @@ Describe 'Write-Color' {
 
         $Object -eq "$([char]0x1B)`[0m48;2;255;0;0mtext$([char]0x1B)`[0m"
     }
+
+    It 'writes text with a foreground and background color' {
+        Write-Color 'text' -Foreground 250, 250, 250 -Background 255, 0, 0
+
+        Assert-MockCalled -ModuleName Terminoid Write-Host -Times 1 -ParameterFilter {
+            $Object -eq "$([char]0x1B)`[0m38;2;250;250;250;48;2;255;0;0mtext$([char]0x1B)`[0m"
+        }
+    }
 }
