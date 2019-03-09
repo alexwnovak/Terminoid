@@ -3,14 +3,16 @@ function Write-Color {
         [Parameter( Mandatory, Position = 0 )]
         $Object,
 
-        [switch]
-        $NoNewline = $false,
-
+        [Parameter( Position = 1 )]
         [byte[]]
         $Foreground,
 
+        [Parameter( Position = 2 )]
         [byte[]]
-        $Background
+        $Background,
+
+        [switch]
+        $NoNewline = $false
     )
 
     $e = [char]0x1B
