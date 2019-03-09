@@ -20,7 +20,7 @@ function Write-Color {
     $hasBackground = $PSBoundParameters.ContainsKey('Background')
 
     if ( $hasForeground -or $hasBackground ) {
-        $output += "$e`[0m"
+        $output += "$e`[0"
 
         if ( $hasForeground -and $hasBackground ) {
             $output += "38;2;$($Foreground[0]);$($Foreground[1]);$($Foreground[2]);"
