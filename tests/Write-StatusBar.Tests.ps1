@@ -13,7 +13,7 @@ Describe 'Write-StatusBar' {
         Assert-MockCalled -ModuleName Terminoid Write-Color -Times 0
     }
 
-    It 'has one bar and writes the value with the joiner character' {
+    It 'has one bar segment and writes the value with the joiner character' {
         Push-BarSegment -ForegroundColor 255,255,255 -BackgroundColor 0,0,0 -Text 'segment-text'
         Write-StatusBar
 
