@@ -49,4 +49,20 @@ Describe 'Format-Color' {
 
         Format-Color 'text' -Background $Background | Should -Be "$([char]0x1B)`[0;$($ExpectedBackground)mtext$([char]0x1B)`[0m"
     }
+
+    It 'formats the input with a bright background console color of <Background>' -Testcases @(
+        @{ Background = 'DarkGray'; ExpectedBackground = 100 },
+        @{ Background = 'Blue'; ExpectedBackground = 104 },
+        @{ Background = 'Green'; ExpectedBackground = 102 }
+        @{ Background = 'Cyan'; ExpectedBackground = 106 },
+        @{ Background = 'Red'; ExpectedBackground = 101 },
+        @{ Background = 'Magenta'; ExpectedBackground = 105 },
+        @{ Background = 'Yellow'; ExpectedBackground = 103 },
+        @{ Background = 'White'; ExpectedBackground = 107 }
+    ) {
+        param ( $Background, $ExpectedBackground )
+
+        Format-Color 'text' -Background $Background | Should -Be "$([char]0x1B)`[0;$($ExpectedBackground)mtext$([char]0x1B)`[0m"
+    }
+
 }

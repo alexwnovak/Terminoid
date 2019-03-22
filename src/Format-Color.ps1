@@ -35,7 +35,14 @@ function Format-Color {
 
     if ( $null -ne ($Background -as [ConsoleColor]) ) {
         $Background = $Background -as [ConsoleColor]
-        $backgroundInt = $ConsoleColorTable[$Background] + 10
+        $backgroundInt = [int] $Background
+
+        if ( $backgroundInt -ge 8 ) {
+            $Background = [ConsoleColor] ($backgroundInt - 8)
+            $backgroundInt = $ConsoleColorTable[$Background] + 70
+        } else {
+            $backgroundInt = $ConsoleColorTable[$Background] + 10
+        }
 
         "$e`[0;$($backgroundInt)m$Object$e`[0m"
         return
