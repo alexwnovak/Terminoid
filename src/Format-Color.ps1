@@ -40,21 +40,28 @@ function Format-Color {
         $Background
     )
 
+    if ( !$PSBoundParameters.ContainsKey( 'Foreground' ) -and !$PSBoundParameters.ContainsKey( 'Background' ) ) {
+        $Object
+        return
+    }
+
     $e = [char]0x1B
 
     if ( $null -ne ($Foreground -as [ConsoleColor]) ) {
-        $foregroundInt = GetAnsiForegroundColor ($Foreground -as [ConsoleColor])
-
-        "$e`[0;$($foregroundInt)m$Object$e`[0m"
-        return
+        $Foreground = GetAnsiForegroundColor ($Foreground -as [ConsoleColor])
     }
 
     if ( $null -ne ($Background -as [ConsoleColor]) ) {
-        $backgroundInt = GetAnsiBackgroundColor ($Background -as [ConsoleColor])
-
-        "$e`[0;$($backgroundInt)m$Object$e`[0m"
-        return
+        $Background = GetAnsiBackgroundColor ($Background -as [ConsoleColor])
     }
 
-    $Object
+    if ( $Foreground -and $Background ) {
+        $color = "$Foreground;$Background"
+    } elseif ( $Foreground ) {
+        $color = $Foreground
+    } elseif ( $Background ) {
+        $color = $Background
+    }
+
+    "$([char]0x1B)`[0;$($color)m$Object$([char]0x1B)`[0m"
 }

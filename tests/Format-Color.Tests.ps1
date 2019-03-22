@@ -64,4 +64,10 @@ Describe 'Format-Color' {
 
         Format-Color 'text' -Background $Background | Should -Be "$([char]0x1B)`[0;$($ExpectedBackground)mtext$([char]0x1B)`[0m"
     }
+
+    It 'formats the input with a background and foreground console color' {
+        $formattedOutput = Format-Color text -Foreground White -Background DarkBlue
+
+        $formattedOutput | Should -Be "$([char]0x1B)`[0;97;44mtext$([char]0x1B)`[0m"
+    }
 }
