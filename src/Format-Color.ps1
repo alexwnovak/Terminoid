@@ -9,6 +9,30 @@ $ConsoleColorTable = @{
     [ConsoleColor]::Gray = 37;
 }
 
+function GetAnsiForegroundColor( $ConsoleColor ) {
+    $foregroundInt = [int] $ConsoleColor
+
+    if ( $foregroundInt -ge 8 ) {
+        $ConsoleColor = [ConsoleColor] ($foregroundInt - 8)
+        $ConsoleColorTable[$ConsoleColor] + 60
+    } else {
+        $ConsoleColorTable[$ConsoleColor]
+    }
+}
+
+function GetAnsiBackgroundColor( $ConsoleColor ) {
+    $backgroundInt = [int] $ConsoleColor
+
+    if ( $backgroundInt -ge 8 ) {
+        $ConsoleColor = [ConsoleColor] ($backgroundInt - 8)
+        $ConsoleColorTable[$ConsoleColor] + 70
+    }
+    else {
+        $ConsoleColorTable[$ConsoleColor] + 10
+    }
+
+}
+
 function Format-Color {
     param (
         $Object,
@@ -19,30 +43,14 @@ function Format-Color {
     $e = [char]0x1B
 
     if ( $null -ne ($Foreground -as [ConsoleColor]) ) {
-        $Foreground = $Foreground -as [ConsoleColor]
-        $foregroundInt = [int] $Foreground
-
-        if ( $foregroundInt -ge 8 ) {
-            $Foreground = [ConsoleColor] ($foregroundInt - 8)
-            $foregroundInt = $ConsoleColorTable[$Foreground] + 60
-        } else {
-            $foregroundInt = $ConsoleColorTable[$Foreground]
-        }
+        $foregroundInt = GetAnsiForegroundColor ($Foreground -as [ConsoleColor])
 
         "$e`[0;$($foregroundInt)m$Object$e`[0m"
         return
     }
 
     if ( $null -ne ($Background -as [ConsoleColor]) ) {
-        $Background = $Background -as [ConsoleColor]
-        $backgroundInt = [int] $Background
-
-        if ( $backgroundInt -ge 8 ) {
-            $Background = [ConsoleColor] ($backgroundInt - 8)
-            $backgroundInt = $ConsoleColorTable[$Background] + 70
-        } else {
-            $backgroundInt = $ConsoleColorTable[$Background] + 10
-        }
+        $backgroundInt = GetAnsiBackgroundColor ($Background -as [ConsoleColor])
 
         "$e`[0;$($backgroundInt)m$Object$e`[0m"
         return
