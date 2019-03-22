@@ -20,16 +20,16 @@ function Format-Color {
 
     if ( $null -ne ($Foreground -as [ConsoleColor]) ) {
         $Foreground = $Foreground -as [ConsoleColor]
-
-        $intensity = 0
         $foregroundInt = [int] $Foreground
 
         if ( $foregroundInt -ge 8 ) {
-            $intensity = 1
             $Foreground = [ConsoleColor] ($foregroundInt - 8)
+            $foregroundInt = $ConsoleColorTable[$Foreground] + 60
+        } else {
+            $foregroundInt = $ConsoleColorTable[$Foreground]
         }
 
-        "$e`[$intensity;$($ConsoleColorTable[$Foreground])m$Object$e`[0m"
+        "$e`[0;$($foregroundInt)m$Object$e`[0m"
         return
     }
 
