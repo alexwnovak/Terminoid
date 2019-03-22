@@ -33,5 +33,13 @@ function Format-Color {
         return
     }
 
+    if ( $null -ne ($Background -as [ConsoleColor]) ) {
+        $Background = $Background -as [ConsoleColor]
+        $backgroundInt = $ConsoleColorTable[$Background] + 10
+
+        "$e`[0;$($backgroundInt)m$Object$e`[0m"
+        return
+    }
+
     $Object
 }
