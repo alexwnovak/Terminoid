@@ -70,4 +70,10 @@ Describe 'Format-Color' {
 
         $formattedOutput | Should -Be "$([char]0x1B)`[0;97;44mtext$([char]0x1B)`[0m"
     }
+
+    It 'formats a list of piped inputs' {
+        $formattedOutput = @('text') | Format-Color -Foreground White -Background DarkGray
+
+        $formattedOutput | Should -Be "$([char]0x1B)`[0;97;100mtext$([char]0x1B)`[0m"
+    }
 }

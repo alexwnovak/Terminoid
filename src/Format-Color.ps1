@@ -35,33 +35,38 @@ function GetAnsiBackgroundColor( $ConsoleColor ) {
 
 function Format-Color {
     param (
+        [Parameter( ValueFromPipeline )]
         $InputObject,
         $Foreground,
         $Background
     )
 
-    if ( !$PSBoundParameters.ContainsKey( 'Foreground' ) -and !$PSBoundParameters.ContainsKey( 'Background' ) ) {
-        $InputObject
-        return
+    begin {
+        $e = [char]0x1B
+
+        if ( $null -ne ($Foreground -as [ConsoleColor]) ) {
+            $Foreground = GetAnsiForegroundColor ($Foreground -as [ConsoleColor])
+        }
+
+        if ( $null -ne ($Background -as [ConsoleColor]) ) {
+            $Background = GetAnsiBackgroundColor ($Background -as [ConsoleColor])
+        }
+
+        if ( $Foreground -and $Background ) {
+            $color = "$Foreground;$Background"
+        } elseif ( $Foreground ) {
+            $color = $Foreground
+        } elseif ( $Background ) {
+            $color = $Background
+        }
     }
 
-    $e = [char]0x1B
+    process {
+        if ( !$PSBoundParameters.ContainsKey( 'Foreground' ) -and !$PSBoundParameters.ContainsKey( 'Background' ) ) {
+            $InputObject
+            return
+        }
 
-    if ( $null -ne ($Foreground -as [ConsoleColor]) ) {
-        $Foreground = GetAnsiForegroundColor ($Foreground -as [ConsoleColor])
+        "$([char]0x1B)`[0;$($color)m$InputObject$([char]0x1B)`[0m"
     }
-
-    if ( $null -ne ($Background -as [ConsoleColor]) ) {
-        $Background = GetAnsiBackgroundColor ($Background -as [ConsoleColor])
-    }
-
-    if ( $Foreground -and $Background ) {
-        $color = "$Foreground;$Background"
-    } elseif ( $Foreground ) {
-        $color = $Foreground
-    } elseif ( $Background ) {
-        $color = $Background
-    }
-
-    "$([char]0x1B)`[0;$($color)m$InputObject$([char]0x1B)`[0m"
 }
