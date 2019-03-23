@@ -29,6 +29,7 @@
       'Format-ChildItem',
       'Format-Color',
       'Push-BarSegment',
+      'Register-ChildItemFormatter',
       'Write-Color',
       'Write-StatusBar'
    )
@@ -39,7 +40,8 @@
 
    # Variables to export from this module
    VariablesToExport = @(
-      'BarSegments'
+      'BarSegments',
+      'FormatterTable'
    )
 
    # Aliases to export from this module, for best performance, do not use wildcards and do not
