@@ -35,13 +35,13 @@ function GetAnsiBackgroundColor( $ConsoleColor ) {
 
 function Format-Color {
     param (
-        $Object,
+        $InputObject,
         $Foreground,
         $Background
     )
 
     if ( !$PSBoundParameters.ContainsKey( 'Foreground' ) -and !$PSBoundParameters.ContainsKey( 'Background' ) ) {
-        $Object
+        $InputObject
         return
     }
 
@@ -63,5 +63,5 @@ function Format-Color {
         $color = $Background
     }
 
-    "$([char]0x1B)`[0;$($color)m$Object$([char]0x1B)`[0m"
+    "$([char]0x1B)`[0;$($color)m$InputObject$([char]0x1B)`[0m"
 }
