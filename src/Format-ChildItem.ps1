@@ -5,8 +5,10 @@ function Format-ChildItem {
     )
 
     process {
+        $foundMatch = $false
+
         foreach ( $formatter in $FormatterTable ) {
-            $match = & $FormatterTable.Predicate
+            $match = & $FormatterTable.Predicate $InputObject
 
             if ( $match ) {
                 & $FormatterTable.Function $InputObject
