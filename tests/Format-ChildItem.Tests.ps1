@@ -5,7 +5,7 @@ Describe 'Format-ChildItem' {
         Reset-GlobalState
     }
 
-    It 'passes the object through the pipeline by default' {
+    It 'passes the object through the pipeline if there are no formatters' {
         $filteredOutput = @(1,2,3) | Format-ChildItem
 
         $filteredOutput[0] | Should -Be 1
