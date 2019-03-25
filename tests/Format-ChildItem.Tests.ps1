@@ -14,11 +14,7 @@ Describe 'Format-ChildItem' {
     }
 
     It 'is filtered by a formatter' {
-        Register-ChildItemFormatter -Predicate { $true } -Function {
-            param ( $Object )
-
-            "Filtered $Object"
-        }
+        Register-ChildItemFormatter -Predicate { $true } -Function { param ( $Object ) "Filtered $Object" }
 
         $filteredOutput = @(1,2,3) | Format-ChildItem
 
@@ -28,15 +24,8 @@ Describe 'Format-ChildItem' {
     }
 
     It 'only uses the single formatter that matches' {
-        $predicate = [scriptblock] {
-            param ( $Object )
-            $Object -eq 2
-        }
-
-        $function = [scriptblock] {
-            param ( $Object )
-            "Filtered $Object"
-        }
+        $predicate = { param ( $Object ) $Object -eq 2 }
+        $function = { param ( $Object ) "Filtered $Object" }
 
         Register-ChildItemFormatter -Predicate $predicate -Function $function
 
