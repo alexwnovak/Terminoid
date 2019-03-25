@@ -8,11 +8,12 @@ function Format-ChildItem {
         $foundMatch = $false
 
         foreach ( $formatter in $FormatterTable ) {
-            $match = & $FormatterTable.Predicate $InputObject
+            $match = & $formatter.Predicate $InputObject
 
             if ( $match ) {
-                & $FormatterTable.Function $InputObject
+                & $formatter.Function $InputObject
                 $foundMatch = $true
+                break
             }
         }
 

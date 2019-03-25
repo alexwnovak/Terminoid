@@ -46,4 +46,16 @@ Describe 'Format-ChildItem' {
         $filteredOutput[1] | Should -Be 'Filtered 2'
         $filteredOutput[2] | Should -Be 3
     }
+
+    It 'only uses the first formatter that matches' {
+        $predicate = { param ( $Object ) $Object -eq 1 }
+        $function = { param ( $Object ) "Did not filter $Object" }
+        $predicate2 = { param ( $Object ) $Object -eq 1 }
+        $function2 = { param ( $Object ) "Filtered $Object" }
+
+        Register-ChildItemFormatter -Predicate $predicate -Function $function
+        Register-ChildItemFormatter -Predicate $predicate2 -Function $function2
+
+        1 | Format-ChildItem | Should -Be 'Filtered 1'
+    }
 }

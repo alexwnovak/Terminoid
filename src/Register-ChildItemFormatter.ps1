@@ -11,6 +11,6 @@ function Register-ChildItemFormatter {
 
     $FormatterTable.Push( @{
         Predicate = $Predicate;
-        Function = $Function
-    })
+        Function = $Function;
+    } )
 }
