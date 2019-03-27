@@ -77,6 +77,10 @@ function Format-Output {
         if ( $null -ne ($Background -as [byte[]]) ) {
             $rgb = $Background -as [byte[]]
 
+            if ( $rgb.Length -ne 3 ) {
+                throw 'An RGB color array must have 3 elements between 0 and 255'
+            }
+
             $modifiers += 48
             $modifiers += 2
             $modifiers += $rgb
