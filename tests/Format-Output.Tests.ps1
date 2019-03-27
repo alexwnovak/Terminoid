@@ -71,6 +71,18 @@ Describe 'Format-Output' {
         $formattedOutput | Should -Be "$([char]0x1B)`[0;97;44mtext$([char]0x1B)`[0m"
     }
 
+    It 'throws when passing less than 3 values for an RGB foreground' {
+        $formatOutput = { Format-Output text -Foreground 100,150 }
+
+        $formatOutput | Should -Throw
+    }
+
+    It 'throws when passing more than 3 values for an RGB foreground' {
+        $formatOutput = { Format-Output text -Foreground 1,2,3,4 }
+
+        $formatOutput | Should -Throw
+    }
+
     It 'formats the input with an RGB foreground color' {
        $formattedOutput = Format-Output text -Foreground 100,150,200
 

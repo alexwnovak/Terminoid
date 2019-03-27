@@ -60,13 +60,18 @@ function Format-Output {
             $modifiers += 4
         }
 
-        if ( $null -ne ($Foreground -as [ConsoleColor]) ) {
-            $modifiers += GetAnsiForegroundColor ($Foreground -as [ConsoleColor])
-        } elseif ( $null -ne ($Foreground -as [byte[]]) ) {
+        if ( $null -ne ($Foreground -as [byte[]]) ) {
             $rgb = $Foreground -as [byte[]]
+
+            if ( $rgb.Length -ne 3 ) {
+                throw 'An RGB color array must have 3 elements between 0 and 255'
+            }
+
             $modifiers += 38
             $modifiers += 2
             $modifiers += $rgb
+        } elseif ( $null -ne ($Foreground -as [ConsoleColor]) ) {
+            $modifiers += GetAnsiForegroundColor ($Foreground -as [ConsoleColor])
         }
 
         if ( $null -ne ($Background -as [ConsoleColor]) ) {
