@@ -43,30 +43,25 @@ function Format-Color {
 
     begin {
         $e = [char]0x1B
+        $modifiers = @()
+        $postfix = "$e`[0m"
 
         if ( $null -ne ($Foreground -as [ConsoleColor]) ) {
-            $Foreground = GetAnsiForegroundColor ($Foreground -as [ConsoleColor])
+            $modifiers += GetAnsiForegroundColor ($Foreground -as [ConsoleColor])
         }
 
         if ( $null -ne ($Background -as [ConsoleColor]) ) {
-            $Background = GetAnsiBackgroundColor ($Background -as [ConsoleColor])
-        }
-
-        if ( $Foreground -and $Background ) {
-            $color = "$Foreground;$Background"
-        } elseif ( $Foreground ) {
-            $color = $Foreground
-        } elseif ( $Background ) {
-            $color = $Background
+            $modifiers += GetAnsiBackgroundColor ($Background -as [ConsoleColor])
         }
     }
 
     process {
-        if ( !$PSBoundParameters.ContainsKey( 'Foreground' ) -and !$PSBoundParameters.ContainsKey( 'Background' ) ) {
+        if ( !$modifiers ) {
             $InputObject
             return
         }
 
-        "$([char]0x1B)`[0;$($color)m$InputObject$([char]0x1B)`[0m"
+        $prefix = "$e`[0;$($modifiers -Join ';')m"
+        "$prefix$InputObject$postfix"
     }
 }
