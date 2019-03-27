@@ -77,6 +77,10 @@ Describe 'Format-Output' {
         $formattedOutput | Should -Be "$([char]0x1B)`[0;97;100mtext$([char]0x1B)`[0m"
     }
 
+    It 'can italicize the input' {
+        Format-Output text -Italic | Should -Be "$([char]0x1B)`[0;3mtext$([char]0x1B)`[0m"
+    }
+
     It 'can underline the input' {
         Format-Output text -Underline | Should -Be "$([char]0x1B)`[0;4mtext$([char]0x1B)`[0m"
     }

@@ -41,6 +41,9 @@ function Format-Output {
         $Background,
 
         [switch]
+        $Italic,
+
+        [switch]
         $Underline
     )
 
@@ -48,6 +51,10 @@ function Format-Output {
         $e = [char]0x1B
         $modifiers = @()
         $postfix = "$e`[0m"
+
+        if ( $Italic ) {
+            $modifiers += 3
+        }
 
         if ( $Underline ) {
             $modifiers += 4
