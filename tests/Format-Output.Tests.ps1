@@ -1,8 +1,8 @@
 . $PSScriptRoot\Shared.ps1
 
-Describe 'Format-Color' {
+Describe 'Format-Output' {
     It 'writes unformatted text when omitting all color information' {
-        Format-Color 'text' | Should -Be 'text'
+        Format-Output 'text' | Should -Be 'text'
     }
 
     It 'formats the input with a dark foreground console color of <Foreground>' -TestCases @(
@@ -17,7 +17,7 @@ Describe 'Format-Color' {
     ) {
         param ( $Foreground, $ExpectedForeground )
 
-        Format-Color 'text' -Foreground $Foreground | Should -Be "$([char]0x1B)`[0;$($ExpectedForeground)mtext$([char]0x1B)`[0m"
+        Format-Output 'text' -Foreground $Foreground | Should -Be "$([char]0x1B)`[0;$($ExpectedForeground)mtext$([char]0x1B)`[0m"
     }
 
     It 'formats the input with a bright foreground console color of <Foreground>' -TestCases @(
@@ -32,7 +32,7 @@ Describe 'Format-Color' {
     ) {
         param ( $Foreground, $ExpectedForeground )
 
-        Format-Color 'text' -Foreground $Foreground | Should -Be "$([char]0x1B)`[0;$($ExpectedForeground)mtext$([char]0x1B)`[0m"
+        Format-Output 'text' -Foreground $Foreground | Should -Be "$([char]0x1B)`[0;$($ExpectedForeground)mtext$([char]0x1B)`[0m"
     }
 
     It 'formats the input with a dark background console color of <Background>' -Testcases @(
@@ -47,7 +47,7 @@ Describe 'Format-Color' {
     ) {
         param ( $Background, $ExpectedBackground )
 
-        Format-Color 'text' -Background $Background | Should -Be "$([char]0x1B)`[0;$($ExpectedBackground)mtext$([char]0x1B)`[0m"
+        Format-Output 'text' -Background $Background | Should -Be "$([char]0x1B)`[0;$($ExpectedBackground)mtext$([char]0x1B)`[0m"
     }
 
     It 'formats the input with a bright background console color of <Background>' -Testcases @(
@@ -62,22 +62,22 @@ Describe 'Format-Color' {
     ) {
         param ( $Background, $ExpectedBackground )
 
-        Format-Color 'text' -Background $Background | Should -Be "$([char]0x1B)`[0;$($ExpectedBackground)mtext$([char]0x1B)`[0m"
+        Format-Output 'text' -Background $Background | Should -Be "$([char]0x1B)`[0;$($ExpectedBackground)mtext$([char]0x1B)`[0m"
     }
 
     It 'formats the input with a background and foreground console color' {
-        $formattedOutput = Format-Color text -Foreground White -Background DarkBlue
+        $formattedOutput = Format-Output text -Foreground White -Background DarkBlue
 
         $formattedOutput | Should -Be "$([char]0x1B)`[0;97;44mtext$([char]0x1B)`[0m"
     }
 
     It 'formats a list of piped inputs' {
-        $formattedOutput = @('text') | Format-Color -Foreground White -Background DarkGray
+        $formattedOutput = @('text') | Format-Output -Foreground White -Background DarkGray
 
         $formattedOutput | Should -Be "$([char]0x1B)`[0;97;100mtext$([char]0x1B)`[0m"
     }
 
     It 'can underline the input' {
-        Format-Color text -Underline | Should -Be "$([char]0x1B)`[0;4mtext$([char]0x1B)`[0m"
+        Format-Output text -Underline | Should -Be "$([char]0x1B)`[0;4mtext$([char]0x1B)`[0m"
     }
 }

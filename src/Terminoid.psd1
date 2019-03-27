@@ -27,7 +27,7 @@
    # delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @(
       'Format-ChildItem',
-      'Format-Color',
+      'Format-Output',
       'Push-BarSegment',
       'Register-ChildItemFormatter',
       'Write-Color',

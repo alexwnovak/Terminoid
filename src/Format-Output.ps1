@@ -33,7 +33,7 @@ function GetAnsiBackgroundColor( $ConsoleColor ) {
 
 }
 
-function Format-Color {
+function Format-Output {
     param (
         [Parameter( ValueFromPipeline )]
         $InputObject,
