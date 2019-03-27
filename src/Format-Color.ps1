@@ -38,13 +38,20 @@ function Format-Color {
         [Parameter( ValueFromPipeline )]
         $InputObject,
         $Foreground,
-        $Background
+        $Background,
+
+        [switch]
+        $Underline
     )
 
     begin {
         $e = [char]0x1B
         $modifiers = @()
         $postfix = "$e`[0m"
+
+        if ( $Underline ) {
+            $modifiers += 4
+        }
 
         if ( $null -ne ($Foreground -as [ConsoleColor]) ) {
             $modifiers += GetAnsiForegroundColor ($Foreground -as [ConsoleColor])
