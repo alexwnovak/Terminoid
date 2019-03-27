@@ -74,6 +74,13 @@ function Format-Output {
             $modifiers += GetAnsiForegroundColor ($Foreground -as [ConsoleColor])
         }
 
+        if ( $null -ne ($Background -as [byte[]]) ) {
+            $rgb = $Background -as [byte[]]
+
+            $modifiers += 48
+            $modifiers += 2
+            $modifiers += $rgb
+        }
         if ( $null -ne ($Background -as [ConsoleColor]) ) {
             $modifiers += GetAnsiBackgroundColor ($Background -as [ConsoleColor])
         }

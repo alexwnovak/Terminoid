@@ -89,6 +89,12 @@ Describe 'Format-Output' {
        $formattedOutput | Should -Be "$([char]0x1B)`[0;38;2;100;150;200mtext$([char]0x1B)`[0m"
     }
 
+    It 'formats the input with an RGB background color' {
+        $formattedOutput = Format-Output text -Background 100, 150, 200
+
+        $formattedOutput | Should -Be "$([char]0x1B)`[0;48;2;100;150;200mtext$([char]0x1B)`[0m"
+    }
+
     It 'formats a list of piped inputs' {
         $formattedOutput = @('text') | Format-Output -Foreground White -Background DarkGray
 
