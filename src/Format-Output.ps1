@@ -11,6 +11,8 @@ $ConsoleColorTable = @{
 
 $ForegroundFlag = 38
 $BackgroundFlag = 48
+$ItalicFlag = 3
+$UnderlineFlag = 4
 
 function GetAnsiForegroundColor( $ConsoleColor ) {
     $foregroundInt = [int] $ConsoleColor
@@ -29,8 +31,7 @@ function GetAnsiBackgroundColor( $ConsoleColor ) {
     if ( $backgroundInt -ge 8 ) {
         $ConsoleColor = [ConsoleColor] ($backgroundInt - 8)
         $ConsoleColorTable[$ConsoleColor] + 70
-    }
-    else {
+    } else {
         $ConsoleColorTable[$ConsoleColor] + 10
     }
 }
@@ -49,6 +50,7 @@ function Format-Output {
     param (
         [Parameter( ValueFromPipeline )]
         $InputObject,
+
         $Foreground,
         $Background,
 
@@ -65,11 +67,11 @@ function Format-Output {
         $postfix = "$e`[0m"
 
         if ( $Italic ) {
-            $modifiers += 3
+            $modifiers += $ItalicFlag
         }
 
         if ( $Underline ) {
-            $modifiers += 4
+            $modifiers += $UnderlineFlag
         }
 
         if ( $null -ne ($Foreground -as [byte[]]) ) {
