@@ -9,8 +9,6 @@ $ConsoleColorToAnsiTable = @(
     7    # Gray
 )
 
-$ForegroundFlag = 38
-$BackgroundFlag = 48
 $ItalicFlag = 3
 $UnderlineFlag = 4
 
@@ -40,14 +38,27 @@ function GetAsConsoleColor {
     }
 }
 
-function GetAsRgbArray( $SetterFlag, $Rgb ) {
+function GetAsRgbArray {
+    param (
+        [Parameter()]
+        [ValidateSet( 'Foreground', 'Background' )]
+        $ColorType,
+
+        $Rgb
+    )
+
+    $modifier = switch ( $ColorType ) {
+        'Foreground' { 38 }
+        'Background' { 48 }
+    }
+
     $Rgb = $Rgb -as [byte[]]
 
     if ( $Rgb.Length -ne 3 ) {
         throw 'An RGB color array must have 3 elements between 0 and 255'
     }
 
-    @($SetterFlag, 2, $Rgb[0], $Rgb[1], $Rgb[2])
+    @($modifier, 2, $Rgb[0], $Rgb[1], $Rgb[2])
 }
 
 function Format-Output {
@@ -79,13 +90,13 @@ function Format-Output {
         }
 
         if ( $null -ne ($Foreground -as [byte[]]) ) {
-            $modifiers += GetAsRgbArray $ForegroundFlag $Foreground
+            $modifiers += GetAsRgbArray -ColorType Foreground -Rgb $Foreground
         } elseif ( $null -ne ($Foreground -as [ConsoleColor]) ) {
             $modifiers += GetAsConsoleColor -ColorType Foreground -ColorName $Foreground
         }
 
         if ( $null -ne ($Background -as [byte[]]) ) {
-            $modifiers += GetAsRgbArray $BackgroundFlag $Background
+            $modifiers += GetAsRgbArray -ColorType Background -Rgb $Background
         } elseif ( $null -ne ($Background -as [ConsoleColor]) ) {
             $modifiers += GetAsConsoleColor -ColorType Background -ColorName $Background
         }
