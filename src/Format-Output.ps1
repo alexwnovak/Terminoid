@@ -1,38 +1,42 @@
-$ConsoleColorTable = @{
-    [ConsoleColor]::Black = 30;
-    [ConsoleColor]::DarkBlue = 34;
-    [ConsoleColor]::DarkGreen = 32;
-    [ConsoleColor]::DarkCyan = 36;
-    [ConsoleColor]::DarkRed = 31;
-    [ConsoleColor]::DarkMagenta = 35;
-    [ConsoleColor]::DarkYellow = 33;
-    [ConsoleColor]::Gray = 37;
-}
+$ConsoleColorToAnsiTable = @(
+    0,   # Black
+    4,   # Blue
+    2,   # Green
+    6,   # Cyan
+    1,   # Red
+    5,   # Magenta
+    3,   # Yellow
+    7    # Gray
+)
 
 $ForegroundFlag = 38
 $BackgroundFlag = 48
 $ItalicFlag = 3
 $UnderlineFlag = 4
 
-function GetAnsiForegroundColor( $ConsoleColor ) {
-    $foregroundInt = [int] $ConsoleColor
+function GetAsConsoleColor {
+    param (
+        [Parameter()]
+        [ValidateSet( 'Foreground', 'Background' )]
+        [string]
+        $ColorType,
 
-    if ( $foregroundInt -ge 8 ) {
-        $ConsoleColor = [ConsoleColor] ($foregroundInt - 8)
-        $ConsoleColorTable[$ConsoleColor] + 60
-    } else {
-        $ConsoleColorTable[$ConsoleColor]
+        $ColorName
+    )
+
+    $indexModifier = switch ( $ColorType ) {
+        'Foreground' { 30 }
+        'Background' { 40 }
     }
-}
 
-function GetAnsiBackgroundColor( $ConsoleColor ) {
-    $backgroundInt = [int] $ConsoleColor
+    $consoleColor = $ColorName -as [ConsoleColor]
+    $colorIndex = [int] $consoleColor
 
-    if ( $backgroundInt -ge 8 ) {
-        $ConsoleColor = [ConsoleColor] ($backgroundInt - 8)
-        $ConsoleColorTable[$ConsoleColor] + 70
+    if ( $colorIndex -ge 8 ) {
+        $colorIndex = $colorIndex - 8
+        $ConsoleColorToAnsiTable[$colorIndex] + $indexModifier + 60
     } else {
-        $ConsoleColorTable[$ConsoleColor] + 10
+        $ConsoleColorToAnsiTable[$colorIndex] + $indexModifier
     }
 }
 
@@ -77,13 +81,13 @@ function Format-Output {
         if ( $null -ne ($Foreground -as [byte[]]) ) {
             $modifiers += GetAsRgbArray $ForegroundFlag $Foreground
         } elseif ( $null -ne ($Foreground -as [ConsoleColor]) ) {
-            $modifiers += GetAnsiForegroundColor ($Foreground -as [ConsoleColor])
+            $modifiers += GetAsConsoleColor -ColorType Foreground -ColorName $Foreground
         }
 
         if ( $null -ne ($Background -as [byte[]]) ) {
             $modifiers += GetAsRgbArray $BackgroundFlag $Background
         } elseif ( $null -ne ($Background -as [ConsoleColor]) ) {
-            $modifiers += GetAnsiBackgroundColor ($Background -as [ConsoleColor])
+            $modifiers += GetAsConsoleColor -ColorType Background -ColorName $Background
         }
     }
 
