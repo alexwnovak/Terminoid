@@ -1,3 +1,6 @@
+$SizeTable = @(1PB, 1TB, 1GB, 1MB, 1KB)
+$LabelTable = @('PB', 'TB', 'GB', 'MB', 'KB')
+
 function Format-Size {
     param (
         [Parameter( Mandatory )]
@@ -5,17 +8,20 @@ function Format-Size {
         $Size
     )
 
-    if ( $Size -gt 1PB ) {
-        "$($Size / 1PB) PB"
-    } elseif ( $Size -gt 1TB ) {
-        "$($Size / 1TB) TB"
-    } elseif ( $Size -gt 1GB ) {
-        "$($Size / 1GB) GB"
-    } elseif ( $Size -gt 1MB ) {
-        "$($Size / 1MB) MB"
-    } elseif ( $Size -gt 1KB ) {
-        "$($Size / 1KB) KB"
-    } else {
-        "$Size B"
+    for ( $index = 0; $index -lt $SizeTable.Length; $index++ ) {
+        if ( $Size -gt $SizeTable[$index] ) {
+            $unitSize = $Size / $SizeTable[$index]
+
+            if ( $unitSize -ge 10 ) {
+                $unitSize = [Math]::Round( $unitSize, 0 )
+            } else {
+                $unitSize = [Math]::Round( $unitSize, 1 )
+            }
+
+            "$unitSize $($LabelTable[$index])"
+            return
+        }
     }
+
+    "$Size B"
 }
