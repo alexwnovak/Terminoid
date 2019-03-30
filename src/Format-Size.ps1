@@ -18,8 +18,7 @@ function Format-Size {
                 $unitSize = [Math]::Round( $unitSize, 1 )
             }
 
-            "$unitSize $($LabelTable[$index])"
-            return
+            return "$unitSize $($LabelTable[$index])"
         }
     }
 
