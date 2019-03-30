@@ -29,6 +29,7 @@
       'Format-ChildItem',
       'Format-Date',
       'Format-Output',
+      'Format-Size',
       'Push-BarSegment',
       'Register-ChildItemFormatter',
       'Write-Color',
