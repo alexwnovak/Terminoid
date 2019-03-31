@@ -11,15 +11,6 @@
 [System.Collections.ArrayList] $LocationHistory = @()
 $FormatterTable = New-Object System.Collections.Stack
 
-$exportModuleMemberParams = @{
-    Function = @(
-       'Push-BarSegment'
-    )
-    Variable = @(
-       'BarSegments'
-    )
-}
-
 Export-ModuleMember -Function Format-ChildItem
 Export-ModuleMember -Function Format-Date
 Export-ModuleMember -Function Format-Output
@@ -31,5 +22,3 @@ Export-ModuleMember -Function Write-StatusBar
 Export-ModuleMember -Variable BarSegments
 Export-ModuleMember -Variable LocationHistory
 Export-ModuleMember -Variable FormatterTable
-
-#Export-ModuleMember @exportModuleMemberParams
