@@ -8,6 +8,7 @@
 . $PSScriptRoot\Write-StatusBar.ps1
 
 [System.Collections.ArrayList] $BarSegments = @()
+[System.Collections.ArrayList] $LocationHistory = @()
 $FormatterTable = New-Object System.Collections.Stack
 
 $exportModuleMemberParams = @{
@@ -28,6 +29,7 @@ Export-ModuleMember -Function Register-ChildItemFormatter
 Export-ModuleMember -Function Write-Color
 Export-ModuleMember -Function Write-StatusBar
 Export-ModuleMember -Variable BarSegments
+Export-ModuleMember -Variable LocationHistory
 Export-ModuleMember -Variable FormatterTable
 
 #Export-ModuleMember @exportModuleMemberParams
