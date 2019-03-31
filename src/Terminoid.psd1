@@ -32,6 +32,7 @@
       'Format-Size',
       'Push-BarSegment',
       'Register-ChildItemFormatter',
+      'Set-Location',
       'Write-Color',
       'Write-StatusBar'
    )

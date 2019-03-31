@@ -4,6 +4,7 @@
 . $PSScriptRoot\Format-Size.ps1
 . $PSScriptRoot\Push-BarSegment.ps1
 . $PSScriptRoot\Register-ChildItemFormatter.ps1
+. $PSScriptRoot\Set-Location.ps1
 . $PSScriptRoot\Write-Color.ps1
 . $PSScriptRoot\Write-StatusBar.ps1
 
@@ -17,6 +18,7 @@ Export-ModuleMember -Function Format-Output
 Export-ModuleMember -Function Format-Size
 Export-ModuleMember -Function Push-BarSegment
 Export-ModuleMember -Function Register-ChildItemFormatter
+Export-ModuleMember -Function Set-Location
 Export-ModuleMember -Function Write-Color
 Export-ModuleMember -Function Write-StatusBar
 Export-ModuleMember -Variable BarSegments

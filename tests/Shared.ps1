@@ -1,5 +1,6 @@
 function Reset-GlobalState {
     $BarSegments.Clear()
+    $LocationHistory.Clear()
     $FormatterTable.Clear()
 }
 
