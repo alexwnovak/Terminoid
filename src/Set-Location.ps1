@@ -1,13 +1,18 @@
 function Set-LocationInternal {
-    Set-Location @Args
-}
-
-function Set-Location {
     param (
         $Path
     )
 
-    Set-LocationInternal @Args
+    Microsoft.PowerShell.Management\Set-Location $Path
+}
+
+function Set-Location {
+    [CmdletBinding()]
+    param (
+        $Path
+    )
+
+    Set-LocationInternal $Path
 
     [void] $LocationHistory.Add( $Path )
 }
