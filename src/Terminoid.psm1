@@ -1,14 +1,4 @@
-. $PSScriptRoot\Disable-Cursor.ps1
-. $PSScriptRoot\Enable-Cursor.ps1
-. $PSScriptRoot\Format-ChildItem.ps1
-. $PSScriptRoot\Format-Date.ps1
-. $PSScriptRoot\Format-Output.ps1
-. $PSScriptRoot\Format-Size.ps1
-. $PSScriptRoot\Push-BarSegment.ps1
-. $PSScriptRoot\Register-ChildItemFormatter.ps1
-. $PSScriptRoot\Set-Location.ps1
-. $PSScriptRoot\Write-Color.ps1
-. $PSScriptRoot\Write-StatusBar.ps1
+Get-ChildItem $PSScriptRoot\*.ps1 | ForEach-Object { . $_ }
 
 [System.Collections.ArrayList] $BarSegments = @()
 [System.Collections.ArrayList] $LocationHistory = @()
