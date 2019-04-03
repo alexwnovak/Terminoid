@@ -1,3 +1,5 @@
+. $PSScriptRoot\Disable-Cursor.ps1
+. $PSScriptRoot\Enable-Cursor.ps1
 . $PSScriptRoot\Format-ChildItem.ps1
 . $PSScriptRoot\Format-Date.ps1
 . $PSScriptRoot\Format-Output.ps1
@@ -12,6 +14,8 @@
 [System.Collections.ArrayList] $LocationHistory = @()
 $FormatterTable = New-Object System.Collections.Stack
 
+Export-ModuleMember -Function Disable-Cursor
+Export-ModuleMember -Function Enable-Cursor
 Export-ModuleMember -Function Format-ChildItem
 Export-ModuleMember -Function Format-Date
 Export-ModuleMember -Function Format-Output
