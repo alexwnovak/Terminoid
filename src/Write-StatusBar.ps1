@@ -1,12 +1,39 @@
+function WriteSingleSegment( $BarSegment ) {
+    $block = Format-Output " $(& $BarSegment.Function) " `
+                -Background $BarSegment.BackgroundColor `
+                -Foreground $BarSegment.ForegroundColor  `
+
+    $joiner = Format-Output $JoinerChar -Foreground $BarSegments[$i - 1].BackgroundColor
+
+    "$block$joiner"
+}
+
 function Write-StatusBar {
     if ( $BarSegments.Count -eq 0 ) {
         return
     }
+    elseif ( $BarSegments.Count -eq 1 ) {
+        $statusBar = WriteSingleSegment $BarSegments[0]
+    }
+    else {
+        for ( $i = 0; $i -lt $BarSegments.Count; $i++ ) {
+            $bar = $BarSegments[$i]
 
-    Write-Color " $(& $BarSegments[0].Function) " `
-        -Foreground $BarSegments[0].ForegroundColor `
-        -Background $BarSegments[0].BackgroundColor `
-        -NoNewline
+            $statusBar += Format-Output " $(& $bar.Function) " `
+                -Background $bar.BackgroundColor `
+                -Foreground $bar.ForegroundColor  `
 
-    Write-Color "$([char]0xE0B0)" -Foreground $BarSegments[0].BackgroundColor
+            if ( $i -lt $BarSegments.Count - 1 ) {
+                $nextBar = $BarSegments[$i + 1]
+
+                $statusBar += Format-Output $JoinerChar `
+                    -Background $nextBar.BackgroundColor  `
+                    -Foreground $bar.BackgroundColor `
+            }
+        }
+
+        $statusBar += Format-Output $JoinerChar -Foreground $BarSegments[$i - 1].BackgroundColor
+    }
+
+    "$($statusBar) "
 }
