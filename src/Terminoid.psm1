@@ -6,6 +6,8 @@ $FormatterTable = New-Object System.Collections.Stack
 
 $DefaultStatReader = $function:DefaultFileStatReader
 
+$JoinerChar = [char]0xE0B0
+
 [System.Collections.ArrayList] $StatReaderTable = @()
 Reset-StatReader
 
@@ -30,6 +32,7 @@ Export-ModuleMember -Function Write-Color
 Export-ModuleMember -Function Write-StatusBar
 Export-ModuleMember -Variable BarSegments
 Export-ModuleMember -Variable DefaultStatReader
+Export-ModuleMember -Variable JoinerChar
 Export-ModuleMember -Variable LocationHistory
 Export-ModuleMember -Variable FormatterTable
 Export-ModuleMember -Variable StatReaderTable

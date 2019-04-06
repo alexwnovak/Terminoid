@@ -5,28 +5,15 @@ Describe 'Write-StatusBar' {
         Reset-GlobalState
     }
 
-    Mock -ModuleName Terminoid Write-Color { }
+    $e = [char] 0x1B
 
     It 'writes nothing if there are no bars' {
-        Write-StatusBar
-
-        Assert-MockCalled -ModuleName Terminoid Write-Color -Times 0
+        Write-StatusBar | Should -Be $null
     }
 
-    It 'has one bar segment and writes the value with the joiner character' {
+    It 'writes a complete bar segment' {
         Push-BarSegment -ForegroundColor 255,255,255 -BackgroundColor 0,0,0 -Text 'segment-text'
-        Write-StatusBar
 
-        Assert-MockCalled -ModuleName Terminoid Write-Color -ParameterFilter {
-            $Object -eq ' segment-text ' -and `
-            $null -eq ($Foreground | Compare-Object @(255,255,255)) -and `
-            $null -eq ($Background | Compare-Object @(0,0,0)) -and `
-            $NoNewline -eq $true
-        }
-
-        Assert-MockCalled -ModuleName Terminoid Write-Color -ParameterFilter {
-            $Object -eq "$([char]0xE0B0)" -and `
-            $null -eq ($Foreground | Compare-Object @(0,0,0))
-        }
+        Write-StatusBar | Should -Be "$e[0;38;2;255;255;255;48;2;0;0;0m segment-text $e[0m$e[0;38;2;0;0;0m$JoinerChar$e[0m"
     }
 }
