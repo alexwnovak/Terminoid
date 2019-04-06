@@ -11,13 +11,13 @@ Reset-StatReader
 
 New-Alias -Name stat -Value Get-FileStatistics
 
-Export-ModuleMember -Function Disable-Cursor
 Export-ModuleMember -Function Enable-Cursor
 Export-ModuleMember -Function Format-ChildItem
 Export-ModuleMember -Function Format-Date
 Export-ModuleMember -Function Format-Output
 Export-ModuleMember -Function Format-Size
 Export-ModuleMember -Function Get-FileStatistics
+Export-ModuleMember -Function Hide-Cursor
 Export-ModuleMember -Function Pop-BarSegment
 Export-ModuleMember -Function Push-BarSegment
 Export-ModuleMember -Function Register-ChildItemFormatter

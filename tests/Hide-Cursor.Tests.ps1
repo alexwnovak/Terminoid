@@ -1,7 +1,7 @@
 . $PSScriptRoot\Shared.ps1
 
-Describe 'Disable-Cursor' {
+Describe 'Hide-Cursor' {
     It 'writes the terminal sequence to hide the cursor' {
-        Disable-Cursor | Should -Be "$([char]0x1B)[?25l"
+        Hide-Cursor | Should -Be "$([char]0x1B)[?25l"
     }
 }
