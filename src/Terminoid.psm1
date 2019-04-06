@@ -9,6 +9,8 @@ $DefaultStatReader = $function:DefaultFileStatReader
 [System.Collections.ArrayList] $StatReaderTable = @()
 Reset-StatReader
 
+New-Alias -Name stat -Value Get-FileStatistics
+
 Export-ModuleMember -Function Disable-Cursor
 Export-ModuleMember -Function Enable-Cursor
 Export-ModuleMember -Function Format-ChildItem
@@ -30,3 +32,4 @@ Export-ModuleMember -Variable DefaultStatReader
 Export-ModuleMember -Variable LocationHistory
 Export-ModuleMember -Variable FormatterTable
 Export-ModuleMember -Variable StatReaderTable
+Export-ModuleMember -Alias stat
