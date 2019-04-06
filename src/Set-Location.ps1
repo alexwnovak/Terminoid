@@ -6,6 +6,10 @@ function Set-LocationInternal {
     Microsoft.PowerShell.Management\Set-Location $Path
 }
 
+function ConvertTo-FullPath( $Path ) {
+    [System.IO.Path]::GetFullPath( $Path )
+}
+
 function Set-Location {
     [CmdletBinding()]
     param (
@@ -14,5 +18,8 @@ function Set-Location {
 
     Set-LocationInternal $Path
 
-    [void] $LocationHistory.Add( $Path )
+    $newLocation = ConvertTo-FullPath $Path
+
+    [void] (New-Event -SourceIdentifier Terminoid.LocationChanged -MessageData $newLocation)
+    [void] $LocationHistory.Add( $newLocation )
 }
