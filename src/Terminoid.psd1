@@ -47,6 +47,7 @@
    # Variables to export from this module
    VariablesToExport = @(
       'BarSegments',
+      'DefaultStatReader',
       'LocationHistory',
       'FormatterTable'
    )

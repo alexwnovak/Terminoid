@@ -4,6 +4,8 @@ Get-ChildItem $PSScriptRoot\*.ps1 | ForEach-Object { . $_ }
 [System.Collections.ArrayList] $LocationHistory = @()
 $FormatterTable = New-Object System.Collections.Stack
 
+$DefaultStatReader = $function:DefaultFileStatReader
+
 Export-ModuleMember -Function Disable-Cursor
 Export-ModuleMember -Function Enable-Cursor
 Export-ModuleMember -Function Format-ChildItem
@@ -17,5 +19,6 @@ Export-ModuleMember -Function Set-Location
 Export-ModuleMember -Function Write-Color
 Export-ModuleMember -Function Write-StatusBar
 Export-ModuleMember -Variable BarSegments
+Export-ModuleMember -Variable DefaultStatReader
 Export-ModuleMember -Variable LocationHistory
 Export-ModuleMember -Variable FormatterTable
