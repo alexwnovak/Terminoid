@@ -28,7 +28,6 @@ Export-ModuleMember -Function Register-FileStatReader
 Export-ModuleMember -Function Set-Location
 Export-ModuleMember -Function Set-DefaultFileStatReader
 Export-ModuleMember -Function Show-Cursor
-Export-ModuleMember -Function Write-Color
 Export-ModuleMember -Function Write-StatusBar
 Export-ModuleMember -Variable BarSegments
 Export-ModuleMember -Variable DefaultStatReader

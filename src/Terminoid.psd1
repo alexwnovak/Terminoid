@@ -41,7 +41,6 @@
       'Set-DefaultFileStatReader',
       'Set-Location',
       'Show-Cursor',
-      'Write-Color',
       'Write-StatusBar'
    )
 
