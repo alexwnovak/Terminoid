@@ -37,6 +37,7 @@
       'Register-ChildItemFormatter',
       'Register-FileStatReader',
       'Reset-DefaultFileStatReader',
+      'Reset-StatReader'
       'Set-DefaultFileStatReader',
       'Set-Location',
       'Write-Color',

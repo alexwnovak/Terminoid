@@ -7,6 +7,7 @@ $FormatterTable = New-Object System.Collections.Stack
 $DefaultStatReader = $function:DefaultFileStatReader
 
 [System.Collections.ArrayList] $StatReaderTable = @()
+Reset-StatReader
 
 Export-ModuleMember -Function Disable-Cursor
 Export-ModuleMember -Function Enable-Cursor
@@ -18,6 +19,7 @@ Export-ModuleMember -Function Get-FileStatistics
 Export-ModuleMember -Function Push-BarSegment
 Export-ModuleMember -Function Register-ChildItemFormatter
 Export-ModuleMember -Function Reset-DefaultFileStatReader
+Export-ModuleMember -Function Reset-StatReader
 Export-ModuleMember -Function Register-FileStatReader
 Export-ModuleMember -Function Set-Location
 Export-ModuleMember -Function Set-DefaultFileStatReader
