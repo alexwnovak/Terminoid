@@ -33,6 +33,7 @@
       'Format-Output',
       'Format-Size',
       'Get-FileStatistics',
+      'Pop-BarSegment',
       'Push-BarSegment',
       'Register-ChildItemFormatter',
       'Register-FileStatReader',

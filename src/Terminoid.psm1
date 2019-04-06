@@ -18,6 +18,7 @@ Export-ModuleMember -Function Format-Date
 Export-ModuleMember -Function Format-Output
 Export-ModuleMember -Function Format-Size
 Export-ModuleMember -Function Get-FileStatistics
+Export-ModuleMember -Function Pop-BarSegment
 Export-ModuleMember -Function Push-BarSegment
 Export-ModuleMember -Function Register-ChildItemFormatter
 Export-ModuleMember -Function Reset-DefaultFileStatReader

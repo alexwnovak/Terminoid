@@ -51,5 +51,12 @@ Describe "Push-BarSegment" {
             Push-BarSegment -BackgroundColor 0,0,0 -ForegroundColor 0,0,0 -Text { 'not-used' }
             $BarSegments[0].Tag | Should -Be $null
         }
+
+        It 'can remove the bar segment' {
+            Push-BarSegment -BackgroundColor 0,0,0 -ForegroundColor 0,0,0 -Text { 'not-used' }
+            Pop-BarSegment
+
+            $BarSegments.Count | Should -Be 0
+        }
     }
 }
