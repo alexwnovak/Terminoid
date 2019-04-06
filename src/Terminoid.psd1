@@ -32,8 +32,13 @@
       'Format-Date',
       'Format-Output',
       'Format-Size',
+      'Get-FileStatistics',
       'Push-BarSegment',
       'Register-ChildItemFormatter',
+      'Register-FileStatReader',
+      'Reset-DefaultFileStatReader',
+      'Reset-StatReader'
+      'Set-DefaultFileStatReader',
       'Set-Location',
       'Write-Color',
       'Write-StatusBar'
@@ -46,13 +51,17 @@
    # Variables to export from this module
    VariablesToExport = @(
       'BarSegments',
+      'DefaultStatReader',
       'LocationHistory',
-      'FormatterTable'
+      'FormatterTable',
+      'StatReaderTable'
    )
 
    # Aliases to export from this module, for best performance, do not use wildcards and do not
    # delete the entry, use an empty array if there are no aliases to export.
-   AliasesToExport   = @()
+   AliasesToExport   = @(
+      'stat'
+   )
 
    # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also
    # contain a PSData hashtable with additional module metadata used by PowerShell.

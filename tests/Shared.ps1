@@ -4,6 +4,10 @@ function Reset-GlobalState {
     $FormatterTable.Clear()
 }
 
+function Resolve-TestFile( $Name ) {
+    "$PSScriptRoot\TestFiles\$Name"
+}
+
 $modulePath = Convert-Path $PSScriptRoot\..\src
 $moduleManifestPath = "$modulePath\Terminoid.psd1"
 
