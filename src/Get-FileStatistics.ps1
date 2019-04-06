@@ -14,4 +14,12 @@ function Get-FileStatistics {
     )
 
     & $DefaultStatReader $Path
+
+    foreach ( $statReader in $StatReaderTable ) {
+        $extension = [System.IO.Path]::GetExtension( $Path )
+
+        if ( $extension -eq $statReader.Extension ) {
+            & $statReader.Function $Path
+        }
+    }
 }

@@ -35,6 +35,7 @@
       'Get-FileStatistics',
       'Push-BarSegment',
       'Register-ChildItemFormatter',
+      'Register-FileStatReader',
       'Reset-DefaultFileStatReader',
       'Set-DefaultFileStatReader',
       'Set-Location',
@@ -51,7 +52,8 @@
       'BarSegments',
       'DefaultStatReader',
       'LocationHistory',
-      'FormatterTable'
+      'FormatterTable',
+      'StatReaderTable'
    )
 
    # Aliases to export from this module, for best performance, do not use wildcards and do not

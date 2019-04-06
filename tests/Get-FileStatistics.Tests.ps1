@@ -30,4 +30,17 @@ Describe 'Get-FileStatistics' {
         $stats.'Last Written' | Should -Be (Get-ChildItem $testFile).LastWriteTime
         $stats.'File Size' | Should -Be '1,024 bytes'
     }
+
+    It 'can use the original default stat reader when combined with another' {
+        Register-FileStatReader -Extension '.txt' -Function {
+            @{ 'Extension' = '.txt' }
+        }
+
+        $testFile = Resolve-TestFile TextFile.txt
+        $stats = Get-FileStatistics -Path $testFile
+
+        $stats.'Last Written' | Should -Be (Get-ChildItem $testFile).LastWriteTime
+        $stats.'File Size' | Should -Be '1,024 bytes'
+        $stats.'Extension' | Should -Be '.txt'
+    }
 }
