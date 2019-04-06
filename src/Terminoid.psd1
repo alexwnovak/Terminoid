@@ -32,6 +32,7 @@
       'Format-Date',
       'Format-Output',
       'Format-Size',
+      'Get-FileStatistics',
       'Push-BarSegment',
       'Register-ChildItemFormatter',
       'Set-Location',
