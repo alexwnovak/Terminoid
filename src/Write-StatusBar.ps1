@@ -1,7 +1,3 @@
-function WriteJoiningSegment( $BarSegment ) {
-
-}
-
 function WriteSingleSegment( $BarSegment ) {
     $block = Format-Output " $(& $BarSegment.Function) " `
                 -Background $BarSegment.BackgroundColor `
@@ -17,29 +13,27 @@ function Write-StatusBar {
         return
     }
     elseif ( $BarSegments.Count -eq 1 ) {
-        WriteSingleSegment $BarSegments[0]
-        return
+        $statusBar = WriteSingleSegment $BarSegments[0]
     }
+    else {
+        for ( $i = 0; $i -lt $BarSegments.Count; $i++ ) {
+            $bar = $BarSegments[$i]
 
-    $joiner = [char]0xE0B0
+            $statusBar += Format-Output " $(& $bar.Function) " `
+                -Background $bar.BackgroundColor `
+                -Foreground $bar.ForegroundColor  `
 
-    for ( $i = 0; $i -lt $BarSegments.Count; $i++ ) {
-        $bar = $BarSegments[$i]
+            if ( $i -lt $BarSegments.Count - 1 ) {
+                $nextBar = $BarSegments[$i + 1]
 
-        Write-Color " $(& $bar.Function) " `
-            -Background $bar.BackgroundColor `
-            -Foreground $bar.ForegroundColor  `
-            -NoNewline
-
-        if ( $i -lt $BarSegments.Count - 1 ) {
-            $nextBar = $BarSegments[$i + 1]
-
-            Write-Color $joiner `
-                -Background $nextBar.BackgroundColor  `
-                -Foreground $bar.BackgroundColor `
-                -NoNewline
+                $statusBar += Format-Output $JoinerChar `
+                    -Background $nextBar.BackgroundColor  `
+                    -Foreground $bar.BackgroundColor `
+            }
         }
+
+        $statusBar += Format-Output $JoinerChar -Foreground $BarSegments[$i - 1].BackgroundColor
     }
 
-    Write-Color $joiner -Foreground $BarSegments[$i - 1].BackgroundColor -NoNewline
+    "$($statusBar) "
 }
