@@ -1,7 +1,7 @@
 . $PSScriptRoot\Shared.ps1
 
-Describe 'Enable-Cursor' {
+Describe 'Show-Cursor' {
     It 'writes the terminal sequence to show the cursor ' {
-        Enable-Cursor | Should -Be "$([char]0x1B)[?25h"
+        Show-Cursor | Should -Be "$([char]0x1B)[?25h"
     }
 }

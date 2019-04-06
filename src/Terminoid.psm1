@@ -11,7 +11,6 @@ Reset-StatReader
 
 New-Alias -Name stat -Value Get-FileStatistics
 
-Export-ModuleMember -Function Enable-Cursor
 Export-ModuleMember -Function Format-ChildItem
 Export-ModuleMember -Function Format-Date
 Export-ModuleMember -Function Format-Output
@@ -26,6 +25,7 @@ Export-ModuleMember -Function Reset-StatReader
 Export-ModuleMember -Function Register-FileStatReader
 Export-ModuleMember -Function Set-Location
 Export-ModuleMember -Function Set-DefaultFileStatReader
+Export-ModuleMember -Function Show-Cursor
 Export-ModuleMember -Function Write-Color
 Export-ModuleMember -Function Write-StatusBar
 Export-ModuleMember -Variable BarSegments
