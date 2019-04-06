@@ -16,6 +16,7 @@ Export-ModuleMember -Function Get-FileStatistics
 Export-ModuleMember -Function Push-BarSegment
 Export-ModuleMember -Function Register-ChildItemFormatter
 Export-ModuleMember -Function Set-Location
+Export-ModuleMember -Function Set-DefaultFileStatReader
 Export-ModuleMember -Function Write-Color
 Export-ModuleMember -Function Write-StatusBar
 Export-ModuleMember -Variable BarSegments

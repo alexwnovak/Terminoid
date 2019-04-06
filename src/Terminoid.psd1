@@ -35,6 +35,7 @@
       'Get-FileStatistics',
       'Push-BarSegment',
       'Register-ChildItemFormatter',
+      'Set-DefaultFileStatReader',
       'Set-Location',
       'Write-Color',
       'Write-StatusBar'

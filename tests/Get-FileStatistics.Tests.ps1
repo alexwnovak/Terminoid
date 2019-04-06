@@ -8,4 +8,15 @@ Describe 'Get-FileStatistics' {
        $stats.'Last Written' | Should -Be (Get-ChildItem $testFile).LastWriteTime
        $stats.'File Size' | Should -Be '1,024 bytes'
     }
+
+    It 'can configure a different default stat reader' {
+        Set-DefaultFileStatReader -Function {
+            @{ DummyValue = 123 }
+        }
+
+        $testFile = Resolve-TestFile TextFile.txt
+        $stats = Get-FileStatistics -Path $testFile
+
+        $stats.DummyValue | Should -Be 123
+    }
 }
