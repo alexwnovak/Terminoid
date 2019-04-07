@@ -31,6 +31,7 @@
       'Format-Output',
       'Format-Size',
       'Get-FileStatistics',
+      'Get-LocationHistory',
       'Hide-Cursor',
       'Pop-BarSegment',
       'Push-BarSegment',
