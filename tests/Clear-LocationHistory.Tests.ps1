@@ -1,20 +1,27 @@
 . $PSScriptRoot\Shared.ps1
 
-InModuleScope 'Terminoid' {
-    Mock Set-LocationInternal { }
-    Mock ConvertTo-FullPath { param ( $Path ) $Path }
+Describe 'Clear-LocationHistory' {
+    BeforeEach {
+        $oldPwd = $PWD
+    }
 
-    Describe 'Clear-LocationHistory' {
-        It 'removes all history items' {
-            Set-Location 'new-location-one'
-            Set-Location 'new-location-two'
-            Set-Location 'new-location-three'
+    AfterEach {
+        Microsoft.PowerShell.Management\Set-Location $oldPwd
+    }
 
-            Get-LocationHistory | Should -HaveCount 3
+    It 'removes all history items' {
+        New-Item TestDrive:\ClearLocationHistory-One -ItemType Directory
+        New-Item TestDrive:\ClearLocationHistory-Two -ItemType Directory
+        New-Item TestDrive:\ClearLocationHistory-Three -ItemType Directory
 
-            Clear-LocationHistory
+        Set-Location TestDrive:\ClearLocationHistory-One
+        Set-Location TestDrive:\ClearLocationHistory-Two
+        Set-Location TestDrive:\ClearLocationHistory-Three
 
-            Get-LocationHistory | Should -BeNullOrEmpty
-        }
+        Get-LocationHistory | Should -HaveCount 3
+
+        Clear-LocationHistory
+
+        Get-LocationHistory | Should -BeNullOrEmpty
     }
 }
