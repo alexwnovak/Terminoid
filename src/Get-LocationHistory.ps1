@@ -1,3 +1,3 @@
 function Get-LocationHistory {
-
+    $LocationHistory
 }

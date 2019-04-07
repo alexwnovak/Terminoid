@@ -1,5 +1,25 @@
 . $PSScriptRoot\Shared.ps1
 
-Describe 'Get-LocationHistory' {
+InModuleScope 'Terminoid' {
+    Describe 'Get-LocationHistory' {
+        Mock Set-LocationInternal { }
+        Mock ConvertTo-FullPath { param ( $Path ) $Path }
 
+        BeforeEach {
+            $LocationHistory.Clear()
+        }
+
+        It 'returns the location history' {
+            Set-Location 'new-location-one'
+            Set-Location 'new-location-two'
+            Set-Location 'new-location-three'
+
+            $history = Get-LocationHistory
+
+            $history.Count | Should -Be 3
+            $history[0] | Should -Be 'new-location-one'
+            $history[1] | Should -Be 'new-location-two'
+            $history[2] | Should -Be 'new-location-three'
+        }
+    }
 }
