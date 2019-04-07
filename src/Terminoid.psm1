@@ -13,6 +13,7 @@ Reset-StatReader
 
 New-Alias -Name stat -Value Get-FileStatistics
 
+Export-ModuleMember -Function Clear-LocationHistory
 Export-ModuleMember -Function Format-ChildItem
 Export-ModuleMember -Function Format-Date
 Export-ModuleMember -Function Format-Output
