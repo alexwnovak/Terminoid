@@ -6,7 +6,7 @@ InModuleScope 'Terminoid' {
         Mock ConvertTo-FullPath { param ( $Path ) $Path }
 
         BeforeEach {
-            $LocationHistory.Clear()
+            Clear-LocationHistory
         }
 
         It 'returns the location history' {

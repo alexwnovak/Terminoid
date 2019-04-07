@@ -56,7 +56,6 @@
       'BarSegments',
       'DefaultStatReader',
       'JoinerChar',
-      'LocationHistory',
       'FormatterTable',
       'StatReaderTable'
    )

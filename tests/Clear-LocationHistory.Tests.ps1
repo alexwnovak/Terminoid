@@ -10,7 +10,9 @@ InModuleScope 'Terminoid' {
             Set-Location 'new-location-two'
             Set-Location 'new-location-three'
 
-            Clear-History
+            Get-LocationHistory | Should -HaveCount 3
+
+            Clear-LocationHistory
 
             Get-LocationHistory | Should -BeNullOrEmpty
         }

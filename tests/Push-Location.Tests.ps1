@@ -5,7 +5,7 @@ InModuleScope 'Terminoid' {
         Mock ConvertTo-FullPath { }
 
         BeforeEach {
-            $LocationHistory.Clear()
+            Clear-LocationHistory
             Get-EventSubscriber -SourceIdentifier Terminoid.LocationChanged -ErrorAction SilentlyContinue | Unregister-Event
         }
 
@@ -39,7 +39,7 @@ InModuleScope 'Terminoid' {
 
             It 'records the new location' {
                 Terminoid\Push-Location -Path 'new-location'
-                $LocationHistory | Should -Contain 'C:\new-location'
+                Get-LocationHistory | Should -Contain 'C:\new-location'
             }
         }
     }
