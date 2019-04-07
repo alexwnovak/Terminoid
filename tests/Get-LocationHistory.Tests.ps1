@@ -16,7 +16,7 @@ InModuleScope 'Terminoid' {
 
             $history = Get-LocationHistory
 
-            $history.Count | Should -Be 3
+            $history | Should -HaveCount 3
             $history[0] | Should -Be 'new-location-one'
             $history[1] | Should -Be 'new-location-two'
             $history[2] | Should -Be 'new-location-three'
