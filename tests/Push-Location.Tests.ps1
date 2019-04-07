@@ -1,46 +1,42 @@
 . $PSScriptRoot\Shared.ps1
 
-InModuleScope 'Terminoid' {
-    Describe 'Push-Location' {
-        Mock ConvertTo-FullPath { }
+Describe 'Push-Location' {
+    BeforeEach {
+        $oldPwd = $PWD
 
-        BeforeEach {
-            Clear-LocationHistory
-            Get-EventSubscriber -SourceIdentifier Terminoid.LocationChanged -ErrorAction SilentlyContinue | Unregister-Event
+        Clear-LocationHistory
+        Get-EventSubscriber -SourceIdentifier Terminoid.LocationChanged -ErrorAction SilentlyContinue | Unregister-Event
+    }
+
+    AfterEach {
+        Microsoft.PowerShell.Management\Set-Location $oldPwd
+    }
+
+    It 'navigates to the new location' {
+        New-Item TestDrive:\PushLocation_SettingTheLocation -ItemType Directory
+
+        Set-Location -Path TestDrive:\PushLocation_SettingTheLocation
+
+        $PWD | Should -Be 'TestDrive:\PushLocation_SettingTheLocation'
+    }
+
+    It 'raises an event with the new location' {
+        New-Item TestDrive:\PushLocation_AnEventShouldBeRaised -ItemType Directory
+
+        Register-EngineEvent Terminoid.LocationChanged -Action {
+            Set-Content TestDrive:\NewLocation.txt $Event.MessageData
         }
 
-        Context 'Setting the location' {
-            Mock Push-LocationInternal { }
+        Set-Location -Path TestDrive:\PushLocation_AnEventShouldBeRaised
 
-            It 'sets the new location' {
-                Terminoid\Push-Location -Path 'new-location'
-                Assert-MockCalled Push-LocationInternal -ParameterFilter { $Path -eq 'new-location' }
-            }
-        }
+        Get-Content TestDrive:\NewLocation.txt | Should -BeLike '*\PushLocation_AnEventShouldBeRaised'
+    }
 
-        Context 'An event should be raised after navigation' {
-            Mock Push-LocationInternal { }
-            Mock ConvertTo-FullPath { 'C:\new-location' }
+    It 'records the destination to location history' {
+        New-Item TestDrive:\PushLocation_TheLocationShouldBeRecorded -ItemType Directory
 
-            It 'raises an event with the new fully-qualified path' {
-                Register-EngineEvent Terminoid.LocationChanged -Action {
-                    Set-Content TestDrive:\PushLocation-NewLocation.txt $Event.MessageData
-                }
+        Set-Location -Path 'TestDrive:\PushLocation_TheLocationShouldBeRecorded'
 
-                Terminoid\Push-Location -Path 'new-location'
-
-                Get-Content TestDrive:\PushLocation-NewLocation.txt | Should -Be 'C:\new-location'
-            }
-        }
-
-        Context 'The location should be recorded' {
-            Mock Push-LocationInternal { $LocationHistory.Count | Should -Be 0 }
-            Mock ConvertTo-FullPath { 'C:\new-location' }
-
-            It 'records the new location' {
-                Terminoid\Push-Location -Path 'new-location'
-                Get-LocationHistory | Should -Contain 'C:\new-location'
-            }
-        }
+        Get-LocationHistory | Should -BeLike '*\PushLocation_TheLocationShouldBeRecorded'
     }
 }
