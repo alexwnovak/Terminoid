@@ -1,9 +1,9 @@
-function Set-Location {
+function Push-Location {
     param (
         $Path
     )
 
-    Microsoft.PowerShell.Management\Set-Location $Path
+    Microsoft.PowerShell.Management\Push-Location $Path
 
     $newLocation = Convert-Path $Path
 

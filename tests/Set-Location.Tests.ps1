@@ -1,29 +1,42 @@
-
 . $PSScriptRoot\Shared.ps1
 
-InModuleScope 'Terminoid' {
+Describe 'Set-Location' {
+    BeforeEach {
+        $oldPwd = $PWD
 
-    Describe 'Set-Location' {
-        BeforeEach {
-            $LocationHistory.Clear()
+        Clear-LocationHistory
+        Get-EventSubscriber -SourceIdentifier Terminoid.LocationChanged -ErrorAction SilentlyContinue | Unregister-Event
+    }
+
+    AfterEach {
+        Microsoft.PowerShell.Management\Set-Location $oldPwd
+    }
+
+    It 'navigates to the new location' {
+        New-Item TestDrive:\SetLocation_SettingTheLocation -ItemType Directory
+
+        Set-Location -Path TestDrive:\SetLocation_SettingTheLocation
+
+        $PWD | Should -Be 'TestDrive:\SetLocation_SettingTheLocation'
+    }
+
+    It 'raises an event with the new location' {
+        New-Item TestDrive:\SetLocation_AnEventShouldBeRaised -ItemType Directory
+
+        Register-EngineEvent Terminoid.LocationChanged -Action {
+            Set-Content TestDrive:\NewLocation.txt $Event.MessageData
         }
 
-        Context 'when setting the location' {
-            Mock Set-LocationInternal { }
+        Set-Location -Path TestDrive:\SetLocation_AnEventShouldBeRaised
 
-            It 'sets the new location' {
-                Terminoid\Set-Location -Path 'new-location'
-                Assert-MockCalled Set-LocationInternal -ParameterFilter { $Path -eq 'new-location' }
-            }
-        }
+        Get-Content TestDrive:\NewLocation.txt | Should -BeLike '*\SetLocation_AnEventShouldBeRaised'
+    }
 
-        Context 'records the new location after successfully navigating there' {
-            Mock Set-LocationInternal { $LocationHistory.Count | Should -Be 0 }
+    It 'records the destination to location history' {
+        New-Item TestDrive:\SetLocation_TheLocationShouldBeRecorded -ItemType Directory
 
-            It 'records the new location' {
-                Terminoid\Set-Location -Path 'new-location'
-                $LocationHistory | Should -Contain 'new-location'
-            }
-        }
+        Set-Location -Path 'TestDrive:\SetLocation_TheLocationShouldBeRecorded'
+
+        Get-LocationHistory | Should -BeLike '*\SetLocation_TheLocationShouldBeRecorded'
     }
 }

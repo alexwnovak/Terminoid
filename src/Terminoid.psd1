@@ -26,14 +26,17 @@
    # Functions to export from this module, for best performance, do not use wildcards and do not
    # delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @(
+      'Clear-LocationHistory',
       'Format-ChildItem',
       'Format-Date',
       'Format-Output',
       'Format-Size',
       'Get-FileStatistics',
+      'Get-LocationHistory',
       'Hide-Cursor',
       'Pop-BarSegment',
       'Push-BarSegment',
+      'Push-Location',
       'Register-ChildItemFormatter',
       'Register-FileStatReader',
       'Reset-DefaultFileStatReader',
@@ -53,7 +56,6 @@
       'BarSegments',
       'DefaultStatReader',
       'JoinerChar',
-      'LocationHistory',
       'FormatterTable',
       'StatReaderTable'
    )
