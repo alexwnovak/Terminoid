@@ -1,25 +1,29 @@
 . $PSScriptRoot\Shared.ps1
 
-InModuleScope 'Terminoid' {
-    Describe 'Get-LocationHistory' {
-        Mock Set-LocationInternal { }
-        Mock ConvertTo-FullPath { param ( $Path ) $Path }
+Describe 'Get-LocationHistory' {
+    BeforeEach {
+        $oldPwd = $PWD
+        Clear-LocationHistory
+    }
 
-        BeforeEach {
-            Clear-LocationHistory
-        }
+    AfterEach {
+        Microsoft.PowerShell.Management\Set-Location $oldPwd
+    }
 
-        It 'returns the location history' {
-            Set-Location 'new-location-one'
-            Set-Location 'new-location-two'
-            Set-Location 'new-location-three'
+    It 'returns the location history' {
+        New-Item TestDrive:\GetLocationHistory-One -ItemType Directory
+        New-Item TestDrive:\GetLocationHistory-Two -ItemType Directory
+        New-Item TestDrive:\GetLocationHistory-Three -ItemType Directory
 
-            $history = Get-LocationHistory
+        Set-Location TestDrive:\GetLocationHistory-One
+        Set-Location TestDrive:\GetLocationHistory-Two
+        Set-Location TestDrive:\GetLocationHistory-Three
 
-            $history | Should -HaveCount 3
-            $history[0] | Should -Be 'new-location-one'
-            $history[1] | Should -Be 'new-location-two'
-            $history[2] | Should -Be 'new-location-three'
-        }
+        $history = Get-LocationHistory
+
+        $history | Should -HaveCount 3
+        $history[0] | Should -BeLike '*\GetLocationHistory-One'
+        $history[1] | Should -BeLike '*\GetLocationHistory-Two'
+        $history[2] | Should -BeLike '*\GetLocationHistory-Three'
     }
 }
