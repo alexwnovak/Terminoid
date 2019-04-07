@@ -21,6 +21,7 @@ Export-ModuleMember -Function Get-FileStatistics
 Export-ModuleMember -Function Hide-Cursor
 Export-ModuleMember -Function Pop-BarSegment
 Export-ModuleMember -Function Push-BarSegment
+Export-ModuleMember -Function Push-Location
 Export-ModuleMember -Function Register-ChildItemFormatter
 Export-ModuleMember -Function Reset-DefaultFileStatReader
 Export-ModuleMember -Function Reset-StatReader

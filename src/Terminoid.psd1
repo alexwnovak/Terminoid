@@ -34,6 +34,7 @@
       'Hide-Cursor',
       'Pop-BarSegment',
       'Push-BarSegment',
+      'Push-Location',
       'Register-ChildItemFormatter',
       'Register-FileStatReader',
       'Reset-DefaultFileStatReader',

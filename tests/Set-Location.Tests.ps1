@@ -1,4 +1,3 @@
-
 . $PSScriptRoot\Shared.ps1
 
 InModuleScope 'Terminoid' {
