@@ -5,7 +5,7 @@ InModuleScope 'Terminoid' {
         $now = Get-Date
 
         It 'formats as "just now" if it was within the last minute' {
-            Format-Date -Date $now.AddSeconds( -30 ) -Now $now | Should -Be 'just now'
+            Format-Date -Date $now.AddSeconds( -10 ) | Should -Be 'just now'
         }
 
         It 'formats as a singular "minute ago" if it was between one and two minutes ago' {
