@@ -2,6 +2,7 @@
 
 Describe 'Get-FileStatistics' {
     BeforeEach {
+        Reset-DefaultFileStatReader
         Reset-StatReader
     }
 

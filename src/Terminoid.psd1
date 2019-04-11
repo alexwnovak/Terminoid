@@ -54,10 +54,8 @@
    # Variables to export from this module
    VariablesToExport = @(
       'BarSegments',
-      'DefaultStatReader',
       'JoinerChar',
-      'FormatterTable',
-      'StatReaderTable'
+      'FormatterTable'
    )
 
    # Aliases to export from this module, for best performance, do not use wildcards and do not

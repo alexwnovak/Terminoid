@@ -1,4 +1,5 @@
 function Set-Location {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute( 'PSUseShouldProcessForStateChangingFunctions', '' )]
     param (
         $Path
     )

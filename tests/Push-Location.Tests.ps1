@@ -15,7 +15,7 @@ Describe 'Push-Location' {
     It 'navigates to the new location' {
         New-Item TestDrive:\PushLocation_SettingTheLocation -ItemType Directory
 
-        Set-Location -Path TestDrive:\PushLocation_SettingTheLocation
+        Push-Location -Path TestDrive:\PushLocation_SettingTheLocation
 
         $PWD | Should -Be 'TestDrive:\PushLocation_SettingTheLocation'
     }
@@ -27,7 +27,7 @@ Describe 'Push-Location' {
             Set-Content TestDrive:\NewLocation.txt $Event.MessageData
         }
 
-        Set-Location -Path TestDrive:\PushLocation_AnEventShouldBeRaised
+        Push-Location -Path TestDrive:\PushLocation_AnEventShouldBeRaised
 
         Get-Content TestDrive:\NewLocation.txt | Should -BeLike '*\PushLocation_AnEventShouldBeRaised'
     }
@@ -35,7 +35,7 @@ Describe 'Push-Location' {
     It 'records the destination to location history' {
         New-Item TestDrive:\PushLocation_TheLocationShouldBeRecorded -ItemType Directory
 
-        Set-Location -Path 'TestDrive:\PushLocation_TheLocationShouldBeRecorded'
+        Push-Location -Path 'TestDrive:\PushLocation_TheLocationShouldBeRecorded'
 
         Get-LocationHistory | Should -BeLike '*\PushLocation_TheLocationShouldBeRecorded'
     }
