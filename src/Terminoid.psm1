@@ -1,14 +1,14 @@
 Get-ChildItem $PSScriptRoot\*.ps1 | ForEach-Object { . $_ }
 
-[System.Collections.ArrayList] $BarSegments = @()
-[System.Collections.ArrayList] $LocationHistory = @()
-$FormatterTable = New-Object System.Collections.Stack
+[System.Collections.ArrayList] $script:BarSegments = @()
+[System.Collections.ArrayList] $script:LocationHistory = @()
+$script:FormatterTable = New-Object System.Collections.Stack
 
-$DefaultStatReader = $function:DefaultFileStatReader
+$script:DefaultStatReader = $function:DefaultFileStatReader
 
-$JoinerChar = [char]0xE0B0
+$script:JoinerChar = [char]0xE0B0
 
-[System.Collections.ArrayList] $StatReaderTable = @()
+[System.Collections.ArrayList] $script:StatReaderTable = @()
 Reset-StatReader
 
 New-Alias -Name stat -Value Get-FileStatistics
