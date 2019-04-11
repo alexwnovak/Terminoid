@@ -35,5 +35,4 @@ Export-ModuleMember -Function Write-StatusBar
 Export-ModuleMember -Variable BarSegments
 Export-ModuleMember -Variable JoinerChar
 Export-ModuleMember -Variable FormatterTable
-Export-ModuleMember -Variable StatReaderTable
 Export-ModuleMember -Alias stat
