@@ -9,7 +9,7 @@ function Register-ChildItemFormatter {
         $Function
     )
 
-    $FormatterTable.Push( @{
+    $script:FormatterTable.Push( @{
         Predicate = $Predicate;
         Function = $Function;
     } )

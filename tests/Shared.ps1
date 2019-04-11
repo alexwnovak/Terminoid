@@ -1,7 +1,7 @@
 function Reset-GlobalState {
     $BarSegments.Clear()
     Clear-LocationHistory
-    $FormatterTable.Clear()
+    Clear-FormatterTable
 }
 
 function Resolve-TestFile( $Name ) {

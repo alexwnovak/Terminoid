@@ -13,6 +13,7 @@ Reset-StatReader
 
 New-Alias -Name stat -Value Get-FileStatistics
 
+Export-ModuleMember -Function Clear-FormatterTable
 Export-ModuleMember -Function Clear-LocationHistory
 Export-ModuleMember -Function Format-ChildItem
 Export-ModuleMember -Function Format-Date
@@ -34,5 +35,4 @@ Export-ModuleMember -Function Show-Cursor
 Export-ModuleMember -Function Write-StatusBar
 Export-ModuleMember -Variable BarSegments
 Export-ModuleMember -Variable JoinerChar
-Export-ModuleMember -Variable FormatterTable
 Export-ModuleMember -Alias stat

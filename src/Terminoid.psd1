@@ -26,6 +26,7 @@
    # Functions to export from this module, for best performance, do not use wildcards and do not
    # delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @(
+      'Clear-FormatterTable',
       'Clear-LocationHistory',
       'Format-ChildItem',
       'Format-Date',
@@ -54,8 +55,7 @@
    # Variables to export from this module
    VariablesToExport = @(
       'BarSegments',
-      'JoinerChar',
-      'FormatterTable'
+      'JoinerChar'
    )
 
    # Aliases to export from this module, for best performance, do not use wildcards and do not

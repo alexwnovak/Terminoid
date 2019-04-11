@@ -7,7 +7,7 @@ function Format-ChildItem {
     process {
         $foundMatch = $false
 
-        foreach ( $formatter in $FormatterTable ) {
+        foreach ( $formatter in $script:FormatterTable ) {
             $match = & $formatter.Predicate $InputObject
 
             if ( $match ) {
