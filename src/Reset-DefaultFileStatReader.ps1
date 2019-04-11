@@ -1,3 +1,3 @@
 function Reset-DefaultFileStatReader {
-    $global:DefaultStatReader = $function:DefaultFileStatReader
+    $script:DefaultStatReader = $function:DefaultFileStatReader
 }

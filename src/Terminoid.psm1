@@ -33,7 +33,6 @@ Export-ModuleMember -Function Set-DefaultFileStatReader
 Export-ModuleMember -Function Show-Cursor
 Export-ModuleMember -Function Write-StatusBar
 Export-ModuleMember -Variable BarSegments
-Export-ModuleMember -Variable DefaultStatReader
 Export-ModuleMember -Variable JoinerChar
 Export-ModuleMember -Variable FormatterTable
 Export-ModuleMember -Variable StatReaderTable

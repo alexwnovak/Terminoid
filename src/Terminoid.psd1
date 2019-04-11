@@ -54,7 +54,6 @@
    # Variables to export from this module
    VariablesToExport = @(
       'BarSegments',
-      'DefaultStatReader',
       'JoinerChar',
       'FormatterTable',
       'StatReaderTable'

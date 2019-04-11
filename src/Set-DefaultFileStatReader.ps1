@@ -4,5 +4,5 @@ function Set-DefaultFileStatReader {
         $Function
     )
 
-    $global:DefaultStatReader = $Function
+    $script:DefaultStatReader = $Function
 }
