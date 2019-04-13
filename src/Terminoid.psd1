@@ -34,7 +34,7 @@
       'Format-Output',
       'Format-Size',
       'Get-BarSegments',
-      'Get-FileStatistics',
+      'Get-FileDetail',
       'Get-LocationHistory',
       'Get-SpecialChar',
       'Hide-Cursor',

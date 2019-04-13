@@ -7,7 +7,7 @@ function DefaultFileStatReader( $Path ) {
     }
 }
 
-function Get-FileStatistics {
+function Get-FileDetail {
     param (
         [string]
         $Path

@@ -24,7 +24,7 @@ Export-ModuleMember -Function Format-Date
 Export-ModuleMember -Function Format-Output
 Export-ModuleMember -Function Format-Size
 Export-ModuleMember -Function Get-BarSegments
-Export-ModuleMember -Function Get-FileStatistics
+Export-ModuleMember -Function Get-FileDetail
 Export-ModuleMember -Function Get-LocationHistory
 Export-ModuleMember -Function Get-SpecialChar
 Export-ModuleMember -Function Hide-Cursor
