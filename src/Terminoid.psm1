@@ -9,7 +9,6 @@ $script:DefaultStatReader = $function:DefaultFileStatReader
 $script:SpecialCharTable = @{
     Joiner = [char]0xE0B0
 }
-#$script:JoinerChar = [char]0xE0B0
 
 [System.Collections.ArrayList] $script:StatReaderTable = @()
 Reset-DetailReader
