@@ -33,7 +33,7 @@
       'Format-Date',
       'Format-Output',
       'Format-Size',
-      'Get-BarSegments',
+      'Get-BarSegment',
       'Get-FileDetail',
       'Get-LocationHistory',
       'Get-SpecialChar',
