@@ -12,7 +12,7 @@ $script:SpecialCharTable = @{
 #$script:JoinerChar = [char]0xE0B0
 
 [System.Collections.ArrayList] $script:StatReaderTable = @()
-Reset-StatReader
+Reset-DetailReader
 
 New-Alias -Name stat -Value Get-FileStatistics
 
@@ -33,7 +33,7 @@ Export-ModuleMember -Function Push-BarSegment
 Export-ModuleMember -Function Push-Location
 Export-ModuleMember -Function Register-ChildItemFormatter
 Export-ModuleMember -Function Reset-DefaultFileStatReader
-Export-ModuleMember -Function Reset-StatReader
+Export-ModuleMember -Function Reset-DetailReader
 Export-ModuleMember -Function Register-FileStatReader
 Export-ModuleMember -Function Set-Location
 Export-ModuleMember -Function Set-DefaultFileStatReader

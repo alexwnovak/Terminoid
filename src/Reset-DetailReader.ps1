@@ -1,4 +1,4 @@
-function Reset-StatReader {
+function Reset-DetailReader {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute( 'PSUseShouldProcessForStateChangingFunctions', '' )]
     param ()
 

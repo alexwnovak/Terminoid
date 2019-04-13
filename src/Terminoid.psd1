@@ -44,7 +44,7 @@
       'Register-ChildItemFormatter',
       'Register-FileStatReader',
       'Reset-DefaultFileStatReader',
-      'Reset-StatReader'
+      'Reset-DetailReader'
       'Set-DefaultFileStatReader',
       'Set-Location',
       'Show-Cursor',

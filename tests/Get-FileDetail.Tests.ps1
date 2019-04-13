@@ -3,7 +3,7 @@
 Describe 'Get-FileDetail' {
     BeforeEach {
         Reset-DefaultFileStatReader
-        Reset-StatReader
+        Reset-DetailReader
     }
 
     It 'gets default file details with no registered detail readers' {
