@@ -1,4 +1,4 @@
-Get-ChildItem $PSScriptRoot\*.ps1 | ForEach-Object { . $_ }
+Get-ChildItem $PSScriptRoot\*.ps1 -Recurse | ForEach-Object { . $_ }
 
 [System.Collections.ArrayList] $script:BarSegments = @()
 [System.Collections.ArrayList] $script:LocationHistory = @()
