@@ -1,5 +1,5 @@
 function Reset-GlobalState {
-    Clear-BarSegments
+    Clear-BarSegment
     Clear-LocationHistory
     Clear-FormatterTable
 }

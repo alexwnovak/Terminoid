@@ -1,3 +1,3 @@
-function Clear-BarSegments {
+function Clear-BarSegment {
     $script:BarSegments.Clear()
 }
