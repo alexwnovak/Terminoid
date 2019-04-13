@@ -1,3 +1,3 @@
 function Pop-BarSegment {
-    $BarSegments.RemoveAt( $BarSegments.Count - 1 )
+    $script:BarSegments.RemoveAt( $BarSegments.Count - 1 )
 }

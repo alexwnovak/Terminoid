@@ -26,14 +26,17 @@
    # Functions to export from this module, for best performance, do not use wildcards and do not
    # delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @(
+      'Clear-BarSegments',
       'Clear-FormatterTable',
       'Clear-LocationHistory',
       'Format-ChildItem',
       'Format-Date',
       'Format-Output',
       'Format-Size',
+      'Get-BarSegments',
       'Get-FileStatistics',
       'Get-LocationHistory',
+      'Get-SpecialChar',
       'Hide-Cursor',
       'Pop-BarSegment',
       'Push-BarSegment',
@@ -53,10 +56,7 @@
    CmdletsToExport   = @()
 
    # Variables to export from this module
-   VariablesToExport = @(
-      'BarSegments',
-      'JoinerChar'
-   )
+   VariablesToExport = @()
 
    # Aliases to export from this module, for best performance, do not use wildcards and do not
    # delete the entry, use an empty array if there are no aliases to export.
