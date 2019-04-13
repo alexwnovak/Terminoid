@@ -34,7 +34,7 @@
       'Format-Output',
       'Format-Size',
       'Get-BarSegments',
-      'Get-FileStatistics',
+      'Get-FileDetail',
       'Get-LocationHistory',
       'Get-SpecialChar',
       'Hide-Cursor',
@@ -42,10 +42,10 @@
       'Push-BarSegment',
       'Push-Location',
       'Register-ChildItemFormatter',
-      'Register-FileStatReader',
-      'Reset-DefaultFileStatReader',
-      'Reset-StatReader'
-      'Set-DefaultFileStatReader',
+      'Register-FileDetailReader',
+      'Reset-DefaultFileDetailReader',
+      'Reset-DetailReader'
+      'Set-DefaultFileDetailReader',
       'Set-Location',
       'Show-Cursor',
       'Write-StatusBar'
