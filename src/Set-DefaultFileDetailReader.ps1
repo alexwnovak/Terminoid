@@ -1,9 +1,9 @@
-function Set-DefaultFileStatReader {
+function Set-DefaultFileDetailReader {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute( 'PSUseShouldProcessForStateChangingFunctions', '' )]
     param (
         [scriptblock]
         $Function
     )
 
-    $script:DefaultStatReader = $Function
+    $script:DefaultDetailReader = $Function
 }

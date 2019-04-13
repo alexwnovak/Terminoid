@@ -42,10 +42,10 @@
       'Push-BarSegment',
       'Push-Location',
       'Register-ChildItemFormatter',
-      'Register-FileStatReader',
-      'Reset-DefaultFileStatReader',
+      'Register-FileDetailReader',
+      'Reset-DefaultFileDetailReader',
       'Reset-DetailReader'
-      'Set-DefaultFileStatReader',
+      'Set-DefaultFileDetailReader',
       'Set-Location',
       'Show-Cursor',
       'Write-StatusBar'

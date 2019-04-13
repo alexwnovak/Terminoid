@@ -4,16 +4,16 @@ Get-ChildItem $PSScriptRoot\*.ps1 | ForEach-Object { . $_ }
 [System.Collections.ArrayList] $script:LocationHistory = @()
 $script:FormatterTable = New-Object System.Collections.Stack
 
-$script:DefaultStatReader = $function:DefaultFileStatReader
+$script:DefaultDetailReader = $function:DefaultFileDetailReader
 
 $script:SpecialCharTable = @{
     Joiner = [char]0xE0B0
 }
 
-[System.Collections.ArrayList] $script:StatReaderTable = @()
+[System.Collections.ArrayList] $script:DetailReaderTable = @()
 Reset-DetailReader
 
-New-Alias -Name stat -Value Get-FileStatistics
+New-Alias -Name stat -Value Get-FileDetail
 
 Export-ModuleMember -Function Clear-BarSegments
 Export-ModuleMember -Function Clear-FormatterTable
@@ -31,11 +31,11 @@ Export-ModuleMember -Function Pop-BarSegment
 Export-ModuleMember -Function Push-BarSegment
 Export-ModuleMember -Function Push-Location
 Export-ModuleMember -Function Register-ChildItemFormatter
-Export-ModuleMember -Function Reset-DefaultFileStatReader
+Export-ModuleMember -Function Reset-DefaultFileDetailReader
 Export-ModuleMember -Function Reset-DetailReader
-Export-ModuleMember -Function Register-FileStatReader
+Export-ModuleMember -Function Register-FileDetailReader
 Export-ModuleMember -Function Set-Location
-Export-ModuleMember -Function Set-DefaultFileStatReader
+Export-ModuleMember -Function Set-DefaultFileDetailReader
 Export-ModuleMember -Function Show-Cursor
 Export-ModuleMember -Function Write-StatusBar
 Export-ModuleMember -Alias stat

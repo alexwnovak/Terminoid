@@ -1,6 +1,6 @@
-function Reset-DefaultFileStatReader {
+function Reset-DefaultFileDetailReader {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute( 'PSUseShouldProcessForStateChangingFunctions', '' )]
     param ()
 
-    $script:DefaultStatReader = $function:DefaultFileStatReader
+    $script:DefaultDetailReader = $function:DefaultFileDetailReader
 }

@@ -1,4 +1,4 @@
-function DefaultFileStatReader( $Path ) {
+function DefaultFileDetailReader( $Path ) {
     $fileInfo = Get-ChildItem $Path
 
     @{
@@ -13,13 +13,13 @@ function Get-FileDetail {
         $Path
     )
 
-    & $DefaultStatReader $Path
+    & $DefaultDetailReader $Path
 
-    foreach ( $statReader in $StatReaderTable ) {
+    foreach ( $detailReader in $DetailReaderTable ) {
         $extension = [System.IO.Path]::GetExtension( $Path )
 
-        if ( $extension -eq $statReader.Extension ) {
-            & $statReader.Function $Path
+        if ( $extension -eq $detailReader.Extension ) {
+            & $detailReader.Function $Path
         }
     }
 }

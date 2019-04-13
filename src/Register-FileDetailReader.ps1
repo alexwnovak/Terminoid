@@ -1,4 +1,4 @@
-function Register-FileStatReader {
+function Register-FileDetailReader {
     param (
         [string]
         $Extension,
@@ -7,7 +7,7 @@ function Register-FileStatReader {
         $Function
     )
 
-    $StatReaderTable.Add( @{
+    $script:DetailReaderTable.Add( @{
         Extension = $Extension;
         Function = $Function
     } )
