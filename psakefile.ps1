@@ -1,5 +1,4 @@
 Properties {
-    $PSBPreference.Test.ScriptAnalysisEnabled = $false
     $PSBPreference.Test.CodeCoverage.Enabled = $true
     $PSBPreference.Test.CodeCoverage.Threshold = 1
 }
