@@ -28,6 +28,14 @@ function Write-Indented( $Text ) {
 }
 
 function Write-FunctionNameTests {
+    Write-Indented "#=============================================================================="
+    Write-Indented "# Function Name Tests"
+    Write-Indented "#   These tests were automatically generated to ensure only the expected"
+    Write-Indented "#   functions are exposed from the module. This protects against accidentally"
+    Write-Indented "#   removing something and breaking backward compatibility. When new functions"
+    Write-Indented "#   are added, this test should be regenerated to reflect the new public API."
+    Write-Indented "#=============================================================================="
+    Write-Indented ''
     Write-Indented "Describe 'Function names' {"
 
     Push-Indentation
