@@ -65,4 +65,4 @@ function Write-FunctionNameTests {
 
 Import-Module $Psd1File -Force
 
-Write-FunctionNameTests | Out-File $OutputPath\FunctionNames.Tests.ps1
+Write-FunctionNameTests | Out-File $OutputPath\FunctionNames.Tests.ps1 -Encoding UTF8
