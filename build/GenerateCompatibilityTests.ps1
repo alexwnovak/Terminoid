@@ -39,6 +39,14 @@ function Write-FunctionNameTests {
     Write-Indented "Describe 'Function names' {"
 
     Push-Indentation
+
+    Write-Indented "BeforeEach {"
+    Push-Indentation
+    Write-Indented "Get-Module -Name $($script:ModuleName) -All | Remove-Module -Force -ErrorAction Ignore"
+    Write-Indented "Import-Module $(Resolve-Path $Psd1File) -Force"
+    Pop-Indentation
+    Write-Indented "}"
+
     Write-Indented "Context 'The module exposes only the expected functions' {"
 
     Push-Indentation
