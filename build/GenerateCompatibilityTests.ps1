@@ -44,6 +44,17 @@ function Write-FunctionNameTests {
     Pop-Indentation
 
     Write-Indented "}"
+
+    $commands | ForEach-Object {
+        Write-Indented "It 'exposes a function named $($_.Name)' {"
+        Push-Indentation
+
+        Write-Indented "Get-Command $($_.Name) -Module $($script:ModuleName) | Should -Not -Be `$null"
+
+        Pop-Indentation
+        Write-Indented "}"
+    }
+
     Pop-Indentation
 
     Write-Indented "}"
