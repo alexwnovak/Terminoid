@@ -9,7 +9,7 @@
 Describe 'Function names' {
     BeforeEach {
         Get-Module -Name Terminoid -All | Remove-Module -Force -ErrorAction Ignore
-        Import-Module C:\Git\alexwnovak\Terminoid\src\Terminoid.psd1 -Force
+        Import-Module $PSScriptRoot\..\..\src\Terminoid.psd1 -Force
     }
     Context 'The module exposes only the expected functions' {
         It 'exposes exactly 23 commands' {
