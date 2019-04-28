@@ -1,0 +1,11 @@
+#install:
+#  - cinst pester
+
+build: false
+
+test_script:
+  - ps: Install-Module pester
+  - ps: Install-Module PSScriptAnalyzer
+  - ps: Install-Module psake
+  - ps: Install-Module PowerShellBuild
+  - ps: ./build.ps1
