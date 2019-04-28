@@ -1,1 +1,4 @@
-powershell -NoProfile -Command 'Invoke-psake'
+powershell -NoProfile -Command {
+    & ./build/Install-Dependencies.ps1
+    Invoke-psake
+}
