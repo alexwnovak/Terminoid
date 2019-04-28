@@ -12,6 +12,11 @@ $script:IndentationLevel = 0
 $script:IndentSpaces = 4
 $script:ModuleName = [System.IO.Path]::GetFileNameWithoutExtension( $Psd1File )
 
+$moduleFullPath = Resolve-Path $Psd1File
+Push-Location (Resolve-Path $OutputPath)
+$script:RelativeModulePath = Resolve-Path $moduleFullPath -Relative
+Pop-Location
+
 function Push-Indentation {
     $script:IndentationLevel++
 }
@@ -43,7 +48,7 @@ function Write-FunctionNameTests {
     Write-Indented "BeforeEach {"
     Push-Indentation
     Write-Indented "Get-Module -Name $($script:ModuleName) -All | Remove-Module -Force -ErrorAction Ignore"
-    Write-Indented "Import-Module $(Resolve-Path $Psd1File) -Force"
+    Write-Indented "Import-Module `$PSScriptRoot\$($script:RelativeModulePath) -Force"
     Pop-Indentation
     Write-Indented "}"
 
@@ -80,5 +85,4 @@ function Write-FunctionNameTests {
 }
 
 Import-Module $Psd1File -Force
-
 Write-FunctionNameTests | Out-File $OutputPath\FunctionNames.Tests.ps1 -Encoding UTF8
