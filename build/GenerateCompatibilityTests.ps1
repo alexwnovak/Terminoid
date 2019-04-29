@@ -84,6 +84,32 @@ function Write-FunctionNameTests {
     Write-Indented "}"
 }
 
+function Write-ModuleTests {
+    Write-Indented "#=============================================================================="
+    Write-Indented "# Module Tests"
+    Write-Indented "#   These tests were automatically generated to ensure only the expected"
+    Write-Indented "#   behavior is exposed from the module. This protects against accidentally"
+    Write-Indented "#   removing something and breaking backward compatibility. When new functions"
+    Write-Indented "#   are added, this test should be regenerated to reflect the new public API."
+    Write-Indented "#=============================================================================="
+    Write-Indented ''
+    Write-Indented "Describe 'Module behavior' {"
+
+    Push-Indentation
+
+    $commands = Get-Command -Module $ModuleName
+    Write-Indented "It 'exposes exactly $($commands.Count) functions' {"
+
+    Push-Indentation
+    Write-Indented "(Get-Command -Module $($script:ModuleName)) | Should -Be $($commands.Count)"
+    Pop-Indentation
+
+    Write-Indented "}"
+
+    Pop-Indentation
+    Write-Indented "}"
+}
+
 function Write-FunctionTests {
     param (
         [System.Management.Automation.FunctionInfo]
@@ -120,7 +146,7 @@ function Write-FunctionTests {
 }
 
 Import-Module $Psd1File -Force
-Write-FunctionNameTests | Out-File $OutputPath\FunctionNames.Tests.ps1 -Encoding UTF8
+Write-ModuleTests | Out-File $OutputPath\Module.Tests.ps1 -Encoding UTF8
 
 Get-Command -Module $script:ModuleName | ForEach-Object {
     Write-FunctionTests $_ | Out-File "$OutputPath\$($_.Name)_Compatibility.Tests.ps1" -Encoding UTF8
