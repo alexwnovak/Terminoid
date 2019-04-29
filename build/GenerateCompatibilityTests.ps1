@@ -84,5 +84,44 @@ function Write-FunctionNameTests {
     Write-Indented "}"
 }
 
+function Write-FunctionTests {
+    param (
+        [System.Management.Automation.FunctionInfo]
+        $Function
+    )
+
+    Write-Indented "#=============================================================================="
+    Write-Indented "# $($_.Name) Compatibility Tests"
+    Write-Indented "#   These tests were automatically generated to ensure that this function's"
+    Write-Indented "#   public API is never accidentally changed (breaking backward compatibility)."
+    Write-Indented "#   When new functionality is added--or if breaking backward compatibility IS"
+    Write-Indented "#   intended, then this test should be generated to reflect the new public API."
+    Write-Indented "#=============================================================================="
+    Write-Indented ''
+    Write-Indented "Describe '$($_.Name) compatibility' {"
+
+    Push-Indentation
+
+    Write-Indented "BeforeEach {"
+    Push-Indentation
+    Write-Indented "Get-Module -Name $($script:ModuleName) -All | Remove-Module -Force -ErrorAction Ignore"
+    Write-Indented "Import-Module `$PSScriptRoot\$($script:RelativeModulePath) -Force"
+    Pop-Indentation
+    Write-Indented "}"
+
+    Write-Indented "It 'exposes a function named $($_.Name)' {"
+    Push-Indentation
+    Write-Indented "Get-Command $($_.Name) -Module $($script:ModuleName) | Should -Not -Be `$null"
+    Pop-Indentation
+    Write-Indented "}"
+
+    Pop-Indentation
+    Write-Indented "}"
+}
+
 Import-Module $Psd1File -Force
 Write-FunctionNameTests | Out-File $OutputPath\FunctionNames.Tests.ps1 -Encoding UTF8
+
+Get-Command -Module $script:ModuleName | ForEach-Object {
+    Write-FunctionTests $_ | Out-File "$OutputPath\$($_.Name)_Compatibility.Tests.ps1" -Encoding UTF8
+}
