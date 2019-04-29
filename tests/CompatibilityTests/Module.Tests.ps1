@@ -7,7 +7,11 @@
 #==============================================================================
 
 Describe 'Module behavior' {
+    BeforeEach {
+        Get-Module -Name Terminoid -All | Remove-Module -Force -ErrorAction Ignore
+        Import-Module $PSScriptRoot\..\..\src\Terminoid.psd1 -Force
+    }
     It 'exposes exactly 23 functions' {
-        (Get-Command -Module Terminoid) | Should -Be 23
+        (Get-Command -Module Terminoid).Count | Should -Be 23
     }
 }
