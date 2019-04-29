@@ -97,11 +97,18 @@ function Write-ModuleTests {
 
     Push-Indentation
 
+    Write-Indented "BeforeEach {"
+    Push-Indentation
+    Write-Indented "Get-Module -Name $($script:ModuleName) -All | Remove-Module -Force -ErrorAction Ignore"
+    Write-Indented "Import-Module `$PSScriptRoot\$($script:RelativeModulePath) -Force"
+    Pop-Indentation
+    Write-Indented "}"
+
     $commands = Get-Command -Module $ModuleName
     Write-Indented "It 'exposes exactly $($commands.Count) functions' {"
 
     Push-Indentation
-    Write-Indented "(Get-Command -Module $($script:ModuleName)) | Should -Be $($commands.Count)"
+    Write-Indented "(Get-Command -Module $($script:ModuleName)).Count | Should -Be $($commands.Count)"
     Pop-Indentation
 
     Write-Indented "}"
