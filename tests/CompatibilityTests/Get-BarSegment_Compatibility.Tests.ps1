@@ -14,4 +14,7 @@ Describe 'Get-BarSegment compatibility' {
     It 'exposes a function named Get-BarSegment' {
         Get-Command Get-BarSegment -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 0 parameters' {
+        (Get-Command Get-BarSegment).Parameters.Count | Should -Be 0
+    }
 }

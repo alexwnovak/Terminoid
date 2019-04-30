@@ -14,4 +14,7 @@ Describe 'Reset-DefaultFileDetailReader compatibility' {
     It 'exposes a function named Reset-DefaultFileDetailReader' {
         Get-Command Reset-DefaultFileDetailReader -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 0 parameters' {
+        (Get-Command Reset-DefaultFileDetailReader).Parameters.Count | Should -Be 0
+    }
 }

@@ -14,4 +14,7 @@ Describe 'Clear-FormatterTable compatibility' {
     It 'exposes a function named Clear-FormatterTable' {
         Get-Command Clear-FormatterTable -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 0 parameters' {
+        (Get-Command Clear-FormatterTable).Parameters.Count | Should -Be 0
+    }
 }

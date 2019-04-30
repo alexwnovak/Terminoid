@@ -14,4 +14,7 @@ Describe 'Set-DefaultFileDetailReader compatibility' {
     It 'exposes a function named Set-DefaultFileDetailReader' {
         Get-Command Set-DefaultFileDetailReader -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 1 parameter' {
+        (Get-Command Set-DefaultFileDetailReader).Parameters.Count | Should -Be 1
+    }
 }

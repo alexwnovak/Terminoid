@@ -14,4 +14,7 @@ Describe 'Get-LocationHistory compatibility' {
     It 'exposes a function named Get-LocationHistory' {
         Get-Command Get-LocationHistory -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 0 parameters' {
+        (Get-Command Get-LocationHistory).Parameters.Count | Should -Be 0
+    }
 }

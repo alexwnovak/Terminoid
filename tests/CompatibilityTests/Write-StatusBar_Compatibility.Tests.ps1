@@ -14,4 +14,7 @@ Describe 'Write-StatusBar compatibility' {
     It 'exposes a function named Write-StatusBar' {
         Get-Command Write-StatusBar -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 0 parameters' {
+        (Get-Command Write-StatusBar).Parameters.Count | Should -Be 0
+    }
 }

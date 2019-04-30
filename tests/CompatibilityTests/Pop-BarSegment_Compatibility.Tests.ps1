@@ -14,4 +14,7 @@ Describe 'Pop-BarSegment compatibility' {
     It 'exposes a function named Pop-BarSegment' {
         Get-Command Pop-BarSegment -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 0 parameters' {
+        (Get-Command Pop-BarSegment).Parameters.Count | Should -Be 0
+    }
 }

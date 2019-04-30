@@ -14,4 +14,7 @@ Describe 'Push-Location compatibility' {
     It 'exposes a function named Push-Location' {
         Get-Command Push-Location -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 1 parameter' {
+        (Get-Command Push-Location).Parameters.Count | Should -Be 1
+    }
 }

@@ -14,4 +14,7 @@ Describe 'Format-ChildItem compatibility' {
     It 'exposes a function named Format-ChildItem' {
         Get-Command Format-ChildItem -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 12 parameters' {
+        (Get-Command Format-ChildItem).Parameters.Count | Should -Be 12
+    }
 }

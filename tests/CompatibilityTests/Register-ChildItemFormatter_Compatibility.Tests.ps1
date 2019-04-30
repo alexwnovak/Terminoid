@@ -14,4 +14,7 @@ Describe 'Register-ChildItemFormatter compatibility' {
     It 'exposes a function named Register-ChildItemFormatter' {
         Get-Command Register-ChildItemFormatter -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 13 parameters' {
+        (Get-Command Register-ChildItemFormatter).Parameters.Count | Should -Be 13
+    }
 }

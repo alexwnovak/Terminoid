@@ -14,4 +14,7 @@ Describe 'Reset-DetailReader compatibility' {
     It 'exposes a function named Reset-DetailReader' {
         Get-Command Reset-DetailReader -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 0 parameters' {
+        (Get-Command Reset-DetailReader).Parameters.Count | Should -Be 0
+    }
 }

@@ -14,4 +14,7 @@ Describe 'Clear-BarSegment compatibility' {
     It 'exposes a function named Clear-BarSegment' {
         Get-Command Clear-BarSegment -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 0 parameters' {
+        (Get-Command Clear-BarSegment).Parameters.Count | Should -Be 0
+    }
 }

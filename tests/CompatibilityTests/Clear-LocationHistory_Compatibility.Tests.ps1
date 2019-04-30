@@ -14,4 +14,7 @@ Describe 'Clear-LocationHistory compatibility' {
     It 'exposes a function named Clear-LocationHistory' {
         Get-Command Clear-LocationHistory -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 0 parameters' {
+        (Get-Command Clear-LocationHistory).Parameters.Count | Should -Be 0
+    }
 }

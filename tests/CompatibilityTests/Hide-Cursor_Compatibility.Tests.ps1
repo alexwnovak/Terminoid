@@ -14,4 +14,7 @@ Describe 'Hide-Cursor compatibility' {
     It 'exposes a function named Hide-Cursor' {
         Get-Command Hide-Cursor -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 0 parameters' {
+        (Get-Command Hide-Cursor).Parameters.Count | Should -Be 0
+    }
 }

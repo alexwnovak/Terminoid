@@ -14,4 +14,7 @@ Describe 'Format-Size compatibility' {
     It 'exposes a function named Format-Size' {
         Get-Command Format-Size -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 12 parameters' {
+        (Get-Command Format-Size).Parameters.Count | Should -Be 12
+    }
 }

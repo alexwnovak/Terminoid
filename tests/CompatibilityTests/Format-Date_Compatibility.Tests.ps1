@@ -14,4 +14,7 @@ Describe 'Format-Date compatibility' {
     It 'exposes a function named Format-Date' {
         Get-Command Format-Date -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 13 parameters' {
+        (Get-Command Format-Date).Parameters.Count | Should -Be 13
+    }
 }

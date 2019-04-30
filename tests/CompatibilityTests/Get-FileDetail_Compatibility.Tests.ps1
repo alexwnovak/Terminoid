@@ -14,4 +14,7 @@ Describe 'Get-FileDetail compatibility' {
     It 'exposes a function named Get-FileDetail' {
         Get-Command Get-FileDetail -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 1 parameter' {
+        (Get-Command Get-FileDetail).Parameters.Count | Should -Be 1
+    }
 }

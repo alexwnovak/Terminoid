@@ -14,4 +14,7 @@ Describe 'Show-Cursor compatibility' {
     It 'exposes a function named Show-Cursor' {
         Get-Command Show-Cursor -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 0 parameters' {
+        (Get-Command Show-Cursor).Parameters.Count | Should -Be 0
+    }
 }

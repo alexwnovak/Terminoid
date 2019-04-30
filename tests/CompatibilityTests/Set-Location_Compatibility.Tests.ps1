@@ -14,4 +14,7 @@ Describe 'Set-Location compatibility' {
     It 'exposes a function named Set-Location' {
         Get-Command Set-Location -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 1 parameter' {
+        (Get-Command Set-Location).Parameters.Count | Should -Be 1
+    }
 }

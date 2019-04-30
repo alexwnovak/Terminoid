@@ -14,4 +14,7 @@ Describe 'Register-FileDetailReader compatibility' {
     It 'exposes a function named Register-FileDetailReader' {
         Get-Command Register-FileDetailReader -Module Terminoid | Should -Not -Be $null
     }
+    It 'exposes exactly 2 parameters' {
+        (Get-Command Register-FileDetailReader).Parameters.Count | Should -Be 2
+    }
 }
