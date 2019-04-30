@@ -144,7 +144,15 @@ function Write-FunctionTests {
 
     Write-Indented "It 'exposes a function named $($_.Name)' {"
     Push-Indentation
-    Write-Indented "Get-Command $($_.Name) -Module $($script:ModuleName) | Should -Not -Be `$null"
+    Write-Indented "Get-Command $($Function.Name) -Module $($script:ModuleName) | Should -Not -Be `$null"
+    Pop-Indentation
+    Write-Indented "}"
+
+    $parameterString = if ( $Function.Parameters.Count -eq 1 ) { 'parameter' } else { 'parameters' }
+
+    Write-Indented "It 'exposes exactly $($Function.Parameters.Count) $parameterString' {"
+    Push-Indentation
+    Write-Indented "(Get-Command $($Function.Name)).Parameters.Count | Should -Be $($Function.Parameters.Count)"
     Pop-Indentation
     Write-Indented "}"
 
