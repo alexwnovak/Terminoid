@@ -48,6 +48,7 @@
       'Set-DefaultFileDetailReader',
       'Set-Location',
       'Show-Cursor',
+      'Start-TerminoidProjectUri',
       'Write-StatusBar'
    )
 
