@@ -18,7 +18,7 @@
    Copyright         = '(c) 2019 Alex Novak. All rights reserved.'
 
    # Description of the functionality provided by this module
-   Description       = 'Rad up your terminal'
+   Description       = 'Power up your PowerShell terminal experience!'
 
    # Minimum version of the Windows PowerShell engine required by this module
    PowerShellVersion = '5.0'
@@ -60,22 +60,23 @@
 
    # Aliases to export from this module, for best performance, do not use wildcards and do not
    # delete the entry, use an empty array if there are no aliases to export.
-   AliasesToExport   = @(
-      'stat'
-   )
+   AliasesToExport   = @()
 
    # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also
    # contain a PSData hashtable with additional module metadata used by PowerShell.
    PrivateData       = @{
       PSData = @{
          # Tags applied to this module. These help with module discovery in online galleries.
-         # Tags = @()
+         Tags = @(
+            'terminoid',
+            'terminal'
+         )
 
          # A URL to the license for this module.
-         # LicenseUri = ''
+         LicenseUri = 'https://github.com/alexwnovak/Terminoid/blob/master/LICENSE'
 
          # A URL to the main website for this project.
-         # ProjectUri = ''
+         ProjectUri = 'https://github.com/alexwnovak/Terminoid'
 
          # A URL to an icon representing this module.
          # IconUri = ''
