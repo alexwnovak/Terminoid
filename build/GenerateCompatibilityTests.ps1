@@ -104,6 +104,8 @@ function Write-ModuleTests {
     Pop-Indentation
     Write-Indented "}"
 
+    # Assert the number of exported functions
+
     $commands = Get-Command -Module $ModuleName
     Write-Indented "It 'exposes exactly $($commands.Count) functions' {"
 
@@ -111,6 +113,24 @@ function Write-ModuleTests {
     Write-Indented "(Get-Command -Module $($script:ModuleName)).Count | Should -Be $($commands.Count)"
     Pop-Indentation
 
+    Write-Indented "}"
+
+    # Assert the number of exported variables
+
+    $variables = (Get-Module Terminoid).ExportedVariables
+    Write-Indented "It 'exposes exactly $($aliases.Count) variables' {"
+    Push-Indentation
+    Write-Indented "(Get-Module $($script:ModuleName)).ExportedVariables.Count | Should -Be $($variables.Count)"
+    Pop-Indentation
+    Write-Indented "}"
+
+    # Assert the number of exported aliases
+
+    $aliases = (Get-Module Terminoid).ExportedAliases
+    Write-Indented "It 'exposes exactly $($aliases.Count) aliases' {"
+    Push-Indentation
+    Write-Indented "(Get-Module $($script:ModuleName)).ExportedAliases.Count | Should -Be $($aliases.Count)"
+    Pop-Indentation
     Write-Indented "}"
 
     Pop-Indentation

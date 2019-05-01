@@ -14,4 +14,10 @@ Describe 'Module behavior' {
     It 'exposes exactly 23 functions' {
         (Get-Command -Module Terminoid).Count | Should -Be 23
     }
+    It 'exposes exactly 0 variables' {
+        (Get-Module Terminoid).ExportedVariables.Count | Should -Be 0
+    }
+    It 'exposes exactly 0 aliases' {
+        (Get-Module Terminoid).ExportedAliases.Count | Should -Be 0
+    }
 }
