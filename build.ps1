@@ -13,5 +13,5 @@
 #     # exit ( [int]( -not $psake.build_success ) )
 # }
 
-    & $ScriptRoot/build/Install-Dependencies.ps1
-    Invoke-psake -buildFile $ScriptRoot/psakefile.ps1
+& $PSScriptRoot/build/Install-Dependencies.ps1
+Invoke-psake -buildFile $PSScriptRoot/psakefile.ps1
