@@ -6,5 +6,9 @@ powershell -NoProfile -Args $PSScriptRoot -Command {
 
     $exitCode = [int]( -not $psake.build_success )
     Write-Host "Exiting with $exitCode and psake is $psake"
-    exit ( [int]( -not $psake.build_success ) )
+
+    if ( -not $psake.build_success ) {
+        throw 'Fail build'
+    }
+    # exit ( [int]( -not $psake.build_success ) )
 }
