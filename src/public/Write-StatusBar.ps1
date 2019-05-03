@@ -13,7 +13,10 @@ function Write-StatusBar {
     if ( $script:BarSegments.Count -eq 0 ) {
         return
     }
-    elseif ( $script:BarSegments.Count -eq 1 ) {
+
+    $statusBar = ''
+
+    if ( $script:BarSegments.Count -eq 1 ) {
         $statusBar = WriteSingleSegment $script:BarSegments[0]
     }
     else {
