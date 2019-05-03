@@ -4,7 +4,7 @@ function WriteSingleSegment( $BarSegment ) {
                 -Foreground $BarSegment.ForegroundColor  `
 
     $joinerChar = Get-SpecialChar -Type Joiner
-    $joiner = Format-Output $joinerChar -Foreground $script:BarSegments[$i - 1].BackgroundColor
+    $joiner = Format-Output $joinerChar -Foreground $BarSegment.BackgroundColor
 
     "$block$joiner"
 }
