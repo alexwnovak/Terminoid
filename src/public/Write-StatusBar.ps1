@@ -4,7 +4,7 @@ function WriteSingleSegment( $BarSegment ) {
                 -Foreground $BarSegment.ForegroundColor  `
 
     $joinerChar = Get-SpecialChar -Type Joiner
-    $joiner = Format-Output $joinerChar -Foreground $script:BarSegments[$i - 1].BackgroundColor
+    $joiner = Format-Output $joinerChar -Foreground $BarSegment.BackgroundColor
 
     "$block$joiner"
 }
@@ -13,7 +13,10 @@ function Write-StatusBar {
     if ( $script:BarSegments.Count -eq 0 ) {
         return
     }
-    elseif ( $script:BarSegments.Count -eq 1 ) {
+
+    $statusBar = ''
+
+    if ( $script:BarSegments.Count -eq 1 ) {
         $statusBar = WriteSingleSegment $script:BarSegments[0]
     }
     else {
