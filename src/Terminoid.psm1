@@ -1,3 +1,5 @@
+Set-StrictMode -Version Latest
+
 Get-ChildItem $PSScriptRoot\*.ps1 -Recurse | ForEach-Object { . $_ }
 
 function InitializeInternalVariables {
