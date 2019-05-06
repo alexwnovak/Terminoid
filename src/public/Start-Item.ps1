@@ -1,14 +1,14 @@
 function Start-Item {
     param (
-        $ItemName
+        $Item
     )
 
     foreach ( $handler in $script:StartHandlerTable ) {
-        if ( & $handler.Predicate $ItemName ) {
-            & $handler.Function $ItemName
+        if ( & $handler.Predicate $Item ) {
+            & $handler.Function $Item
             return
         }
     }
 
-    & $script:DefaultStartHandler $ItemName
+    & $script:DefaultStartHandler $Item
 }

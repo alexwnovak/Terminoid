@@ -13,7 +13,7 @@ Describe 'Start-Item' {
             Set-Variable actualItem -Scope 1 -Value $Item
         }
 
-        Start-Item 'SomeItem.txt'
+        Start-Item -Item 'SomeItem.txt'
 
         $actualItem | Should -Be 'SomeItem.txt'
     }
@@ -26,7 +26,7 @@ Describe 'Start-Item' {
             Set-Variable actualItem -Scope 1 -Value $Item
         }
 
-        Start-Item 'Test.item'
+        Start-Item -Item 'Test.item'
 
         $actualItem | Should -Be 'Test.item'
     }
@@ -36,7 +36,7 @@ Describe 'Start-Item' {
 
         Register-StartHandler -Predicate { param ( $Item ) $Item -eq 'Test.item' } -Function { }
 
-        { Start-Item 'Test.item' } | Should -Not -Throw
+        { Start-Item -Item 'Test.item' } | Should -Not -Throw
     }
 
     It 'uses the first matched handler' {
@@ -54,7 +54,7 @@ Describe 'Start-Item' {
             Set-Variable actualItem -Scope 1 -Value 'second match'
         }
 
-        Start-Item -ItemName 'Test.item'
+        Start-Item -Item 'Test.item'
 
         $actualItem | Should -Be 'first match'
     }
