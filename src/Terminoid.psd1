@@ -46,8 +46,10 @@
       'Reset-DefaultFileDetailReader',
       'Reset-DetailReader'
       'Set-DefaultFileDetailReader',
+      'Set-DefaultStartHandler',
       'Set-Location',
       'Show-Cursor',
+      'Start-Item',
       'Write-StatusBar'
    )
 
