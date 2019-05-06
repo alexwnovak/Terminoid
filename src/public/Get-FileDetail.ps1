@@ -13,13 +13,16 @@ function Get-FileDetail {
         $Path
     )
 
-    & $DefaultDetailReader $Path
+    [hashtable] $details = @{}
+    $details += & $DefaultDetailReader $Path
 
     foreach ( $detailReader in $DetailReaderTable ) {
         $extension = [System.IO.Path]::GetExtension( $Path )
 
         if ( $extension -eq $detailReader.Extension ) {
-            & $detailReader.Function $Path
+            $details += & $detailReader.Function $Path
         }
     }
+
+    $details
 }

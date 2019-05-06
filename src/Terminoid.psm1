@@ -3,7 +3,7 @@ Set-StrictMode -Version Latest
 Get-ChildItem $PSScriptRoot\*.ps1 -Recurse | ForEach-Object { . $_ }
 
 function InitializeInternalVariables {
-    [System.Collections.ArrayList] $script:BarSegments = @()
+    [System.Collections.ArrayList] $script:BarSegments = New-Object -TypeName System.Collections.ArrayList
     [System.Collections.ArrayList] $script:LocationHistory = @()
     $script:FormatterTable = New-Object System.Collections.Stack
 

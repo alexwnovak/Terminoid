@@ -57,7 +57,7 @@ Describe "Push-BarSegment" {
             Push-BarSegment -BackgroundColor 0,0,0 -ForegroundColor 0,0,0 -Text { 'not-used' }
             Pop-BarSegment
 
-            (Get-BarSegment).Count | Should -Be 0
+            @(Get-BarSegment).Count | Should -Be 0
         }
     }
 }
