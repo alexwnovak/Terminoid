@@ -43,8 +43,10 @@
       'Push-Location',
       'Register-ChildItemFormatter',
       'Register-FileDetailReader',
+      'Register-StartHandler',
       'Reset-DefaultFileDetailReader',
-      'Reset-DetailReader'
+      'Reset-DetailReader',
+      'Reset-StartHandler',
       'Set-DefaultFileDetailReader',
       'Set-DefaultStartHandler',
       'Set-Location',

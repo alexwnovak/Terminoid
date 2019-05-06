@@ -16,6 +16,8 @@ function InitializeInternalVariables {
 
     [System.Collections.ArrayList] $script:DetailReaderTable = @()
     Reset-DetailReader
+
+    [System.Collections.ArrayList] $script:StartHandlerTable = @()
 }
 
 function ExportPublicFunctions {
