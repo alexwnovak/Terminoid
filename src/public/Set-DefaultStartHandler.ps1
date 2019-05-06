@@ -3,10 +3,13 @@ function DefaultStartHandler( $ItemName ) {
 }
 
 function Set-DefaultStartHandler {
+    [CmdletBinding( SupportsShouldProcess )]
     param (
         [scriptblock]
         $Function
     )
 
-    $script:DefaultStartHandler = $Function
+    if ( $PSCmdlet.ShouldProcess( 'Setting the default start handler' ) ) {
+        $script:DefaultStartHandler = $Function
+    }
 }

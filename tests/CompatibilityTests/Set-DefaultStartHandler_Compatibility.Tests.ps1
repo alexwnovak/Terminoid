@@ -14,7 +14,7 @@ Describe 'Set-DefaultStartHandler compatibility' {
     It 'exposes a function named Set-DefaultStartHandler' {
         Get-Command Set-DefaultStartHandler -Module Terminoid | Should -Not -Be $null
     }
-    It 'exposes exactly 1 parameter' {
-        (Get-Command Set-DefaultStartHandler).Parameters.Count | Should -Be 1
+    It 'exposes exactly 14 parameters' {
+        (Get-Command Set-DefaultStartHandler).Parameters.Count | Should -Be 14
     }
 }
