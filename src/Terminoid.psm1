@@ -8,6 +8,7 @@ function InitializeInternalVariables {
     $script:FormatterTable = New-Object System.Collections.Stack
 
     $script:DefaultDetailReader = $function:DefaultFileDetailReader
+    $script:DefaultStartHandler = $function:DefaultStartHandler
 
     $script:SpecialCharTable = @{
         Joiner = [char]0xE0B0
@@ -15,6 +16,8 @@ function InitializeInternalVariables {
 
     [System.Collections.ArrayList] $script:DetailReaderTable = @()
     Reset-DetailReader
+
+    Reset-StartHandler
 }
 
 function ExportPublicFunctions {
