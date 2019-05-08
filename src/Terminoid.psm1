@@ -25,5 +25,10 @@ function ExportPublicFunctions {
     }
 }
 
+function RegisterKeyHandlers {
+    Set-PSReadLineKeyHandler -Chord Ctrl+O -ScriptBlock ${function:Add-StartItemCommand}
+}
+
 InitializeInternalVariables
 ExportPublicFunctions
+RegisterKeyHandlers
