@@ -27,6 +27,7 @@ function ExportPublicFunctions {
 
 function RegisterKeyHandlers {
     Set-PSReadLineKeyHandler -Chord Ctrl+O -ScriptBlock ${function:Add-StartItemCommand}
+    Set-PSReadLineKeyHandler -Chord Ctrl+N -ScriptBlock ${function:Add-NewItemCommand}
 }
 
 InitializeInternalVariables
