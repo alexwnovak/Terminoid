@@ -20,4 +20,16 @@ Describe 'Module behavior' {
     It 'exposes exactly 0 aliases' {
         (Get-Module Terminoid).ExportedAliases.Count | Should -Be 0
     }
+    It 'registers a PSReadline key handler for Ctrl+o' {
+        $keyHandler = Get-PSReadlineKeyHandler -Bound | Where-Object { $_.Key -ceq 'Ctrl+o' }
+        $keyHandler.Function | Should -Be TerminoidInsertStartItem
+    }
+    It 'registers a PSReadline key handler for Ctrl+n' {
+        $keyHandler = Get-PSReadlineKeyHandler -Bound | Where-Object { $_.Key -ceq 'Ctrl+n' }
+        $keyHandler.Function | Should -Be TerminoidInsertNewItem
+    }
+    It 'registers a PSReadline key handler for Ctrl+N' {
+        $keyHandler = Get-PSReadlineKeyHandler -Bound | Where-Object { $_.Key -ceq 'Ctrl+N' }
+        $keyHandler.Function | Should -Be TerminoidInsertNewDirectory
+    }
 }
