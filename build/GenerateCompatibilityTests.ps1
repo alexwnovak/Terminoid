@@ -133,6 +133,19 @@ function Write-ModuleTests {
     Pop-Indentation
     Write-Indented "}"
 
+    # Assert the PSReadline key handlers
+
+    $keyHandlers = (Get-PSReadlineKeyHandler -Bound) | Where-Object { $_.Function -clike 'Terminoid*' }
+
+    foreach ( $keyHandler in $keyHandlers ) {
+        Write-Indented "It 'registers a PSReadline key handler for $($keyHandler.Key)' {"
+        Push-Indentation
+        Write-Indented "`$keyHandler = Get-PSReadlineKeyHandler -Bound | Where-Object { `$_.Key -ceq '$($keyHandler.Key)' }"
+        Write-Indented "`$keyHandler.Function | Should -Be '$($keyHandler.Function)'"
+        Pop-Indentation
+        Write-Indented "}"
+    }
+
     Pop-Indentation
     Write-Indented "}"
 }
