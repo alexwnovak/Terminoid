@@ -7,6 +7,10 @@ function Test-Module( $Name, $Version ) {
         return $true
     }
 
+    if ( (Get-Module $dependency.name -ListAvailable).Version -eq $Version ) {
+        return $true
+    }
+
     $false
 }
 
