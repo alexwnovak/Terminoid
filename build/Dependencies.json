@@ -15,6 +15,10 @@
         {
             "name": "psake",
             "version": "4.8.0-alpha"
+        },
+        {
+            "name": "PSReadline",
+            "version": "1.2"
         }
     ]
 }
