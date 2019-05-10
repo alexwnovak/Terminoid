@@ -46,10 +46,12 @@
       'Register-StartHandler',
       'Reset-DefaultFileDetailReader',
       'Reset-DetailReader',
+      'Reset-SpecialChar',
       'Reset-StartHandler',
       'Set-DefaultFileDetailReader',
       'Set-DefaultStartHandler',
       'Set-Location',
+      'Set-SpecialChar',
       'Show-Cursor',
       'Start-Item',
       'Write-StatusBar'

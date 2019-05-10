@@ -1,5 +1,7 @@
 function Get-SpecialChar {
     param (
+        [Parameter( Mandatory )]
+        [ValidateSet( 'BarJoiner' )]
         $Type
     )
 
