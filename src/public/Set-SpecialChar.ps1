@@ -1,4 +1,5 @@
 function Set-SpecialChar {
+    [CmdletBinding( SupportsShouldProcess )]
     param (
         [Parameter( Mandatory )]
         [ValidateSet( 'BarJoiner' )]
@@ -8,5 +9,7 @@ function Set-SpecialChar {
         $Char
     )
 
-    $script:SpecialCharTable[$Type] = $Char
+    if ( $PSCmdlet.ShouldProcess( "Setting $Type to $Char" ) ) {
+        $script:SpecialCharTable[$Type] = $Char
+    }
 }
