@@ -46,6 +46,7 @@
       'Register-StartHandler',
       'Reset-DefaultFileDetailReader',
       'Reset-DetailReader',
+      'Reset-SpecialChar',
       'Reset-StartHandler',
       'Set-DefaultFileDetailReader',
       'Set-DefaultStartHandler',
