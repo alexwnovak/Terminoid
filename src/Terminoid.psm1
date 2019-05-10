@@ -1,8 +1,11 @@
+using namespace System.Collections.Generic
+
 Set-StrictMode -Version Latest
 Get-ChildItem $PSScriptRoot\*.ps1 -Recurse | ForEach-Object { . $_ }
 
 function InitializeInternalVariables {
-    [System.Collections.ArrayList] $script:BarSegments = New-Object -TypeName System.Collections.ArrayList
+    $script:BarSegments = [List[Hashtable]]::new()
+
     [System.Collections.ArrayList] $script:LocationHistory = @()
     $script:FormatterTable = New-Object System.Collections.Stack
 
