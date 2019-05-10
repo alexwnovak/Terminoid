@@ -50,6 +50,7 @@
       'Set-DefaultFileDetailReader',
       'Set-DefaultStartHandler',
       'Set-Location',
+      'Set-SpecialChar',
       'Show-Cursor',
       'Start-Item',
       'Write-StatusBar'

@@ -6,7 +6,7 @@ Describe 'Write-StatusBar' {
     }
 
     $e = [char] 0x1B
-    $joinerChar = Get-SpecialChar -Type Joiner
+    $joinerChar = Get-SpecialChar -Type BarJoiner
 
     It 'writes nothing if there are no bars' {
         Write-StatusBar | Should -Be $null

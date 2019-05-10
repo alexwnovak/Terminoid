@@ -14,7 +14,7 @@ Describe 'Get-SpecialChar compatibility' {
     It 'exposes a function named Get-SpecialChar' {
         Get-Command Get-SpecialChar -Module Terminoid | Should -Not -Be $null
     }
-    It 'exposes exactly 1 parameter' {
-        (Get-Command Get-SpecialChar).Parameters.Count | Should -Be 1
+    It 'exposes exactly 12 parameters' {
+        (Get-Command Get-SpecialChar).Parameters.Count | Should -Be 12
     }
 }

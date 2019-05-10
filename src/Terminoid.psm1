@@ -10,7 +10,7 @@ function InitializeInternalVariables {
     $script:DefaultStartHandler = $function:DefaultStartHandler
 
     $script:SpecialCharTable = @{
-        Joiner = [char]0xE0B0
+        BarJoiner = [char]0xE0B0
     }
 
     [System.Collections.ArrayList] $script:DetailReaderTable = @()
