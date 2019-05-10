@@ -5,8 +5,8 @@ Get-ChildItem $PSScriptRoot\*.ps1 -Recurse | ForEach-Object { . $_ }
 
 function InitializeInternalVariables {
     $script:BarSegments = [List[Hashtable]]::new()
+    $script:LocationHistory = [List[string]]::new()
 
-    [System.Collections.ArrayList] $script:LocationHistory = @()
     $script:FormatterTable = New-Object System.Collections.Stack
 
     $script:DefaultDetailReader = $function:DefaultFileDetailReader
