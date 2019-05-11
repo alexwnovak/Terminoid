@@ -19,9 +19,7 @@ function InitializeInternalVariables {
         BarJoiner = $script:DefaultSpecialCharTable['BarJoiner']
     }
 
-    [System.Collections.ArrayList] $script:DetailReaderTable = @()
     Reset-DetailReader
-
     Reset-StartHandler
 }
 

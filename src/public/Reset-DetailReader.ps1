@@ -2,7 +2,7 @@ function Reset-DetailReader {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute( 'PSUseShouldProcessForStateChangingFunctions', '' )]
     param ()
 
-    $script:DetailReaderTable.Clear()
+    $script:DetailReaderTable = [List[Hashtable]]::new()
     Register-FileDetailReader -Extension '.bmp' -Function ${function:Get-ImageDetail}
     Register-FileDetailReader -Extension '.gif' -Function ${function:Get-ImageDetail}
     Register-FileDetailReader -Extension '.jpeg' -Function ${function:Get-ImageDetail}
