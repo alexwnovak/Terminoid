@@ -4,7 +4,7 @@ function Get-FileDetail {
         $Path
     )
 
-    [hashtable] $details = @{}
+    [Hashtable] $details = @{}
     $details += & $DefaultDetailReader $Path
 
     foreach ( $detailReader in $DetailReaderTable ) {
