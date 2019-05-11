@@ -1,12 +1,3 @@
-function DefaultFileDetailReader( $Path ) {
-    $fileInfo = Get-ChildItem $Path
-
-    @{
-        'Last Written' = $fileInfo.LastWriteTime
-        'File Size' = '{0:N0} bytes' -f $fileInfo.Length
-    }
-}
-
 function Get-FileDetail {
     param (
         [string]
