@@ -3,6 +3,6 @@ function Reset-StartHandler {
     param ()
 
     if ( $PSCmdlet.ShouldProcess( 'Resetting custom start handlers' ) ) {
-        [System.Collections.ArrayList] $script:StartHandlerTable = @()
+        $script:StartHandlerTable = [List[Hashtable]]::new()
     }
 }
