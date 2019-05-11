@@ -1,5 +1,5 @@
 function Get-BarSegment {
-    [OutputType( [System.Collections.ArrayList] )]
+    [OutputType( [List[Hashtable]] )]
     param ()
 
     $script:BarSegments
