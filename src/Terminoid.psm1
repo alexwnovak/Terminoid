@@ -1,10 +1,12 @@
+using namespace System.Collections.Generic
+
 Set-StrictMode -Version Latest
 Get-ChildItem $PSScriptRoot\*.ps1 -Recurse | ForEach-Object { . $_ }
 
 function InitializeInternalVariables {
-    [System.Collections.ArrayList] $script:BarSegments = New-Object -TypeName System.Collections.ArrayList
-    [System.Collections.ArrayList] $script:LocationHistory = @()
-    $script:FormatterTable = New-Object System.Collections.Stack
+    $script:BarSegments = [List[Hashtable]]::new()
+    $script:LocationHistory = [List[string]]::new()
+    $script:FormatterTable = [Stack[Hashtable]]::new()
 
     $script:DefaultDetailReader = $function:DefaultFileDetailReader
     $script:DefaultStartHandler = $function:DefaultStartHandler
@@ -17,9 +19,7 @@ function InitializeInternalVariables {
         BarJoiner = $script:DefaultSpecialCharTable['BarJoiner']
     }
 
-    [System.Collections.ArrayList] $script:DetailReaderTable = @()
     Reset-DetailReader
-
     Reset-StartHandler
 }
 

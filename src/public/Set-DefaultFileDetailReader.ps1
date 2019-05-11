@@ -1,9 +1,11 @@
 function Set-DefaultFileDetailReader {
-    [Diagnostics.CodeAnalysis.SuppressMessageAttribute( 'PSUseShouldProcessForStateChangingFunctions', '' )]
+    [CmdletBinding( SupportsShouldProcess )]
     param (
         [scriptblock]
         $Function
     )
 
-    $script:DefaultDetailReader = $Function
+    if ( $PSCmdlet.ShouldProcess( 'Changing the default file detail reader' ) ) {
+        $script:DefaultDetailReader = $Function
+    }
 }

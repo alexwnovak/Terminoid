@@ -1,6 +1,8 @@
 function Reset-DefaultFileDetailReader {
-    [Diagnostics.CodeAnalysis.SuppressMessageAttribute( 'PSUseShouldProcessForStateChangingFunctions', '' )]
+    [CmdletBinding( SupportsShouldProcess )]
     param ()
 
-    $script:DefaultDetailReader = $function:DefaultFileDetailReader
+    if ( $PSCmdlet.ShouldProcess( 'Resetting the default file detail reader' ) ) {
+        $script:DefaultDetailReader = $function:DefaultFileDetailReader
+    }
 }
