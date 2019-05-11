@@ -6,8 +6,7 @@ Get-ChildItem $PSScriptRoot\*.ps1 -Recurse | ForEach-Object { . $_ }
 function InitializeInternalVariables {
     $script:BarSegments = [List[Hashtable]]::new()
     $script:LocationHistory = [List[string]]::new()
-
-    $script:FormatterTable = New-Object System.Collections.Stack
+    $script:FormatterTable = [Stack[Hashtable]]::new()
 
     $script:DefaultDetailReader = $function:DefaultFileDetailReader
     $script:DefaultStartHandler = $function:DefaultStartHandler
