@@ -2,13 +2,10 @@ function Format-Date {
     param (
         [Parameter( Mandatory )]
         [DateTime]
-        $Date,
-
-        [DateTime]
-        $Now = (Get-Date)
+        $Date
     )
 
-    $elapsedTime = New-TimeSpan -Start $Date -End $Now
+    $elapsedTime = New-TimeSpan -Start $Date -End (Get-Date)
 
     if ( $elapsedTime.TotalDays -gt 730 ) {
         "$([int] ($elapsedTime.TotalDays / 365)) years ago"
