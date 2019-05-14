@@ -48,6 +48,7 @@
       'Reset-DetailReader',
       'Reset-SpecialChar',
       'Reset-StartHandler',
+      'Select-FromMany',
       'Set-DefaultFileDetailReader',
       'Set-DefaultStartHandler',
       'Set-Location',
