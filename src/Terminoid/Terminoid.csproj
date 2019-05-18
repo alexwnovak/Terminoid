@@ -58,6 +58,12 @@
     <Compile Include="Region.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Terminoid.Native\Terminoid.Native.csproj">
+      <Project>{e8ea75e7-fc84-4449-8a5e-a648c8fe7ef4}</Project>
+      <Name>Terminoid.Native</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
