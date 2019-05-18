@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Region.cs" />
+    <Compile Include="RegionRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Terminoid.Native\Terminoid.Native.csproj">
