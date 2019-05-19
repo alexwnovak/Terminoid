@@ -16,7 +16,7 @@ namespace Terminoid
 
       public Menu( object[] items )
       {
-         Items = items;
+         Items = items ?? throw new ArgumentNullException( nameof( items ) );
       }
 
       private Region CreateRegion( int width, int height, string[] items )
