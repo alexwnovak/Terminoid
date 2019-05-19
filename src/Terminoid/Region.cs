@@ -29,6 +29,14 @@ namespace Terminoid
          Array.Copy( attrBuffer, 0, _attrBuffer, y * Width, Width );
       }
 
+      public void FloodCharLine( int y, char c )
+      {
+         for ( int x = 0; x < Width; x++ )
+         {
+            SetChar( x, y, c );
+         }
+      }
+
       public void FloodAttrLine( int y, ushort attr )
       {
          for ( int x = 0; x < Width; x++ )
