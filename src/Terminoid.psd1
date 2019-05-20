@@ -25,7 +25,7 @@
 
    # Required assemblies
    RequiredAssemblies = @(
-      'dependencies/Terminoid.dll'
+      #'dependencies/Terminoid.dll'
    )
 
    # Functions to export from this module, for best performance, do not use wildcards and do not
