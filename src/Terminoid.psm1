@@ -1,7 +1,7 @@
 using namespace System.Collections.Generic
 
 Set-StrictMode -Version Latest
-Get-ChildItem $PSScriptRoot\*.ps1 -Recurse | ForEach-Object { . $_ }
+Get-ChildItem $PSScriptRoot\public, $PSScriptRoot\private -Include *.ps1 -Recurse | ForEach-Object { . $_ }
 
 function InitializeInternalVariables {
     $script:BarSegments = [List[Hashtable]]::new()
