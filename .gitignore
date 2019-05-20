@@ -1,6 +1,7 @@
 .vscode/
 output/
 scratchpad/
+dependencies/
 
 # MarkdownMonster backup files
 *.saved.bak
