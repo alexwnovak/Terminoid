@@ -60,6 +60,7 @@
     <Compile Include="COORD.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Region.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
