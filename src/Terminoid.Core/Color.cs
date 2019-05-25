@@ -20,6 +20,26 @@
       public static readonly Color Yellow = new Color( 14 );
       public static readonly Color White = new Color( 15 );
 
+      private static readonly Color[] _colorTable = new []
+      {
+         Black,
+         DarkBlue,
+         DarkGreen,
+         DarkCyan,
+         DarkRed,
+         DarkMagenta,
+         DarkYellow,
+         Gray,
+         DarkGray,
+         Blue,
+         Green,
+         Cyan,
+         Red,
+         Magenta,
+         Yellow,
+         White
+      };
+
       internal int Value { get; }
 
       private Color( int value ) => Value = value;
@@ -39,5 +59,7 @@
 
       public static bool operator ==( Color first, Color second ) => Equals( first, second );
       public static bool operator !=( Color first, Color second ) => !( first == second );
+
+      internal static Color FromIndex( int index ) => _colorTable[index];
    }
 }
