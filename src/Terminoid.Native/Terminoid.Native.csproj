@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Color.cs" />
+    <Compile Include="ColorCell.cs" />
     <Compile Include="ConsoleContext.cs" />
     <Compile Include="COORD.cs" />
     <Compile Include="NativeMethods.cs" />

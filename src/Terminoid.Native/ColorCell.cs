@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Terminoid
+﻿namespace Terminoid.Native
 {
    public struct ColorCell
    {
