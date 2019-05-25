@@ -2,9 +2,9 @@
 {
    public struct ColorCell
    {
-      public char Char { get; }
-      public Color Foreground { get; }
-      public Color Background { get; }
+      public char Char { get; internal set; }
+      public Color Foreground { get; internal set; }
+      public Color Background { get; internal set; }
 
       public ColorCell( char c )
          : this( c, Color.Gray, Color.Black )
