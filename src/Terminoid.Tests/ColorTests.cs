@@ -45,7 +45,9 @@ namespace Terminoid.Tests
       [Fact]
       public void Equals_ColorsAreSame_AreEqual()
       {
+#pragma warning disable CS1718
          ( Color.Black == Color.Black ).Should().BeTrue();
+#pragma warning restore CS1718
          Color.Black.Equals( Color.Black ).Should().BeTrue();
       }
 
