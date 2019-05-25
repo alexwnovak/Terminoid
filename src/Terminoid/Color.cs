@@ -24,10 +24,20 @@
 
       private Color( int value ) => Value = value;
 
+      public override int GetHashCode() => Value;
+
       public override bool Equals( object obj )
       {
+         if ( !( obj is Color ) )
+         {
+            return false;
+         }
 
-         return base.Equals( obj );
+         var second = (Color) obj;
+         return Value == second.Value;
       }
+
+      public static bool operator ==( Color first, Color second ) => Equals( first, second );
+      public static bool operator !=( Color first, Color second ) => !( first == second );
    }
 }

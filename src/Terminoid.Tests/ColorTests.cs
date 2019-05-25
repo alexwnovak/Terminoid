@@ -41,5 +41,19 @@ namespace Terminoid.Tests
       {
          color.Value.Should().Be( value );
       }
+
+      [Fact]
+      public void Equals_ColorsAreSame_AreEqual()
+      {
+         ( Color.Black == Color.Black ).Should().BeTrue();
+         Color.Black.Equals( Color.Black ).Should().BeTrue();
+      }
+
+      [Fact]
+      public void Equals_ColorsAreDifferent_AreNotEqual()
+      {
+         ( Color.Black == Color.Blue ).Should().BeFalse();
+         Color.Black.Equals( Color.Blue ).Should().BeFalse();
+      }
    }
 }
