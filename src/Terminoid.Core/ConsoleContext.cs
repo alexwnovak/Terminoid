@@ -7,6 +7,40 @@ namespace Terminoid.Core
    {
       private static IntPtr _handle = NativeMethods.GetStdHandle( NativeMethods.STD_OUTPUT_HANDLE );
 
+      public static void Write( Region2 region, int x, int y )
+      {
+         var charInfo = new CHAR_INFO[region.Width, region.Height];
+
+         for ( int row = 0; row < region.Height; row++ )
+         {
+            for ( int column = 0; column < region.Width; column++ )
+            {
+               var cell = region.Cells[column, row];
+
+               charInfo[column, row] = new CHAR_INFO
+               {
+                  UnicodeChar = cell.Char,
+                  Attributes = (ushort) ((cell.Background.Value << 4) | cell.Foreground.Value)
+               };
+            }
+         }
+
+         var rect = new SMALL_RECT
+         {
+            Left = (short) x,
+            Top = (short) y,
+            Right = (short) (x + region.Width - 1),
+            Bottom = (short) (y + region.Height - 1)
+         };
+
+         NativeMethods.WriteConsoleOutput(
+            _handle,
+            charInfo,
+            new COORD( (short) region.Width, (short) region.Height ),
+            new COORD( 0, 0 ),
+            ref rect );
+      }
+
       private unsafe static void WriteChars( int x, int y, ReadOnlySpan<char> slice, ReadOnlySpan<ushort> attr )
       {
          fixed ( char* ptr = slice )
