@@ -18,6 +18,14 @@ namespace Terminoid.Core.Internal
          COORD dwReadCoord,
          out uint lpNumberOfCharsRead );
 
+      [DllImport( "kernel32.dll", EntryPoint = "ReadConsoleOutputW", CharSet = CharSet.Unicode, SetLastError = true )]
+      public static extern bool ReadConsoleOutput(
+         IntPtr hConsoleOutput,
+         [MarshalAs( UnmanagedType.LPArray ), Out] CHAR_INFO[,] lpBuffer,
+         COORD dwBufferSize,
+         COORD dwBufferCoord,
+         ref SMALL_RECT lpReadRegion );
+
       [DllImport( "kernel32.dll", EntryPoint = "WriteConsoleOutputW", CharSet = CharSet.Unicode, SetLastError = true )]
       public static extern bool WriteConsoleOutput(
          IntPtr hConsoleOutput,
