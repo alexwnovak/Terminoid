@@ -1,4 +1,4 @@
-﻿namespace Terminoid.Core
+﻿namespace Terminoid.Core.Internal
 {
    internal struct COORD
    {

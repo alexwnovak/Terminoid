@@ -56,16 +56,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CHAR_INFO.cs" />
+    <Compile Include="Internal\CHAR_INFO.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="ColorCell.cs" />
     <Compile Include="ConsoleContext.cs" />
-    <Compile Include="COORD.cs" />
-    <Compile Include="NativeMethods.cs" />
+    <Compile Include="Internal\COORD.cs" />
+    <Compile Include="Internal\NativeMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Region.cs" />
     <Compile Include="RegionContext.cs" />
-    <Compile Include="SMALL_RECT.cs" />
+    <Compile Include="Internal\SMALL_RECT.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

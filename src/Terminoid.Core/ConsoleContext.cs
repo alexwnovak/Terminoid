@@ -1,4 +1,5 @@
 ﻿using System;
+using Terminoid.Core.Internal;
 
 namespace Terminoid.Core
 {
