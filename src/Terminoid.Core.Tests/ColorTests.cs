@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Terminoid.Native;
 using FluentAssertions;
 using Xunit;
 
-namespace Terminoid.Tests
+namespace Terminoid.Core.Tests
 {
    public class ColorTests
    {

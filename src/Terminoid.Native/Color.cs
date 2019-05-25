@@ -1,4 +1,4 @@
-﻿namespace Terminoid
+﻿namespace Terminoid.Native
 {
    public struct Color
    {
