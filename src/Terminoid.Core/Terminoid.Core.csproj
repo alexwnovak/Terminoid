@@ -7,8 +7,8 @@
     <ProjectGuid>{E8EA75E7-FC84-4449-8A5E-A648C8FE7EF4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Terminoid.Native</RootNamespace>
-    <AssemblyName>Terminoid.Native</AssemblyName>
+    <RootNamespace>Terminoid.Core</RootNamespace>
+    <AssemblyName>Terminoid.Core</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CHAR_INFO.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="ColorCell.cs" />
     <Compile Include="ConsoleContext.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Region.cs" />
     <Compile Include="RegionContext.cs" />
+    <Compile Include="SMALL_RECT.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

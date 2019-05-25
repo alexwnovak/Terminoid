@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Terminoid.Native
+namespace Terminoid.Core
 {
    public class RegionContext
    {

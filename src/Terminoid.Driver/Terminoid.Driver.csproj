@@ -50,9 +50,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Terminoid.Native\Terminoid.Native.csproj">
-      <Project>{E8EA75E7-FC84-4449-8A5E-A648C8FE7EF4}</Project>
-      <Name>Terminoid.Native</Name>
+    <ProjectReference Include="..\Terminoid.Core\Terminoid.Core.csproj">
+      <Project>{e8ea75e7-fc84-4449-8a5e-a648c8fe7ef4}</Project>
+      <Name>Terminoid.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Terminoid\Terminoid.csproj">
       <Project>{1f4f2366-dee9-4c74-b7eb-7731d73b7aa6}</Project>

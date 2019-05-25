@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28803.452
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terminoid", "Terminoid\Terminoid.csproj", "{1F4F2366-DEE9-4C74-B7EB-7731D73B7AA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terminoid.Native", "Terminoid.Native\Terminoid.Native.csproj", "{E8EA75E7-FC84-4449-8A5E-A648C8FE7EF4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terminoid.Core", "Terminoid.Core\Terminoid.Core.csproj", "{E8EA75E7-FC84-4449-8A5E-A648C8FE7EF4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terminoid.Driver", "Terminoid.Driver\Terminoid.Driver.csproj", "{6E664BDE-7D35-47DF-9881-17888BFC16A6}"
 EndProject

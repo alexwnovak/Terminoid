@@ -71,9 +71,9 @@
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Terminoid.Native\Terminoid.Native.csproj">
+    <ProjectReference Include="..\Terminoid.Core\Terminoid.Core.csproj">
       <Project>{e8ea75e7-fc84-4449-8a5e-a648c8fe7ef4}</Project>
-      <Name>Terminoid.Native</Name>
+      <Name>Terminoid.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

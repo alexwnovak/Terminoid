@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Terminoid.Native
+namespace Terminoid.Core
 {
    internal static class NativeMethods
    {

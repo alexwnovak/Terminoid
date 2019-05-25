@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Terminoid.Native;
+using Terminoid.Core;
 using FluentAssertions;
 using Xunit;
 

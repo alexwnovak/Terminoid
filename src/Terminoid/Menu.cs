@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Terminoid.Native;
+using Terminoid.Core;
 
 namespace Terminoid
 {

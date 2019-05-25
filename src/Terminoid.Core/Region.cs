@@ -1,8 +1,8 @@
-﻿namespace Terminoid.Native
+﻿namespace Terminoid.Core
 {
    public class Region
    {
-      private readonly char[] _charBuffer;
+      protected char[] _charBuffer;
       private readonly ushort[] _attrBuffer;
 
       public int Width { get; }
@@ -17,7 +17,7 @@
          _attrBuffer = new ushort[Width * Height];
       }
 
-      internal char[] GetCharBuffer() => _charBuffer;
-      internal ushort[] GetAttrBuffer() => _attrBuffer;
+      public char[] GetCharBuffer() => _charBuffer;
+      public ushort[] GetAttrBuffer() => _attrBuffer;
    }
 }
