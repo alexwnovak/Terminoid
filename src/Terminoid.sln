@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terminoid.Driver", "Termino
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terminoid.Tests", "Terminoid.Tests\Terminoid.Tests.csproj", "{E21A4F48-61AC-4B09-9153-0530E7A8F083}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terminoid.Core.Tests", "Terminoid.Core.Tests\Terminoid.Core.Tests.csproj", "{7C873FD8-2AA7-43D0-AFD2-EBAFC630E09D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{E21A4F48-61AC-4B09-9153-0530E7A8F083}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E21A4F48-61AC-4B09-9153-0530E7A8F083}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E21A4F48-61AC-4B09-9153-0530E7A8F083}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C873FD8-2AA7-43D0-AFD2-EBAFC630E09D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C873FD8-2AA7-43D0-AFD2-EBAFC630E09D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C873FD8-2AA7-43D0-AFD2-EBAFC630E09D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C873FD8-2AA7-43D0-AFD2-EBAFC630E09D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
