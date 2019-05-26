@@ -44,7 +44,7 @@
 
       public void Set( int x, int y, char c, Color foreground, Color background )
       {
-         _region.Cells[y, x] = new ColorCell( c, foreground, background );
+         _region.Cells[y, x] = new Cell( c, foreground, background );
       }
 
       public void SetLine( int y, string text )
