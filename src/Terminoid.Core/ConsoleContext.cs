@@ -139,33 +139,5 @@ namespace Terminoid.Core
                out _ );
          }
       }
-
-      private static char[] ReadChars( int x, int y, int length )
-      {
-         var buffer = new char[length];
-
-         NativeMethods.ReadConsoleOutputCharacter(
-            _handle,
-            buffer,
-            (uint) length,
-            new COORD( (short) x, (short) y ),
-            out _ );
-
-         return buffer;
-      }
-
-      private static ushort[] ReadAttrs( int x, int y, int length )
-      {
-         var attrs = new ushort[length];
-
-         NativeMethods.ReadConsoleOutputAttribute(
-            _handle,
-            attrs,
-            (uint) length,
-            new COORD( (short) x, (short) y ),
-            out _ );
-
-         return attrs;
-      }
    }
 }
