@@ -8,6 +8,9 @@
 
       public void Fill( char c, Color foreground, Color background )
       {
+         _region.HasChar = true;
+         _region.HasAttr = true;
+
          for ( int y = 0; y < _region.Height; y++ )
          {
             for ( int x = 0; x < _region.Width; x++ )
@@ -21,6 +24,8 @@
 
       public void FillColor( Color foreground, Color background )
       {
+         _region.HasAttr = true;
+
          for ( int y = 0; y < _region.Height; y++ )
          {
             for ( int x = 0; x < _region.Width; x++ )
@@ -33,6 +38,8 @@
 
       public void FillForeground( Color foreground )
       {
+         _region.HasAttr = true;
+
          for ( int y = 0; y < _region.Height; y++ )
          {
             for ( int x = 0; x < _region.Width; x++ )
@@ -44,11 +51,16 @@
 
       public void Set( int x, int y, char c, Color foreground, Color background )
       {
-         _region.Cells[y, x] = new ColorCell( c, foreground, background );
+         _region.HasChar = true;
+         _region.HasAttr = true;
+
+         _region.Cells[y, x] = new Cell( c, foreground, background );
       }
 
       public void SetLine( int y, string text )
       {
+         _region.HasChar = true;
+
          for ( int x = 0; x < text.Length; x++ )
          {
             _region.Cells[y, x].Char = text[x];

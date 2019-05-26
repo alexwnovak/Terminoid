@@ -35,13 +35,10 @@ namespace Terminoid.Core
             {
                char c = charInfo[row, column].UnicodeChar;
 
-               int foreground = charInfo[row, column].Attributes & 0x0F;
-               int background = (charInfo[row, column].Attributes >> 4) & 0x0F;
+               var foreground = ColorMask.GetForeground( charInfo[row, column].Attributes );
+               var background = ColorMask.GetBackground( charInfo[row, column].Attributes );
 
-               var foregroundColor = Color.FromIndex( foreground );
-               var backgroundColor = Color.FromIndex( background );
-
-               regionContext.Set( column, row, c, foregroundColor, backgroundColor );
+               regionContext.Set( column, row, c, foreground, background );
             }
          }
 
@@ -49,6 +46,22 @@ namespace Terminoid.Core
       }
 
       public static void Write( Region region, int x, int y )
+      {
+         if ( region.HasChar && region.HasAttr )
+         {
+            WriteFullRegion( region, x, y );
+         }
+         else if ( region.HasAttr )
+         {
+            WriteAttrRegion( region, x, y );
+         }
+         else if ( region.HasChar )
+         {
+            WriteCharRegion( region, x, y );
+         }
+      }
+
+      private static void WriteFullRegion( Region region, int x, int y )
       {
          var charInfo = new CHAR_INFO[region.Height, region.Width];
 
@@ -61,7 +74,7 @@ namespace Terminoid.Core
                charInfo[row, column] = new CHAR_INFO
                {
                   UnicodeChar = cell.Char,
-                  Attributes = (ushort) ((cell.Background.Value << 4) | cell.Foreground.Value)
+                  Attributes = ColorMask.GetAttribute( cell.Foreground, cell.Background )
                };
             }
          }
@@ -70,8 +83,8 @@ namespace Terminoid.Core
          {
             Left = (short) x,
             Top = (short) y,
-            Right = (short) (x + region.Width - 1),
-            Bottom = (short) (y + region.Height - 1)
+            Right = (short) ( x + region.Width - 1 ),
+            Bottom = (short) ( y + region.Height - 1 )
          };
 
          NativeMethods.WriteConsoleOutput(
@@ -82,55 +95,46 @@ namespace Terminoid.Core
             ref rect );
       }
 
-      private unsafe static void WriteChars( int x, int y, ReadOnlySpan<char> slice, ReadOnlySpan<ushort> attr )
+      private static void WriteAttrRegion( Region region, int x, int y )
       {
-         fixed ( char* ptr = slice )
-         {
-            NativeMethods.WriteConsoleOutputCharacter(
-               _handle,
-               ptr,
-               (uint) slice.Length,
-               new COORD( (short) x, (short) y ),
-               out _ );
-         }
+         var attr = new ushort[region.Width];
 
-         fixed ( ushort* ptr = attr )
+         for ( int row = 0; row < region.Height; row++ )
          {
+            for ( int column = 0; column < region.Width; column++ )
+            {
+               var cell = region.Cells[row, column];
+               attr[column] = ColorMask.GetAttribute( cell.Foreground, cell.Background );
+            }
+
             NativeMethods.WriteConsoleOutputAttribute(
                _handle,
-               ptr,
+               attr,
                (uint) attr.Length,
-               new COORD( (short) x, (short) y ),
+               new COORD( (short) x, (short) (y + row) ),
                out _ );
          }
       }
 
-      private static char[] ReadChars( int x, int y, int length )
+      private static void WriteCharRegion( Region region, int x, int y )
       {
-         var buffer = new char[length];
+         var chars = new char[region.Width];
 
-         NativeMethods.ReadConsoleOutputCharacter(
-            _handle,
-            buffer,
-            (uint) length,
-            new COORD( (short) x, (short) y ),
-            out _ );
+         for ( int row = 0; row < region.Height; row++ )
+         {
+            for ( int column = 0; column < region.Width; column++ )
+            {
+               var cell = region.Cells[row, column];
+               chars[column] = cell.Char;
+            }
 
-         return buffer;
-      }
-
-      private static ushort[] ReadAttrs( int x, int y, int length )
-      {
-         var attrs = new ushort[length];
-
-         NativeMethods.ReadConsoleOutputAttribute(
-            _handle,
-            attrs,
-            (uint) length,
-            new COORD( (short) x, (short) y ),
-            out _ );
-
-         return attrs;
+            NativeMethods.WriteConsoleOutputCharacter(
+               _handle,
+               chars,
+               (uint) chars.Length,
+               new COORD( (short) x, (short) ( y + row ) ),
+               out _ );
+         }
       }
    }
 }
