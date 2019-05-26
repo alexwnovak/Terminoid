@@ -8,7 +8,7 @@
 
       public Region( int width, int height )
       {
-         Cells = new ColorCell[width, height];
+         Cells = new ColorCell[height, width];
          Width = width;
          Height = height;
       }

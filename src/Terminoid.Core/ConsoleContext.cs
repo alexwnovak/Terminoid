@@ -9,7 +9,7 @@ namespace Terminoid.Core
 
       public static Region Read( int x, int y, int width, int height )
       {
-         var charInfo = new CHAR_INFO[width, height];
+         var charInfo = new CHAR_INFO[height, width];
 
          var rect = new SMALL_RECT
          {
@@ -33,10 +33,10 @@ namespace Terminoid.Core
          {
             for ( int column = 0; column < width; column++ )
             {
-               char c = charInfo[column, row].UnicodeChar;
+               char c = charInfo[row, column].UnicodeChar;
 
-               int foreground = charInfo[column, row].Attributes & 0x0F;
-               int background = (charInfo[column, row].Attributes >> 4) & 0x0F;
+               int foreground = charInfo[row, column].Attributes & 0x0F;
+               int background = (charInfo[row, column].Attributes >> 4) & 0x0F;
 
                var foregroundColor = Color.FromIndex( foreground );
                var backgroundColor = Color.FromIndex( background );
@@ -56,7 +56,7 @@ namespace Terminoid.Core
          {
             for ( int column = 0; column < region.Width; column++ )
             {
-               var cell = region.Cells[column, row];
+               var cell = region.Cells[row, column];
 
                charInfo[row, column] = new CHAR_INFO
                {

@@ -12,9 +12,9 @@
          {
             for ( int x = 0; x < _region.Width; x++ )
             {
-               _region.Cells[x, y].Char = c;
-               _region.Cells[x, y].Foreground = foreground;
-               _region.Cells[x, y].Background = background;
+               _region.Cells[y, x].Char = c;
+               _region.Cells[y, x].Foreground = foreground;
+               _region.Cells[y, x].Background = background;
             }
          }
       }
@@ -25,8 +25,8 @@
          {
             for ( int x = 0; x < _region.Width; x++ )
             {
-               _region.Cells[x, y].Foreground = foreground;
-               _region.Cells[x, y].Background = background;
+               _region.Cells[y, x].Foreground = foreground;
+               _region.Cells[y, x].Background = background;
             }
          }
       }
@@ -37,21 +37,21 @@
          {
             for ( int x = 0; x < _region.Width; x++ )
             {
-               _region.Cells[x, y].Foreground = foreground;
+               _region.Cells[y, x].Foreground = foreground;
             }
          }
       }
 
       public void Set( int x, int y, char c, Color foreground, Color background )
       {
-         _region.Cells[x, y] = new ColorCell( c, foreground, background );
+         _region.Cells[y, x] = new ColorCell( c, foreground, background );
       }
 
       public void SetLine( int y, string text )
       {
          for ( int x = 0; x < text.Length; x++ )
          {
-            _region.Cells[x, y].Char = text[x];
+            _region.Cells[y, x].Char = text[x];
          }
       }
    }
