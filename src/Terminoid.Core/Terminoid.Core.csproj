@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorMask.cs" />
     <Compile Include="Internal\CHAR_INFO.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="Cell.cs" />
