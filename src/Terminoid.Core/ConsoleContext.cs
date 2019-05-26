@@ -58,6 +58,10 @@ namespace Terminoid.Core
          {
             WriteAttrRegion( region, x, y );
          }
+         else if ( region.HasChar )
+         {
+            WriteCharRegion( region, x, y );
+         }
       }
 
       private static void WriteFullRegion( Region region, int x, int y )
@@ -115,15 +119,23 @@ namespace Terminoid.Core
          }
       }
 
-      private unsafe static void WriteChars( int x, int y, ReadOnlySpan<char> slice, ReadOnlySpan<ushort> attr )
+      private static void WriteCharRegion( Region region, int x, int y )
       {
-         fixed ( char* ptr = slice )
+         var chars = new char[region.Width];
+
+         for ( int row = 0; row < region.Height; row++ )
          {
+            for ( int column = 0; column < region.Width; column++ )
+            {
+               var cell = region.Cells[row, column];
+               chars[column] = cell.Char;
+            }
+
             NativeMethods.WriteConsoleOutputCharacter(
                _handle,
-               ptr,
-               (uint) slice.Length,
-               new COORD( (short) x, (short) y ),
+               chars,
+               (uint) chars.Length,
+               new COORD( (short) x, (short) ( y + row ) ),
                out _ );
          }
       }

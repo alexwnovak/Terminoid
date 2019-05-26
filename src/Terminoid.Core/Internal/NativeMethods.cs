@@ -35,9 +35,9 @@ namespace Terminoid.Core.Internal
          ref SMALL_RECT lpWriteRegion );
 
       [DllImport( "kernel32.dll", CharSet = CharSet.Unicode )]
-      public unsafe static extern bool WriteConsoleOutputCharacter(
+      public static extern bool WriteConsoleOutputCharacter(
          IntPtr hConsoleOutput,
-         char* lpCharacter,
+         char[] lpCharacter,
          uint nLength,
          COORD dwWriteCoord,
          out uint lpNumberOfCharsWritten );
