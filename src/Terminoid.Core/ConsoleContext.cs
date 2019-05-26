@@ -77,7 +77,7 @@ namespace Terminoid.Core
                charInfo[row, column] = new CHAR_INFO
                {
                   UnicodeChar = cell.Char,
-                  Attributes = (ushort) ((cell.Background.Value << 4) | cell.Foreground.Value)
+                  Attributes = (ushort) ( ( cell.Background.Value << 4 ) | cell.Foreground.Value )
                };
             }
          }
@@ -86,8 +86,8 @@ namespace Terminoid.Core
          {
             Left = (short) x,
             Top = (short) y,
-            Right = (short) (x + region.Width - 1),
-            Bottom = (short) (y + region.Height - 1)
+            Right = (short) ( x + region.Width - 1 ),
+            Bottom = (short) ( y + region.Height - 1 )
          };
 
          NativeMethods.WriteConsoleOutput(
