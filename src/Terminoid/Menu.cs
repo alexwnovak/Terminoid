@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Terminoid.Core;
 
 namespace Terminoid
 {
@@ -8,11 +9,12 @@ namespace Terminoid
       public object[] Items { get; }
       public int SelectedIndex { get; private set; }
 
-      public int Width { get; }
-      public int Height { get; }
+      public int Width { get; private set; }
+      public int Height { get; private set; }
       public char SelectionIndicator { get; set; } = '*';
 
       private Region _region;
+      private RegionContext _regionContext;
 
       public Menu( object[] items )
       {
@@ -22,24 +24,42 @@ namespace Terminoid
       private Region CreateRegion( int width, int height, string[] items )
       {
          _region = new Region( width, height );
+         _regionContext = new RegionContext( _region );
+
+         _regionContext.FillColor( Color.White, Color.DarkRed );
 
          for ( int y = 0; y < _region.Height; y++ )
          {
-            _region.FloodAttrLine( y, 8 << 4 | 15 );
-            _region.SetLine( y, $"   {items[y]}" );
+            _regionContext.SetLine( y, $"   {items[y]}" );
          }
 
-         _region.SetChar( 1, SelectedIndex, SelectionIndicator );
+         _regionContext.Set( 1, SelectedIndex, SelectionIndicator, Color.White, Color.DarkRed );
 
          return _region;
       }
 
       private void UpdateRegion()
       {
-         for ( int y = 0; y < Items.Length; y++ )
+         for ( int y = 0; y < Height; y++ )
+         {
+            char indicatorOrBlank = SelectedIndex == y + _indexOffset ? SelectionIndicator : ' ';
+            _regionContext.Set( 1, y, indicatorOrBlank, Color.White, Color.DarkRed );
+         }
+      }
+
+      private void ScrollItems( int rows )
+      {
+         _indexOffset += rows;
+
+         if ( _indexOffset + _maxDisplayItems >= Items.Length )
+         {
+            _indexOffset = Items.Length - _maxDisplayItems;
+         }
+
+         for ( int y = 0; y < Height; y++ )
          {
             char indicatorOrBlank = SelectedIndex == y ? SelectionIndicator : ' ';
-            _region.SetChar( 1, y, indicatorOrBlank );
+            _regionContext.SetLine( y, $" {indicatorOrBlank} {Items[y + _indexOffset]}" );
          }
       }
 
@@ -49,10 +69,11 @@ namespace Terminoid
          int menuWidth = longestItem + 6;
          int menuHeight = Items.Length;
 
-         var underRegion = RegionRenderer.Read( x, y, menuWidth, menuHeight );
+         var underRegion = ConsoleContext.Read( x, y, Width, Height );
 
-         CreateRegion( menuWidth, menuHeight, Items.Cast<string>().ToArray() );
-         RegionRenderer.Render( _region, x, y );
+         CreateRegion( Width, Height, Items.Cast<string>().ToArray() );
+
+         ConsoleContext.Write( _region, x, y );
 
          bool exit = false;
          bool cancel = false;
@@ -84,10 +105,10 @@ namespace Terminoid
             }
 
             UpdateRegion();
-            RegionRenderer.Render( _region, x, y );
+            ConsoleContext.Write( _region, x, y );
          }
 
-         RegionRenderer.Render( underRegion, x, y );
+         ConsoleContext.Write( underRegion, x, y );
 
          if ( cancel )
          {
