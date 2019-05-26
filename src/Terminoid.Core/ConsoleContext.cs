@@ -35,13 +35,10 @@ namespace Terminoid.Core
             {
                char c = charInfo[row, column].UnicodeChar;
 
-               int foreground = charInfo[row, column].Attributes & 0x0F;
-               int background = (charInfo[row, column].Attributes >> 4) & 0x0F;
+               var foreground = ColorMask.GetForeground( charInfo[row, column].Attributes );
+               var background = ColorMask.GetBackground( charInfo[row, column].Attributes );
 
-               var foregroundColor = Color.FromIndex( foreground );
-               var backgroundColor = Color.FromIndex( background );
-
-               regionContext.Set( column, row, c, foregroundColor, backgroundColor );
+               regionContext.Set( column, row, c, foreground, background );
             }
          }
 
@@ -77,7 +74,7 @@ namespace Terminoid.Core
                charInfo[row, column] = new CHAR_INFO
                {
                   UnicodeChar = cell.Char,
-                  Attributes = (ushort) ( ( cell.Background.Value << 4 ) | cell.Foreground.Value )
+                  Attributes = ColorMask.GetAttribute( cell.Foreground, cell.Background )
                };
             }
          }
@@ -107,7 +104,7 @@ namespace Terminoid.Core
             for ( int column = 0; column < region.Width; column++ )
             {
                var cell = region.Cells[row, column];
-               attr[column] = (ushort) ( ( cell.Background.Value << 4 ) | cell.Foreground.Value );
+               attr[column] = ColorMask.GetAttribute( cell.Foreground, cell.Background );
             }
 
             NativeMethods.WriteConsoleOutputAttribute(
