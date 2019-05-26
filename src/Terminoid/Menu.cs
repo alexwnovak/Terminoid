@@ -26,14 +26,14 @@ namespace Terminoid
          _region = new Region( width, height );
          _regionContext = new RegionContext( _region );
 
+         _regionContext.FillColor( Color.White, Color.DarkRed );
+
          for ( int y = 0; y < _region.Height; y++ )
          {
-            _regionContext.FloodAttrLine( y, 8 << 4 | 15 );
-            _regionContext.FloodCharLine( y, ' ' );
             _regionContext.SetLine( y, $"   {items[y]}" );
          }
 
-         _regionContext.SetChar( 1, SelectedIndex, SelectionIndicator );
+         _regionContext.Set( 1, SelectedIndex, SelectionIndicator, Color.White, Color.DarkRed );
 
          return _region;
       }
@@ -42,8 +42,23 @@ namespace Terminoid
       {
          for ( int y = 0; y < Height; y++ )
          {
+            char indicatorOrBlank = SelectedIndex == y + _indexOffset ? SelectionIndicator : ' ';
+            _regionContext.Set( 1, y, indicatorOrBlank, Color.White, Color.DarkRed );
+         }
+      }
+
+      private void ScrollItems( int rows )
+      {
+         _indexOffset += rows;
+
+         if ( _indexOffset + _maxDisplayItems >= Items.Length )
+         {
+            _indexOffset = Items.Length - _maxDisplayItems;
+         }
+
+         for ( int y = 0; y < Height; y++ )
+         {
             char indicatorOrBlank = SelectedIndex == y ? SelectionIndicator : ' ';
-            _regionContext.FloodCharLine( y, ' ' );
             _regionContext.SetLine( y, $" {indicatorOrBlank} {Items[y + _indexOffset]}" );
          }
       }
@@ -57,7 +72,8 @@ namespace Terminoid
          var underRegion = ConsoleContext.Read( x, y, Width, Height );
 
          CreateRegion( Width, Height, Items.Cast<string>().ToArray() );
-         ConsoleContext.Render( _region, x, y );
+
+         ConsoleContext.Write( _region, x, y );
 
          bool exit = false;
          bool cancel = false;
@@ -89,10 +105,10 @@ namespace Terminoid
             }
 
             UpdateRegion();
-            ConsoleContext.Render( _region, x, y );
+            ConsoleContext.Write( _region, x, y );
          }
 
-         ConsoleContext.Render( underRegion, x, y );
+         ConsoleContext.Write( underRegion, x, y );
 
          if ( cancel )
          {

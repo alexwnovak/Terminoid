@@ -7,9 +7,50 @@ namespace Terminoid.Core
    {
       private static IntPtr _handle = NativeMethods.GetStdHandle( NativeMethods.STD_OUTPUT_HANDLE );
 
-      public static void Write( Region2 region, int x, int y )
+      public static Region Read( int x, int y, int width, int height )
       {
-         var charInfo = new CHAR_INFO[region.Width, region.Height];
+         var charInfo = new CHAR_INFO[width, height];
+
+         var rect = new SMALL_RECT
+         {
+            Left = (short) x,
+            Top = (short) y,
+            Right = (short) ( x + width - 1 ),
+            Bottom = (short) ( y + height - 1 )
+         };
+
+         NativeMethods.ReadConsoleOutput(
+            _handle,
+            charInfo,
+            new COORD( (short) width, (short) height ),
+            new COORD( 0, 0 ),
+            ref rect );
+
+         var region = new Region( width, height );
+         var regionContext = new RegionContext( region );
+
+         for ( int row = 0; row < height; row++ )
+         {
+            for ( int column = 0; column < width; column++ )
+            {
+               char c = charInfo[column, row].UnicodeChar;
+
+               int foreground = charInfo[column, row].Attributes & 0x0F;
+               int background = (charInfo[column, row].Attributes >> 4) & 0x0F;
+
+               var foregroundColor = Color.FromIndex( foreground );
+               var backgroundColor = Color.FromIndex( background );
+
+               regionContext.Set( column, row, c, foregroundColor, backgroundColor );
+            }
+         }
+
+         return region;
+      }
+
+      public static void Write( Region region, int x, int y )
+      {
+         var charInfo = new CHAR_INFO[region.Height, region.Width];
 
          for ( int row = 0; row < region.Height; row++ )
          {
@@ -17,7 +58,7 @@ namespace Terminoid.Core
             {
                var cell = region.Cells[column, row];
 
-               charInfo[column, row] = new CHAR_INFO
+               charInfo[row, column] = new CHAR_INFO
                {
                   UnicodeChar = cell.Char,
                   Attributes = (ushort) ((cell.Background.Value << 4) | cell.Foreground.Value)
@@ -90,37 +131,6 @@ namespace Terminoid.Core
             out _ );
 
          return attrs;
-      }
-
-      public static Region Read( int x, int y, int width, int height )
-      {
-         var region = new Region( width, height );
-         var regionContext = new RegionContext( region );
-
-         for ( int row = 0; row < height; row++ )
-         {
-            var charBuffer = ReadChars( x, y + row, width );
-            regionContext.SetCharLine( row, charBuffer );
-
-            var attrBuffer = ReadAttrs( x, y + row, width );
-            regionContext.SetAttrLine( row, attrBuffer );
-         }
-
-         return region;
-      }
-
-      public static void Render( Region region, int x, int y )
-      {
-         var charBuffer = region.GetCharBuffer().AsSpan();
-         var attrBuffer = region.GetAttrBuffer().AsSpan();
-
-         for ( int row = 0; row < region.Height; row++ )
-         {
-            var charRow = charBuffer.Slice( row * region.Width, region.Width );
-            var attrRow = attrBuffer.Slice( row * region.Width, region.Width );
-
-            WriteChars( x, y + row, charRow, attrRow );
-         }
       }
    }
 }

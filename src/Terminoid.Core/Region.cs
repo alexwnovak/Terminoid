@@ -2,22 +2,15 @@
 {
    public class Region
    {
-      protected char[] _charBuffer;
-      private readonly ushort[] _attrBuffer;
-
+      internal ColorCell[,] Cells { get; }
       public int Width { get; }
       public int Height { get; }
 
       public Region( int width, int height )
       {
+         Cells = new ColorCell[width, height];
          Width = width;
          Height = height;
-
-         _charBuffer = new char[Width * Height];
-         _attrBuffer = new ushort[Width * Height];
       }
-
-      public char[] GetCharBuffer() => _charBuffer;
-      public ushort[] GetAttrBuffer() => _attrBuffer;
    }
 }
