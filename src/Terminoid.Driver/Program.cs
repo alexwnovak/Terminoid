@@ -1,13 +1,14 @@
 ﻿using System;
+using Terminoid.Core;
 
 namespace Terminoid.Driver
 {
    class Program
    {
+      private const string _background = @"Bacon ipsum dolor amet pork loin swine bresaola boudin chuck turkey turducken filet mignon spare ribs frankfurter pork belly. Leberkas andouille fatback drumstick jerky pork belly flank swine doner ball tip filet mignon. Bacon chicken pig jerky, landjaeger shankle tongue. Hamburger shank pork belly, cupim swine jerky tail brisket. Sirloin spare ribs sausage, beef ribs tongue cupim beef ham hock leberkas. Sirloin buffalo pork chop picanha filet mignon, kevin andouille short ribs pork belly pastrami hamburger bacon. Sirloin kielbasa chuck fatback bacon venison. Fatback pancetta kevin, kielbasa landjaeger strip steak turkey short ribs. Pig landjaeger shankle burgdoggen, shoulder bresaola salami drumstick pork chop corned beef. Rump andouille doner, tongue tail pork belly bresaola sirloin. Beef ribs tri-tip shoulder strip steak. Sirloin boudin burgdoggen pork belly. Turducken short loin corned beef, swine beef ribs kevin venison. Prosciutto flank ground round meatloaf chuck tongue shank alcatra salami filet mignon ribeye sausage. Porchetta ribeye meatloaf leberkas. Biltong swine cow bacon turducken leberkas. Jowl pig beef ribs venison, pork chop tongue drumstick turkey biltong bresaola. Brisket tail capicola jowl salami andouille. Jowl tail cow corned beef. Capicola jowl kevin, meatloaf burgdoggen turkey pork chop biltong jerky andouille strip steak beef corned beef ham. Burgdoggen ground round pig beef ribs.";
+
       private static void TestMenu()
       {
-         const string background = @"Repulsive questions contented him few extensive supported. Of remarkably thoroughly he appearance in. Supposing tolerably applauded or of be. Suffering unfeeling so objection agreeable allowance me of. Ask within entire season sex common far who family. As be valley warmth assure on. Park girl they rich hour new well way you. Face ye be me been room we sons fond. Now eldest new tastes plenty mother called misery get. Longer excuse for county nor except met its things. Narrow enough sex moment desire are. Hold who what come that seen read age its. Contained or estimable earnestly so perceived. Imprudence he in sufficient cultivated. Delighted promotion improving acuteness an newspaper offending he. Misery in am secure theirs giving an. Design on longer thrown oppose am. Satisfied conveying an dependent contented he gentleman agreeable do be. Warrant private blushes removed an in equally totally if. Delivered dejection necessary objection do mr prevailed. Mr feeling do chiefly cordial in do. Water timed folly right aware if oh truth. Imprudence attachment him his for sympathize. Large above be to means. Dashwood do provided stronger is. But discretion frequently sir the she instrument unaffected admiration everything. Kindness to he horrible reserved ye. Effect twenty indeed beyond for not had county. The use him without greatly can private. Increasing it unpleasant no of contrasted no continuing. Nothing colonel my no removed in weather. It dissimilar in up devonshire inhabiting. Sudden looked elinor off gay estate nor silent. Son read such next see the rest two. Was use extent old entire sussex. Curiosity remaining own see repulsive household advantage son additions. Supposing exquisite daughters eagerness why repulsive for. Praise turned it lovers be warmly by. Little do it eldest former be if. Extremity direction existence as dashwoods do up. Securing marianne led welcomed offended but offering six raptures. Conveying concluded newspaper rapturous oh at. Two indeed suffer saw beyond far former mrs remain. Occasional continuing possession we insensible an sentiments as is. Law but reasonably motionless principles she. Has six worse downs far blush rooms above stood. Paid was hill sir high. For him precaution any advantages dissimilar comparison few terminated projecting. Prevailed discovery immediate objection of ye at. Repair summer one winter living feebly pretty his. In so sense am known these since. Shortly respect ask cousins brought add tedious nay. Expect relied do we genius is. On as around spirit of hearts genius. Is raptures daughter branched laughter peculiar in settling.";
-
          var items = new[]
          {
             "first",
@@ -27,7 +28,7 @@ namespace Terminoid.Driver
             "fifteenth"
          };
 
-         Console.WriteLine( background );
+         Console.WriteLine( _background );
 
          var menu = new Menu( items );
          int index = menu.Show( 10, 10 );
@@ -42,9 +43,34 @@ namespace Terminoid.Driver
          }
       }
 
+      private static void TestNewRegion()
+      {
+         Console.WriteLine( _background );
+
+         int x = Viewport.Left + 2;
+         int y = Viewport.Top + 2;
+
+         var under = ConsoleContext.Read( x, y, 20, 10 );
+
+         var region = new Region( 20, 10 );
+
+         var regionContext = new RegionContext( region );
+         regionContext.FillColor( Color.White, Color.DarkBlue );
+
+         regionContext.Set( 0, 0, 'x', Color.White, Color.DarkBlue );
+         regionContext.Set( 1, 0, '!', Color.White, Color.DarkBlue );
+
+         ConsoleContext.Write( region, x, y );
+
+         Console.Read();
+         ConsoleContext.Write( under, x, y );
+         Console.Read();
+      }
+
       static void Main( string[] args )
       {
-         TestMenu();
+         //TestMenu();
+         TestNewRegion();
          Console.Read();
       }
    }
