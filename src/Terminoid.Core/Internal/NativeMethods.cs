@@ -51,9 +51,9 @@ namespace Terminoid.Core.Internal
          out uint lpNumberOfCharsRead );
 
       [DllImport( "kernel32.dll" )]
-      public unsafe static extern bool WriteConsoleOutputAttribute(
+      public static extern bool WriteConsoleOutputAttribute(
          IntPtr hConsoleOutput,
-         ushort* lpAttribute,
+         ushort[] lpAttribute,
          uint nLength,
          COORD dwWriteCoord,
          out uint lpNumberOfAttrsWritten );

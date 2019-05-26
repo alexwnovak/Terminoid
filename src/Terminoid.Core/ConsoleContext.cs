@@ -50,6 +50,18 @@ namespace Terminoid.Core
 
       public static void Write( Region region, int x, int y )
       {
+         if ( region.HasChar && region.HasAttr )
+         {
+            WriteFullRegion( region, x, y );
+         }
+         else if ( region.HasAttr )
+         {
+            WriteAttrRegion( region, x, y );
+         }
+      }
+
+      private static void WriteFullRegion( Region region, int x, int y )
+      {
          var charInfo = new CHAR_INFO[region.Height, region.Width];
 
          for ( int row = 0; row < region.Height; row++ )
@@ -82,6 +94,27 @@ namespace Terminoid.Core
             ref rect );
       }
 
+      private static void WriteAttrRegion( Region region, int x, int y )
+      {
+         var attr = new ushort[region.Width];
+
+         for ( int row = 0; row < region.Height; row++ )
+         {
+            for ( int column = 0; column < region.Width; column++ )
+            {
+               var cell = region.Cells[row, column];
+               attr[column] = (ushort) ( ( cell.Background.Value << 4 ) | cell.Foreground.Value );
+            }
+
+            NativeMethods.WriteConsoleOutputAttribute(
+               _handle,
+               attr,
+               (uint) attr.Length,
+               new COORD( (short) x, (short) (y + row) ),
+               out _ );
+         }
+      }
+
       private unsafe static void WriteChars( int x, int y, ReadOnlySpan<char> slice, ReadOnlySpan<ushort> attr )
       {
          fixed ( char* ptr = slice )
@@ -90,16 +123,6 @@ namespace Terminoid.Core
                _handle,
                ptr,
                (uint) slice.Length,
-               new COORD( (short) x, (short) y ),
-               out _ );
-         }
-
-         fixed ( ushort* ptr = attr )
-         {
-            NativeMethods.WriteConsoleOutputAttribute(
-               _handle,
-               ptr,
-               (uint) attr.Length,
                new COORD( (short) x, (short) y ),
                out _ );
          }
