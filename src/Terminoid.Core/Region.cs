@@ -3,6 +3,7 @@
    public class Region
    {
       internal Cell[,] Cells { get; }
+
       public int Width { get; }
       public int Height { get; }
 
