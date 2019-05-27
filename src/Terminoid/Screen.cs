@@ -4,6 +4,12 @@ namespace Terminoid
 {
    public static class Screen
    {
+      public static void Use( InputElement inputElement )
+      {
+         Draw( inputElement );
+         inputElement.InputHandler();
+      }
+
       public static void Draw( VisualElement visualElement )
       {
          DrawPositionally( visualElement, visualElement.Left, visualElement.Top );
