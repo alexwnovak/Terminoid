@@ -22,7 +22,7 @@
          }
       }
 
-      public void FillColor( Color foreground, Color background )
+      public void Fill( Color foreground, Color background )
       {
          _region.HasAttr = true;
 

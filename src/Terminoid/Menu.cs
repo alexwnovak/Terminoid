@@ -26,7 +26,7 @@ namespace Terminoid
          _region = new Region( width, height );
          _regionContext = new RegionContext( _region );
 
-         _regionContext.FillColor( Color.White, Color.DarkRed );
+         _regionContext.Fill( Color.White, Color.DarkRed );
 
          for ( int y = 0; y < _region.Height; y++ )
          {
