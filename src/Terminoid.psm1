@@ -35,6 +35,24 @@ function RegisterKeyHandlers {
     Set-PSReadLineKeyHandler -Chord Ctrl+Shift+N -ScriptBlock ${function:Add-NewDirectoryCommand} -BriefDescription 'TerminoidInsertNewDirectory' -Description 'Inserts a New-Item command for directories'
 }
 
+Register-ArgumentCompleter -Native -CommandName git -ScriptBlock {
+    param (
+        $WordToComplete,
+        $CommandAst,
+        $CursorPosition
+    )
+
+    $command = $CommandAst.ToString()
+
+    if ( !$WordToComplete ) {
+        $command += ' '
+    }
+
+    GitCommandCompleter -Command $command
+}
+
+Register-ArgumentCompleter -Native -CommandName git -ScriptBlock ${function:GitArgumentCompleter}
+
 InitializeInternalVariables
 ExportPublicFunctions
 RegisterKeyHandlers
