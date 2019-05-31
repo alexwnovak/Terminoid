@@ -1,3 +1,8 @@
+$GitCommands = @(
+    'add',
+    'checkout'
+)
+
 function WriteCompletionResult( $Result ) {
     [System.Management.Automation.CompletionResult]::new( $Result, $Result, 'ParameterValue', $Result )
 }
@@ -31,5 +36,17 @@ function GitCommandCompleter( $Command ) {
         $branches | ForEach-Object {
             WriteCompletionResult $_
         }
+    } elseif ( $Command -like 'git *' ) {
+        $tokens = -split $Command
+        $commands = $GitCommands
+
+        if ( $tokens.Count -ge 2 ) {
+            $partialSearch = $tokens[1]
+            $commands = $commands | Where-Object { $_.StartsWith( $partialSearch, [StringComparison]::InvariantCultureIgnoreCase ) }
+        }
+
+        $commands.ForEach( {
+            WriteCompletionResult $_
+        } )
     }
 }
