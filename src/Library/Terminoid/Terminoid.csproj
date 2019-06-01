@@ -73,7 +73,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>mkdir $(SolutionDir)dependencies
-copy $(TargetDir)*.dll $(SolutionDir)dependencies /Y</PostBuildEvent>
+    <PostBuildEvent>REM mkdir $(SolutionDir)dependencies
+REM copy $(TargetDir)*.dll $(SolutionDir)dependencies /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>
