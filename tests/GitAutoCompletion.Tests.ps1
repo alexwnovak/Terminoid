@@ -52,5 +52,13 @@ InModuleScope 'Terminoid' {
                 $branchSuggestions[1].CompletionText | Should -Be 'three'
             }
         }
+
+        Context 'Creating a new branch' {
+            Mock GetGitBranches { 'one', 'two', 'three' }
+
+            It 'resolves no suggestions' {
+                GitCommandCompleter -Command 'git checkout -b ' | Should -BeNullOrEmpty
+            }
+        }
     }
 }
