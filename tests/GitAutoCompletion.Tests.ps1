@@ -21,7 +21,7 @@ InModuleScope 'Terminoid' {
     }
 
     Describe 'Git Checkout completion' {
-        Context 'One branch suggestion' {
+        Context 'Changing to another branch when there is only one available' {
             Mock GetGitBranches { 'branchName' }
 
             It 'resolves the only suggestion' {
@@ -31,7 +31,7 @@ InModuleScope 'Terminoid' {
             }
         }
 
-        Context 'Two branch suggestions' {
+        Context 'Changing to another branch when there are two available' {
             Mock GetGitBranches { 'first','second' }
 
             It 'resolves both suggestions' {
