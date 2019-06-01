@@ -9,7 +9,7 @@
 Describe 'Reset-DefaultFileDetailReader compatibility' {
     BeforeEach {
         Get-Module -Name Terminoid -All | Remove-Module -Force -ErrorAction Ignore
-        Import-Module $PSScriptRoot\..\..\src\Terminoid.psd1 -Force
+        Import-Module $PSScriptRoot\..\..\Terminoid.psd1 -Force
     }
     It 'exposes a function named Reset-DefaultFileDetailReader' {
         Get-Command Reset-DefaultFileDetailReader -Module Terminoid | Should -Not -Be $null

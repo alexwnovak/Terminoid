@@ -9,7 +9,7 @@
 Describe 'Set-Location compatibility' {
     BeforeEach {
         Get-Module -Name Terminoid -All | Remove-Module -Force -ErrorAction Ignore
-        Import-Module $PSScriptRoot\..\..\src\Terminoid.psd1 -Force
+        Import-Module $PSScriptRoot\..\..\Terminoid.psd1 -Force
     }
     It 'exposes a function named Set-Location' {
         Get-Command Set-Location -Module Terminoid | Should -Not -Be $null

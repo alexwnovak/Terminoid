@@ -9,7 +9,7 @@
 Describe 'Register-StartHandler compatibility' {
     BeforeEach {
         Get-Module -Name Terminoid -All | Remove-Module -Force -ErrorAction Ignore
-        Import-Module $PSScriptRoot\..\..\src\Terminoid.psd1 -Force
+        Import-Module $PSScriptRoot\..\..\Terminoid.psd1 -Force
     }
     It 'exposes a function named Register-StartHandler' {
         Get-Command Register-StartHandler -Module Terminoid | Should -Not -Be $null

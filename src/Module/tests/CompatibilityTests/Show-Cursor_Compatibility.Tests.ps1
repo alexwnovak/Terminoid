@@ -9,7 +9,7 @@
 Describe 'Show-Cursor compatibility' {
     BeforeEach {
         Get-Module -Name Terminoid -All | Remove-Module -Force -ErrorAction Ignore
-        Import-Module $PSScriptRoot\..\..\src\Terminoid.psd1 -Force
+        Import-Module $PSScriptRoot\..\..\Terminoid.psd1 -Force
     }
     It 'exposes a function named Show-Cursor' {
         Get-Command Show-Cursor -Module Terminoid | Should -Not -Be $null

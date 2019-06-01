@@ -10,7 +10,7 @@ function Resolve-TestFile( $Name ) {
     "$PSScriptRoot\TestFiles\$Name"
 }
 
-$modulePath = Convert-Path $PSScriptRoot\..\src
+$modulePath = Convert-Path $PSScriptRoot\..
 $moduleManifestPath = "$modulePath\Terminoid.psd1"
 
 Get-Module -Name Terminoid -All | Remove-Module -Force -ErrorAction Ignore
