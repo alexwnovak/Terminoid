@@ -36,7 +36,11 @@ function GitArgumentCompleter {
 }
 
 function IsMatch( $Text, $PartialSearch ) {
-    $Text.StartsWith( $PartialSearch, [StringComparison]::InvariantCultureIgnoreCase )
+    if ( $PartialSearch -notcontains '*' ) {
+        $PartialSearch += '*'
+    }
+
+    $Text -like $PartialSearch
 }
 
 function GitCommandCompleter( $Command ) {

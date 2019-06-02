@@ -103,6 +103,16 @@ InModuleScope 'Terminoid' {
             }
         }
 
+        Context 'Completing a wildcard search' {
+            Mock GetGitBranches { 'one', 'two', 'three' }
+
+            It 'resolves the branches who match the partial search' {
+                $branchSuggestions = GitCommandCompleter -Command 'git checkout *hre*'
+
+                $branchSuggestions[0].CompletionText | Should -Be 'three'
+            }
+        }
+
         Context 'Creating a new branch' {
             Mock GetGitBranches { 'one', 'two', 'three' }
 
