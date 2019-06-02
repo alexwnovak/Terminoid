@@ -25,8 +25,8 @@ function GitArgumentCompleter {
 
 function GitCommandCompleter( $Command ) {
     if ( $Command -like 'git add *' ) {
-        $modifiedFiles = GetModifiedFiles
-        $untrackedFiles = GetUntrackedFiles
+        $modifiedFiles = @(GetModifiedFiles)
+        $untrackedFiles = @(GetUntrackedFiles)
 
         $allFiles = $modifiedFiles + $untrackedFiles
 

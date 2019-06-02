@@ -23,6 +23,7 @@ InModuleScope 'Terminoid' {
     Describe 'Git Add completion' {
         Context 'Adding files with pending changes' {
             Mock GetModifiedFiles { 'one.txt', 'two.txt' }
+            Mock GetUntrackedFiles { }
 
             It 'resolves the changed files' {
                 $fileSuggestions = GitCommandCompleter -Command 'git add '
@@ -41,6 +42,19 @@ InModuleScope 'Terminoid' {
 
                 $fileSuggestions[0].CompletionText | Should -Be 'untracked1.txt'
                 $fileSuggestions[1].CompletionText | Should -Be 'untracked2.txt'
+            }
+        }
+
+        Context 'Adding modified and untracked files' {
+            Mock GetModifiedFiles { 'modified.txt' }
+            Mock GetUntrackedFiles { 'untracked.txt' }
+
+            It 'groups results by modified, then untracked' {
+                $fileSuggestions = GitCommandCompleter -Command 'git add '
+
+                $fileSuggestions[0].CompletionText | Should -Be 'modified.txt'
+                $fileSuggestions[1].CompletionText | Should -Be 'untracked.txt'
+
             }
         }
     }
