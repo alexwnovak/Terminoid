@@ -37,9 +37,9 @@ function GitCommandCompleter( $Command ) {
             $allFiles = $allFiles | Where-Object { $_.StartsWith( $partialSearch, [StringComparison]::InvariantCultureIgnoreCase ) }
         }
 
-        $allFiles | ForEach-Object {
+        $allFiles.ForEach( {
             WriteCompletionResult $_
-        }
+        } )
     } elseif ( $Command -like 'git checkout *' ) {
         $tokens = -split $Command
         $branches = GetGitBranches
@@ -49,9 +49,9 @@ function GitCommandCompleter( $Command ) {
             $branches = $branches | Where-Object { $_.StartsWith( $partialSearch, [StringComparison]::InvariantCultureIgnoreCase ) }
         }
 
-        $branches | ForEach-Object {
+        $branches.ForEach( {
             WriteCompletionResult $_
-        }
+        } )
     } elseif ( $Command -like 'git *' ) {
         $tokens = -split $Command
         $commands = $GitCommands
