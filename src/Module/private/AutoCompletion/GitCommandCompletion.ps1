@@ -3,8 +3,20 @@ $GitCommands = @(
     'checkout'
 )
 
-function WriteCompletionResult( $Result ) {
-    [System.Management.Automation.CompletionResult]::new( $Result, $Result, 'ParameterValue', $Result )
+$CommandTable = [List[Hashtable]]::new()
+$CommandTable.Add( @{
+    MatchText = 'git add *'
+    Provider = { @(GetModifiedFiles) + @(GetUntrackedFiles) }
+} )
+$CommandTable.Add( @{
+    MatchText = 'git checkout *'
+    Provider = { GetGitBranches }
+} )
+
+function WriteCompletionResults( $Results ) {
+    $Results.ForEach( {
+        [System.Management.Automation.CompletionResult]::new( $_, $_, 'ParameterValue', $_ )
+    } )
 }
 
 function GitArgumentCompleter {
@@ -24,45 +36,30 @@ function GitArgumentCompleter {
 }
 
 function GitCommandCompleter( $Command ) {
-    if ( $Command -like 'git add *' ) {
-        $tokens = -split $Command
+    foreach ( $tableEntry in $CommandTable ) {
+        if ( $Command -like $tableEntry.MatchText ) {
+            $results = & $tableEntry.Provider
+            $tokens = -split $Command
 
-        $modifiedFiles = @(GetModifiedFiles)
-        $untrackedFiles = @(GetUntrackedFiles)
+            if ( $tokens.Count -ge 3 ) {
+                $partialSearch = $tokens[2]
+                $results = $results | Where-Object { $_.StartsWith( $partialSearch, [StringComparison]::InvariantCultureIgnoreCase ) }
+            }
 
-        $allFiles = $modifiedFiles + $untrackedFiles
-
-        if ( $tokens.Count -ge 3 ) {
-            $partialSearch = $tokens[2]
-            $allFiles = $allFiles | Where-Object { $_.StartsWith( $partialSearch, [StringComparison]::InvariantCultureIgnoreCase ) }
+            WriteCompletionResults $results
+            return
         }
+    }
 
-        $allFiles.ForEach( {
-            WriteCompletionResult $_
-        } )
-    } elseif ( $Command -like 'git checkout *' ) {
+    if ( $Command -like 'git *' ) {
         $tokens = -split $Command
-        $branches = GetGitBranches
-
-        if ( $tokens.Count -ge 3 ) {
-            $partialSearch = $tokens[2]
-            $branches = $branches | Where-Object { $_.StartsWith( $partialSearch, [StringComparison]::InvariantCultureIgnoreCase ) }
-        }
-
-        $branches.ForEach( {
-            WriteCompletionResult $_
-        } )
-    } elseif ( $Command -like 'git *' ) {
-        $tokens = -split $Command
-        $commands = $GitCommands
+        $results = $GitCommands
 
         if ( $tokens.Count -ge 2 ) {
             $partialSearch = $tokens[1]
-            $commands = $commands | Where-Object { $_.StartsWith( $partialSearch, [StringComparison]::InvariantCultureIgnoreCase ) }
+            $results = $results | Where-Object { $_.StartsWith( $partialSearch, [StringComparison]::InvariantCultureIgnoreCase ) }
         }
 
-        $commands.ForEach( {
-            WriteCompletionResult $_
-        } )
+        WriteCompletionResults $results
     }
 }
