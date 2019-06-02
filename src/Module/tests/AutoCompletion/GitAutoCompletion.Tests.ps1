@@ -1,4 +1,4 @@
-. $PSScriptRoot\Shared.ps1
+. $PSScriptRoot\..\Shared.ps1
 
 InModuleScope 'Terminoid' {
     Describe 'Git command completion' {
