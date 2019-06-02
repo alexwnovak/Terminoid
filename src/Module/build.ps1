@@ -4,13 +4,13 @@ param (
 )
 
 if ( $ExitOnFailure ) {
-    & $PSScriptRoot/build/Install-Dependencies.ps1
+    & $PSScriptRoot\build\Install-Dependencies.ps1
     Invoke-psake
     exit ( [int]( -not $psake.build_success ) )
 } else {
     powershell -NoProfile -Args $PSScriptRoot -Command {
         param ( $ScriptRoot )
-        & $ScriptRoot/build/Install-Dependencies.ps1
+        & $ScriptRoot\build\Install-Dependencies.ps1
         Invoke-psake
     }
 }
