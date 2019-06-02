@@ -31,6 +31,18 @@ InModuleScope 'Terminoid' {
                 $fileSuggestions[1].CompletionText | Should -Be 'two.txt'
             }
         }
+
+        Context 'Adding untracked files' {
+            Mock GetModifiedFiles { }
+            Mock GetUntrackedFiles { 'untracked1.txt', 'untracked2.txt' }
+
+            It 'resolves the untracked files' {
+                $fileSuggestions = GitCommandCompleter -Command 'git add '
+
+                $fileSuggestions[0].CompletionText | Should -Be 'untracked1.txt'
+                $fileSuggestions[1].CompletionText | Should -Be 'untracked2.txt'
+            }
+        }
     }
 
     Describe 'Git Checkout completion' {

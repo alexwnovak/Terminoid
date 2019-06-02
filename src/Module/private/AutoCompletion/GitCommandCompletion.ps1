@@ -25,9 +25,12 @@ function GitArgumentCompleter {
 
 function GitCommandCompleter( $Command ) {
     if ( $Command -like 'git add *' ) {
-        $files = GetModifiedFiles
+        $modifiedFiles = GetModifiedFiles
+        $untrackedFiles = GetUntrackedFiles
 
-        $files | ForEach-Object {
+        $allFiles = $modifiedFiles + $untrackedFiles
+
+        $allFiles | ForEach-Object {
             WriteCompletionResult $_
         }
     } elseif ( $Command -like 'git checkout *' ) {
