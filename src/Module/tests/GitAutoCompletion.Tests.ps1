@@ -54,7 +54,18 @@ InModuleScope 'Terminoid' {
 
                 $fileSuggestions[0].CompletionText | Should -Be 'modified.txt'
                 $fileSuggestions[1].CompletionText | Should -Be 'untracked.txt'
+            }
+        }
 
+        Context 'Adding with a partial completion' {
+            Mock GetModifiedFiles { 'other.txt', 'file.bmp' }
+            Mock GetUntrackedFiles { 'file.txt' }
+
+            It 'resolves the matches' {
+                $fileSuggestions = GitCommandCompleter -Command 'git add f'
+
+                $fileSuggestions[0].CompletionText | Should -Be 'file.bmp'
+                $fileSuggestions[1].CompletionText | Should -Be 'file.txt'
             }
         }
     }

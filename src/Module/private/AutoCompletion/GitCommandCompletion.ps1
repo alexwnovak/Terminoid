@@ -25,10 +25,17 @@ function GitArgumentCompleter {
 
 function GitCommandCompleter( $Command ) {
     if ( $Command -like 'git add *' ) {
+        $tokens = -split $Command
+
         $modifiedFiles = @(GetModifiedFiles)
         $untrackedFiles = @(GetUntrackedFiles)
 
         $allFiles = $modifiedFiles + $untrackedFiles
+
+        if ( $tokens.Count -ge 3 ) {
+            $partialSearch = $tokens[2]
+            $allFiles = $allFiles | Where-Object { $_.StartsWith( $partialSearch, [StringComparison]::InvariantCultureIgnoreCase ) }
+        }
 
         $allFiles | ForEach-Object {
             WriteCompletionResult $_
