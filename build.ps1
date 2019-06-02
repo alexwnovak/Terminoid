@@ -3,14 +3,12 @@ param (
     $ExitOnFailure
 )
 
-if ( $ExitOnFailure ) {
-    & $PSScriptRoot/build/Install-Dependencies.ps1
-    Invoke-psake -buildFile $PSScriptRoot/psakefile.ps1
-    exit ( [int]( -not $psake.build_success ) )
-} else {
-    powershell -NoProfile -Args $PSScriptRoot -Command {
-        param ( $ScriptRoot )
-        & $ScriptRoot/build/Install-Dependencies.ps1
-        Invoke-psake -buildFile $ScriptRoot/psakefile.ps1
-    }
+$oldLocation = $PWD
+
+try {
+    Set-Location $PSScriptRoot\src\Module
+    & .\build.ps1 -ExitOnFailure:$ExitOnFailure
+}
+finally {
+    Set-Location $oldLocation
 }
