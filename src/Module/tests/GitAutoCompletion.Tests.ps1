@@ -20,6 +20,19 @@ InModuleScope 'Terminoid' {
         }
     }
 
+    Describe 'Git Add completion' {
+        Context 'Adding files with pending changes' {
+            Mock GetModifiedFiles { 'one.txt', 'two.txt' }
+
+            It 'resolves the changed files' {
+                $fileSuggestions = GitCommandCompleter -Command 'git add '
+
+                $fileSuggestions[0].CompletionText | Should -Be 'one.txt'
+                $fileSuggestions[1].CompletionText | Should -Be 'two.txt'
+            }
+        }
+    }
+
     Describe 'Git Checkout completion' {
         Context 'Changing to another branch when there is only one available' {
             Mock GetGitBranches { 'branchName' }

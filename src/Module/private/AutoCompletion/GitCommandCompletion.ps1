@@ -24,7 +24,13 @@ function GitArgumentCompleter {
 }
 
 function GitCommandCompleter( $Command ) {
-    if ( $Command -like 'git checkout *' ) {
+    if ( $Command -like 'git add *' ) {
+        $files = GetModifiedFiles
+
+        $files | ForEach-Object {
+            WriteCompletionResult $_
+        }
+    } elseif ( $Command -like 'git checkout *' ) {
         $tokens = -split $Command
         $branches = GetGitBranches
 
