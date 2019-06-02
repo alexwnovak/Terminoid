@@ -35,6 +35,10 @@ function GitArgumentCompleter {
     GitCommandCompleter -Command $command
 }
 
+function IsMatch( $Text, $PartialSearch ) {
+    $Text.StartsWith( $PartialSearch, [StringComparison]::InvariantCultureIgnoreCase )
+}
+
 function GitCommandCompleter( $Command ) {
     foreach ( $tableEntry in $CommandTable ) {
         if ( $Command -like $tableEntry.MatchText ) {
@@ -43,7 +47,7 @@ function GitCommandCompleter( $Command ) {
 
             if ( $tokens.Count -ge 3 ) {
                 $partialSearch = $tokens[2]
-                $results = $results | Where-Object { $_.StartsWith( $partialSearch, [StringComparison]::InvariantCultureIgnoreCase ) }
+                $results = $results | Where-Object { IsMatch $_ $partialSearch }
             }
 
             WriteCompletionResults $results
@@ -57,7 +61,7 @@ function GitCommandCompleter( $Command ) {
 
         if ( $tokens.Count -ge 2 ) {
             $partialSearch = $tokens[1]
-            $results = $results | Where-Object { $_.StartsWith( $partialSearch, [StringComparison]::InvariantCultureIgnoreCase ) }
+            $results = $results | Where-Object { IsMatch $_ $partialSearch }
         }
 
         WriteCompletionResults $results
