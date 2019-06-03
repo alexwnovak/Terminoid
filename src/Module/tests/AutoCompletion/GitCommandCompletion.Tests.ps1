@@ -7,7 +7,8 @@ InModuleScope 'Terminoid' {
                 $commandSuggestions = GitCommandCompleter -Command 'git '
 
                 $commandSuggestions[0].CompletionText | Should -Be 'add'
-                $commandSuggestions[1].CompletionText | Should -Be 'checkout'
+                $commandSuggestions[1].CompletionText | Should -Be 'branch'
+                $commandSuggestions[2].CompletionText | Should -Be 'checkout'
             }
         }
 

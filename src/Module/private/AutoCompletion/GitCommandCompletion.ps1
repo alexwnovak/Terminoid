@@ -1,5 +1,6 @@
 $GitCommands = @(
     'add',
+    'branch',
     'checkout'
 )
 
