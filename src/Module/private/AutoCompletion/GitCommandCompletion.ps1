@@ -5,11 +5,15 @@ $GitCommands = @(
 
 $CommandTable = [List[Hashtable]]::new()
 $CommandTable.Add( @{
-    MatchText = 'git add *'
+    MatchText = 'git add'
     Provider = { @(GetModifiedFiles) + @(GetUntrackedFiles) }
 } )
 $CommandTable.Add( @{
-    MatchText = 'git checkout *'
+    MatchText = 'git branch -d'
+    Provider = { GetGitBranches }
+} )
+$CommandTable.Add( @{
+    MatchText = 'git checkout'
     Provider = { GetGitBranches }
 } )
 
@@ -45,12 +49,15 @@ function IsMatch( $Text, $PartialSearch ) {
 
 function GitCommandCompleter( $Command ) {
     foreach ( $tableEntry in $CommandTable ) {
-        if ( $Command -like $tableEntry.MatchText ) {
+        $commandMatch = $tableEntry.MatchText + ' *'
+
+        if ( $Command -like $commandMatch ) {
             $results = & $tableEntry.Provider
             $tokens = -split $Command
+            $matchTextTokens = -split $tableEntry.MatchText
 
-            if ( $tokens.Count -ge 3 ) {
-                $partialSearch = $tokens[2]
+            if ( $tokens.Count -gt $matchTextTokens.Count ) {
+                $partialSearch = $tokens[-1]
                 $results = $results | Where-Object { IsMatch $_ $partialSearch }
             }
 
