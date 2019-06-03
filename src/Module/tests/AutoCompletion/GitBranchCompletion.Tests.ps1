@@ -12,5 +12,15 @@ InModuleScope 'Terminoid' {
                 $fileSuggestions[1].CompletionText | Should -Be 'branch2'
             }
         }
+
+        Context 'Deleting a branch with a partial search' {
+            Mock GetGitBranches { 'first', 'second' }
+
+            It 'resolves the branches that match' {
+                $fileSuggestions = GitCommandCompleter -Command 'git branch -d sec'
+
+                $fileSuggestions[0].CompletionText | Should -Be 'second'
+            }
+        }
     }
 }
