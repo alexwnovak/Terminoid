@@ -22,5 +22,15 @@ InModuleScope 'Terminoid' {
                 $fileSuggestions[0].CompletionText | Should -Be 'second'
             }
         }
+
+        Context 'Deleting a branch with a wildcard search' {
+            Mock GetGitBranches { 'first', 'second' }
+
+            It 'resolves the branches that match' {
+                $fileSuggestions = GitCommandCompleter -Command 'git branch -d *on*'
+
+                $fileSuggestions[0].CompletionText | Should -Be 'second'
+            }
+        }
     }
 }
