@@ -38,30 +38,30 @@ namespace Terminoid
          return _region;
       }
 
-      private void UpdateRegion()
-      {
-         for ( int y = 0; y < Height; y++ )
-         {
-            char indicatorOrBlank = SelectedIndex == y + _indexOffset ? SelectionIndicator : ' ';
-            _regionContext.Set( 1, y, indicatorOrBlank, Color.White, Color.DarkRed );
-         }
-      }
+      //private void UpdateRegion()
+      //{
+      //   for ( int y = 0; y < Height; y++ )
+      //   {
+      //      char indicatorOrBlank = SelectedIndex == y + _indexOffset ? SelectionIndicator : ' ';
+      //      _regionContext.Set( 1, y, indicatorOrBlank, Color.White, Color.DarkRed );
+      //   }
+      //}
 
-      private void ScrollItems( int rows )
-      {
-         _indexOffset += rows;
+      //private void ScrollItems( int rows )
+      //{
+      //   _indexOffset += rows;
 
-         if ( _indexOffset + _maxDisplayItems >= Items.Length )
-         {
-            _indexOffset = Items.Length - _maxDisplayItems;
-         }
+      //   if ( _indexOffset + _maxDisplayItems >= Items.Length )
+      //   {
+      //      _indexOffset = Items.Length - _maxDisplayItems;
+      //   }
 
-         for ( int y = 0; y < Height; y++ )
-         {
-            char indicatorOrBlank = SelectedIndex == y ? SelectionIndicator : ' ';
-            _regionContext.SetLine( y, $" {indicatorOrBlank} {Items[y + _indexOffset]}" );
-         }
-      }
+      //   for ( int y = 0; y < Height; y++ )
+      //   {
+      //      char indicatorOrBlank = SelectedIndex == y ? SelectionIndicator : ' ';
+      //      _regionContext.SetLine( y, $" {indicatorOrBlank} {Items[y + _indexOffset]}" );
+      //   }
+      //}
 
       public int Show( int x, int y )
       {
@@ -104,7 +104,7 @@ namespace Terminoid
                break;
             }
 
-            UpdateRegion();
+            //UpdateRegion();
             ConsoleContext.Write( _region, x, y );
          }
 
