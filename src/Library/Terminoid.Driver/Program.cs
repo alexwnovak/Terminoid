@@ -55,7 +55,7 @@ namespace Terminoid.Driver
          var region = new Region( 20, 10 );
 
          var regionContext = new RegionContext( region );
-         regionContext.FillColor( Color.White, Color.DarkBlue );
+         regionContext.Fill( Color.White, Color.DarkBlue );
 
          regionContext.Set( 0, 0, 'x', Color.White, Color.DarkBlue );
          regionContext.Set( 1, 0, '!', Color.White, Color.DarkBlue );
