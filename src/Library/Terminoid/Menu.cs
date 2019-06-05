@@ -16,6 +16,10 @@ namespace Terminoid
       private Region _region;
       private RegionContext _regionContext;
 
+      private readonly int _maxDisplayItems = 10;
+      private bool _hasOverflowContent;
+      private int _indexOffset;
+
       public Menu( object[] items )
       {
          Items = items ?? throw new ArgumentNullException( nameof( items ) );
@@ -38,36 +42,37 @@ namespace Terminoid
          return _region;
       }
 
-      //private void UpdateRegion()
-      //{
-      //   for ( int y = 0; y < Height; y++ )
-      //   {
-      //      char indicatorOrBlank = SelectedIndex == y + _indexOffset ? SelectionIndicator : ' ';
-      //      _regionContext.Set( 1, y, indicatorOrBlank, Color.White, Color.DarkRed );
-      //   }
-      //}
+      private void UpdateRegion()
+      {
+         for ( int y = 0; y < Height; y++ )
+         {
+            char indicatorOrBlank = SelectedIndex == y + _indexOffset ? SelectionIndicator : ' ';
+            _regionContext.Set( 1, y, indicatorOrBlank, Color.White, Color.DarkRed );
+         }
+      }
 
-      //private void ScrollItems( int rows )
-      //{
-      //   _indexOffset += rows;
+      private void ScrollItems( int rows )
+      {
+         _indexOffset += rows;
 
-      //   if ( _indexOffset + _maxDisplayItems >= Items.Length )
-      //   {
-      //      _indexOffset = Items.Length - _maxDisplayItems;
-      //   }
+         if ( _indexOffset + _maxDisplayItems >= Items.Length )
+         {
+            _indexOffset = Items.Length - _maxDisplayItems;
+         }
 
-      //   for ( int y = 0; y < Height; y++ )
-      //   {
-      //      char indicatorOrBlank = SelectedIndex == y ? SelectionIndicator : ' ';
-      //      _regionContext.SetLine( y, $" {indicatorOrBlank} {Items[y + _indexOffset]}" );
-      //   }
-      //}
+         for ( int y = 0; y < Height; y++ )
+         {
+            char indicatorOrBlank = SelectedIndex == y ? SelectionIndicator : ' ';
+            _regionContext.SetLine( y, $" {indicatorOrBlank} {Items[y + _indexOffset]}" );
+         }
+      }
 
       public int Show( int x, int y )
       {
-         int longestItem = Items.Max( i => i.ToString().Length );
-         int menuWidth = longestItem + 6;
-         int menuHeight = Items.Length;
+         int longestItem = Items.Min( i => i.ToString().Length );
+         Width = longestItem + 20;
+         Height = Items.Length > _maxDisplayItems ? _maxDisplayItems : Items.Length;
+         _hasOverflowContent = Items.Length > _maxDisplayItems;
 
          var underRegion = ConsoleContext.Read( x, y, Width, Height );
 
@@ -89,10 +94,10 @@ namespace Terminoid
                   cancel = true;
                   break;
                case ConsoleKey.DownArrow:
-                  SelectedIndex = ( SelectedIndex + 1 ) % Items.Length;
+                  OnDownArrow();
                   break;
                case ConsoleKey.UpArrow:
-                  SelectedIndex = ( SelectedIndex + Items.Length - 1 ) % Items.Length;
+                  OnUpArrow();
                   break;
                case ConsoleKey.Enter:
                   exit = true;
@@ -104,7 +109,7 @@ namespace Terminoid
                break;
             }
 
-            //UpdateRegion();
+            UpdateRegion();
             ConsoleContext.Write( _region, x, y );
          }
 
@@ -116,6 +121,46 @@ namespace Terminoid
          }
 
          return SelectedIndex;
+      }
+
+      private void OnDownArrow()
+      {
+         if ( _hasOverflowContent )
+         {
+            if ( SelectedIndex + 1 < Items.Length )
+            {
+               SelectedIndex++;
+            }
+
+            if ( SelectedIndex >= _maxDisplayItems )
+            {
+               ScrollItems( 1 );
+            }
+         }
+         else
+         {
+            SelectedIndex = ( SelectedIndex + 1 ) % Items.Length;
+         }
+      }
+
+      private void OnUpArrow()
+      {
+         if ( _hasOverflowContent )
+         {
+            if ( SelectedIndex - 1 >= 0 )
+            {
+               SelectedIndex--;
+            }
+
+            if ( SelectedIndex - _indexOffset > _maxDisplayItems )
+            {
+               ScrollItems( -1 );
+            }
+         }
+         else
+         {
+            SelectedIndex = ( SelectedIndex + Items.Length - 1 ) % Items.Length;
+         }
       }
    }
 }
