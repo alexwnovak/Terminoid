@@ -83,7 +83,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>REM mkdir $(SolutionDir)dependencies
-REM copy $(TargetDir)*.dll $(SolutionDir)dependencies /Y</PostBuildEvent>
+REM copy $(TargetPath) $(SolutionDir)..\Module\dependencies /Y</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\Fody.5.0.6\build\Fody.targets" Condition="Exists('..\packages\Fody.5.0.6\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
