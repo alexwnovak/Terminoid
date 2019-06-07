@@ -1,6 +1,4 @@
 function Get-ImageDetail( $Path ) {
-    Add-Type -AssemblyName System.Drawing
-
     $image = New-Object System.Drawing.Bitmap $Path
 
     try {

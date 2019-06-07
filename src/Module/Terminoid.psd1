@@ -25,6 +25,7 @@
 
    # Required assemblies
    RequiredAssemblies = @(
+      'System.Drawing.dll'
       #'dependencies/Terminoid.dll'
    )
 
