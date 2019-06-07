@@ -1,9 +1,15 @@
 function DefaultFileDetailReader( $Path ) {
-    $fileInfo = Get-ChildItem $Path
+    $item = Get-Item $Path
 
-    @{
-        'Last Written' = $fileInfo.LastWriteTime
-        'File Size' = '{0:N0} bytes' -f $fileInfo.Length
+    if ( $item -is [System.IO.DirectoryInfo] ) {
+        @{
+            'Last Written' = $item.LastWriteTime
+        }
+    } else {
+        @{
+            'Last Written' = $item.LastWriteTime
+            'File Size' = '{0:N0} bytes' -f $item.Length
+        }
     }
 }
 
