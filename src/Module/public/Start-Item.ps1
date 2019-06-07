@@ -1,6 +1,7 @@
 function Start-Item {
     [CmdletBinding( SupportsShouldProcess )]
     param (
+        [Parameter( Mandatory )]
         $Item,
 
         [switch]
