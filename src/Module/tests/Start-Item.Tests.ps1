@@ -58,4 +58,30 @@ Describe 'Start-Item' {
 
         $actualItem | Should -Be 'first match'
     }
+
+    It 'does not wait by default' {
+        $waiting = $false
+
+        Set-DefaultStartHandler -Function {
+            param ( $Item, $Wait )
+            Set-Variable waiting -Scope 1 -Value $Wait
+        }
+
+        Start-Item -Item 'doesnt-matter'
+
+        $waiting | Should -Be $false
+    }
+
+    It 'waits for the operation to complete' {
+        $waiting = $false
+
+        Set-DefaultStartHandler -Function {
+            param ( $Item, $Wait )
+            Set-Variable waiting -Scope 1 -Value $Wait
+        }
+
+        Start-Item -Item 'doesnt-matter' -Wait
+
+        $waiting | Should -Be $true
+    }
 }

@@ -1,5 +1,5 @@
-function DefaultStartHandler( $ItemName ) {
-    Start-Process -FilePath $ItemName
+function DefaultStartHandler( $ItemName, $Wait ) {
+    Start-Process $ItemName -Wait:$Wait
 }
 
 function Set-DefaultStartHandler {
