@@ -14,7 +14,7 @@ Describe 'Start-Item compatibility' {
     It 'exposes a function named Start-Item' {
         Get-Command Start-Item -Module Terminoid | Should -Not -Be $null
     }
-    It 'exposes exactly 14 parameters' {
-        (Get-Command Start-Item).Parameters.Count | Should -Be 14
+    It 'exposes exactly 15 parameters' {
+        (Get-Command Start-Item).Parameters.Count | Should -Be 15
     }
 }
