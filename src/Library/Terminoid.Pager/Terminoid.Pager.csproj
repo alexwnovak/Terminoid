@@ -7,7 +7,7 @@
     <ProjectGuid>{B9C20E58-261D-44AF-9D9C-D8276330EC2B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Terminoid.Pager</RootNamespace>
-    <AssemblyName>Terminoid.Pager</AssemblyName>
+    <AssemblyName>vu</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
