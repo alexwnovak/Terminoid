@@ -15,12 +15,15 @@ namespace Terminoid.Pager
 
          var highlighter = new Highlighter( new VTEngine() );
 
-         using ( var streamReader = new StreamReader(args[0] ) )
+         string extension = Path.GetExtension( args[0] );
+         string definition = LanguageDefinitionTable.GetDefinition( extension );
+
+         using ( var streamReader = new StreamReader( args[0] ) )
          {
             while ( !streamReader.EndOfStream )
             {
                string line = streamReader.ReadLine();
-               string highlightedCode = highlighter.Highlight( "C#", line );
+               string highlightedCode = highlighter.Highlight( definition, line );
                Console.WriteLine( highlightedCode );
             }
          }
