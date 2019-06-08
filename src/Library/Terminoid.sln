@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terminoid.Tests", "Terminoi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terminoid.Core.Tests", "Terminoid.Core.Tests\Terminoid.Core.Tests.csproj", "{7C873FD8-2AA7-43D0-AFD2-EBAFC630E09D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terminoid.Pager", "Terminoid.Pager\Terminoid.Pager.csproj", "{B9C20E58-261D-44AF-9D9C-D8276330EC2B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{7C873FD8-2AA7-43D0-AFD2-EBAFC630E09D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C873FD8-2AA7-43D0-AFD2-EBAFC630E09D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C873FD8-2AA7-43D0-AFD2-EBAFC630E09D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9C20E58-261D-44AF-9D9C-D8276330EC2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9C20E58-261D-44AF-9D9C-D8276330EC2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9C20E58-261D-44AF-9D9C-D8276330EC2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9C20E58-261D-44AF-9D9C-D8276330EC2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
