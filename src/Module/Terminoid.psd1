@@ -44,6 +44,7 @@
       'Get-LocationHistory',
       'Get-SpecialChar',
       'Hide-Cursor',
+      'New-VTSequence',
       'Pop-BarSegment',
       'Push-BarSegment',
       'Push-Location',
