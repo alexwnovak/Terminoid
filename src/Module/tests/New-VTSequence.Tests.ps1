@@ -71,5 +71,20 @@ Describe 'New-VTSequence' {
 
             $sequence | Should -Throw
         }
+
+        It 'throws when any value is outside the 0-255 byte range' -TestCases @(
+            @{ Rgb = -1,0,0 },
+            @{ Rgb = 0,-1,0 },
+            @{ Rgb = 0,0,-1 },
+            @{ Rgb = 256,0,0 },
+            @{ Rgb = 0,256,0 },
+            @{ Rgb = 0,0,256 }
+        ) {
+            param ( $Rgb )
+
+            $sequence = { New-VTSequence text -Foreground $Rgb }
+
+            $sequence | Should -Throw
+        }
     }
 }

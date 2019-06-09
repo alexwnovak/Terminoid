@@ -56,6 +56,18 @@ function GetAsRgbArray {
         throw 'An RGB color array must have 3 elements between 0 and 255'
     }
 
+    if ( $Rgb[0] -lt 0 -or $Rgb[0] -gt 255 ) {
+        throw "Red element found to be outside the 0-255 range: $($Rgb[0])"
+    }
+
+    if ( $Rgb[1] -lt 0 -or $Rgb[1] -gt 255 ) {
+        throw "Green element found to be outside the 0-255 range: $($Rgb[1])"
+    }
+
+    if ( $Rgb[2] -lt 0 -or $Rgb[2] -gt 255 ) {
+        throw "Blue element found to be outside the 0-255 range: $($Rgb[2])"
+    }
+
     "$($EscPrefix)38;2;$($Rgb[0]);$($Rgb[1]);$($Rgb[2])m"
 }
 
