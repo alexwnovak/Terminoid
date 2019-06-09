@@ -68,19 +68,19 @@ function GetAsRgbArray {
         throw "Blue element found to be outside the 0-255 range: $($Rgb[2])"
     }
 
-    "$($EscPrefix)38;2;$($Rgb[0]);$($Rgb[1]);$($Rgb[2])m"
+    "$($EscPrefix)$($modifier);2;$($Rgb[0]);$($Rgb[1]);$($Rgb[2])m"
 }
 
 function IsHexColor( $Hex ) {
     $Hex -match '[0-9a-fA-F]{6}'
 }
 
-function GetAsHex( $Hex ) {
+function GetAsHex( $Hex, $ColorType ) {
     $red = [byte] ('0x' + $Hex.Substring( 0, 2 ))
     $green = [byte] ('0x' + $Hex.Substring( 2, 2 ))
     $blue = [byte] ('0x' + $Hex.Substring( 4, 2 ))
 
-    GetAsRgbArray $red, $green, $blue
+    GetAsRgbArray $red, $green, $blue $ColorType
 }
 
 function New-VTSequence {
@@ -88,25 +88,49 @@ function New-VTSequence {
         [Parameter( Mandatory )]
         $Text,
 
-        $Foreground
+        $Foreground,
+        $Background
     )
 
-    if ( -not $PSBoundParameters.ContainsKey( 'Foreground' ) ) {
+    if ( $PSBoundParameters.Count -eq 1 ) {
         return $Text
     }
 
-    $prefix = if ( $Foreground -is [ConsoleColor] ) {
-        GetAsConsoleColor $Foreground Foreground
-    } elseif ( [Enum]::GetNames( [ConsoleColor] ) -contains $Foreground ) {
-        $consoleColor = $Foreground -as [ConsoleColor]
-        GetAsConsoleColor $consoleColor Foreground
-    } elseif ( $Foreground -is [Array] ) {
-        GetAsRgbArray $Foreground Foreground
-    } elseif ( IsHexColor $Foreground ) {
-        GetAsHex $Foreground
-    } else {
-        throw "Unable to parse foreground into a ConsoleColor, RGB triplet, or hex color: $Foreground"
+    if ( $PSBoundParameters.ContainsKey( 'Foreground' ) ) {
+        $prefix = if ( $Foreground -is [ConsoleColor] ) {
+            GetAsConsoleColor $Foreground Foreground
+        } elseif ( [Enum]::GetNames( [ConsoleColor] ) -contains $Foreground ) {
+            $consoleColor = $Foreground -as [ConsoleColor]
+            GetAsConsoleColor $consoleColor Foreground
+        } elseif ( $Foreground -is [Array] ) {
+            GetAsRgbArray $Foreground Foreground
+        } elseif ( IsHexColor $Foreground ) {
+            GetAsHex $Foreground Foreground
+        } else {
+            throw "Unable to parse foreground into a ConsoleColor, RGB triplet, or hex color: $Foreground"
+        }
+
+        "$prefix$Text$EscPostfix"
     }
 
-    "$prefix$Text$EscPostfix"
+    if ( $PSBoundParameters.ContainsKey( 'Background' ) ) {
+        $prefix = if ( $Background -is [ConsoleColor] ) {
+            GetAsConsoleColor $Background Background
+        }
+        elseif ( [Enum]::GetNames( [ConsoleColor] ) -contains $Background ) {
+            $consoleColor = $Background -as [ConsoleColor]
+            GetAsConsoleColor $consoleColor Background
+        }
+        elseif ( $Background -is [Array] ) {
+            GetAsRgbArray $Background Background
+        }
+        elseif ( IsHexColor $Background ) {
+            GetAsHex $Background
+        }
+        else {
+            throw "Unable to parse background into a ConsoleColor, RGB triplet, or hex color: $Background"
+        }
+
+        "$prefix$Text$EscPostfix"
+    }
 }
