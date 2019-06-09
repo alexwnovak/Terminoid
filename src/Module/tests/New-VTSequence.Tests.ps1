@@ -95,4 +95,12 @@ Describe 'New-VTSequence' {
             $sequence | Should -Be "$([char]0x1B)`[0;38;2;255;255;255mtext$([char]0x1B)`[0m"
         }
     }
+
+    Context 'Using a non-usable color representation' {
+        It 'throws' {
+            $sequence = { New-VTSequence text -Foreground notanything }
+
+            $sequence | Should -Throw
+        }
+    }
 }

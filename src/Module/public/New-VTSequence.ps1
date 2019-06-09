@@ -71,6 +71,10 @@ function GetAsRgbArray {
     "$($EscPrefix)38;2;$($Rgb[0]);$($Rgb[1]);$($Rgb[2])m"
 }
 
+function IsHexColor( $Hex ) {
+    $Hex -match '[0-9a-fA-F]{6}'
+}
+
 function GetAsHex( $Hex ) {
     $red = [byte] ('0x' + $Hex.Substring( 0, 2 ))
     $green = [byte] ('0x' + $Hex.Substring( 2, 2 ))
@@ -95,8 +99,10 @@ function New-VTSequence {
         GetAsConsoleColor $consoleColor Foreground
     } elseif ( $Color -is [Array] ) {
         GetAsRgbArray $Color Foreground
-    } else {
+    } elseif ( IsHexColor $Color ) {
         GetAsHex $Color
+    } else {
+        throw "Unable to parse color into a ConsoleColor, RGB triplet, or hex color: $Color"
     }
 
     "$prefix$Text$EscPostfix"
