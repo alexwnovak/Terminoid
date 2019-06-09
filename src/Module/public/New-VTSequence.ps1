@@ -35,7 +35,7 @@ function GetAsConsoleColor {
         $ConsoleColorToVTTable[$colorIndex] + $indexModifier
     }
 
-    "$EscPrefix$($colorValue)m"
+    "$($colorValue)m"
 }
 
 function GetAsRgbArray {
@@ -68,7 +68,7 @@ function GetAsRgbArray {
         throw "Blue element found to be outside the 0-255 range: $($Rgb[2])"
     }
 
-    "$($EscPrefix)$($modifier);2;$($Rgb[0]);$($Rgb[1]);$($Rgb[2])m"
+    "$($modifier);2;$($Rgb[0]);$($Rgb[1]);$($Rgb[2])m"
 }
 
 function IsHexColor( $Hex ) {
@@ -110,7 +110,7 @@ function New-VTSequence {
             throw "Unable to parse foreground into a ConsoleColor, RGB triplet, or hex color: $Foreground"
         }
 
-        "$prefix$Text$EscPostfix"
+        "$EscPrefix$prefix$Text$EscPostfix"
     }
 
     if ( $PSBoundParameters.ContainsKey( 'Background' ) -and $null -ne $Background ) {
@@ -131,6 +131,6 @@ function New-VTSequence {
             throw "Unable to parse background into a ConsoleColor, RGB triplet, or hex color: $Background"
         }
 
-        "$prefix$Text$EscPostfix"
+        "$EscPrefix$prefix$Text$EscPostfix"
     }
 }
