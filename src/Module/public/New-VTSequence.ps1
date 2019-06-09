@@ -100,7 +100,4 @@ function New-VTSequence {
     }
 
     "$prefix$Text$EscPostfix"
-
-    # $prefix = "$Esc`[0;m"
-    # "$prefix$InputObject$postfix"
 }
