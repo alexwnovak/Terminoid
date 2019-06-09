@@ -155,38 +155,38 @@ Describe 'New-VTSequence' {
             $sequence | Should -Be "$([char]0x1B)`[0;$($ExpectedBackground)mtext$([char]0x1B)`[0m"
         }
 
-        # It 'formats the input with a valid RGB triplet' {
-        #     $sequence = New-VTSequence text -Foreground 100, 150, 200
+        It 'formats the input with a valid RGB triplet' {
+            $sequence = New-VTSequence text -Background 100, 150, 200
 
-        #     $sequence | Should -Be "$([char]0x1B)`[0;38;2;100;150;200mtext$([char]0x1B)`[0m"
-        # }
+            $sequence | Should -Be "$([char]0x1B)`[0;48;2;100;150;200mtext$([char]0x1B)`[0m"
+        }
 
-        # It 'throws when using fewer than 3 values for the color' {
-        #     $sequence = { New-VTSequence text -Foreground 100, 150 }
+        It 'throws when using fewer than 3 values for the color' {
+            $sequence = { New-VTSequence text -Background 100, 150 }
 
-        #     $sequence | Should -Throw
-        # }
+            $sequence | Should -Throw
+        }
 
-        # It 'throws when passing more than 3 values for an RGB foreground' {
-        #     $sequence = { New-VTSequence text -Foreground 1, 2, 3, 4 }
+        It 'throws when passing more than 3 values for an RGB background' {
+            $sequence = { New-VTSequence text -Background 1, 2, 3, 4 }
 
-        #     $sequence | Should -Throw
-        # }
+            $sequence | Should -Throw
+        }
 
-        # It 'throws when any value is outside the 0-255 byte range' -TestCases @(
-        #     @{ Rgb = -1, 0, 0 },
-        #     @{ Rgb = 0, -1, 0 },
-        #     @{ Rgb = 0, 0, -1 },
-        #     @{ Rgb = 256, 0, 0 },
-        #     @{ Rgb = 0, 256, 0 },
-        #     @{ Rgb = 0, 0, 256 }
-        # ) {
-        #     param ( $Rgb )
+        It 'throws when any value is outside the 0-255 byte range' -TestCases @(
+            @{ Rgb = -1,0,0 },
+            @{ Rgb = 0,-1,0 },
+            @{ Rgb = 0,0,-1 },
+            @{ Rgb = 256,0,0 },
+            @{ Rgb = 0,256,0 },
+            @{ Rgb = 0,0,256 }
+        ) {
+            param ( $Rgb )
 
-        #     $sequence = { New-VTSequence text -Foreground $Rgb }
+            $sequence = { New-VTSequence text -Background $Rgb }
 
-        #     $sequence | Should -Throw
-        # }
+            $sequence | Should -Throw
+        }
 
         # It 'formats the input with a valid hex string' {
         #     $sequence = New-VTSequence text -Foreground FFFFFF
