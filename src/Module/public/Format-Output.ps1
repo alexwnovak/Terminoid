@@ -5,7 +5,7 @@ $EscPostfix = "$Esc`[0m"
 function Format-Output {
     param (
         [Parameter( Mandatory )]
-        $Text,
+        $InputObject,
 
         $Foreground,
         $Background,
@@ -21,7 +21,7 @@ function Format-Output {
     )
 
     if ( $PSBoundParameters.Count -eq 1 ) {
-        return $Text
+        return $InputObject
     }
 
     $modifiers = @()
@@ -47,5 +47,5 @@ function Format-Output {
         $modifiers += ProcessColor $Background Background
     }
 
-    "$($modifiers -join ';')m$Text$EscPostfix"
+    "$($modifiers -join ';')m$InputObject$EscPostfix"
 }
