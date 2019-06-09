@@ -1,5 +1,5 @@
 $Esc = [char]0x1B
-$EscPrefix = "$Esc`[0;"
+$EscPrefix = "$Esc`[0"
 $EscPostfix = "$Esc`[0m"
 
 $ConsoleColorToVTTable = @(
@@ -35,7 +35,7 @@ function GetAsConsoleColor {
         $ConsoleColorToVTTable[$colorIndex] + $indexModifier
     }
 
-    "$($colorValue)m"
+    $colorValue
 }
 
 function GetAsRgbArray {
@@ -68,7 +68,7 @@ function GetAsRgbArray {
         throw "Blue element found to be outside the 0-255 range: $($Rgb[2])"
     }
 
-    "$($modifier);2;$($Rgb[0]);$($Rgb[1]);$($Rgb[2])m"
+    "$($modifier);2;$($Rgb[0]);$($Rgb[1]);$($Rgb[2])"
 }
 
 function IsHexColor( $Hex ) {
@@ -81,6 +81,21 @@ function GetAsHex( $Hex, $ColorType ) {
     $blue = [byte] ('0x' + $Hex.Substring( 4, 2 ))
 
     GetAsRgbArray $red, $green, $blue $ColorType
+}
+
+function ProcessColor( $Color, $ColorType ) {
+    if ( $Color -is [ConsoleColor] ) {
+        GetAsConsoleColor $Color $ColorType
+    } elseif ( [Enum]::GetNames( [ConsoleColor] ) -contains $Color ) {
+        $consoleColor = $Color -as [ConsoleColor]
+        GetAsConsoleColor $consoleColor $ColorType
+    } elseif ( $Color -is [Array] ) {
+        GetAsRgbArray $Color $ColorType
+    } elseif ( IsHexColor $Color ) {
+        GetAsHex $Color $ColorType
+    } else {
+        throw "Unable to parse into a ConsoleColor, RGB triplet, or hex color: $Color"
+    }
 }
 
 function New-VTSequence {
@@ -96,41 +111,16 @@ function New-VTSequence {
         return $Text
     }
 
-    if ( $PSBoundParameters.ContainsKey( 'Foreground' ) -and $null -ne $Foreground ) {
-        $prefix = if ( $Foreground -is [ConsoleColor] ) {
-            GetAsConsoleColor $Foreground Foreground
-        } elseif ( [Enum]::GetNames( [ConsoleColor] ) -contains $Foreground ) {
-            $consoleColor = $Foreground -as [ConsoleColor]
-            GetAsConsoleColor $consoleColor Foreground
-        } elseif ( $Foreground -is [Array] ) {
-            GetAsRgbArray $Foreground Foreground
-        } elseif ( IsHexColor $Foreground ) {
-            GetAsHex $Foreground Foreground
-        } else {
-            throw "Unable to parse foreground into a ConsoleColor, RGB triplet, or hex color: $Foreground"
-        }
+    $modifiers = @()
+    $modifiers += $EscPrefix
 
-        "$EscPrefix$prefix$Text$EscPostfix"
+    if ( $null -ne $Foreground ) {
+        $modifiers += ProcessColor $Foreground Foreground
     }
 
-    if ( $PSBoundParameters.ContainsKey( 'Background' ) -and $null -ne $Background ) {
-        $prefix = if ( $Background -is [ConsoleColor] ) {
-            GetAsConsoleColor $Background Background
-        }
-        elseif ( [Enum]::GetNames( [ConsoleColor] ) -contains $Background ) {
-            $consoleColor = $Background -as [ConsoleColor]
-            GetAsConsoleColor $consoleColor Background
-        }
-        elseif ( $Background -is [Array] ) {
-            GetAsRgbArray $Background Background
-        }
-        elseif ( IsHexColor $Background ) {
-            GetAsHex $Background Background
-        }
-        else {
-            throw "Unable to parse background into a ConsoleColor, RGB triplet, or hex color: $Background"
-        }
-
-        "$EscPrefix$prefix$Text$EscPostfix"
+    if ( $null -ne $Background ) {
+        $modifiers += ProcessColor $Background Background
     }
+
+    "$($modifiers -join ';')m$Text$EscPostfix"
 }

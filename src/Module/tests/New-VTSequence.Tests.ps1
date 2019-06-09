@@ -200,4 +200,12 @@ Describe 'New-VTSequence' {
             $sequence | Should -Throw
         }
     }
+
+    Context 'Uses a foreground and background together' {
+        It 'formats the input with both console colors' {
+            $sequence = New-VTSequence text -Foreground Yellow -Background DarkRed
+
+            $sequence | Should -Be "$([char]0x1B)`[0;93;41mtext$([char]0x1B)`[0m"
+        }
+    }
 }

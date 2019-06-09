@@ -5,12 +5,6 @@ Describe 'Format-Output' {
         Format-Output 'text' | Should -Be 'text'
     }
 
-    It 'formats the input with a background and foreground console color' {
-        $formattedOutput = Format-Output text -Foreground White -Background DarkBlue
-
-        $formattedOutput | Should -Be "$([char]0x1B)`[0;97;44mtext$([char]0x1B)`[0m"
-    }
-
     It 'formats a list of piped inputs' {
         $formattedOutput = @('text') | Format-Output -Foreground White -Background DarkGray
 
