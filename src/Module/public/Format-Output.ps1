@@ -4,10 +4,11 @@ $UnderlineFlag = 4
 function Format-Output {
     param (
         $InputObject,
-        $Foreground
+        $Foreground,
+        $Background
     )
 
-    New-VTSequence -Text $InputObject -Color $Foreground
+    New-VTSequence -Text $InputObject -Foreground $Foreground -Background $Background
 }
 
 function Format-Output2 {
