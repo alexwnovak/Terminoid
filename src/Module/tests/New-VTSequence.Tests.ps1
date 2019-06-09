@@ -188,16 +188,16 @@ Describe 'New-VTSequence' {
             $sequence | Should -Throw
         }
 
-        # It 'formats the input with a valid hex string' {
-        #     $sequence = New-VTSequence text -Foreground FFFFFF
+        It 'formats the input with a valid hex string' {
+            $sequence = New-VTSequence text -Background FFFFFF
 
-        #     $sequence | Should -Be "$([char]0x1B)`[0;38;2;255;255;255mtext$([char]0x1B)`[0m"
-        # }
+            $sequence | Should -Be "$([char]0x1B)`[0;48;2;255;255;255mtext$([char]0x1B)`[0m"
+        }
 
-        # It 'throws when the input is an unusable color format' {
-        #     $sequence = { New-VTSequence text -Foreground notanything }
+        It 'throws when the input is an unusable color format' {
+            $sequence = { New-VTSequence text -Background notanything }
 
-        #     $sequence | Should -Throw
-        # }
+            $sequence | Should -Throw
+        }
     }
 }

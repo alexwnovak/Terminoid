@@ -125,7 +125,7 @@ function New-VTSequence {
             GetAsRgbArray $Background Background
         }
         elseif ( IsHexColor $Background ) {
-            GetAsHex $Background
+            GetAsHex $Background Background
         }
         else {
             throw "Unable to parse background into a ConsoleColor, RGB triplet, or hex color: $Background"
