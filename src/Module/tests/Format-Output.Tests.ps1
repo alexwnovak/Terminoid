@@ -1,6 +1,6 @@
 . $PSScriptRoot\Shared.ps1
 
-Describe 'Colors' {
+Describe 'Foreground colors' {
     Context 'Using ConsoleColor as the color' {
         It 'formats the input with a foreground console color of <Foreground>' -TestCases @(
             @{ Foreground = [ConsoleColor]::Black; ExpectedForeground = 30 },
