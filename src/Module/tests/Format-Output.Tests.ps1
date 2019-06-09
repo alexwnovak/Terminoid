@@ -1,5 +1,37 @@
 . $PSScriptRoot\Shared.ps1
 
+Describe 'Colors' {
+    Context 'Using ConsoleColor as the color' {
+        It 'formats the input with a foreground console color of <Foreground>' -TestCases @(
+            @{ Foreground = [ConsoleColor]::Black; ExpectedForeground = 30 },
+            @{ Foreground = [ConsoleColor]::DarkBlue; ExpectedForeground = 34 },
+            @{ Foreground = [ConsoleColor]::DarkGreen; ExpectedForeground = 32 },
+            @{ Foreground = [ConsoleColor]::DarkCyan; ExpectedForeground = 36 },
+            @{ Foreground = [ConsoleColor]::DarkRed; ExpectedForeground = 31 },
+            @{ Foreground = [ConsoleColor]::DarkMagenta; ExpectedForeground = 35 },
+            @{ Foreground = [ConsoleColor]::DarkYellow; ExpectedForeground = 33 },
+            @{ Foreground = [ConsoleColor]::Gray; ExpectedForeground = 37 },
+            @{ Foreground = [ConsoleColor]::DarkGray; ExpectedForeground = 90 },
+            @{ Foreground = [ConsoleColor]::Blue; ExpectedForeground = 94 },
+            @{ Foreground = [ConsoleColor]::Green; ExpectedForeground = 92 },
+            @{ Foreground = [ConsoleColor]::Cyan; ExpectedForeground = 96 },
+            @{ Foreground = [ConsoleColor]::Red; ExpectedForeground = 91 },
+            @{ Foreground = [ConsoleColor]::Magenta; ExpectedForeground = 95 },
+            @{ Foreground = [ConsoleColor]::Yellow; ExpectedForeground = 93 },
+            @{ Foreground = [ConsoleColor]::White; ExpectedForeground = 97 }
+        ) {
+            param ( $Foreground, $ExpectedForeground )
+
+            $sequence = Format-Output 'text' -Foreground $Foreground
+
+            $sequence | Should -Be "$([char]0x1B)`[0;$($ExpectedForeground)mtext$([char]0x1B)`[0m"
+        }
+    }
+
+    It 'can use a byte array as an RGB triplet for the foreground' {
+        Format-Output 'text' -Foreground @(255,0,255)
+    }
+}
 Describe 'Format-Output' {
     It 'writes unformatted text when omitting all color information' {
         Format-Output 'text' | Should -Be 'text'

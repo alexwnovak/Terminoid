@@ -3,6 +3,15 @@ $UnderlineFlag = 4
 
 function Format-Output {
     param (
+        $InputObject,
+        $Foreground
+    )
+
+    New-VTSequence -Text $InputObject -Color $Foreground
+}
+
+function Format-Output2 {
+    param (
         [Parameter( ValueFromPipeline )]
         $InputObject,
 
@@ -43,6 +52,9 @@ function Format-Output {
     }
 
     process {
+        New-VTSequence $Foreground
+        return
+
         if ( !$modifiers ) {
             $InputObject
             return
