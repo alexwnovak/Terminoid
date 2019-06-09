@@ -41,18 +41,6 @@ Describe 'Format-Output' {
         $formattedOutput | Should -Be "$([char]0x1B)`[0;97;44mtext$([char]0x1B)`[0m"
     }
 
-    It 'throws when passing less than 3 values for an RGB background' {
-        $formatOutput = { Format-Output text -Background 100,150 }
-
-        $formatOutput | Should -Throw
-    }
-
-    It 'throws when passing more than 3 values for an RGB background' {
-        $formatOutput = { Format-Output text -Background 1,2,3,4 }
-
-        $formatOutput | Should -Throw
-    }
-
     It 'formats the input with an RGB background color' {
         $formattedOutput = Format-Output text -Background 100, 150, 200
 
