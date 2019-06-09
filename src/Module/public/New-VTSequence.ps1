@@ -85,7 +85,9 @@ function GetAsHex( $Hex ) {
 
 function New-VTSequence {
     param (
+        [Parameter( Mandatory )]
         $Text,
+
         $Color,
 
         [switch]
