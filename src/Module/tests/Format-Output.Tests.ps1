@@ -59,6 +59,18 @@ Describe 'Foreground colors' {
 
             $sequence | Should -Be "$([char]0x1B)`[0;38;2;100;150;200mtext$([char]0x1B)`[0m"
         }
+
+        It 'throws when using fewer than 3 values for the color' {
+            $sequence = { Format-Output text -Foreground 100, 150 }
+
+            $sequence | Should -Throw
+        }
+
+        It 'throws when passing more than 3 values for an RGB foreground' {
+            $sequence = { Format-Output text -Foreground 1, 2, 3, 4 }
+
+            $sequence | Should -Throw
+        }
     }
 }
 Describe 'Format-Output' {
@@ -100,24 +112,6 @@ Describe 'Format-Output' {
         $formattedOutput = Format-Output text -Foreground White -Background DarkBlue
 
         $formattedOutput | Should -Be "$([char]0x1B)`[0;97;44mtext$([char]0x1B)`[0m"
-    }
-
-    It 'throws when passing less than 3 values for an RGB foreground' {
-        $formatOutput = { Format-Output text -Foreground 100,150 }
-
-        $formatOutput | Should -Throw
-    }
-
-    It 'throws when passing more than 3 values for an RGB foreground' {
-        $formatOutput = { Format-Output text -Foreground 1,2,3,4 }
-
-        $formatOutput | Should -Throw
-    }
-
-    It 'formats the input with an RGB foreground color' {
-       $formattedOutput = Format-Output text -Foreground 100,150,200
-
-       $formattedOutput | Should -Be "$([char]0x1B)`[0;38;2;100;150;200mtext$([char]0x1B)`[0m"
     }
 
     It 'throws when passing less than 3 values for an RGB background' {
