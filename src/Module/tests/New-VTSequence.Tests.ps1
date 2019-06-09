@@ -208,4 +208,12 @@ Describe 'New-VTSequence' {
             $sequence | Should -Be "$([char]0x1B)`[0;93;41mtext$([char]0x1B)`[0m"
         }
     }
+
+    Context 'Uses italic' {
+        It 'formats the input with italic' {
+            $sequence = New-VTSequence text -Italic
+
+            $sequence | Should -Be "$([char]0x1B)`[0;3mtext$([char]0x1B)`[0m"
+        }
+    }
 }

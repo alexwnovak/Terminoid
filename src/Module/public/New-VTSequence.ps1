@@ -2,6 +2,8 @@ $Esc = [char]0x1B
 $EscPrefix = "$Esc`[0"
 $EscPostfix = "$Esc`[0m"
 
+$ItalicFlag = 3
+
 $ConsoleColorToVTTable = @(
     0, # Black
     4, # Blue
@@ -104,7 +106,10 @@ function New-VTSequence {
         $Text,
 
         $Foreground,
-        $Background
+        $Background,
+
+        [switch]
+        $Italic
     )
 
     if ( $PSBoundParameters.Count -eq 1 ) {
@@ -113,6 +118,10 @@ function New-VTSequence {
 
     $modifiers = @()
     $modifiers += $EscPrefix
+
+    if ( $Italic ) {
+        $modifiers += $ItalicFlag
+    }
 
     if ( $null -ne $Foreground ) {
         $modifiers += ProcessColor $Foreground Foreground

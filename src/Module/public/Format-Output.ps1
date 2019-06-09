@@ -1,4 +1,3 @@
-$ItalicFlag = 3
 $UnderlineFlag = 4
 
 function Format-Output {
