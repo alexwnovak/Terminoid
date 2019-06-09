@@ -71,6 +71,14 @@ function GetAsRgbArray {
     "$($EscPrefix)38;2;$($Rgb[0]);$($Rgb[1]);$($Rgb[2])m"
 }
 
+function GetAsHex( $Hex ) {
+    $red = [byte] ('0x' + $Hex.Substring( 0, 2 ))
+    $green = [byte] ('0x' + $Hex.Substring( 2, 2 ))
+    $blue = [byte] ('0x' + $Hex.Substring( 4, 2 ))
+
+    GetAsRgbArray $red, $green, $blue
+}
+
 function New-VTSequence {
     param (
         $Text,
@@ -87,9 +95,9 @@ function New-VTSequence {
         GetAsConsoleColor $consoleColor Foreground
     } elseif ( $Color -is [Array] ) {
         GetAsRgbArray $Color Foreground
-    } #else {
-    #     Write-Host "Can't tell $Color $($Color.GetType())"
-    # }
+    } else {
+        GetAsHex $Color
+    }
 
     "$prefix$Text$EscPostfix"
 
