@@ -37,36 +37,6 @@ Describe 'Format-Output' {
         Format-Output 'text' | Should -Be 'text'
     }
 
-    It 'formats the input with a dark foreground console color of <Foreground>' -TestCases @(
-        @{ Foreground = 'Black'; ExpectedForeground = 30 },
-        @{ Foreground = 'DarkBlue'; ExpectedForeground = 34 },
-        @{ Foreground = 'DarkGreen'; ExpectedForeground = 32 },
-        @{ Foreground = 'DarkCyan'; ExpectedForeground = 36 },
-        @{ Foreground = 'DarkRed'; ExpectedForeground = 31 },
-        @{ Foreground = 'DarkMagenta'; ExpectedForeground = 35 },
-        @{ Foreground = 'DarkYellow'; ExpectedForeground = 33 },
-        @{ Foreground = 'Gray'; ExpectedForeground = 37 }
-    ) {
-        param ( $Foreground, $ExpectedForeground )
-
-        Format-Output 'text' -Foreground $Foreground | Should -Be "$([char]0x1B)`[0;$($ExpectedForeground)mtext$([char]0x1B)`[0m"
-    }
-
-    It 'formats the input with a bright foreground console color of <Foreground>' -TestCases @(
-        @{ Foreground = 'DarkGray'; ExpectedForeground = 90 },
-        @{ Foreground = 'Blue'; ExpectedForeground = 94 },
-        @{ Foreground = 'Green'; ExpectedForeground = 92 },
-        @{ Foreground = 'Cyan'; ExpectedForeground = 96 },
-        @{ Foreground = 'Red'; ExpectedForeground = 91 },
-        @{ Foreground = 'Magenta'; ExpectedForeground = 95 },
-        @{ Foreground = 'Yellow'; ExpectedForeground = 93 },
-        @{ Foreground = 'White'; ExpectedForeground = 97 }
-    ) {
-        param ( $Foreground, $ExpectedForeground )
-
-        Format-Output 'text' -Foreground $Foreground | Should -Be "$([char]0x1B)`[0;$($ExpectedForeground)mtext$([char]0x1B)`[0m"
-    }
-
     It 'formats the input with a dark background console color of <Background>' -Testcases @(
         @{ Background = 'Black'; ExpectedBackground = 40 },
         @{ Background = 'DarkBlue'; ExpectedBackground = 44 },
