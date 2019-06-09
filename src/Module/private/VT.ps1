@@ -74,9 +74,10 @@ function New-VTSequence {
 
     if ( $Color -is [ConsoleColor] ) {
         $prefix = GetAsConsoleColor $Color Foreground
-    } #elseif ( [Enum]::GetNames( [ConsoleColor] ) -contains $Color ) {
-    #     Write-Host "Got ConsoleColor $Color"
-    # } elseif ( $Color -is [Array] ) {
+    } elseif ( [Enum]::GetNames( [ConsoleColor] ) -contains $Color ) {
+        $consoleColor = $Color -as [ConsoleColor]
+        $prefix = GetAsConsoleColor $consoleColor Foreground
+    } # elseif ( $Color -is [Array] ) {
     #     Write-Host "Got array $Color of type $($Color.GetType())"
     # } else {
     #     Write-Host "Can't tell $Color $($Color.GetType())"
