@@ -94,6 +94,10 @@ function New-VTSequence {
         $Foreground
     )
 
+    if ( -not $PSBoundParameters.ContainsKey( 'Color' ) ) {
+        return $Text
+    }
+
     $prefix = if ( $Color -is [ConsoleColor] ) {
         GetAsConsoleColor $Color Foreground
     } elseif ( [Enum]::GetNames( [ConsoleColor] ) -contains $Color ) {

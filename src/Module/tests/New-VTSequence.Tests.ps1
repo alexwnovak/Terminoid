@@ -1,6 +1,12 @@
 . $PSScriptRoot\Shared.ps1
 
 Describe 'New-VTSequence' {
+    Context 'Uses no formatting' {
+        It 'applies no formatting' {
+            New-VTSequence 'text' | Should -Be 'text'
+        }
+    }
+
     Context 'Using a ConsoleColor' {
         It 'formats the input with a foreground console color of <Foreground>' -TestCases @(
             @{ Foreground = [ConsoleColor]::Black; ExpectedForeground = 30 },
