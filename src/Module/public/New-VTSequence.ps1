@@ -88,27 +88,24 @@ function New-VTSequence {
         [Parameter( Mandatory )]
         $Text,
 
-        $Color,
-
-        [switch]
         $Foreground
     )
 
-    if ( -not $PSBoundParameters.ContainsKey( 'Color' ) ) {
+    if ( -not $PSBoundParameters.ContainsKey( 'Foreground' ) ) {
         return $Text
     }
 
-    $prefix = if ( $Color -is [ConsoleColor] ) {
-        GetAsConsoleColor $Color Foreground
-    } elseif ( [Enum]::GetNames( [ConsoleColor] ) -contains $Color ) {
-        $consoleColor = $Color -as [ConsoleColor]
+    $prefix = if ( $Foreground -is [ConsoleColor] ) {
+        GetAsConsoleColor $Foreground Foreground
+    } elseif ( [Enum]::GetNames( [ConsoleColor] ) -contains $Foreground ) {
+        $consoleColor = $Foreground -as [ConsoleColor]
         GetAsConsoleColor $consoleColor Foreground
-    } elseif ( $Color -is [Array] ) {
-        GetAsRgbArray $Color Foreground
-    } elseif ( IsHexColor $Color ) {
-        GetAsHex $Color
+    } elseif ( $Foreground -is [Array] ) {
+        GetAsRgbArray $Foreground Foreground
+    } elseif ( IsHexColor $Foreground ) {
+        GetAsHex $Foreground
     } else {
-        throw "Unable to parse color into a ConsoleColor, RGB triplet, or hex color: $Color"
+        throw "Unable to parse foreground into a ConsoleColor, RGB triplet, or hex color: $Foreground"
     }
 
     "$prefix$Text$EscPostfix"
