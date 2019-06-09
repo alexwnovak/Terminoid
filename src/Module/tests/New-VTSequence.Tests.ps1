@@ -7,7 +7,7 @@ Describe 'New-VTSequence' {
         }
     }
 
-    Context 'Using a ConsoleColor' {
+    Context 'Using a foreground' {
         It 'formats the input with a foreground console color of <Foreground>' -TestCases @(
             @{ Foreground = [ConsoleColor]::Black; ExpectedForeground = 30 },
             @{ Foreground = [ConsoleColor]::DarkBlue; ExpectedForeground = 34 },
@@ -57,9 +57,7 @@ Describe 'New-VTSequence' {
 
             $sequence | Should -Be "$([char]0x1B)`[0;$($ExpectedForeground)mtext$([char]0x1B)`[0m"
         }
-    }
 
-    Context 'Using an array as an RGB triplet' {
         It 'formats the input with a valid RGB triplet' {
             $sequence = New-VTSequence text -Foreground 100, 150, 200
 
@@ -92,18 +90,14 @@ Describe 'New-VTSequence' {
 
             $sequence | Should -Throw
         }
-    }
 
-    Context 'Using a hex string for the color' {
         It 'formats the input with a valid hex string' {
             $sequence = New-VTSequence text -Foreground FFFFFF
 
             $sequence | Should -Be "$([char]0x1B)`[0;38;2;255;255;255mtext$([char]0x1B)`[0m"
         }
-    }
 
-    Context 'Using a non-usable color representation' {
-        It 'throws' {
+        It 'throws when the input is an unusable color format' {
             $sequence = { New-VTSequence text -Foreground notanything }
 
             $sequence | Should -Throw
