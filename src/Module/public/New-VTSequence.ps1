@@ -96,7 +96,7 @@ function New-VTSequence {
         return $Text
     }
 
-    if ( $PSBoundParameters.ContainsKey( 'Foreground' ) ) {
+    if ( $PSBoundParameters.ContainsKey( 'Foreground' ) -and $null -ne $Foreground ) {
         $prefix = if ( $Foreground -is [ConsoleColor] ) {
             GetAsConsoleColor $Foreground Foreground
         } elseif ( [Enum]::GetNames( [ConsoleColor] ) -contains $Foreground ) {
@@ -113,7 +113,7 @@ function New-VTSequence {
         "$prefix$Text$EscPostfix"
     }
 
-    if ( $PSBoundParameters.ContainsKey( 'Background' ) ) {
+    if ( $PSBoundParameters.ContainsKey( 'Background' ) -and $null -ne $Background ) {
         $prefix = if ( $Background -is [ConsoleColor] ) {
             GetAsConsoleColor $Background Background
         }

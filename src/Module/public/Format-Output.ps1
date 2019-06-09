@@ -8,7 +8,12 @@ function Format-Output {
         $Background
     )
 
-    New-VTSequence -Text $InputObject -Foreground $Foreground -Background $Background
+    $parameters = @{
+        Foreground = $Foreground
+        Background = $Background
+    }
+
+    New-VTSequence -Text $InputObject @parameters #-Foreground $Foreground -Background $Background
 }
 
 function Format-Output2 {
