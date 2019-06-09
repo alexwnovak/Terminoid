@@ -3,6 +3,7 @@ $EscPrefix = "$Esc`[0"
 $EscPostfix = "$Esc`[0m"
 
 $ItalicFlag = 3
+$UnderlineFlag = 4
 
 $ConsoleColorToVTTable = @(
     0, # Black
@@ -109,7 +110,10 @@ function New-VTSequence {
         $Background,
 
         [switch]
-        $Italic
+        $Italic,
+
+        [switch]
+        $Underline
     )
 
     if ( $PSBoundParameters.Count -eq 1 ) {
@@ -121,6 +125,10 @@ function New-VTSequence {
 
     if ( $Italic ) {
         $modifiers += $ItalicFlag
+    }
+
+    if ( $Underline ) {
+        $modifiers += $UnderlineFlag
     }
 
     if ( $null -ne $Foreground ) {

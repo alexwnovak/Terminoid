@@ -216,4 +216,12 @@ Describe 'New-VTSequence' {
             $sequence | Should -Be "$([char]0x1B)`[0;3mtext$([char]0x1B)`[0m"
         }
     }
+
+    Context 'Uses underline' {
+        It 'formats the input with underline' {
+            $sequence = New-VTSequence text -Underline
+
+            $sequence | Should -Be "$([char]0x1B)`[0;4mtext$([char]0x1B)`[0m"
+        }
+    }
 }

@@ -1,5 +1,3 @@
-$UnderlineFlag = 4
-
 function Format-Output {
     param (
         $InputObject,
