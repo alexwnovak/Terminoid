@@ -1,7 +1,7 @@
 . $PSScriptRoot\Shared.ps1
 
 Describe 'Foreground colors' {
-    Context 'Using ConsoleColor as the color' {
+    Context 'Using a ConsoleColor' {
         It 'formats the input with a foreground console color of <Foreground>' -TestCases @(
             @{ Foreground = [ConsoleColor]::Black; ExpectedForeground = 30 },
             @{ Foreground = [ConsoleColor]::DarkBlue; ExpectedForeground = 34 },
@@ -51,11 +51,14 @@ Describe 'Foreground colors' {
 
             $sequence | Should -Be "$([char]0x1B)`[0;$($ExpectedForeground)mtext$([char]0x1B)`[0m"
         }
-
     }
 
-    It 'can use a byte array as an RGB triplet for the foreground' {
-        Format-Output 'text' -Foreground @(255,0,255)
+    Context 'Using an array as an RGB triplet' {
+        It 'formats the input with a valid RGB triplet' {
+            $sequence = Format-Output text -Foreground 100, 150, 200
+
+            $sequence | Should -Be "$([char]0x1B)`[0;38;2;100;150;200mtext$([char]0x1B)`[0m"
+        }
     }
 }
 Describe 'Format-Output' {

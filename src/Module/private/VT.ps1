@@ -40,11 +40,11 @@ function GetAsConsoleColor {
 
 function GetAsRgbArray {
     param (
-        [Parameter()]
-        [ValidateSet( 'Foreground', 'Background' )]
-        $ColorType,
+        [Array]
+        $Rgb,
 
-        $Rgb
+        [string]
+        $ColorType
     )
 
     $modifier = switch ( $ColorType ) {
@@ -52,13 +52,11 @@ function GetAsRgbArray {
         'Background' { 48 }
     }
 
-    $Rgb = $Rgb -as [byte[]]
-
     if ( $Rgb.Length -ne 3 ) {
         throw 'An RGB color array must have 3 elements between 0 and 255'
     }
 
-    @($modifier, 2, $Rgb[0], $Rgb[1], $Rgb[2])
+    "$($EscPrefix)38;2;$($Rgb[0]);$($Rgb[1]);$($Rgb[2])m"
 }
 
 function New-VTSequence {
@@ -70,16 +68,14 @@ function New-VTSequence {
         $Foreground
     )
 
-    $prefix = ''
-
-    if ( $Color -is [ConsoleColor] ) {
-        $prefix = GetAsConsoleColor $Color Foreground
+    $prefix = if ( $Color -is [ConsoleColor] ) {
+        GetAsConsoleColor $Color Foreground
     } elseif ( [Enum]::GetNames( [ConsoleColor] ) -contains $Color ) {
         $consoleColor = $Color -as [ConsoleColor]
-        $prefix = GetAsConsoleColor $consoleColor Foreground
-    } # elseif ( $Color -is [Array] ) {
-    #     Write-Host "Got array $Color of type $($Color.GetType())"
-    # } else {
+        GetAsConsoleColor $consoleColor Foreground
+    } elseif ( $Color -is [Array] ) {
+        GetAsRgbArray $Color Foreground
+    } #else {
     #     Write-Host "Can't tell $Color $($Color.GetType())"
     # }
 
