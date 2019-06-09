@@ -7,7 +7,7 @@ Describe 'New-VTSequence' {
         }
     }
 
-    Context 'Using a foreground' {
+    Context 'Uses a foreground' {
         It 'formats the input with a foreground console color of <Foreground>' -TestCases @(
             @{ Foreground = [ConsoleColor]::Black; ExpectedForeground = 30 },
             @{ Foreground = [ConsoleColor]::DarkBlue; ExpectedForeground = 34 },
