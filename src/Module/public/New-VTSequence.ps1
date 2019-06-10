@@ -7,14 +7,14 @@ $ItalicFlag = 3
 $UnderlineFlag = 4
 
 $ConsoleColorToVTTable = @(
-    0, # Black
-    4, # Blue
-    2, # Green
-    6, # Cyan
-    1, # Red
-    5, # Magenta
-    3, # Yellow
-    7  # Gray
+    0,  # Black
+    4,  # Blue
+    2,  # Green
+    6,  # Cyan
+    1,  # Red
+    5,  # Magenta
+    3,  # Yellow
+    7   # Gray
 )
 
 function GetAsConsoleColor {
