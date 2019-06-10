@@ -1,16 +1,49 @@
 function Format-Output {
     param (
-        $InputObject,
+        [Parameter( Mandatory )]
+        $Text,
+
         $Foreground,
-        $Background
+        $Background,
+
+        [switch]
+        $Bold,
+
+        [switch]
+        $Italic,
+
+        [switch]
+        $Underline
     )
 
-    $parameters = @{
-        Foreground = $Foreground
-        Background = $Background
+    if ( $PSBoundParameters.Count -eq 1 ) {
+        return $Text
     }
 
-    New-VTSequence -Text $InputObject @parameters #-Foreground $Foreground -Background $Background
+    $modifiers = @()
+    $modifiers += $EscPrefix
+
+    if ( $Bold ) {
+        $modifiers += $BoldFlag
+    }
+
+    if ( $Italic ) {
+        $modifiers += $ItalicFlag
+    }
+
+    if ( $Underline ) {
+        $modifiers += $UnderlineFlag
+    }
+
+    if ( $null -ne $Foreground ) {
+        $modifiers += ProcessColor $Foreground Foreground
+    }
+
+    if ( $null -ne $Background ) {
+        $modifiers += ProcessColor $Background Background
+    }
+
+    "$($modifiers -join ';')m$Text$EscPostfix"
 }
 
 function Format-Output2 {
