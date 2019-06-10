@@ -6,6 +6,13 @@ $BoldFlag = 1
 $ItalicFlag = 3
 $UnderlineFlag = 4
 
+$ForegroundOffset = 30
+$BackgroundOffset = 40
+$BrightOffset = 60
+
+$ForegroundRgbSequence = 38
+$BackgroundRgbSequence = 48
+
 $ConsoleColorToVTTable = @(
     0,  # Black
     4,  # Blue
@@ -27,14 +34,14 @@ function GetAsConsoleColor {
     )
 
     $indexModifier = switch ( $ColorType ) {
-        'Foreground' { 30 }
-        'Background' { 40 }
+        'Foreground' { $ForegroundOffset }
+        'Background' { $BackgroundOffset }
     }
 
     $colorIndex = [int] $Color
     $colorValue = if ( $colorIndex -ge 8 ) {
         $colorIndex = $colorIndex - 8
-        $ConsoleColorToVTTable[$colorIndex] + $indexModifier + 60
+        $ConsoleColorToVTTable[$colorIndex] + $indexModifier + $BrightOffset
     } else {
         $ConsoleColorToVTTable[$colorIndex] + $indexModifier
     }
@@ -52,8 +59,8 @@ function GetAsRgbArray {
     )
 
     $modifier = switch ( $ColorType ) {
-        'Foreground' { 38 }
-        'Background' { 48 }
+        'Foreground' { $ForegroundRgbSequence }
+        'Background' { $BackgroundRgbSequence }
     }
 
     if ( $Rgb.Length -ne 3 ) {
