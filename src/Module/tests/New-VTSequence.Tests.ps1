@@ -224,4 +224,12 @@ Describe 'New-VTSequence' {
             $sequence | Should -Be "$([char]0x1B)`[0;4mtext$([char]0x1B)`[0m"
         }
     }
+
+    Context 'Uses bold' {
+        It 'formats the input with bold when omitting the foreground' {
+            $sequence = New-VTSequence text -Bold
+
+            $sequence | Should -Be "$([char]0x1B)`[0;1mtext$([char]0x1B)`[0m"
+        }
+    }
 }

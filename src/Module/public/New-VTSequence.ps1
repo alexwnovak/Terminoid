@@ -2,6 +2,7 @@ $Esc = [char]0x1B
 $EscPrefix = "$Esc`[0"
 $EscPostfix = "$Esc`[0m"
 
+$BoldFlag = 1
 $ItalicFlag = 3
 $UnderlineFlag = 4
 
@@ -110,6 +111,9 @@ function New-VTSequence {
         $Background,
 
         [switch]
+        $Bold,
+
+        [switch]
         $Italic,
 
         [switch]
@@ -122,6 +126,10 @@ function New-VTSequence {
 
     $modifiers = @()
     $modifiers += $EscPrefix
+
+    if ( $Bold ) {
+        $modifiers += $BoldFlag
+    }
 
     if ( $Italic ) {
         $modifiers += $ItalicFlag
