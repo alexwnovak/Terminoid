@@ -1,21 +1,36 @@
-$Esc = [char]0x1B
-$EscPrefix = "$Esc`[0"
-$EscPostfix = "$Esc`[0m"
-
 $BoldFlag = 1
 $ItalicFlag = 3
 $UnderlineFlag = 4
 
+$ForegroundOffset = 30
+$BackgroundOffset = 40
+$BrightOffset = 60
+
+$ForegroundRgbSequence = 38
+$BackgroundRgbSequence = 48
+
 $ConsoleColorToVTTable = @(
-    0, # Black
-    4, # Blue
-    2, # Green
-    6, # Cyan
-    1, # Red
-    5, # Magenta
-    3, # Yellow
-    7  # Gray
+    0,  # Black
+    4,  # Blue
+    2,  # Green
+    6,  # Cyan
+    1,  # Red
+    5,  # Magenta
+    3,  # Yellow
+    7   # Gray
 )
+
+function GetBoldModifier {
+    $BoldFlag
+}
+
+function GetItalicModifier {
+    $ItalicFlag
+}
+
+function GetUnderlineModiifer {
+    $UnderlineFlag
+}
 
 function GetAsConsoleColor {
     param (
@@ -27,19 +42,18 @@ function GetAsConsoleColor {
     )
 
     $indexModifier = switch ( $ColorType ) {
-        'Foreground' { 30 }
-        'Background' { 40 }
+        'Foreground' { $ForegroundOffset }
+        'Background' { $BackgroundOffset }
     }
 
     $colorIndex = [int] $Color
-    $colorValue = if ( $colorIndex -ge 8 ) {
+
+    if ( $colorIndex -ge 8 ) {
         $colorIndex = $colorIndex - 8
-        $ConsoleColorToVTTable[$colorIndex] + $indexModifier + 60
+        $ConsoleColorToVTTable[$colorIndex] + $indexModifier + $BrightOffset
     } else {
         $ConsoleColorToVTTable[$colorIndex] + $indexModifier
     }
-
-    $colorValue
 }
 
 function GetAsRgbArray {
@@ -52,8 +66,8 @@ function GetAsRgbArray {
     )
 
     $modifier = switch ( $ColorType ) {
-        'Foreground' { 38 }
-        'Background' { 48 }
+        'Foreground' { $ForegroundRgbSequence }
+        'Background' { $BackgroundRgbSequence }
     }
 
     if ( $Rgb.Length -ne 3 ) {
@@ -100,52 +114,4 @@ function ProcessColor( $Color, $ColorType ) {
     } else {
         throw "Unable to parse into a ConsoleColor, RGB triplet, or hex color: $Color"
     }
-}
-
-function New-VTSequence {
-    param (
-        [Parameter( Mandatory )]
-        $Text,
-
-        $Foreground,
-        $Background,
-
-        [switch]
-        $Bold,
-
-        [switch]
-        $Italic,
-
-        [switch]
-        $Underline
-    )
-
-    if ( $PSBoundParameters.Count -eq 1 ) {
-        return $Text
-    }
-
-    $modifiers = @()
-    $modifiers += $EscPrefix
-
-    if ( $Bold ) {
-        $modifiers += $BoldFlag
-    }
-
-    if ( $Italic ) {
-        $modifiers += $ItalicFlag
-    }
-
-    if ( $Underline ) {
-        $modifiers += $UnderlineFlag
-    }
-
-    if ( $null -ne $Foreground ) {
-        $modifiers += ProcessColor $Foreground Foreground
-    }
-
-    if ( $null -ne $Background ) {
-        $modifiers += ProcessColor $Background Background
-    }
-
-    "$($modifiers -join ';')m$Text$EscPostfix"
 }
