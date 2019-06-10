@@ -39,14 +39,13 @@ function GetAsConsoleColor {
     }
 
     $colorIndex = [int] $Color
-    $colorValue = if ( $colorIndex -ge 8 ) {
+
+    if ( $colorIndex -ge 8 ) {
         $colorIndex = $colorIndex - 8
         $ConsoleColorToVTTable[$colorIndex] + $indexModifier + $BrightOffset
     } else {
         $ConsoleColorToVTTable[$colorIndex] + $indexModifier
     }
-
-    $colorValue
 }
 
 function GetAsRgbArray {
