@@ -11,8 +11,8 @@ Describe 'Module behavior' {
         Get-Module -Name Terminoid -All | Remove-Module -Force -ErrorAction Ignore
         Import-Module $PSScriptRoot\..\..\Terminoid.psd1 -Force
     }
-    It 'exposes exactly 30 functions' {
-        (Get-Command -Module Terminoid).Count | Should -Be 30
+    It 'exposes exactly 31 functions' {
+        (Get-Command -Module Terminoid).Count | Should -Be 31
     }
     It 'exposes exactly 0 variables' {
         (Get-Module Terminoid).ExportedVariables.Count | Should -Be 0
@@ -31,5 +31,9 @@ Describe 'Module behavior' {
     It 'registers a PSReadline key handler for Ctrl+N' {
         $keyHandler = Get-PSReadlineKeyHandler -Bound | Where-Object { $_.Key -ceq 'Ctrl+N' }
         $keyHandler.Function | Should -Be 'TerminoidInsertNewDirectory'
+    }
+    It 'registers a PSReadline key handler for Ctrl+Shift+UpArrow' {
+        $keyHandler = Get-PSReadlineKeyHandler -Bound | Where-Object { $_.Key -ceq 'Ctrl+Shift+UpArrow' }
+        $keyHandler.Function | Should -Be 'TerminoidNavigateUp'
     }
 }
