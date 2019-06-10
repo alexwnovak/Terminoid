@@ -233,10 +233,6 @@ Describe 'Format-Output' {
         }
     }
 
-    # It 'writes unformatted text when omitting all color information' {
-    #     Format-Output 'text' | Should -Be 'text'
-    # }
-
     # It 'formats a list of piped inputs' {
     #     $formattedOutput = @('text') | Format-Output -Foreground White -Background DarkGray
 
