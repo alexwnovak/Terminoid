@@ -14,7 +14,7 @@ Describe 'Format-Output compatibility' {
     It 'exposes a function named Format-Output' {
         Get-Command Format-Output -Module Terminoid | Should -Not -Be $null
     }
-    It 'exposes exactly 3 parameters' {
-        (Get-Command Format-Output).Parameters.Count | Should -Be 3
+    It 'exposes exactly 17 parameters' {
+        (Get-Command Format-Output).Parameters.Count | Should -Be 17
     }
 }
