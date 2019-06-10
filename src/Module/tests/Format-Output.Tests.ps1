@@ -1,6 +1,12 @@
 . $PSScriptRoot\Shared.ps1
 
 Describe 'Format-Output' {
+        It 'formats a list of piped inputs' {
+        $sequence = @('text') | Format-Output -Foreground White -Background DarkGray
+
+        $sequence | Should -Be "$([char]0x1B)`[0;97;100mtext$([char]0x1B)`[0m"
+    }
+
     Context 'Uses no formatting' {
         It 'applies no formatting' {
             Format-Output 'text' | Should -Be 'text'
@@ -232,10 +238,4 @@ Describe 'Format-Output' {
             $sequence | Should -Be "$([char]0x1B)`[0;1mtext$([char]0x1B)`[0m"
         }
     }
-
-    # It 'formats a list of piped inputs' {
-    #     $formattedOutput = @('text') | Format-Output -Foreground White -Background DarkGray
-
-    #     $formattedOutput | Should -Be "$([char]0x1B)`[0;97;100mtext$([char]0x1B)`[0m"
-    # }
 }

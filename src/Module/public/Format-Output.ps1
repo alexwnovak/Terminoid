@@ -4,7 +4,7 @@ $EscPostfix = "$Esc`[0m"
 
 function Format-Output {
     param (
-        [Parameter( Mandatory )]
+        [Parameter( Mandatory, ValueFromPipeline )]
         $InputObject,
 
         $Foreground,
