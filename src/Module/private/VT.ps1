@@ -1,7 +1,3 @@
-$Esc = [char]0x1B
-$EscPrefix = "$Esc`[0"
-$EscPostfix = "$Esc`[0m"
-
 $BoldFlag = 1
 $ItalicFlag = 3
 $UnderlineFlag = 4
@@ -23,6 +19,18 @@ $ConsoleColorToVTTable = @(
     3,  # Yellow
     7   # Gray
 )
+
+function GetBoldModifier {
+    $BoldFlag
+}
+
+function GetItalicModifier {
+    $ItalicFlag
+}
+
+function GetUnderlineModiifer {
+    $UnderlineFlag
+}
 
 function GetAsConsoleColor {
     param (
