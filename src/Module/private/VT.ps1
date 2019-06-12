@@ -89,10 +89,6 @@ function GetAsRgbArray {
     "$($modifier);2;$($Rgb[0]);$($Rgb[1]);$($Rgb[2])"
 }
 
-function IsHexColor( $Hex ) {
-    $Hex -match '[0-9a-fA-F]{6}'
-}
-
 function GetAsHex( $Hex, $ColorType ) {
     $red = [byte] ('0x' + $Hex.Substring( 0, 2 ))
     $green = [byte] ('0x' + $Hex.Substring( 2, 2 ))
