@@ -40,10 +40,12 @@ function Format-Output {
     }
 
     if ( $null -ne $Foreground ) {
+        ValidateColor $Foreground
         $modifiers += ProcessColor $Foreground Foreground
     }
 
     if ( $null -ne $Background ) {
+        ValidateColor $Background
         $modifiers += ProcessColor $Background Background
     }
 
