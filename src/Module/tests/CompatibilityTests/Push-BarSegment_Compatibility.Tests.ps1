@@ -14,7 +14,7 @@ Describe 'Push-BarSegment compatibility' {
     It 'exposes a function named Push-BarSegment' {
         Get-Command Push-BarSegment -Module Terminoid | Should -Not -Be $null
     }
-    It 'exposes exactly 16 parameters' {
-        (Get-Command Push-BarSegment).Parameters.Count | Should -Be 16
+    It 'exposes exactly 19 parameters' {
+        (Get-Command Push-BarSegment).Parameters.Count | Should -Be 19
     }
 }
