@@ -12,6 +12,9 @@
         [switch]
         $Italic,
 
+        [switch]
+        $Underline,
+
         [Parameter( Mandatory, ParameterSetName = 'WithText' )]
         [string]
         $Text,
@@ -35,6 +38,7 @@
         'ForegroundColor' = $Foreground
         'Bold' = $Bold
         'Italic' = $Italic
+        'Underline' = $Underline
         'Function' = $Function
         'Tag' = $Tag
     } )
