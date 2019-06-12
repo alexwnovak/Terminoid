@@ -1,7 +1,10 @@
 function WriteSingleSegment( $BarSegment ) {
     $block = Format-Output " $(& $BarSegment.Function) " `
                 -Background $BarSegment.BackgroundColor `
-                -Foreground $BarSegment.ForegroundColor  `
+                -Foreground $BarSegment.ForegroundColor `
+                -Bold:$BarSegment.Bold `
+                -Italic:$BarSegment.Italic `
+                -Underline:$BarSegment.Underline
 
     $joinerChar = Get-SpecialChar -Type BarJoiner
     $joiner = Format-Output $joinerChar -Foreground $BarSegment.BackgroundColor
@@ -27,7 +30,10 @@ function Write-StatusBar {
 
             $statusBar += Format-Output " $(& $bar.Function) " `
                 -Background $bar.BackgroundColor `
-                -Foreground $bar.ForegroundColor  `
+                -Foreground $bar.ForegroundColor `
+                -Bold:$bar.Bold `
+                -Italic:$bar.Italic `
+                -Underline:$bar.Underline
 
             if ( $i -lt $script:BarSegments.Count - 1 ) {
                 $nextBar = $script:BarSegments[$i + 1]

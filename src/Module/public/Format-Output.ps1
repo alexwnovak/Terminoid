@@ -1,6 +1,6 @@
 $Esc = [char]0x1B
 $EscPrefix = "$Esc`[0"
-$EscPostfix = "$Esc`[0m"
+$EscPostfix = "$($EscPrefix)m"
 
 function Format-Output {
     param (
@@ -40,10 +40,12 @@ function Format-Output {
     }
 
     if ( $null -ne $Foreground ) {
+        ValidateColor $Foreground
         $modifiers += ProcessColor $Foreground Foreground
     }
 
     if ( $null -ne $Background ) {
+        ValidateColor $Background
         $modifiers += ProcessColor $Background Background
     }
 

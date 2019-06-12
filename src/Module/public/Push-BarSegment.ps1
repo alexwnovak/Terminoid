@@ -1,12 +1,19 @@
 ﻿function Push-BarSegment {
     param (
         [Parameter( Mandatory )]
-        [byte[]]
-        $BackgroundColor,
+        $Foreground,
 
         [Parameter( Mandatory )]
-        [byte[]]
-        $ForegroundColor,
+        $Background,
+
+        [switch]
+        $Bold,
+
+        [switch]
+        $Italic,
+
+        [switch]
+        $Underline,
 
         [Parameter( Mandatory, ParameterSetName = 'WithText' )]
         [string]
@@ -19,14 +26,20 @@
         $Tag
     )
 
+    ValidateColor $Foreground
+    ValidateColor $Background
+
     if ( $PSBoundParameters.ContainsKey( 'Text' ) ) {
         $Function = { $Text }.GetNewClosure()
     }
 
     [void] $script:BarSegments.Add( @{
-        'BackgroundColor' = $BackgroundColor;
-        'ForegroundColor' = $ForegroundColor;
-        'Function' = $Function;
+        'BackgroundColor' = $Background
+        'ForegroundColor' = $Foreground
+        'Bold' = $Bold
+        'Italic' = $Italic
+        'Underline' = $Underline
+        'Function' = $Function
         'Tag' = $Tag
     } )
 }
