@@ -6,6 +6,9 @@
         [Parameter( Mandatory )]
         $Background,
 
+        [switch]
+        $Italic,
+
         [Parameter( Mandatory, ParameterSetName = 'WithText' )]
         [string]
         $Text,
@@ -27,6 +30,7 @@
     [void] $script:BarSegments.Add( @{
         'BackgroundColor' = $Background
         'ForegroundColor' = $Foreground
+        'Italic' = $Italic
         'Function' = $Function
         'Tag' = $Tag
     } )
