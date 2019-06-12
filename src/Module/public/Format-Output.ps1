@@ -1,6 +1,6 @@
 $Esc = [char]0x1B
 $EscPrefix = "$Esc`[0"
-$EscPostfix = "$Esc`[0m"
+$EscPostfix = "$($EscPrefix)m"
 
 function Format-Output {
     param (
