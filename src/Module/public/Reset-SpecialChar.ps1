@@ -1,12 +1,18 @@
 function Reset-SpecialChar {
     [CmdletBinding( SupportsShouldProcess )]
-    param (
-        [Parameter( Mandatory )]
-        [ValidateSet( 'BarJoiner' )]
-        $Type
-    )
+    param ( )
 
-    if ( $PSCmdlet.ShouldProcess( "Resetting $Type to its default value" ) ) {
-        $script:SpecialCharTable[$Type] = $script:DefaultSpecialCharTable[$Type]
+    dynamicparam {
+        NewDynamicParam -ParameterName 'Type' -Position 0 -Mandatory -Values $script:SpecialCharTable.Keys
+    }
+
+    begin {
+        $Type = $PSBoundParameters['Type']
+    }
+
+    process {
+        if ( $PSCmdlet.ShouldProcess( "Resetting $Type to its default value" ) ) {
+            $script:SpecialCharTable[$Type] = $script:DefaultSpecialCharTable[$Type]
+        }
     }
 }
