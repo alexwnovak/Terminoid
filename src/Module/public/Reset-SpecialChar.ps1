@@ -1,9 +1,12 @@
 function Reset-SpecialChar {
-    [CmdletBinding( SupportsShouldProcess )]
-    param ( )
+    [CmdletBinding( SupportsShouldProcess, ConfirmImpact='High' )]
+    param (
+        [switch]
+        $Force
+    )
 
     dynamicparam {
-        NewDynamicParam -ParameterName 'Type' -Position 0 -Mandatory -Values $script:SpecialCharTable.Keys
+        NewDynamicParam -ParameterName 'Type' -Position 0 -Values $script:SpecialCharTable.Keys
     }
 
     begin {
@@ -11,8 +14,18 @@ function Reset-SpecialChar {
     }
 
     process {
-        if ( $PSCmdlet.ShouldProcess( "Resetting $Type to its default value" ) ) {
+        if ( -not $Force ) {
+            $types = if ( $Type ) { $Type } else { 'all characters' }
+
+            if ( -not $PSCmdlet.ShouldProcess( "Resetting $types to its default value" ) ) {
+                return
+            }
+        }
+
+        if ( $Type ) {
             $script:SpecialCharTable[$Type] = $script:DefaultSpecialCharTable[$Type]
+        } else {
+            $script:SpecialCharTable = $script:DefaultSpecialCharTable.Clone()
         }
     }
 }
