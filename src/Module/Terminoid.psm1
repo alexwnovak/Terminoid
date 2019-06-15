@@ -13,10 +13,12 @@ function InitializeInternalVariables {
 
     $script:DefaultSpecialCharTable = @{
         BarJoiner = $([char]0xE0B0)
+        SelectionIndicator = $([char]0x2794)
     }
 
     $script:SpecialCharTable = @{
         BarJoiner = $script:DefaultSpecialCharTable['BarJoiner']
+        SelectionIndicator = $script:DefaultSpecialCharTable['SelectionIndicator']
     }
 
     Reset-DetailReader
