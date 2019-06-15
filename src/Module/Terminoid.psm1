@@ -16,10 +16,7 @@ function InitializeInternalVariables {
         SelectionIndicator = $([char]0x2794)
     }
 
-    $script:SpecialCharTable = @{
-        BarJoiner = $script:DefaultSpecialCharTable['BarJoiner']
-        SelectionIndicator = $script:DefaultSpecialCharTable['SelectionIndicator']
-    }
+    $script:SpecialCharTable = $script:DefaultSpecialCharTable.Clone()
 
     Reset-DetailReader
     Reset-StartHandler
