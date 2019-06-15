@@ -18,4 +18,15 @@ Describe 'Enable-Prompt' {
 
         $newPrompt | Should -Not -Be $defaultPrompt
     }
+
+    It 'can be restored to its original state' {
+        $defaultPrompt = (Get-Item Function:\prompt).ScriptBlock
+
+        Enable-TerminoidPrompt
+        Disable-TerminoidPrompt
+
+        $newPrompt = (Get-Item Function:\prompt).ScriptBlock
+
+        $newPrompt | Should -Be $defaultPrompt
+    }
 }
