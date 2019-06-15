@@ -35,6 +35,7 @@
       'Clear-BarSegment',
       'Clear-FormatterTable',
       'Clear-LocationHistory',
+      'Enable-TerminoidPrompt',
       'Format-ChildItem',
       'Format-Date',
       'Format-Output',
