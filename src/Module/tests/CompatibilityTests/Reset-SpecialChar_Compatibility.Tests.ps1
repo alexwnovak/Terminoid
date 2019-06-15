@@ -14,7 +14,7 @@ Describe 'Reset-SpecialChar compatibility' {
     It 'exposes a function named Reset-SpecialChar' {
         Get-Command Reset-SpecialChar -Module Terminoid | Should -Not -Be $null
     }
-    It 'exposes exactly 14 parameters' {
-        (Get-Command Reset-SpecialChar).Parameters.Count | Should -Be 14
+    It 'exposes exactly 15 parameters' {
+        (Get-Command Reset-SpecialChar).Parameters.Count | Should -Be 15
     }
 }
