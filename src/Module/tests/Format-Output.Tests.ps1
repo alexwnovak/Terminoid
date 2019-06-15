@@ -1,7 +1,7 @@
 . $PSScriptRoot\Shared.ps1
 
 Describe 'Format-Output' {
-        It 'formats a list of piped inputs' {
+    It 'formats a list of piped inputs' {
         $sequence = @('text') | Format-Output -Foreground White -Background DarkGray
 
         $sequence | Should -Be "$([char]0x1B)`[0;97;100mtext$([char]0x1B)`[0m"
