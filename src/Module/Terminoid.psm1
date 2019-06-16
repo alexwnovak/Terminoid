@@ -18,6 +18,8 @@ function InitializeInternalVariables {
 
     $script:SpecialCharTable = $script:DefaultSpecialCharTable.Clone()
 
+    $script:DefaultPrompt = (Get-Item Function:\prompt).ScriptBlock
+
     Reset-DetailReader
     Reset-StartHandler
 }

@@ -1,0 +1,3 @@
+function TerminoidPrompt {
+    Write-StatusBar
+}
