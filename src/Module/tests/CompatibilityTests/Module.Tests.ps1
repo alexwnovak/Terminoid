@@ -11,8 +11,8 @@ Describe 'Module behavior' {
         Get-Module -Name Terminoid -All | Remove-Module -Force -ErrorAction Ignore
         Import-Module $PSScriptRoot\..\..\Terminoid.psd1 -Force
     }
-    It 'exposes exactly 30 functions' {
-        (Get-Command -Module Terminoid).Count | Should -Be 30
+    It 'exposes exactly 32 functions' {
+        (Get-Command -Module Terminoid).Count | Should -Be 32
     }
     It 'exposes exactly 0 variables' {
         (Get-Module Terminoid).ExportedVariables.Count | Should -Be 0
