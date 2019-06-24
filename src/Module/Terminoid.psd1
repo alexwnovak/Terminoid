@@ -55,6 +55,7 @@
       'Register-StartHandler',
       'Reset-DefaultFileDetailReader',
       'Reset-DetailReader',
+      'Reset-PromptFormatter',
       'Reset-SpecialChar',
       'Reset-StartHandler',
       'Select-FromMany',
