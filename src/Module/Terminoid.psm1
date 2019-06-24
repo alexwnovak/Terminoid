@@ -11,6 +11,8 @@ function InitializeInternalVariables {
     $script:DefaultDetailReader = $function:DefaultFileDetailReader
     $script:DefaultStartHandler = $function:DefaultStartHandler
 
+    $script:PromptHandlers = [List[scriptblock]]::new()
+
     $script:DefaultSpecialCharTable = @{
         BarJoiner = $([char]0xE0B0)
         SelectionIndicator = $([char]0x2794)
