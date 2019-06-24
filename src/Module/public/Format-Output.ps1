@@ -4,7 +4,7 @@ $EscPostfix = "$($EscPrefix)m"
 
 function Format-Output {
     param (
-        [Parameter( Mandatory, ValueFromPipeline )]
+        [Parameter( Mandatory, ValueFromPipeline, Position=0 )]
         $InputObject,
 
         $Foreground,
@@ -17,11 +17,34 @@ function Format-Output {
         $Italic,
 
         [switch]
-        $Underline
+        $Underline,
+
+        [switch]
+        $AsHashtable
     )
 
-    if ( $PSBoundParameters.Count -eq 1 ) {
+    if ( $PSBoundParameters.Count -eq 1 -and (-not $InputObject -is [Hashtable]) ) {
         return $InputObject
+    }
+
+    if ( $AsHashtable ) {
+        return @{
+            Text = $InputObject.ToString()
+            Foreground = $Foreground
+            Background = $Background
+            Bold = $Bold
+            Italic = $Italic
+            Underline = $Underline
+        }
+    }
+
+    if ( $InputObject -is [Hashtable] ) {
+        $Foreground = $InputObject.Foreground
+        $Background = $InputObject.Background
+        $Bold = $InputObject.Bold
+        $Italic = $InputObject.Italic
+        $Underline = $InputObject.Underline
+        $InputObject = $InputObject.Text
     }
 
     $modifiers = @()
