@@ -62,6 +62,7 @@
       'Set-DefaultFileDetailReader',
       'Set-DefaultStartHandler',
       'Set-Location',
+      'Set-PromptFormatter',
       'Set-SpecialChar',
       'Show-Cursor',
       'Start-Item',
