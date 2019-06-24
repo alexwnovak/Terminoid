@@ -67,6 +67,7 @@
       'Set-SpecialChar',
       'Show-Cursor',
       'Start-Item',
+      'Test-GitRepoPath',
       'Write-StatusBar'
    )
 
