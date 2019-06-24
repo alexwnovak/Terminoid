@@ -38,6 +38,7 @@
       'Disable-TerminoidPrompt',
       'Enable-TerminoidPrompt',
       'Format-ChildItem',
+      'Format-Bar',
       'Format-Date',
       'Format-Output',
       'Format-Size',
