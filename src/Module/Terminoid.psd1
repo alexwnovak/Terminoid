@@ -51,6 +51,7 @@
       'Push-Location',
       'Register-ChildItemFormatter',
       'Register-FileDetailReader',
+      'Register-PromptHandler',
       'Register-StartHandler',
       'Reset-DefaultFileDetailReader',
       'Reset-DetailReader',
