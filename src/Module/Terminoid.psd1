@@ -43,6 +43,7 @@
       'Format-Output',
       'Format-Size',
       'Get-BarSegment',
+      'Get-CurrentBranch',
       'Get-FileDetail',
       'Get-LocationHistory',
       'Get-SpecialChar',
