@@ -12,7 +12,8 @@ function InitializeInternalVariables {
     $script:DefaultStartHandler = $function:DefaultStartHandler
 
     $script:PromptHandlers = [List[scriptblock]]::new()
-    $script:PromptFormatter = $function:DefaultPromptFormatter
+    $script:DefaultPromptFormatter = ${function:Format-Bar}
+    Reset-PromptFormatter
 
     $script:DefaultSpecialCharTable = @{
         BarJoiner = $([char]0xE0B0)

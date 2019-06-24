@@ -1,7 +1,3 @@
-function DefaultPromptFormatter( $Parts ) {
-    '> '
-}
-
 function Reset-PromptFormatter {
-    $script:PromptFormatter = $function:DefaultPromptFormatter
+    $script:PromptFormatter = $script:DefaultPromptFormatter
 }
