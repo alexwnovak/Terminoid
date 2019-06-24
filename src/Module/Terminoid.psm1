@@ -16,9 +16,10 @@ function InitializeInternalVariables {
     Reset-PromptFormatter
 
     $script:DefaultSpecialCharTable = @{
+        AdminIcon = $([char]0xF132)
         BarJoiner = $([char]0xE0B0)
-        SelectionIndicator = $([char]0x2794)
         GitRepoIcon = $([char]0xF113)
+        SelectionIndicator = $([char]0x2794)
     }
 
     $script:SpecialCharTable = $script:DefaultSpecialCharTable.Clone()
