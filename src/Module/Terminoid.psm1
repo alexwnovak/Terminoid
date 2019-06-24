@@ -18,6 +18,7 @@ function InitializeInternalVariables {
     $script:DefaultSpecialCharTable = @{
         BarJoiner = $([char]0xE0B0)
         SelectionIndicator = $([char]0x2794)
+        GitRepoIcon = $([char]0xF113)
     }
 
     $script:SpecialCharTable = $script:DefaultSpecialCharTable.Clone()
