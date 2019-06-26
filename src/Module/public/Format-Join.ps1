@@ -1,7 +1,18 @@
 function Format-Join {
     param (
-        $InputObject
+        $InputObject,
+        $Property = 'Text'
     )
 
-    $InputObject -join ''
+    $output = ''
+
+    foreach ( $item in $InputObject ) {
+        if ( $item -is [Hashtable] ) {
+            $output += Format-Output $item
+        } else {
+            $output += $item
+        }
+    }
+
+    $output
 }
