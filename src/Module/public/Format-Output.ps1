@@ -39,6 +39,7 @@ function Format-Output {
     }
 
     if ( $InputObject -is [Hashtable] ) {
+        Set-StrictMode -Off
         $Foreground = $InputObject.Foreground
         $Background = $InputObject.Background
         $Bold = $InputObject.Bold

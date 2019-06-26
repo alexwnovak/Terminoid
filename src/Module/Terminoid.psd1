@@ -40,6 +40,7 @@
       'Format-ChildItem',
       'Format-Bar',
       'Format-Date',
+      'Format-Join',
       'Format-Output',
       'Format-Size',
       'Get-BarSegment',
