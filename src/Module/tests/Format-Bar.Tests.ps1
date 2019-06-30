@@ -8,7 +8,7 @@ Describe 'Format-Bar' {
         Format-Bar -Parts @() | Should -Be $null
     }
 
-    It 'writes a complete bar segment' {
+    It 'writes a single bar segment' {
         $bar = @{
             Foreground = 255, 255, 255
             Background = 0, 0, 0
