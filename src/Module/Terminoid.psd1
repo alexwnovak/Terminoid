@@ -32,7 +32,6 @@
    # Functions to export from this module, for best performance, do not use wildcards and do not
    # delete the entry, use an empty array if there are no functions to export.
    FunctionsToExport = @(
-      'Clear-BarSegment',
       'Clear-FormatterTable',
       'Clear-LocationHistory',
       'Disable-TerminoidPrompt',
@@ -43,14 +42,11 @@
       'Format-Join',
       'Format-Output',
       'Format-Size',
-      'Get-BarSegment',
       'Get-CurrentBranch',
       'Get-FileDetail',
       'Get-LocationHistory',
       'Get-SpecialChar',
       'Hide-Cursor',
-      'Pop-BarSegment',
-      'Push-BarSegment',
       'Push-Location',
       'Register-ChildItemFormatter',
       'Register-FileDetailReader',

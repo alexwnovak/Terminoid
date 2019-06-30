@@ -4,7 +4,6 @@ Set-StrictMode -Version Latest
 Get-ChildItem $PSScriptRoot\public, $PSScriptRoot\private -Include *.ps1 -Recurse | ForEach-Object { . $_ }
 
 function InitializeInternalVariables {
-    $script:BarSegments = [List[Hashtable]]::new()
     $script:LocationHistory = [List[string]]::new()
     $script:FormatterTable = [Stack[Hashtable]]::new()
 
