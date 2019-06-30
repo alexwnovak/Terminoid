@@ -5,6 +5,7 @@ $EscPostfix = "$($EscPrefix)m"
 function Format-Output {
     param (
         [Parameter( Mandatory, ValueFromPipeline, Position=0 )]
+        [Alias( 'Text' )]
         $InputObject,
 
         $Foreground,

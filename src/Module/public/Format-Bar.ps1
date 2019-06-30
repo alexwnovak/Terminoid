@@ -1,8 +1,12 @@
-function WriteSinglePart( $BarSegment ) {
-    $copy = $BarSegment.Clone()
+function FormatText( $Part ) {
+    $copy = $Part.Clone()
+    $copy.Text = " $($copy.Text) "
 
-    $copy.InputObject = " $($copy.Text) "
-    $copy.Remove( 'Text' )
+    $copy
+}
+
+function WriteSinglePart( $BarSegment ) {
+    $copy = FormatText $BarSegment
     $block = Format-Output @copy
 
     $joinerChar = Get-SpecialChar -Type BarJoiner
@@ -29,10 +33,7 @@ function Format-Bar {
         $joinerChar = Get-SpecialChar -Type BarJoiner
 
         for ( $i = 0; $i -lt $Parts.Count; $i++ ) {
-            $bar = $Parts[$i].Clone()
-            $bar.InputObject = " $($bar.Text) "
-            $bar.Remove( 'Text' )
-
+            $bar = FormatText $Parts[$i].Clone()
             $statusBar += Format-Output @bar
 
             if ( $i -lt $Parts.Count - 1 ) {
