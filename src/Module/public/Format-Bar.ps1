@@ -29,14 +29,11 @@ function Format-Bar {
         $joinerChar = Get-SpecialChar -Type BarJoiner
 
         for ( $i = 0; $i -lt $Parts.Count; $i++ ) {
-            $bar = $Parts[$i]
+            $bar = $Parts[$i].Clone()
+            $bar.InputObject = " $($bar.Text) "
+            $bar.Remove( 'Text' )
 
-            $statusBar += Format-Output " $($bar.Text) " `
-                -Background $bar.Background `
-                -Foreground $bar.Foreground `
-                -Bold:$bar.Bold `
-                -Italic:$bar.Italic `
-                -Underline:$bar.Underline
+            $statusBar += Format-Output @bar
 
             if ( $i -lt $Parts.Count - 1 ) {
                 $nextBar = $Parts[$i + 1]
