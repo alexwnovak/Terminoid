@@ -69,8 +69,7 @@
       'Set-SpecialChar',
       'Show-Cursor',
       'Start-Item',
-      'Test-GitRepoPath',
-      'Write-StatusBar'
+      'Test-GitRepoPath'
    )
 
    # Cmdlets to export from this module, for best performance, do not use wildcards and do not
