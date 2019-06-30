@@ -1,7 +1,6 @@
 Set-StrictMode -Version Latest
 
 function Reset-GlobalState {
-    Clear-BarSegment
     Clear-LocationHistory
     Clear-FormatterTable
 }
