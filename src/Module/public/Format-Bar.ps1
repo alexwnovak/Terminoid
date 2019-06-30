@@ -1,16 +1,16 @@
 function WriteSinglePart( $BarSegment ) {
-    $block = Format-Output " $($BarSegment.Text) " `
-        -Background $BarSegment.Background `
-        -Foreground $BarSegment.Foreground `
-        -Bold:$BarSegment.Bold `
-        -Italic:$BarSegment.Italic `
-        -Underline:$BarSegment.Underline
+    $copy = $BarSegment.Clone()
+
+    $copy.InputObject = " $($copy.Text) "
+    $copy.Remove( 'Text' )
+    $block = Format-Output @copy
 
     $joinerChar = Get-SpecialChar -Type BarJoiner
     $joiner = Format-Output $joinerChar -Foreground $BarSegment.Background
 
     "$block$joiner"
 }
+
 function Format-Bar {
     param (
         $Parts
@@ -22,8 +22,8 @@ function Format-Bar {
 
     $statusBar = ''
 
-    if ( $Parts.Count -eq 1 ) {
-        $statusBar = WriteSinglePart $Parts[0]
+    if ( -not ($Parts -is [Array]) ) {
+        $statusBar = WriteSinglePart $Parts
     }
     else {
         $joinerChar = Get-SpecialChar -Type BarJoiner
