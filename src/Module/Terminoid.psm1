@@ -23,6 +23,12 @@ function InitializeInternalVariables {
 
     $script:SpecialCharTable = $script:DefaultSpecialCharTable.Clone()
 
+    $promptFunction = Get-Item Function:\prompt -ErrorAction SilentlyContinue
+
+    if ( -not $promptFunction ) {
+        function global:prompt { }
+    }
+
     $script:DefaultPrompt = (Get-Item Function:\prompt).ScriptBlock
 
     Reset-DetailReader
@@ -67,3 +73,7 @@ Register-ArgumentCompleter -Native -CommandName git -ScriptBlock ${function:GitA
 InitializeInternalVariables
 ExportPublicFunctions
 RegisterKeyHandlers
+
+$ExecutionContext.SessionState.Module.OnRemove = {
+    Disable-TerminoidPrompt
+}
