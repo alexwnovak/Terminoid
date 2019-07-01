@@ -46,6 +46,7 @@
       'Get-FileDetail',
       'Get-LocationHistory',
       'Get-SpecialChar',
+      'Get-Viewport',
       'Hide-Cursor',
       'Push-Location',
       'Register-ChildItemFormatter',
