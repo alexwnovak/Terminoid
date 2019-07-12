@@ -25,8 +25,8 @@
 
    # Required assemblies
    RequiredAssemblies = @(
-      'System.Drawing.dll'
-      #'dependencies/Terminoid.dll'
+      'System.Drawing.dll',
+      'dependencies/Terminoid.dll'
    )
 
    # Functions to export from this module, for best performance, do not use wildcards and do not
@@ -46,6 +46,7 @@
       'Get-FileDetail',
       'Get-LocationHistory',
       'Get-SpecialChar',
+      'Get-Viewport',
       'Hide-Cursor',
       'Push-Location',
       'Register-ChildItemFormatter',

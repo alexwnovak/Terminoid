@@ -21,9 +21,15 @@ function Show-AutoCompletion {
     $menu.SelectionIndicator = [char] 0xE602
 
     $x = [Console]::CursorLeft
-    $y = [Console]::CursorTop
+    $y = [Console]::CursorTop + 1
 
-    $selectedIndex = $menu.Show( $x, $y - 10 )
+    $viewport = Get-Viewport
+
+    if ( $y -gt $viewport.Height / 2 ) {
+        $y -= 10
+    }
+
+    $selectedIndex = $menu.Show( $x, $y )
 
     if ( $selectedIndex -ne -1 ) {
         $selectedItem = $items[$selectedIndex]

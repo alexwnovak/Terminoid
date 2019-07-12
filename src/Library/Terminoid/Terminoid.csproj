@@ -60,11 +60,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Box.cs" />
+    <Compile Include="Controls\TextBox.cs" />
     <Compile Include="InputContext.cs" />
     <Compile Include="InputElement.cs" />
+    <Compile Include="InputHandler.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screen.cs" />
+    <Compile Include="Shadow.cs" />
     <Compile Include="Viewport.cs" />
     <Compile Include="VisualElement.cs" />
   </ItemGroup>
@@ -82,8 +86,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>REM mkdir $(SolutionDir)dependencies
-REM copy $(TargetPath) $(SolutionDir)..\Module\dependencies /Y</PostBuildEvent>
+    <PostBuildEvent>mkdir $(SolutionDir)dependencies
+copy $(TargetPath) $(SolutionDir)..\Module\dependencies /Y</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\Fody.5.0.6\build\Fody.targets" Condition="Exists('..\packages\Fody.5.0.6\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
