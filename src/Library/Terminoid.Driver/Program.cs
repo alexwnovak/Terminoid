@@ -1,4 +1,5 @@
 ﻿using System;
+using Terminoid.Controls;
 using Terminoid.Core;
 
 namespace Terminoid.Driver
@@ -67,10 +68,137 @@ namespace Terminoid.Driver
          Console.Read();
       }
 
+      private static void TestShadow()
+      {
+         Console.WriteLine( _background );
+
+         int x = Viewport.Left + 2;
+         int y = Viewport.Top + 2;
+
+         var under = ConsoleContext.Read( x, y, 20, 10 );
+
+         var region = new Region( 20, 10 );
+
+         var regionContext = new RegionContext( region );
+         regionContext.Fill( Color.DarkGray, Color.Black );
+
+         ConsoleContext.Write( region, x, y );
+
+         Console.Read();
+         ConsoleContext.Write( under, x, y );
+         Console.Read();
+      }
+
+      private static void TestChars()
+      {
+         Console.ForegroundColor = ConsoleColor.Green;
+         Console.WriteLine( _background );
+
+         int x = Viewport.Left + 2;
+         int y = Viewport.Top + 2;
+
+         int width = 5;
+         int height = 2;
+
+         var under = ConsoleContext.Read( x, y, width, height );
+
+         var region = new Region( width, height );
+
+         var regionContext = new RegionContext( region );
+         regionContext.SetLine( 0, "!!!!!" );
+         regionContext.SetLine( 1, "?????" );
+
+         ConsoleContext.Write( region, x, y );
+
+         Console.Read();
+         ConsoleContext.Write( under, x, y );
+         Console.Read();
+      }
+
+      private static void TestCompositeRegion()
+      {
+         Console.WriteLine( _background );
+
+         int x = Viewport.Left + 2;
+         int y = Viewport.Top + 2;
+
+         var under = ConsoleContext.Read( x, y, 20, 10 );
+
+         // Shadow
+
+         var shadowRegion = new Region( 20, 10 );
+         var shadowRegionContext = new RegionContext( shadowRegion );
+         shadowRegionContext.Fill( Color.DarkGray, Color.Black );
+
+         var boxRegion = new Region( 16, 8 );
+         var boxRegionContext = new RegionContext( boxRegion );
+         boxRegionContext.Fill( 'x', Color.White, Color.DarkBlue );
+
+         //shadowRegion.Children.Add( boxRegion );
+
+         ConsoleContext.Write( shadowRegion, x, y );
+
+         Console.Read();
+         ConsoleContext.Write( under, x, y );
+         Console.Read();
+      }
+
+      private static void TestVisualElement()
+      {
+         Console.ForegroundColor = ConsoleColor.Red;
+         Console.WriteLine( _background );
+
+         int x = Viewport.Left + 2;
+         int y = Viewport.Top + 2;
+
+         //var under = ConsoleContext.Read( x, y, 20, 10 );
+
+         var shadow = new Shadow( 24, 12 )
+         {
+            Left = x,
+            Top = y
+         };
+
+         var box = new Box( 20, 10 )
+         {
+            Left = 2,
+            Top = 1
+         };
+
+         shadow.Children.Add( box );
+
+         Screen.Draw( shadow );
+
+
+         //Console.Read();
+         //ConsoleContext.Write( under, x, y );
+         Console.Read();
+      }
+
+      private static void TestTextBox()
+      {
+         var textBox = new TextBox( 80, 1 )
+         {
+            Left = 0,
+            Top = Viewport.Top + 5
+         };
+
+         Screen.Use( textBox );
+
+
+         Console.WriteLine( "Input complete" );
+      }
+
       static void Main( string[] args )
       {
          //TestMenu();
-         TestNewRegion();
+         //TestNewRegion();
+         //TestShadow();
+         //TestChars();
+         //TestCompositeRegion();
+         //TestVisualElement();
+         TestTextBox();
+
          Console.Read();
       }
    }
