@@ -25,8 +25,8 @@
 
    # Required assemblies
    RequiredAssemblies = @(
-      'System.Drawing.dll'
-      #'dependencies/Terminoid.dll'
+      'System.Drawing.dll',
+      'dependencies/Terminoid.dll'
    )
 
    # Functions to export from this module, for best performance, do not use wildcards and do not
