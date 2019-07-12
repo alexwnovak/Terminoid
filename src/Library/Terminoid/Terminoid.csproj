@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Box.cs" />
+    <Compile Include="Controls\TextBox.cs" />
     <Compile Include="InputContext.cs" />
     <Compile Include="InputElement.cs" />
     <Compile Include="InputHandler.cs" />
