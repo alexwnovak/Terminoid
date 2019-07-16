@@ -1,29 +1,23 @@
+function GetCursorLocation {
+    @{
+        Left = [Console]::CursorLeft
+        Top = [Console]::CursorTop
+    }
+}
+
+function ShowMenu( $Items, $X, $Y ) {
+    $menu = [Terminoid.Menu]::new( $Items )
+    $menu.SelectionIndicator = '*'
+    $menu.Show( $X, $Y )
+}
+
 function Show-AutoCompletion {
-    # $items = @(
-    #     'first',
-    #     'second',
-    #     'third',
-    #     'fourth',
-    #     'fifth',
-    #     'sixth',
-    #     'seventh',
-    #     'eighth',
-    #     'ninth',
-    #     'tenth',
-    #     'eleventh',
-    #     'twelfth',
-    #     'thirteenth',
-    #     'fourteenth',
-    #     'fifteenth'
-    # )
+    $items = 1, 2, 3
 
-    $items = GetGitBranches -as [string[]]
+    $cursor = GetCursorLocation
 
-    $menu = [Terminoid.Menu]::new( $items )
-    $menu.SelectionIndicator = [char] 0xE602
-
-    $x = [Console]::CursorLeft
-    $y = [Console]::CursorTop + 1
+    $x = $cursor.Left
+    $y = $cursor.Top + 1
 
     $viewport = Get-Viewport
 
@@ -31,7 +25,7 @@ function Show-AutoCompletion {
         $y -= 11
     }
 
-    $selectedIndex = $menu.Show( $x, $y )
+    $selectedIndex = ShowMenu $items $x $y
 
     if ( $selectedIndex -ne -1 ) {
         $selectedItem = $items[$selectedIndex]
