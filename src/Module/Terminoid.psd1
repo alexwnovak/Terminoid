@@ -64,6 +64,7 @@
       'Set-Location',
       'Set-PromptFormatter',
       'Set-SpecialChar',
+      'Show-AutoCompletion',
       'Show-Cursor',
       'Start-Item',
       'Test-GitRepoPath'
