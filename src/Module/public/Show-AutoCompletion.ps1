@@ -1,21 +1,23 @@
 function Show-AutoCompletion {
-    $items = @(
-        'first',
-        'second',
-        'third',
-        'fourth',
-        'fifth',
-        'sixth',
-        'seventh',
-        'eighth',
-        'ninth',
-        'tenth',
-        'eleventh',
-        'twelfth',
-        'thirteenth',
-        'fourteenth',
-        'fifteenth'
-    )
+    # $items = @(
+    #     'first',
+    #     'second',
+    #     'third',
+    #     'fourth',
+    #     'fifth',
+    #     'sixth',
+    #     'seventh',
+    #     'eighth',
+    #     'ninth',
+    #     'tenth',
+    #     'eleventh',
+    #     'twelfth',
+    #     'thirteenth',
+    #     'fourteenth',
+    #     'fifteenth'
+    # )
+
+    $items = GetGitBranches -as [string[]]
 
     $menu = [Terminoid.Menu]::new( $items )
     $menu.SelectionIndicator = [char] 0xE602
@@ -26,7 +28,7 @@ function Show-AutoCompletion {
     $viewport = Get-Viewport
 
     if ( $y -gt $viewport.Height / 2 ) {
-        $y -= 10
+        $y -= 11
     }
 
     $selectedIndex = $menu.Show( $x, $y )
