@@ -1,3 +1,11 @@
+function GetCurrentInput {
+    $currentInput = ''
+    $discard = 0
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState( [ref] $currentInput, [ref] $discard )
+
+    $currentInput
+}
+
 function GetCursorLocation {
     @{
         Left = [Console]::CursorLeft
@@ -12,7 +20,20 @@ function ShowMenu( $Items, $X, $Y ) {
 }
 
 function Show-AutoCompletion {
-    $items = 1, 2, 3
+    $currentInput = GetCurrentInput
+    $items = $null
+
+    foreach ( $handler in $script:AutoCompletionTable ) {
+        $match = & $handler.Predicate $currentInput
+
+        if ( $match ) {
+            $items = & $handler.Function $currentInput
+        }
+    }
+
+    if ( -not $items ) {
+        return
+    }
 
     $cursor = GetCursorLocation
 
@@ -28,7 +49,6 @@ function Show-AutoCompletion {
     $selectedIndex = ShowMenu $items $x $y
 
     if ( $selectedIndex -ne -1 ) {
-        $selectedItem = $items[$selectedIndex]
-        [Microsoft.PowerShell.PSConsoleReadLine]::Insert( $selectedItem )
+        $items[$selectedIndex]
     }
 }

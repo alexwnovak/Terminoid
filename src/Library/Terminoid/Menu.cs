@@ -6,7 +6,7 @@ namespace Terminoid
 {
    public class Menu
    {
-      public object[] Items { get; }
+      public string[] Items { get; }
       public int SelectedIndex { get; private set; }
 
       public int Width { get; private set; }
@@ -22,7 +22,7 @@ namespace Terminoid
 
       public Menu( object[] items )
       {
-         Items = items ?? throw new ArgumentNullException( nameof( items ) );
+         Items = items.Select( i => i.ToString() ).ToArray() ?? throw new ArgumentNullException( nameof( items ) );
       }
 
       private Region CreateRegion( int width, int height, string[] items )
@@ -76,7 +76,7 @@ namespace Terminoid
 
          var underRegion = ConsoleContext.Read( x, y, Width, Height );
 
-         CreateRegion( Width, Height, Items.Cast<string>().ToArray() );
+         CreateRegion( Width, Height, Items );
 
          ConsoleContext.Write( _region, x, y );
 

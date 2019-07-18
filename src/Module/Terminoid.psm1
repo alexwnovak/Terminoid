@@ -33,6 +33,7 @@ function InitializeInternalVariables {
 
     Reset-DetailReader
     Reset-StartHandler
+    Reset-AutoCompletionHandler
 }
 
 function ExportPublicFunctions {
