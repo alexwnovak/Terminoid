@@ -40,9 +40,19 @@ InModuleScope Terminoid {
             }
         }
 
+        Context 'There are no registered handlers that respond to the input' {
+            Mock ShowMenu { -1 }
+            Register-AutoCompletionHandler -Predicate { $true } -Function { 'one', 'two', 'three' }
+
+            $selectedItem = Show-AutoCompletion
+
+            It 'returns the selected item' {
+                $selectedItem | Should -BeNullOrEmpty
+            }
+        }
+
         Context 'Selecting an item' {
             Mock ShowMenu { 1 }
-
             Register-AutoCompletionHandler -Predicate { $true } -Function { 'one', 'two', 'three' }
 
             $selectedItem = Show-AutoCompletion
