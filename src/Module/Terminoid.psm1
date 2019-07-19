@@ -53,22 +53,6 @@ function RegisterKeyHandlers {
     }
 }
 
-Register-ArgumentCompleter -Native -CommandName git -ScriptBlock {
-    param (
-        $WordToComplete,
-        $CommandAst,
-        $CursorPosition
-    )
-
-    $command = $CommandAst.ToString()
-
-    if ( !$WordToComplete ) {
-        $command += ' '
-    }
-
-    GitCommandCompleter -Command $command
-}
-
 Register-ArgumentCompleter -Native -CommandName git -ScriptBlock ${function:GitArgumentCompleter}
 
 InitializeInternalVariables
