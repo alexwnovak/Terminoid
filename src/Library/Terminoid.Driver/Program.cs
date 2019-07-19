@@ -169,7 +169,6 @@ namespace Terminoid.Driver
 
          Screen.Draw( shadow );
 
-
          //Console.Read();
          //ConsoleContext.Write( under, x, y );
          Console.Read();
@@ -184,8 +183,6 @@ namespace Terminoid.Driver
          };
 
          Screen.Use( textBox );
-
-
          Console.WriteLine( "Input complete" );
       }
 
