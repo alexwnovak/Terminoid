@@ -156,7 +156,7 @@ namespace Terminoid
                SelectedIndex--;
             }
 
-            if ( SelectedIndex - _indexOffset > _maxDisplayItems )
+            if ( SelectedIndex < _indexOffset )
             {
                ScrollItems( -1 );
             }
