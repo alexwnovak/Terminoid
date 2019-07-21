@@ -32,7 +32,9 @@ namespace Terminoid
 
          _regionContext.Fill( Color.White, Color.DarkRed );
 
-         for ( int y = 0; y < _region.Height; y++ )
+         int drawHeight = items.Length >= height ? height : items.Length;
+
+         for ( int y = 0; y < drawHeight; y++ )
          {
             _regionContext.SetLine( y, $"   {items[y]}" );
          }
@@ -71,7 +73,7 @@ namespace Terminoid
       {
          int longestItem = Items.Max( i => i.ToString().Length );
          Width = longestItem + 6;
-         Height = Items.Length > _maxDisplayItems ? _maxDisplayItems : Items.Length;
+         Height = _maxDisplayItems;
          _hasOverflowContent = Items.Length > _maxDisplayItems;
 
          var underRegion = ConsoleContext.Read( x, y, Width, Height );
