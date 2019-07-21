@@ -60,8 +60,9 @@
       public void SetLine( int y, string text )
       {
          _region.HasChar = true;
+         int width = text.Length < _region.Width ? text.Length : _region.Width;
 
-         for ( int x = 0; x < text.Length; x++ )
+         for ( int x = 0; x < width; x++ )
          {
             _region.Cells[y, x].Char = text[x];
          }
