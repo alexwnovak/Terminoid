@@ -69,8 +69,8 @@ namespace Terminoid
 
       public int Show( int x, int y )
       {
-         int longestItem = Items.Min( i => i.ToString().Length );
-         Width = longestItem + 20;
+         int longestItem = Items.Max( i => i.ToString().Length );
+         Width = longestItem + 6;
          Height = Items.Length > _maxDisplayItems ? _maxDisplayItems : Items.Length;
          _hasOverflowContent = Items.Length > _maxDisplayItems;
 
