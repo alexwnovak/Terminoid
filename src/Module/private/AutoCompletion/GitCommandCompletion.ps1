@@ -48,7 +48,12 @@ function IsMatch( $Text, $PartialSearch ) {
     $Text -like $PartialSearch
 }
 
-function GitCommandCompleter( $Command ) {
+function GitCommandCompleter {
+    param (
+        $Command,
+        $WriteFunction = ${function:WriteCompletionResults}
+    )
+
     foreach ( $tableEntry in $CommandTable ) {
         $commandMatch = $tableEntry.MatchText + ' *'
 
@@ -62,7 +67,7 @@ function GitCommandCompleter( $Command ) {
                 $results = $results | Where-Object { IsMatch $_ $partialSearch }
             }
 
-            WriteCompletionResults $results
+            & $WriteFunction $results
             return
         }
     }
@@ -76,6 +81,6 @@ function GitCommandCompleter( $Command ) {
             $results = $results | Where-Object { IsMatch $_ $partialSearch }
         }
 
-        WriteCompletionResults $results
+        & $WriteFunction $results
     }
 }

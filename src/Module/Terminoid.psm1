@@ -62,6 +62,14 @@ InitializeInternalVariables
 ExportPublicFunctions
 RegisterKeyHandlers
 
+Register-AutoCompletionHandler -Predicate {
+    param ( $CurrentInput )
+    $CurrentInput.StartsWith( 'git ', 'CurrentCultureIgnoreCase' )
+} -Function {
+    param ( $CurrentInput )
+    GitCommandCompleter -Command $CurrentInput -WriteFunction (Get-Command Write-Output)
+}
+
 $ExecutionContext.SessionState.Module.OnRemove = {
     Disable-TerminoidPrompt
 }
