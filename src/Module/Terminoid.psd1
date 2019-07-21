@@ -51,6 +51,7 @@
       'Push-Location',
       'Register-ChildItemFormatter',
       'Register-FileDetailReader',
+      'Register-AutoCompletionHandler',
       'Register-PromptHandler',
       'Register-StartHandler',
       'Reset-DefaultFileDetailReader',
@@ -64,6 +65,7 @@
       'Set-Location',
       'Set-PromptFormatter',
       'Set-SpecialChar',
+      'Show-AutoCompletion',
       'Show-Cursor',
       'Start-Item',
       'Test-GitRepoPath'

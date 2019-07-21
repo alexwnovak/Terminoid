@@ -33,6 +33,7 @@ function InitializeInternalVariables {
 
     Reset-DetailReader
     Reset-StartHandler
+    Reset-AutoCompletionHandler
 }
 
 function ExportPublicFunctions {
@@ -46,26 +47,13 @@ function RegisterKeyHandlers {
     Set-PSReadLineKeyHandler -Chord Ctrl+N -ScriptBlock ${function:Add-NewItemCommand} -BriefDescription 'TerminoidInsertNewItem' -Description 'Inserts a New-Item command'
     Set-PSReadLineKeyHandler -Chord Ctrl+Shift+N -ScriptBlock ${function:Add-NewDirectoryCommand} -BriefDescription 'TerminoidInsertNewDirectory' -Description 'Inserts a New-Item command for directories'
     Set-PSReadLineKeyHandler -Chord Ctrl+Shift+UpArrow -ScriptBlock ${function:Set-LocationToParent} -BriefDescription 'TerminoidNavigateUp' -Description 'Navigates up one directory'
+    Set-PSReadlineKeyHandler -Chord Ctrl+Spacebar -ScriptBlock {
+        $result = Show-AutoCompletion
 
-    if ( IsDebugMode ) {
-        Set-PSReadlineKeyHandler -Chord Ctrl+Spacebar -ScriptBlock ${function:Show-AutoCompletion}
+        if ( $result ) {
+            [Microsoft.PowerShell.PSConsoleReadLine]::Insert( $result )
+        }
     }
-}
-
-Register-ArgumentCompleter -Native -CommandName git -ScriptBlock {
-    param (
-        $WordToComplete,
-        $CommandAst,
-        $CursorPosition
-    )
-
-    $command = $CommandAst.ToString()
-
-    if ( !$WordToComplete ) {
-        $command += ' '
-    }
-
-    GitCommandCompleter -Command $command
 }
 
 Register-ArgumentCompleter -Native -CommandName git -ScriptBlock ${function:GitArgumentCompleter}
@@ -73,6 +61,14 @@ Register-ArgumentCompleter -Native -CommandName git -ScriptBlock ${function:GitA
 InitializeInternalVariables
 ExportPublicFunctions
 RegisterKeyHandlers
+
+Register-AutoCompletionHandler -Predicate {
+    param ( $CurrentInput )
+    $CurrentInput.StartsWith( 'git ', 'CurrentCultureIgnoreCase' )
+} -Function {
+    param ( $CurrentInput )
+    GitCommandCompleter -Command $CurrentInput -WriteFunction (Get-Command Write-Output)
+}
 
 $ExecutionContext.SessionState.Module.OnRemove = {
     Disable-TerminoidPrompt
