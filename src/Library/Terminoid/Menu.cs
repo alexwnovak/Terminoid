@@ -65,7 +65,9 @@ namespace Terminoid
          for ( int y = 0; y < Height; y++ )
          {
             char indicatorOrBlank = SelectedIndex == y ? SelectionIndicator : ' ';
-            _regionContext.SetLine( y, $" {indicatorOrBlank} {Items[y + _indexOffset]}" );
+            string line = $" {indicatorOrBlank} {Items[y + _indexOffset]}";
+            string trailingSpace = new string( ' ', _region.Width - line.Length + 1 );
+            _regionContext.SetLine( y, $"{line}{trailingSpace}" );
          }
       }
 
