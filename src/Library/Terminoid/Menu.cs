@@ -32,7 +32,9 @@ namespace Terminoid
 
          _regionContext.Fill( Color.White, Color.DarkRed );
 
-         for ( int y = 0; y < _region.Height; y++ )
+         int drawHeight = items.Length >= height ? height : items.Length;
+
+         for ( int y = 0; y < drawHeight; y++ )
          {
             _regionContext.SetLine( y, $"   {items[y]}" );
          }
@@ -63,15 +65,17 @@ namespace Terminoid
          for ( int y = 0; y < Height; y++ )
          {
             char indicatorOrBlank = SelectedIndex == y ? SelectionIndicator : ' ';
-            _regionContext.SetLine( y, $" {indicatorOrBlank} {Items[y + _indexOffset]}" );
+            string line = $" {indicatorOrBlank} {Items[y + _indexOffset]}";
+            string trailingSpace = new string( ' ', _region.Width - line.Length + 1 );
+            _regionContext.SetLine( y, $"{line}{trailingSpace}" );
          }
       }
 
       public int Show( int x, int y )
       {
-         int longestItem = Items.Min( i => i.ToString().Length );
-         Width = longestItem + 20;
-         Height = Items.Length > _maxDisplayItems ? _maxDisplayItems : Items.Length;
+         int longestItem = Items.Max( i => i.ToString().Length );
+         Width = longestItem + 6;
+         Height = _maxDisplayItems;
          _hasOverflowContent = Items.Length > _maxDisplayItems;
 
          var underRegion = ConsoleContext.Read( x, y, Width, Height );
@@ -152,7 +156,7 @@ namespace Terminoid
                SelectedIndex--;
             }
 
-            if ( SelectedIndex - _indexOffset > _maxDisplayItems )
+            if ( SelectedIndex < _indexOffset )
             {
                ScrollItems( -1 );
             }

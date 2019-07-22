@@ -38,12 +38,14 @@ function Show-AutoCompletion {
     $cursor = GetCursorLocation
 
     $x = $cursor.Left
-    $y = $cursor.Top + 1
+    $y = 0
 
     $viewport = Get-Viewport
 
-    if ( $y -gt $viewport.Height / 2 ) {
-        $y -= 11
+    if ( $cursor.Top -lt $viewport.BufferHeight - $viewport.Height / 2 ) {
+        $y = $cursor.Top + 1
+    } else {
+        $y = $cursor.Top - 10
     }
 
     $selectedIndex = ShowMenu $items $x $y
