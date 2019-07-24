@@ -61,5 +61,16 @@ InModuleScope Terminoid {
                 $selectedItem | Should -Be 'two'
             }
         }
+
+        Context 'Only one item to choose from' {
+            Mock ShowMenu { 0 }
+            Register-AutoCompletionHandler -Predicate { $true } -Function { 'item' }
+
+            $selectedItem = Show-AutoCompletion
+
+            It 'returns the selected item' {
+                $selectedItem | Should -Be 'item'
+            }
+        }
     }
 }
