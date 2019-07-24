@@ -35,6 +35,10 @@ function Show-AutoCompletion {
         return
     }
 
+    if ( -not ($items -is [Array]) ) {
+        $items = @($items)
+    }
+
     $cursor = GetCursorLocation
 
     $x = $cursor.Left
