@@ -73,3 +73,6 @@ Register-AutoCompletionHandler -Predicate {
 $ExecutionContext.SessionState.Module.OnRemove = {
     Disable-TerminoidPrompt
 }
+
+# Ensure config stuff
+EnsureConfigExists
