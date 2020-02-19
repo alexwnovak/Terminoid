@@ -21,7 +21,7 @@
    Description       = 'Power up your PowerShell terminal experience!'
 
    # Minimum version of the Windows PowerShell engine required by this module
-   PowerShellVersion = '5.0'
+   PowerShellVersion = '6.0'
 
    # Required assemblies
    RequiredAssemblies = @(
