@@ -15,7 +15,7 @@
    CompanyName       = 'Alex Novak'
 
    # Copyright statement for this module
-   Copyright         = '(c) 2019 Alex Novak. All rights reserved.'
+   Copyright         = '(c) 2019-2020 Alex Novak. All rights reserved.'
 
    # Description of the functionality provided by this module
    Description       = 'Power up your PowerShell terminal experience!'
