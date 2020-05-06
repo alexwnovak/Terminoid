@@ -2,7 +2,7 @@ using System.Text;
 
 namespace LineInput
 {
-    public class InputController
+    public class InputController : IInputController
     {
         private readonly StringBuilder _sb = new StringBuilder();
 
