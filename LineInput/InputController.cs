@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 namespace LineInput
@@ -8,6 +9,11 @@ namespace LineInput
 
         public int CursorIndex { get; private set; }
         public string Buffer => _sb.ToString();
+
+        public void Press( ConsoleKeyInfo keyInfo )
+        {
+            Console.WriteLine($"Got key {keyInfo.Key}");
+        }
 
         public void PressKey( char key )
         {
