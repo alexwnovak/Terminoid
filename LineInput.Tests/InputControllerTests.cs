@@ -31,7 +31,7 @@ namespace LineInput.Tests
 
             sut.PressKey( 'q' );
 
-            sut.Buffer.Should().Be( "q" );
+            sut.GetBuffer().Should().Be( "q" );
         }
 
         [Fact]
@@ -42,7 +42,19 @@ namespace LineInput.Tests
             sut.PressKey( 'q' );
             sut.PressKey( 'u' );
 
-            sut.Buffer.Should().Be( "qu" );
+            sut.GetBuffer().Should().Be( "qu" );
+        }
+
+        [Fact]
+        public void PressKey_PressingAKeyThatWouldBeVisible_RaisesInputChangedEvent()
+        {
+            var sut = new InputController();
+
+            using (var monitoredSut = sut.Monitor())
+            {
+                sut.PressKey('q');
+                monitoredSut.Should().Raise(nameof(sut.InputChanged));
+            }
         }
     }
 }
