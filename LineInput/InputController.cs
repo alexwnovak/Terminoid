@@ -6,7 +6,7 @@ namespace LineInput
     {
         private readonly StringBuilder _sb = new StringBuilder();
 
-        public int CursorIndex { get; set; }
+        public int CursorIndex { get; private set; }
         public string Buffer => _sb.ToString();
 
         public void PressKey( char key )
