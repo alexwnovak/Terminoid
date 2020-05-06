@@ -15,6 +15,16 @@ namespace LineInput.Tests
         }
 
         [Fact]
+        public void CursorIndex_PressingAKey_CursorMovesWithCharacterInsertion()
+        {
+            var sut = new InputController();
+
+            sut.PressKey( 'a' );
+
+            sut.CursorIndex.Should().Be( 1 );
+        }
+
+        [Fact]
         public void PressKey_PressingQKey_KeyIsAddedToBuffer()
         {
             var sut = new InputController();

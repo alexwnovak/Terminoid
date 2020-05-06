@@ -8,6 +8,7 @@ namespace LineInput
         public void PressKey( char key )
         {
             Buffer += key;
+            CursorIndex++;
         }
     }
 }
