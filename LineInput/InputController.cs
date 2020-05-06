@@ -13,6 +13,8 @@ namespace LineInput
         {
             _sb.Append( key );
             CursorIndex++;
+
+            System.Console.WriteLine($"Got {key}, code {(int)key}");
         }
     }
 }
