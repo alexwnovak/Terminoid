@@ -1,13 +1,17 @@
+using System.Text;
+
 namespace LineInput
 {
     public class InputController
     {
+        private readonly StringBuilder _sb = new StringBuilder();
+
         public int CursorIndex { get; set; }
-        public string Buffer { get; private set; } = string.Empty;
+        public string Buffer => _sb.ToString();
 
         public void PressKey( char key )
         {
-            Buffer += key;
+            _sb.Append( key );
             CursorIndex++;
         }
     }
