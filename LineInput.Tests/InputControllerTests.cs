@@ -23,5 +23,16 @@ namespace LineInput.Tests
 
             sut.Buffer.Should().Be( "q" );
         }
+
+        [Fact]
+        public void PressKey_PressingQKeyThenUKey_UKeyIsAppended()
+        {
+            var sut = new InputController();
+
+            sut.PressKey( 'q' );
+            sut.PressKey( 'u' );
+
+            sut.Buffer.Should().Be( "qu" );
+        }
     }
 }
