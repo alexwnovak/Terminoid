@@ -8,7 +8,7 @@ namespace LineInput
         private readonly StringBuilder _sb = new StringBuilder();
 
         public int CursorIndex { get; private set; }
-        public string Buffer => _sb.ToString();
+        public string GetBuffer() => _sb.ToString();
 
         public void Press( ConsoleKeyInfo keyInfo )
         {
@@ -19,8 +19,6 @@ namespace LineInput
         {
             _sb.Append( key );
             CursorIndex++;
-
-            System.Console.WriteLine($"Got {key}, code {(int)key}");
         }
     }
 }

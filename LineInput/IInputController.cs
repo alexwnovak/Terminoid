@@ -2,6 +2,7 @@ namespace LineInput
 {
     public interface IInputController
     {
-         void PressKey(char key);
+        string GetBuffer();
+        void PressKey(char key);
     }
 }

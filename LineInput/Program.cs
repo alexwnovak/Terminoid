@@ -5,11 +5,15 @@ namespace LineInput
 {
     public class RenderManager
     {
+        private readonly IInputController _inputController;
         private readonly Thread _thread;
-        private bool _isThreadRunning;
 
-        public RenderManager()
+        private bool _isThreadRunning;
+        private bool _requestRepaint;
+
+        public RenderManager(IInputController inputController)
         {
+            _inputController = inputController;
             _thread = new Thread(ThreadProc);
             _isThreadRunning = false;
         }
@@ -23,7 +27,11 @@ namespace LineInput
         public void Stop()
         {
             _isThreadRunning = false;
-            // _thread.Abort();
+        }
+
+        public void RequestRepaint()
+        {
+            _requestRepaint = true;
         }
 
         private void ThreadProc(object parameter)
@@ -32,8 +40,13 @@ namespace LineInput
 
             while (_isThreadRunning)
             {
-                Console.WriteLine("===== Render thread ping");
-                Thread.Sleep(1000);
+                if (_requestRepaint)
+                {
+                    _requestRepaint = false;
+                    Console.WriteLine($"===== Repaint: {_inputController.GetBuffer()}");
+                }
+
+                Thread.Sleep(100);
             }
 
             Console.WriteLine("===== Stopping render thread");
@@ -44,25 +57,29 @@ namespace LineInput
     {
         private static void Main(string[] args)
         {
-            var renderManager = new RenderManager();
+            var inputController = new InputController();
+
+            var renderManager = new RenderManager(inputController);
             renderManager.StartAsync();
 
-            var inputController = new InputController();
             bool isRunning = true;
 
             while (isRunning)
             {
                 var keyInfo = Console.ReadKey(intercept: true);
-                Console.WriteLine($"===== Key input: {keyInfo.KeyChar}");
+                // Console.WriteLine($"===== Key input: {keyInfo.KeyChar}");
 
                 if (keyInfo.Key == ConsoleKey.Escape)
                 {
                     Console.WriteLine("===== Exiting input loop");
                     isRunning = false;
                 }
+                else
+                {
+                    inputController.PressKey(keyInfo.KeyChar);
+                    renderManager.RequestRepaint();
+                }
             }
-
-            Thread.Sleep(1000);
 
             renderManager.Stop();
 
