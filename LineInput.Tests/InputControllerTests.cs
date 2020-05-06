@@ -13,5 +13,15 @@ namespace LineInput.Tests
 
             sut.CursorIndex.Should().Be( 0 );
         }
+
+        [Fact]
+        public void PressKey_PressingQKey_KeyIsAddedToBuffer()
+        {
+            var sut = new InputController();
+
+            sut.PressKey( 'q' );
+
+            sut.Buffer.Should().Be( "q" );
+        }
     }
 }
