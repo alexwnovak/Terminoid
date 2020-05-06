@@ -14,8 +14,15 @@ namespace LineInput
         public RenderManager(IInputController inputController)
         {
             _inputController = inputController;
+            _inputController.InputChanged += OnInputChanged;
+
             _thread = new Thread(ThreadProc);
             _isThreadRunning = false;
+        }
+
+        private void OnInputChanged(object sender, EventArgs e)
+        {
+            RequestRepaint();
         }
 
         public void StartAsync()
@@ -77,7 +84,6 @@ namespace LineInput
                 else
                 {
                     inputController.PressKey(keyInfo.KeyChar);
-                    renderManager.RequestRepaint();
                 }
             }
 
