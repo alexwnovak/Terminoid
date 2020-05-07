@@ -6,6 +6,8 @@ namespace LineInput
     {
         private static void Main(string[] args)
         {
+            Console.WriteLine("===== Starting");
+
             var inputController = new InputController();
 
             var renderManager = new RenderManager(inputController);
