@@ -12,16 +12,16 @@ namespace LineInput
 
         public event EventHandler InputChanged;
 
-        protected virtual void OnInputChanged( object sender, EventArgs e) => InputChanged?.Invoke(this, e);
+        protected virtual void OnInputChanged(object sender, EventArgs e) => InputChanged?.Invoke(this, e);
 
-        public void Press( ConsoleKeyInfo keyInfo )
+        public void Press(ConsoleKeyInfo keyInfo)
         {
             Console.WriteLine($"Got key {keyInfo.Key}");
         }
 
-        public void PressKey( char key )
+        public void PressKey(char key)
         {
-            _sb.Append( key );
+            _sb.Append(key);
             CursorIndex++;
             OnInputChanged(this, EventArgs.Empty);
         }
