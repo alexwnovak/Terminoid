@@ -6,6 +6,7 @@ namespace LineInput
     public class RenderManager
     {
         private readonly IInputController _inputController;
+        private readonly CursorPainter _cursorPainter;
         private readonly Thread _thread;
 
         private bool _isThreadRunning;
@@ -15,6 +16,8 @@ namespace LineInput
         {
             _inputController = inputController;
             _inputController.InputChanged += OnInputChanged;
+
+            _cursorPainter = new CursorPainter();
 
             _thread = new Thread(ThreadProc);
             _isThreadRunning = false;
@@ -44,16 +47,35 @@ namespace LineInput
         private void ThreadProc(object parameter)
         {
             _isThreadRunning = true;
+            var lastTime = DateTime.Now;
+
+            double theta = 0;
+            double opacity;
 
             while (_isThreadRunning)
             {
-                if (_requestRepaint)
+                var elapsedTime = DateTime.Now - lastTime;
+
+                theta += elapsedTime.TotalMilliseconds * 0.005;
+                opacity = 0.5 + 0.5 * Math.Sin(theta);
+
+                int r = (int)(255.0 * opacity);
+                int g = 0; //(int)(192.0 * opacity);
+                int b = 0;
+
+                // if (_requestRepaint)
                 {
-                    _requestRepaint = false;
-                    Console.WriteLine($"===== Repaint: {_inputController.GetBuffer()}");
+                    string line = "\x0D" + _inputController.GetBuffer();
+                    line += $"\x1B[48;2;{r};{g};{b}m \x1B[0m";
+
+                    // _requestRepaint = false;
+                    Console.Write(line);
                 }
 
-                Thread.Sleep(100);
+                // _cursorPainter.Paint(elapsedTime.TotalMilliseconds);
+
+                lastTime = DateTime.Now;
+                Thread.Sleep(20);
             }
 
             Console.WriteLine("===== Stopping render thread");
