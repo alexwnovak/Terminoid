@@ -7,6 +7,6 @@ namespace LineInput
         int CursorIndex { get; }
         event EventHandler InputChanged;
         string GetBuffer();
-        void PressKey(char key);
+        void PressKey(ConsoleKeyInfo keyInfo);
     }
 }

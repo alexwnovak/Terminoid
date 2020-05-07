@@ -27,7 +27,7 @@ namespace LineInput
                 }
                 else
                 {
-                    inputController.PressKey(keyInfo.KeyChar);
+                    inputController.PressKey(keyInfo);
                 }
             }
 

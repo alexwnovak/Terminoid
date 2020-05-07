@@ -14,14 +14,9 @@ namespace LineInput
 
         protected virtual void OnInputChanged(object sender, EventArgs e) => InputChanged?.Invoke(this, e);
 
-        public void Press(ConsoleKeyInfo keyInfo)
+        public void PressKey(ConsoleKeyInfo keyInfo)
         {
-            Console.WriteLine($"Got key {keyInfo.Key}");
-        }
-
-        public void PressKey(char key)
-        {
-            _sb.Append(key);
+            _sb.Append(keyInfo.KeyChar);
             CursorIndex++;
             OnInputChanged(this, EventArgs.Empty);
         }
