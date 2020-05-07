@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Threading;
 
 namespace LineInput
@@ -64,7 +65,7 @@ namespace LineInput
                 int b = (int)(255.0 * opacity);
 
                 string buffer = _inputController.GetBuffer();
-                string line = "\x0D" + buffer;
+                string line = buffer;
 
                 if (_inputController.CursorIndex == buffer.Length)
                 {
@@ -72,12 +73,19 @@ namespace LineInput
                 }
                 else
                 {
-                    line = line.Insert(_inputController.CursorIndex, $"\x1B[48;2;{r};{g};{b}m \x1B[0m");
+                    var sb = new StringBuilder(buffer);
+                    sb.Remove(_inputController.CursorIndex, 1);
+                    char under = buffer[_inputController.CursorIndex];
+
+                    sb.Insert(_inputController.CursorIndex, $"\x1B[48;2;{r};{g};{b}m{under}\x1B[0m");
+
+                    // An extra space at the end will remove the cursor if it was at the end
+                    sb.Append("\x1B[0m ");
+
+                    line = sb.ToString();
                 }
 
-                Console.Write(line);
-
-                // _cursorPainter.Paint(elapsedTime.TotalMilliseconds);
+                Console.Write("\x0D" + line);
 
                 lastTime = DateTime.Now;
                 Thread.Sleep(20);

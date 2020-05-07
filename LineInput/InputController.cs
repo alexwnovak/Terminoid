@@ -16,9 +16,16 @@ namespace LineInput
 
         public void PressKey(ConsoleKeyInfo keyInfo)
         {
-            _sb.Append(keyInfo.KeyChar);
-            CursorIndex++;
-            OnInputChanged(this, EventArgs.Empty);
+            if (keyInfo.Key == ConsoleKey.LeftArrow)
+            {
+                CursorIndex--;
+            }
+            else
+            {
+                _sb.Append(keyInfo.KeyChar);
+                CursorIndex++;
+                OnInputChanged(this, EventArgs.Empty);
+            }
         }
     }
 }
