@@ -63,14 +63,19 @@ namespace LineInput
                 int g = 0; //(int)(192.0 * opacity);
                 int b = (int)(255.0 * opacity);
 
-                // if (_requestRepaint)
-                {
-                    string line = "\x0D" + _inputController.GetBuffer();
-                    line += $"\x1B[48;2;{r};{g};{b}m \x1B[0m";
+                string buffer = _inputController.GetBuffer();
+                string line = "\x0D" + buffer;
 
-                    // _requestRepaint = false;
-                    Console.Write(line);
+                if (_inputController.CursorIndex == buffer.Length)
+                {
+                    line += $"\x1B[48;2;{r};{g};{b}m \x1B[0m";
                 }
+                else
+                {
+                    line = line.Insert(_inputController.CursorIndex, $"\x1B[48;2;{r};{g};{b}m \x1B[0m");
+                }
+
+                Console.Write(line);
 
                 // _cursorPainter.Paint(elapsedTime.TotalMilliseconds);
 
