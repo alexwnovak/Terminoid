@@ -61,7 +61,7 @@ namespace LineInput
 
                 int r = (int)(255.0 * opacity);
                 int g = 0; //(int)(192.0 * opacity);
-                int b = 0;
+                int b = (int)(255.0 * opacity);
 
                 // if (_requestRepaint)
                 {
