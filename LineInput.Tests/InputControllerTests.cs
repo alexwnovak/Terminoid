@@ -11,7 +11,7 @@ namespace LineInput.Tests
         {
             var sut = new InputController();
 
-            sut.CursorIndex.Should().Be( 0 );
+            sut.CursorIndex.Should().Be(0);
         }
 
         [Fact]
@@ -19,9 +19,9 @@ namespace LineInput.Tests
         {
             var sut = new InputController();
 
-            sut.PressKey( 'a' );
+            sut.PressKey(new ConsoleKeyInfo('a', ConsoleKey.A, false, false, false));
 
-            sut.CursorIndex.Should().Be( 1 );
+            sut.CursorIndex.Should().Be(1);
         }
 
         [Fact]
@@ -29,9 +29,9 @@ namespace LineInput.Tests
         {
             var sut = new InputController();
 
-            sut.PressKey( 'q' );
+            sut.PressKey(new ConsoleKeyInfo('q', ConsoleKey.Q, false, false, false));
 
-            sut.GetBuffer().Should().Be( "q" );
+            sut.GetBuffer().Should().Be("q");
         }
 
         [Fact]
@@ -39,10 +39,10 @@ namespace LineInput.Tests
         {
             var sut = new InputController();
 
-            sut.PressKey( 'q' );
-            sut.PressKey( 'u' );
+            sut.PressKey(new ConsoleKeyInfo('q', ConsoleKey.Q, false, false, false));
+            sut.PressKey(new ConsoleKeyInfo('u', ConsoleKey.U, false, false, false));
 
-            sut.GetBuffer().Should().Be( "qu" );
+            sut.GetBuffer().Should().Be("qu");
         }
 
         [Fact]
@@ -52,7 +52,7 @@ namespace LineInput.Tests
 
             using (var monitoredSut = sut.Monitor())
             {
-                sut.PressKey('q');
+                sut.PressKey(new ConsoleKeyInfo('q', ConsoleKey.Q, false, false, false));
                 monitoredSut.Should().Raise(nameof(sut.InputChanged));
             }
         }
