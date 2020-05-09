@@ -9,17 +9,11 @@ namespace LineInput
         {
             if (keyInfo.Key == ConsoleKey.LeftArrow)
             {
-                // if (CursorIndex > 0)
-                // {
-                //     CursorIndex--;
-                // }
+                InputStateManager.ExecuteCommand(new MoveCursorCommand(), -1);
             }
             else if (keyInfo.Key == ConsoleKey.RightArrow)
             {
-                // if (CursorIndex < GetBuffer().Length)
-                // {
-                //     CursorIndex++;
-                // }
+                InputStateManager.ExecuteCommand(new MoveCursorCommand(), 1);
             }
             else if (keyInfo.Key == ConsoleKey.F1)
             {
