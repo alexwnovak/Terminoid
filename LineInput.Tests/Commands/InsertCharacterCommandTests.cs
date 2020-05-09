@@ -40,5 +40,18 @@ namespace LineInput.Tests.Commands
 
             inputState.Text.Should().Be("qu");
         }
+
+        [Fact]
+        public void TheCursorIsInTheMiddleOfTheText_TheUserPressesA_TheCharacterIsInsertedInTheMiddle()
+        {
+            var inputState = new InputState();
+            var inputStateManager = new InputStateManager(inputState);
+
+            inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'b');
+            inputStateManager.ExecuteCommand(new MoveCursorCommand(), -1);
+            inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'a');
+
+            inputState.Text.Should().Be("ab");
+        }
     }
 }
