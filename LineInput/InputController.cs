@@ -8,6 +8,8 @@ namespace LineInput
         private readonly object _syncObject = new object();
         private readonly StringBuilder _sb = new StringBuilder();
 
+        private readonly InputStateManager _inputStateManager;
+
         private int _cursorIndex;
         public int CursorIndex
         {
@@ -29,6 +31,11 @@ namespace LineInput
 
         public string GetBuffer() => _sb.ToString();
 
+        public InputController(InputStateManager inputStateManager)
+        {
+            _inputStateManager = inputStateManager;
+        }
+
         public void PressKey(ConsoleKeyInfo keyInfo)
         {
             if (keyInfo.Key == ConsoleKey.LeftArrow)
@@ -45,10 +52,15 @@ namespace LineInput
                     CursorIndex++;
                 }
             }
+            else if (keyInfo.Key == ConsoleKey.F1)
+            {
+                _inputStateManager.ExecuteCommand(new ClearLineCommand());
+            }
             else
             {
-                _sb.Append(keyInfo.KeyChar);
-                CursorIndex++;
+                _inputStateManager.ExecuteCommand(new InsertCharacterCommand());
+                // _sb.Append(keyInfo.KeyChar);
+                // CursorIndex++;
             }
         }
     }

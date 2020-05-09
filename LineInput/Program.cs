@@ -9,9 +9,12 @@ namespace LineInput
             Console.CursorVisible = false;
             Console.WriteLine("===== Starting");
 
-            var inputController = new InputController();
+            var inputState = new InputState();
+            var inputStateManager = new InputStateManager(inputState);
 
-            var renderManager = new RenderManager(inputController);
+            var inputController = new InputController(inputStateManager);
+
+            var renderManager = new RenderManager(inputState);
             renderManager.StartAsync();
 
             bool isRunning = true;

@@ -6,15 +6,17 @@ namespace LineInput
 {
     public class RenderManager
     {
-        private readonly IInputController _inputController;
+        // private readonly IInputController _inputController;
+        private readonly InputState _inputState;
         private readonly CursorPainter _cursorPainter;
         private readonly Thread _thread;
 
         private bool _isThreadRunning;
 
-        public RenderManager(IInputController inputController)
+        public RenderManager(InputState inputState)
         {
-            _inputController = inputController;
+            // _inputController = inputController;
+            _inputState = inputState;
             _cursorPainter = new CursorPainter();
 
             _thread = new Thread(ThreadProc);
@@ -51,20 +53,20 @@ namespace LineInput
                 int g = 0; //(int)(192.0 * opacity);
                 int b = (int)(255.0 * opacity);
 
-                string buffer = _inputController.GetBuffer();
+                string buffer = _inputState.Text;
                 string line = buffer;
 
-                if (_inputController.CursorIndex == buffer.Length)
+                if (_inputState.CursorIndex == buffer.Length)
                 {
                     line += $"\x1B[48;2;{r};{g};{b}m \x1B[0m";
                 }
                 else
                 {
                     var sb = new StringBuilder(buffer);
-                    sb.Remove(_inputController.CursorIndex, 1);
-                    char under = buffer[_inputController.CursorIndex];
+                    sb.Remove(_inputState.CursorIndex, 1);
+                    char under = buffer[_inputState.CursorIndex];
 
-                    sb.Insert(_inputController.CursorIndex, $"\x1B[48;2;{r};{g};{b}m{under}\x1B[0m");
+                    sb.Insert(_inputState.CursorIndex, $"\x1B[48;2;{r};{g};{b}m{under}\x1B[0m");
 
                     // An extra space at the end will remove the cursor if it was at the end
                     sb.Append("\x1B[0m ");

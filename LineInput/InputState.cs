@@ -26,6 +26,8 @@ namespace LineInput
         }
 
         private readonly StringBuilder _sb = new StringBuilder();
+        internal StringBuilder StringBuilder => _sb;
+
         public string Text
         {
             get
