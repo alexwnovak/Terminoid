@@ -29,10 +29,6 @@ namespace LineInput
 
         public string GetBuffer() => _sb.ToString();
 
-        public event EventHandler InputChanged;
-
-        protected virtual void OnInputChanged(object sender, EventArgs e) => InputChanged?.Invoke(this, e);
-
         public void PressKey(ConsoleKeyInfo keyInfo)
         {
             if (keyInfo.Key == ConsoleKey.LeftArrow)
@@ -43,7 +39,6 @@ namespace LineInput
             {
                 _sb.Append(keyInfo.KeyChar);
                 CursorIndex++;
-                OnInputChanged(this, EventArgs.Empty);
             }
         }
     }

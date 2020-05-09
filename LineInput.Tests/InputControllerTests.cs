@@ -26,17 +26,5 @@ namespace LineInput.Tests
 
             sut.GetBuffer().Should().Be("qu");
         }
-
-        [Fact]
-        public void PressKey_PressingAKeyThatWouldBeVisible_RaisesInputChangedEvent()
-        {
-            var sut = new InputController();
-
-            using (var monitoredSut = sut.Monitor())
-            {
-                sut.PressKey(new ConsoleKeyInfo('q', ConsoleKey.Q, false, false, false));
-                monitoredSut.Should().Raise(nameof(sut.InputChanged));
-            }
-        }
     }
 }

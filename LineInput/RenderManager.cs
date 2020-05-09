@@ -11,22 +11,14 @@ namespace LineInput
         private readonly Thread _thread;
 
         private bool _isThreadRunning;
-        private bool _requestRepaint;
 
         public RenderManager(IInputController inputController)
         {
             _inputController = inputController;
-            _inputController.InputChanged += OnInputChanged;
-
             _cursorPainter = new CursorPainter();
 
             _thread = new Thread(ThreadProc);
             _isThreadRunning = false;
-        }
-
-        private void OnInputChanged(object sender, EventArgs e)
-        {
-            RequestRepaint();
         }
 
         public void StartAsync()
@@ -38,11 +30,6 @@ namespace LineInput
         public void Stop()
         {
             _isThreadRunning = false;
-        }
-
-        public void RequestRepaint()
-        {
-            _requestRepaint = true;
         }
 
         private void ThreadProc(object parameter)
