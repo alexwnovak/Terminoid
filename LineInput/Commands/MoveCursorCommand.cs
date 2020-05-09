@@ -10,6 +10,10 @@ namespace LineInput.Commands
             {
                 inputState.CursorIndex = 0;
             }
+            else if (newIndex >= inputState.StringBuilder.Length)
+            {
+                inputState.CursorIndex = inputState.StringBuilder.Length;
+            }
             else
             {
                 inputState.CursorIndex += parameter;
