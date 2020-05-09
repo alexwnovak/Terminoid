@@ -2,16 +2,9 @@ using System;
 
 namespace LineInput
 {
-    public class InputController : IInputController
+    public class InputController : InputControllerBase
     {
-        private readonly InputStateManager _inputStateManager;
-
-        public InputController(InputStateManager inputStateManager)
-        {
-            _inputStateManager = inputStateManager;
-        }
-
-        public void PressKey(ConsoleKeyInfo keyInfo)
+        public override void PressKey(ConsoleKeyInfo keyInfo)
         {
             if (keyInfo.Key == ConsoleKey.LeftArrow)
             {
@@ -29,13 +22,11 @@ namespace LineInput
             }
             else if (keyInfo.Key == ConsoleKey.F1)
             {
-                _inputStateManager.ExecuteCommand(new ClearLineCommand());
+                InputStateManager.ExecuteCommand(new ClearLineCommand());
             }
             else
             {
-                _inputStateManager.ExecuteCommand(new InsertCharacterCommand());
-                // _sb.Append(keyInfo.KeyChar);
-                // CursorIndex++;
+                InputStateManager.ExecuteCommand(new InsertCharacterCommand());
             }
         }
     }

@@ -12,7 +12,10 @@ namespace LineInput
             var inputState = new InputState();
             var inputStateManager = new InputStateManager(inputState);
 
-            var inputController = new InputController(inputStateManager);
+            var inputController = new InputController
+            {
+                InputStateManager = inputStateManager
+            };
 
             var renderManager = new RenderManager(inputState);
             renderManager.StartAsync();
