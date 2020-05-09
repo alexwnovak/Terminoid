@@ -1,8 +1,8 @@
 namespace LineInput
 {
-    public class InsertCharacterCommand : IInputStateCommand
+    public class InsertCharacterCommand : InputStateCommandBase
     {
-        public void Execute(WritableInputState inputState)
+        public override void Execute(WritableInputState inputState)
         {
             inputState.StringBuilder.Insert(inputState.CursorIndex, 'q');
         }

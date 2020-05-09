@@ -9,10 +9,10 @@ namespace LineInput
             _inputState = inputState;
         }
 
-        public void ExecuteCommand(IInputStateCommand command)
+        public void ExecuteCommand(IInputStateCommand command, params object[] parameters)
         {
             var writeableInputState = new WritableInputState(_inputState);
-            command.Execute(writeableInputState);
+            command.Execute(writeableInputState, parameters);
         }
     }
 }
