@@ -5,9 +5,28 @@ namespace LineInput
 {
     public class InputController : IInputController
     {
+        private readonly object _syncObject = new object();
         private readonly StringBuilder _sb = new StringBuilder();
 
-        public int CursorIndex { get; private set; }
+        private int _cursorIndex;
+        public int CursorIndex
+        {
+            get
+            {
+                lock (_syncObject)
+                {
+                    return _cursorIndex;
+                }
+            }
+            private set
+            {
+                lock (_syncObject)
+                {
+                    _cursorIndex = value;
+                }
+            }
+        }
+
         public string GetBuffer() => _sb.ToString();
 
         public event EventHandler InputChanged;
