@@ -1,4 +1,5 @@
 using System;
+using LineInput.Commands;
 
 namespace LineInput
 {

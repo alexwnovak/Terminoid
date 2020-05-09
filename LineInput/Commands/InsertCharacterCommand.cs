@@ -1,4 +1,4 @@
-namespace LineInput
+namespace LineInput.Commands
 {
     public class InsertCharacterCommand : IInputStateCommand<char>
     {
