@@ -6,7 +6,6 @@ namespace LineInput
 {
     public class RenderManager
     {
-        // private readonly IInputController _inputController;
         private readonly InputState _inputState;
         private readonly CursorPainter _cursorPainter;
         private readonly Thread _thread;
