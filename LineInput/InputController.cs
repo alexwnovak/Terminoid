@@ -26,7 +26,7 @@ namespace LineInput
             }
             else
             {
-                InputStateManager.ExecuteCommand(new InsertCharacterCommand());
+                InputStateManager.ExecuteCommand(new InsertCharacterCommand(), keyInfo.KeyChar);
             }
         }
     }

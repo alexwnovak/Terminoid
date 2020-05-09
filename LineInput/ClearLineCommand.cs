@@ -1,8 +1,8 @@
 namespace LineInput
 {
-    public class ClearLineCommand : InputStateCommandBase
+    public class ClearLineCommand : IInputStateCommand
     {
-        public override void Execute(WritableInputState inputState)
+        public void Execute(WritableInputState inputState)
         {
             inputState.StringBuilder.Clear();
         }

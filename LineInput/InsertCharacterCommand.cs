@@ -1,10 +1,10 @@
 namespace LineInput
 {
-    public class InsertCharacterCommand : InputStateCommandBase
+    public class InsertCharacterCommand : IInputStateCommand<char>
     {
-        public override void Execute(WritableInputState inputState)
+        public void Execute(WritableInputState inputState, char newCharacter)
         {
-            inputState.StringBuilder.Insert(inputState.CursorIndex, 'q');
+            inputState.StringBuilder.Insert(inputState.CursorIndex, newCharacter);
         }
     }
 }
