@@ -4,7 +4,16 @@ namespace LineInput.Commands
     {
         public void Execute(IWritableInputState inputState, int parameter)
         {
-            inputState.CursorIndex += parameter;
+            int newIndex = inputState.CursorIndex + parameter;
+
+            if (newIndex < 0)
+            {
+                inputState.CursorIndex = 0;
+            }
+            else
+            {
+                inputState.CursorIndex += parameter;
+            }
         }
     }
 }
