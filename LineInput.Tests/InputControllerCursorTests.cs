@@ -5,7 +5,7 @@ using LineInput.Tests.Internal;
 
 namespace LineInput.Tests
 {
-    public class InputControllerCursorTests
+    public partial class InputControllerTests
     {
         [Fact]
         public void CursorIndex_ByDefault_IsAtLocation0()

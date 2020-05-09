@@ -4,7 +4,7 @@ using FluentAssertions;
 
 namespace LineInput.Tests
 {
-    public class InputControllerTests
+    public partial class InputControllerTests
     {
         [Fact]
         public void PressKey_PressingQKey_KeyIsAddedToBuffer()
