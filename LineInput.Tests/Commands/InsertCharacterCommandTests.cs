@@ -28,5 +28,17 @@ namespace LineInput.Tests.Commands
 
             inputState.CursorIndex.Should().Be(1);
         }
+
+        [Fact]
+        public void TheTextIsBlank_TheUserPressesQAndThenU_TheSecondCharacterIsAppended()
+        {
+            var inputState = new InputState();
+            var inputStateManager = new InputStateManager(inputState);
+
+            inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'q');
+            inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'u');
+
+            inputState.Text.Should().Be("qu");
+        }
     }
 }
