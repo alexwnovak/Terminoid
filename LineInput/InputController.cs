@@ -38,6 +38,13 @@ namespace LineInput
                     CursorIndex--;
                 }
             }
+            else if (keyInfo.Key == ConsoleKey.RightArrow)
+            {
+                if (CursorIndex < GetBuffer().Length)
+                {
+                    CursorIndex++;
+                }
+            }
             else
             {
                 _sb.Append(keyInfo.KeyChar);

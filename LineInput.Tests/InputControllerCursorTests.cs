@@ -16,11 +16,21 @@ namespace LineInput.Tests
         }
 
         [Fact]
-        public void CursorIsAtTheBeginningOfTheLine_UserPressesLeftArrow_CursorIndexDoesNotChange()
+        public void TheLineIsBlank_UserPressesLeftArrow_CursorIndexDoesNotChange()
         {
             var sut = new InputController();
 
             sut.PressKey(KeyFactory.FromKey(ConsoleKey.LeftArrow));
+
+            sut.CursorIndex.Should().Be(0);
+        }
+
+        [Fact]
+        public void TheLineIsBlank_UserPressesRightArrow_CursorIndexDoesNotChange()
+        {
+            var sut = new InputController();
+
+            sut.PressKey(KeyFactory.FromKey(ConsoleKey.RightArrow));
 
             sut.CursorIndex.Should().Be(0);
         }
@@ -34,6 +44,29 @@ namespace LineInput.Tests
             sut.PressKey(KeyFactory.FromKey(ConsoleKey.LeftArrow));
 
             sut.CursorIndex.Should().Be(0);
+        }
+
+        [Fact]
+        public void CursorIsAtTheEndOfTheLine_UserPressesRightArrow_CursorIndexDoesNotChange()
+        {
+            var sut = new InputController();
+
+            sut.PressKey(KeyFactory.FromChar('a', ConsoleKey.A));
+            sut.PressKey(KeyFactory.FromKey(ConsoleKey.RightArrow));
+
+            sut.CursorIndex.Should().Be(1);
+        }
+
+        [Fact]
+        public void CursorIsInTheMiddle_UserPressesRightArrow_CursorIndexMovesRightOneCharacter()
+        {
+            var sut = new InputController();
+
+            sut.PressKey(KeyFactory.FromChar('a', ConsoleKey.A));
+            sut.PressKey(KeyFactory.FromKey(ConsoleKey.LeftArrow));
+            sut.PressKey(KeyFactory.FromKey(ConsoleKey.RightArrow));
+
+            sut.CursorIndex.Should().Be(1);
         }
 
         [Fact]
