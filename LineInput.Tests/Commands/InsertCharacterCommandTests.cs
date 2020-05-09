@@ -17,5 +17,16 @@ namespace LineInput.Tests.Commands
 
             inputState.Text.Should().Be("a");
         }
+
+        [Fact]
+        public void TheTextIsBlank_TheUserPressesTheAKey_TheCursorIsPlacedAfterTheNewCharacter()
+        {
+            var inputState = new InputState();
+            var inputStateManager = new InputStateManager(inputState);
+
+            inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'a');
+
+            inputState.CursorIndex.Should().Be(1);
+        }
     }
 }

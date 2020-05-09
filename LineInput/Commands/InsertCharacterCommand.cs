@@ -5,6 +5,7 @@ namespace LineInput.Commands
         public void Execute(IWritableInputState inputState, char newCharacter)
         {
             inputState.StringBuilder.Insert(inputState.CursorIndex, newCharacter);
+            inputState.CursorIndex++;
         }
     }
 }
