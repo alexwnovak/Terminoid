@@ -2,7 +2,7 @@ using System.Text;
 
 namespace LineInput
 {
-    public class WritableInputState
+    internal class WritableInputState : IWritableInputState
     {
         private readonly InputState _inputState;
 

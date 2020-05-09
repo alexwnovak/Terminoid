@@ -2,7 +2,7 @@ namespace LineInput.Commands
 {
     public class ClearLineCommand : IInputStateCommand
     {
-        public void Execute(WritableInputState inputState)
+        public void Execute(IWritableInputState inputState)
         {
             inputState.StringBuilder.Clear();
         }
