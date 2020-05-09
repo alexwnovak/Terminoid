@@ -33,7 +33,10 @@ namespace LineInput
         {
             if (keyInfo.Key == ConsoleKey.LeftArrow)
             {
-                CursorIndex--;
+                if (CursorIndex > 0)
+                {
+                    CursorIndex--;
+                }
             }
             else
             {
