@@ -14,7 +14,6 @@ namespace LineInput
 
         public RenderManager(InputState inputState)
         {
-            // _inputController = inputController;
             _inputState = inputState;
             _cursorPainter = new CursorPainter();
 
