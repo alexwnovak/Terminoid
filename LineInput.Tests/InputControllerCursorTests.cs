@@ -1,6 +1,7 @@
 using System;
 using Xunit;
 using FluentAssertions;
+using LineInput.Tests.Internal;
 
 namespace LineInput.Tests
 {
@@ -19,7 +20,7 @@ namespace LineInput.Tests
         {
             var sut = new InputController();
 
-            sut.PressKey(new ConsoleKeyInfo('\0', ConsoleKey.LeftArrow, false, false, false));
+            sut.PressKey(KeyFactory.FromKey(ConsoleKey.LeftArrow));
 
             sut.CursorIndex.Should().Be(0);
         }
@@ -29,8 +30,8 @@ namespace LineInput.Tests
         {
             var sut = new InputController();
 
-            sut.PressKey(new ConsoleKeyInfo('a', ConsoleKey.A, false, false, false));
-            sut.PressKey(new ConsoleKeyInfo('\0', ConsoleKey.LeftArrow, false, false, false));
+            sut.PressKey(KeyFactory.FromChar('a', ConsoleKey.A));
+            sut.PressKey(KeyFactory.FromKey(ConsoleKey.LeftArrow));
 
             sut.CursorIndex.Should().Be(0);
         }
@@ -40,7 +41,7 @@ namespace LineInput.Tests
         {
             var sut = new InputController();
 
-            sut.PressKey(new ConsoleKeyInfo('a', ConsoleKey.A, false, false, false));
+            sut.PressKey(KeyFactory.FromChar('a', ConsoleKey.A));
 
             sut.CursorIndex.Should().Be(1);
         }
