@@ -53,5 +53,30 @@ namespace LineInput.Tests.Commands
 
             inputState.CursorIndex.Should().Be(1);
         }
+
+        [Fact]
+        public void TheCursorIsAtTheEndOfTheText_MovingCursorLeftPastTheStart_TheCursorIsClampedToTheStart()
+        {
+            var inputState = new InputState();
+            var inputStateManager = new InputStateManager(inputState);
+
+            inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'q');
+            inputStateManager.ExecuteCommand(new MoveCursorCommand(), -100);
+
+            inputState.CursorIndex.Should().Be(0);
+        }
+
+        [Fact]
+        public void TheCursorAtTheStartOfTheText_MovingCursorRightPastTheEnd_TheCursorIsClampedToTheEnd()
+        {
+            var inputState = new InputState();
+            var inputStateManager = new InputStateManager(inputState);
+
+            inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'q');
+            inputStateManager.ExecuteCommand(new MoveCursorCommand(), -1);
+            inputStateManager.ExecuteCommand(new MoveCursorCommand(), 100);
+
+            inputState.CursorIndex.Should().Be(1);
+        }
     }
 }
