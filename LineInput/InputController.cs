@@ -15,7 +15,7 @@ namespace LineInput
             {
                 InputStateManager.ExecuteCommand(new MoveCursorCommand(), 1);
             }
-            else if (keyInfo.Key == ConsoleKey.F1)
+            else if (keyInfo.Key == ConsoleKey.UpArrow)
             {
                 InputStateManager.ExecuteCommand(new ClearLineCommand());
             }

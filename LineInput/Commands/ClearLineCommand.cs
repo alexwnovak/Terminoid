@@ -5,6 +5,7 @@ namespace LineInput.Commands
         public void Execute(IWritableInputState inputState)
         {
             inputState.StringBuilder.Clear();
+            inputState.CursorIndex = 0;
         }
     }
 }
