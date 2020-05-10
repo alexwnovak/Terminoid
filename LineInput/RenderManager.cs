@@ -77,7 +77,7 @@ namespace LineInput
                     Console.Write("\x0D" + line);
 
                     lastTime = DateTime.Now;
-                    Thread.Sleep(20);
+                    Thread.Sleep(10);
                 }
             }
 
