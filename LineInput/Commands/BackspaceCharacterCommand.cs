@@ -9,6 +9,7 @@ namespace LineInput.Commands
             if (inputState.CursorIndex > 0)
             {
                 inputState.StringBuilder.Remove(inputState.CursorIndex - 1, 1);
+                inputState.CursorIndex--;
             }
         }
     }

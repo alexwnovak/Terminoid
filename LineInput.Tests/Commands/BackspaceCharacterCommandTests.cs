@@ -66,5 +66,17 @@ namespace LineInput.Tests.Commands
 
             inputState.Text.Should().BeEmpty();
         }
+
+        [Fact]
+        public void ThereIsText_BackspacingAtTheEndOfTheLine_TheCursorMovesLeftByOneSpot()
+        {
+            var inputState = new InputState();
+            var inputStateManager = new InputStateManager(inputState);
+
+            inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'a');
+            inputStateManager.ExecuteCommand(new BackspaceCharacterCommand());
+
+            inputState.CursorIndex.Should().Be(0);
+        }
     }
 }
