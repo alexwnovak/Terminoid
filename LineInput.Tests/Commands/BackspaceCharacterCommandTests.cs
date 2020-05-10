@@ -78,5 +78,35 @@ namespace LineInput.Tests.Commands
 
             inputState.CursorIndex.Should().Be(0);
         }
+
+        [Fact]
+        public void ThereIsText_BackspacingInTheMiddleOfTheLine_TheCharacterBehindTheCursorIsRemoved()
+        {
+            var inputState = new InputState();
+            var inputStateManager = new InputStateManager(inputState);
+
+            inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'a');
+            inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'b');
+            inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'c');
+            inputStateManager.ExecuteCommand(new MoveCursorCommand(), -1);
+            inputStateManager.ExecuteCommand(new BackspaceCharacterCommand());
+
+            inputState.Text.Should().Be("ac");
+        }
+
+        [Fact]
+        public void ThereIsText_BackspacingInTheMiddleOfTheLine_TheCursorMovesLeftByOneSpot()
+        {
+            var inputState = new InputState();
+            var inputStateManager = new InputStateManager(inputState);
+
+            inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'a');
+            inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'b');
+            inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'c');
+            inputStateManager.ExecuteCommand(new MoveCursorCommand(), -1);
+            inputStateManager.ExecuteCommand(new BackspaceCharacterCommand());
+
+            inputState.CursorIndex.Should().Be(1);
+        }
     }
 }
