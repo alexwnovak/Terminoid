@@ -4,6 +4,10 @@ namespace LineInput.Commands
     {
         public void Execute(IWritableInputState inputState)
         {
+            if (inputState.CursorIndex > 0)
+            {
+                inputState.StringBuilder.Remove(inputState.CursorIndex - 1, 1);
+            }
         }
     }
 }
