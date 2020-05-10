@@ -84,7 +84,7 @@ namespace LineInput
                 Console.Write("\x0D" + line);
 
                 lastTime = DateTime.Now;
-                Thread.Sleep(10);
+                Thread.Sleep(30);
             }
 
             Console.WriteLine("===== Stopping render thread");
