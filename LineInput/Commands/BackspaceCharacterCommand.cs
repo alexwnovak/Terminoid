@@ -1,3 +1,5 @@
+using System;
+
 namespace LineInput.Commands
 {
     public class BackspaceCharacterCommand : IInputStateCommand

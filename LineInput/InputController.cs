@@ -23,6 +23,10 @@ namespace LineInput
             {
                 InputStateManager.ExecuteCommand(new InsertTextCommand(), "_one-two-three_");
             }
+            else if (keyInfo.Key == ConsoleKey.Backspace)
+            {
+                InputStateManager.ExecuteCommand(new BackspaceCharacterCommand());
+            }
             else
             {
                 InputStateManager.ExecuteCommand(new InsertCharacterCommand(), keyInfo.KeyChar);
