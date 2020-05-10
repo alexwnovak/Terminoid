@@ -19,6 +19,10 @@ namespace LineInput
             {
                 InputStateManager.ExecuteCommand(new ClearLineCommand());
             }
+            else if (keyInfo.Key == ConsoleKey.DownArrow)
+            {
+                InputStateManager.ExecuteCommand(new InsertTextCommand(), "_one-two-three_");
+            }
             else
             {
                 InputStateManager.ExecuteCommand(new InsertCharacterCommand(), keyInfo.KeyChar);
