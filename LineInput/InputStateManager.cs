@@ -16,12 +16,18 @@ namespace LineInput
 
         public void ExecuteCommand(IInputStateCommand command)
         {
-            command.Execute(GetWritableInputState());
+            lock (_inputState)
+            {
+                command.Execute(GetWritableInputState());
+            }
         }
 
         public void ExecuteCommand<T>(IInputStateCommand<T> command, T parameter)
         {
-            command.Execute(GetWritableInputState(), parameter);
+            lock (_inputState)
+            {
+                command.Execute(GetWritableInputState(), parameter);
+            }
         }
     }
 }
