@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using System.Threading;
+using LineInput.Animation;
 
 namespace LineInput
 {
@@ -37,8 +38,7 @@ namespace LineInput
             _isThreadRunning = true;
             var lastTime = DateTime.Now;
 
-            double theta = 0;
-            double opacity;
+            var cursorAnimation = new CursorAnimation(TimeSpan.FromSeconds(1));
 
             while (_isThreadRunning)
             {
@@ -52,13 +52,11 @@ namespace LineInput
                 }
 
                 var elapsedTime = DateTime.Now - lastTime;
+                cursorAnimation.AddTime(elapsedTime);
 
-                theta += elapsedTime.TotalMilliseconds * 0.005;
-                opacity = 0.5 + 0.5 * Math.Sin(theta);
-
-                int r = (int)(255.0 * opacity);
-                int g = 0; //(int)(192.0 * opacity);
-                int b = (int)(255.0 * opacity);
+                int r = cursorAnimation.R;
+                int g = cursorAnimation.G;
+                int b = cursorAnimation.B;
 
                 string buffer = _inputState.Text;
                 string line = buffer;
