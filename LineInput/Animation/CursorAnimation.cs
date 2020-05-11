@@ -6,9 +6,9 @@ namespace LineInput.Animation
     {
         private const double _twoPi = Math.PI * 2;
 
-        public int R => (int)(128 * Math.Sin(Progress * _twoPi) + 128);
-        public int G => (int)(128 * Math.Sin(Progress * _twoPi) + 128);
-        public int B => (int)(128 * Math.Sin(Progress * _twoPi) + 128);
+        public int R => 0;
+        public int G => (int)(64 * Math.Sin(Progress * _twoPi) + 192);
+        public int B => (int)(64 * Math.Sin(Progress * _twoPi) + 192);
 
         public CursorAnimation(TimeSpan duration) : base(duration)
         {
