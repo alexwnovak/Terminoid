@@ -51,13 +51,21 @@ namespace LineInput
 
                 if (animatable.Progress >= 1)
                 {
-                    completedAnimations.Enqueue(animatable);
+                    // completedAnimations.Enqueue(animatable);
                 }
             }
 
             foreach (var completedAnimation in completedAnimations)
             {
                 _animationObjects.Remove(completedAnimation);
+            }
+        }
+
+        private void RenderAnimations(int cursorIndex, StringBuilder output)
+        {
+            foreach (var animatable in _animationObjects)
+            {
+                animatable.Render(cursorIndex, output);
             }
         }
 
@@ -82,33 +90,12 @@ namespace LineInput
                     text = _inputState.Text;
                 }
 
+                var output = new StringBuilder(text);
+
                 UpdateAnimation(elapsedTime);
+                RenderAnimations(cursorIndex, output);
 
-                int r = cursorAnimation.R;
-                int g = cursorAnimation.G;
-                int b = cursorAnimation.B;
-
-                string line = text;
-
-                if (cursorIndex == text.Length)
-                {
-                    line += $"\x1B[48;2;{r};{g};{b}m \x1B[0m";
-                }
-                else
-                {
-                    var sb = new StringBuilder(text);
-                    sb.Remove(cursorIndex, 1);
-                    char under = text[cursorIndex];
-
-                    sb.Insert(cursorIndex, $"\x1B[48;2;{r};{g};{b}m{under}\x1B[0m");
-
-                    // An extra space at the end will remove the cursor if it was at the end
-                    sb.Append("\x1B[0m ");
-
-                    line = sb.ToString();
-                }
-
-                Console.Write("\x0D" + line);
+                Console.Write($"\x0D{output}");
 
                 lastTime = DateTime.Now;
                 Thread.Sleep(30);

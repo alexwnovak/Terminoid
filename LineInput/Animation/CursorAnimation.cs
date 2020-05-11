@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace LineInput.Animation
 {
@@ -12,6 +13,24 @@ namespace LineInput.Animation
 
         public CursorAnimation(TimeSpan duration) : base(duration)
         {
+        }
+
+        public override void Render(int cursorIndex, StringBuilder output)
+        {
+            if (cursorIndex == output.Length)
+            {
+                output.Append($"\x1B[48;2;{R};{G};{B}m \x1B[0m");
+            }
+            else
+            {
+                output.Remove(cursorIndex, 1);
+                char under = output[cursorIndex];
+
+                output.Insert(cursorIndex, $"\x1B[48;2;{R};{G};{B}m{under}\x1B[0m");
+
+                // An extra space at the end will remove the cursor if it was at the end
+                output.Append("\x1B[0m ");
+            }
         }
     }
 }
