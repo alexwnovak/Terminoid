@@ -82,7 +82,6 @@ namespace LineInput
 
                 var elapsedTime = DateTime.Now - lastTime;
                 UpdateAnimation(elapsedTime);
-                // cursorAnimation.AddTime(elapsedTime);
 
                 int r = cursorAnimation.R;
                 int g = cursorAnimation.G;
