@@ -88,20 +88,19 @@ namespace LineInput
                 int g = cursorAnimation.G;
                 int b = cursorAnimation.B;
 
-                string buffer = _inputState.Text;
-                string line = buffer;
+                string line = text;
 
-                if (_inputState.CursorIndex == buffer.Length)
+                if (cursorIndex == text.Length)
                 {
                     line += $"\x1B[48;2;{r};{g};{b}m \x1B[0m";
                 }
                 else
                 {
-                    var sb = new StringBuilder(buffer);
-                    sb.Remove(_inputState.CursorIndex, 1);
-                    char under = buffer[_inputState.CursorIndex];
+                    var sb = new StringBuilder(text);
+                    sb.Remove(cursorIndex, 1);
+                    char under = text[cursorIndex];
 
-                    sb.Insert(_inputState.CursorIndex, $"\x1B[48;2;{r};{g};{b}m{under}\x1B[0m");
+                    sb.Insert(cursorIndex, $"\x1B[48;2;{r};{g};{b}m{under}\x1B[0m");
 
                     // An extra space at the end will remove the cursor if it was at the end
                     sb.Append("\x1B[0m ");
