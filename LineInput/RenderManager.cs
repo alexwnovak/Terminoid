@@ -71,6 +71,8 @@ namespace LineInput
 
             while (_isThreadRunning)
             {
+                var elapsedTime = DateTime.Now - lastTime;
+
                 int cursorIndex;
                 string text;
 
@@ -80,7 +82,6 @@ namespace LineInput
                     text = _inputState.Text;
                 }
 
-                var elapsedTime = DateTime.Now - lastTime;
                 UpdateAnimation(elapsedTime);
 
                 int r = cursorAnimation.R;
