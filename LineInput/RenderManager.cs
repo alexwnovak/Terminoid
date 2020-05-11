@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using LineInput.Animation;
@@ -12,6 +13,8 @@ namespace LineInput
         private readonly Thread _thread;
 
         private bool _isThreadRunning;
+
+        private readonly List<Animatable> _animationObjects = new List<Animatable>();
 
         public RenderManager(InputState inputState)
         {
@@ -33,12 +36,38 @@ namespace LineInput
             _isThreadRunning = false;
         }
 
+        private void StartAnimation(Animatable animatable)
+        {
+            _animationObjects.Add(animatable);
+        }
+
+        private void UpdateAnimation(TimeSpan frameTime)
+        {
+            var completedAnimations = new Queue<Animatable>();
+
+            foreach (var animatable in _animationObjects)
+            {
+                animatable.AddTime(frameTime);
+
+                if (animatable.Progress >= 1)
+                {
+                    completedAnimations.Enqueue(animatable);
+                }
+            }
+
+            foreach (var completedAnimation in completedAnimations)
+            {
+                _animationObjects.Remove(completedAnimation);
+            }
+        }
+
         private void ThreadProc(object parameter)
         {
             _isThreadRunning = true;
             var lastTime = DateTime.Now;
 
             var cursorAnimation = new CursorAnimation(TimeSpan.FromSeconds(1));
+            StartAnimation(cursorAnimation);
 
             while (_isThreadRunning)
             {
@@ -52,7 +81,8 @@ namespace LineInput
                 }
 
                 var elapsedTime = DateTime.Now - lastTime;
-                cursorAnimation.AddTime(elapsedTime);
+                UpdateAnimation(elapsedTime);
+                // cursorAnimation.AddTime(elapsedTime);
 
                 int r = cursorAnimation.R;
                 int g = cursorAnimation.G;
