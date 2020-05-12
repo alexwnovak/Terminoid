@@ -186,5 +186,17 @@ namespace LineInput.Tests
 
             newColor.B.Should().Be(0);
         }
+
+        [Fact]
+        public void OneColorExists_ChainingAdditionsTogetherForAllComponents_TheNewColorHasTheRightValues()
+        {
+            var color = new Color(10, 20, 30);
+
+            var newColor = color + Color.Red(1) + Color.Green(2) + Color.Blue(3);
+
+            newColor.R.Should().Be(11);
+            newColor.G.Should().Be(22);
+            newColor.B.Should().Be(33);
+        }
     }
 }
