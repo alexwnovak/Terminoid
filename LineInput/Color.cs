@@ -26,12 +26,7 @@ namespace LineInput
             return false;
         }
 
-        public override int GetHashCode()
-        {
-            // TODO: write your implementation of GetHashCode() here
-            throw new System.NotImplementedException();
-            return base.GetHashCode();
-        }
+        public override int GetHashCode() => (B << 16) | (G << 8) | R;
 
         public bool Equals(Color other)
         {
