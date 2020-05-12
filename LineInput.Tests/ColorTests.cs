@@ -99,5 +99,15 @@ namespace LineInput.Tests
 
             newColor.R.Should().Be(255);
         }
+
+        [Fact]
+        public void OneColorExists_SubtractingEnoughToUnderflowRedComponent_RedComponentIsClampedAtMinimum()
+        {
+            var color = new Color(100, 20, 30);
+
+            var newColor = color - Color.Red(200);
+
+            newColor.R.Should().Be(0);
+        }
     }
 }
