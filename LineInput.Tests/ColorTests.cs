@@ -79,6 +79,19 @@ namespace LineInput.Tests
         }
 
         [Fact]
+        public void ThereAreTwoColorsWhoseValuesDifferBelowTheMax_SubtractingColors_ComponentsAreCappedAtTheMinValue()
+        {
+            var one = new Color(100, 100, 100);
+            var two = new Color(200, 200, 200);
+
+            var three = one - two;
+
+            three.R.Should().Be(0);
+            three.G.Should().Be(0);
+            three.B.Should().Be(0);
+        }
+
+        [Fact]
         public void OneColorExists_AddingJustToTheRedComponent_ANewColorIsProducedWithTheNewRedAndOldGreenAndBlue()
         {
             var color = new Color(10, 20, 30);

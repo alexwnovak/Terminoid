@@ -46,6 +46,15 @@ namespace LineInput
             return new Color((byte)r, (byte)g, (byte)b);
         }
 
+        public static Color operator -(Color lhs, Color rhs)
+        {
+            int r = Math.Clamp(lhs.R - rhs.R, 0, 255);
+            int g = Math.Clamp(lhs.G - rhs.G, 0, 255);
+            int b = Math.Clamp(lhs.B - rhs.B, 0, 255);
+
+            return new Color((byte)r, (byte)g, (byte)b);
+        }
+
         public static Color operator +(Color lhs, Red rhs)
         {
             int r = Math.Clamp(lhs.R + rhs.Value, 0, 255);
