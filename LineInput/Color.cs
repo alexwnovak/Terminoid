@@ -16,6 +16,7 @@ namespace LineInput
         }
 
         public static Red Red(byte value) => new Red(value);
+        public static Green Green(byte value) => new Green(value);
 
         public override bool Equals(object obj)
         {
@@ -67,6 +68,20 @@ namespace LineInput
             int r = Math.Clamp(lhs.R - rhs.Value, 0, 255);
 
             return new Color((byte)r, lhs.G, lhs.B);
+        }
+
+        public static Color operator +(Color lhs, Green rhs)
+        {
+            int g = Math.Clamp(lhs.G + rhs.Value, 0, 255);
+
+            return new Color(lhs.R, (byte)g, lhs.B);
+        }
+
+        public static Color operator -(Color lhs, Green rhs)
+        {
+            int g = Math.Clamp(lhs.G - rhs.Value, 0, 255);
+
+            return new Color(lhs.R, (byte)g, lhs.B);
         }
     }
 }
