@@ -51,5 +51,31 @@ namespace LineInput.Tests
 
             (one != two).Should().Be(true);
         }
+
+        [Fact]
+        public void ThereAreTwoColors_TheColorsAreAddedTogether_AThirdColorIsProducedAsTheSumOfTheTwo()
+        {
+            var one = new Color(1, 2, 3);
+            var two = new Color(7, 8, 9);
+
+            var three = one + two;
+
+            three.R.Should().Be(8);
+            three.G.Should().Be(10);
+            three.B.Should().Be(12);
+        }
+
+        [Fact]
+        public void ThereAreTwoColorsWhoseValuesSumOverTheMax_AddingColors_ComponentsAreCappedAtTheMaxValue()
+        {
+            var one = new Color(200, 200, 200);
+            var two = new Color(200, 200, 200);
+
+            var three = one + two;
+
+            three.R.Should().Be(255);
+            three.G.Should().Be(255);
+            three.B.Should().Be(255);
+        }
     }
 }
