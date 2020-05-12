@@ -15,6 +15,8 @@ namespace LineInput
             B = b;
         }
 
+        public static Red Red(int value) => new Red(value);
+
         public override bool Equals(object obj)
         {
             if (obj is Color color)
@@ -42,6 +44,13 @@ namespace LineInput
             int b = Math.Clamp(lhs.B + rhs.B, 0, 255);
 
             return new Color((byte) r, (byte) g, (byte) b);
+        }
+
+        public static Color operator +(Color lhs, Red rhs)
+        {
+            int r = Math.Clamp(lhs.R + rhs.Value, 0, 255);
+
+            return new Color((byte) r, lhs.G, lhs.B);
         }
     }
 }

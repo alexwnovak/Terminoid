@@ -77,5 +77,17 @@ namespace LineInput.Tests
             three.G.Should().Be(255);
             three.B.Should().Be(255);
         }
+
+        [Fact]
+        public void OneColorExists_AddingJustToTheRedComponent_ANewColorIsProducedWithTheNewRedAndOldGreenAndBlue()
+        {
+            var color = new Color(10, 20, 30);
+
+            var newColor = color + Color.Red(100);
+
+            newColor.R.Should().Be(110);
+            newColor.G.Should().Be(20);
+            newColor.B.Should().Be(30);
+        }
     }
 }
