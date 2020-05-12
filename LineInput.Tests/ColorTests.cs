@@ -154,5 +154,37 @@ namespace LineInput.Tests
 
             newColor.G.Should().Be(0);
         }
+
+        [Fact]
+        public void OneColorExists_AddingJustToTheBlueComponent_ANewColorIsProducedWithTheNewBlueAndOldRedAndGreen()
+        {
+            var color = new Color(10, 20, 30);
+
+            var newColor = color + Color.Blue(100);
+
+            newColor.R.Should().Be(10);
+            newColor.G.Should().Be(20);
+            newColor.B.Should().Be(130);
+        }
+
+        [Fact]
+        public void OneColorExists_AddingEnoughToOverflowBlueComponent_BlueComponentIsClampedAtMaximum()
+        {
+            var color = new Color(10, 20, 30);
+
+            var newColor = color + Color.Blue(240);
+
+            newColor.B.Should().Be(255);
+        }
+
+        [Fact]
+        public void OneColorExists_SubtractingEnoughToUnderflowBlueComponent_BlueComponentIsClampedAtMinimum()
+        {
+            var color = new Color(10, 20, 30);
+
+            var newColor = color - Color.Blue(200);
+
+            newColor.B.Should().Be(0);
+        }
     }
 }
