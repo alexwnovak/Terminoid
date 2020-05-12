@@ -89,5 +89,15 @@ namespace LineInput.Tests
             newColor.G.Should().Be(20);
             newColor.B.Should().Be(30);
         }
+
+        [Fact]
+        public void OneColorExists_AddingEnoughToOverflowRedComponent_RedComponentIsClampedAtMaximum()
+        {
+            var color = new Color(200, 20, 30);
+
+            var newColor = color + Color.Red(200);
+
+            newColor.R.Should().Be(255);
+        }
     }
 }

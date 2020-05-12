@@ -2,7 +2,7 @@ namespace LineInput
 {
     public struct Red
     {
-        public int Value { get; }
-        internal Red(int value) => Value = value;
+        public byte Value { get; }
+        internal Red(byte value) => Value = value;
     }
 }

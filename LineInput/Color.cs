@@ -15,7 +15,7 @@ namespace LineInput
             B = b;
         }
 
-        public static Red Red(int value) => new Red(value);
+        public static Red Red(byte value) => new Red(value);
 
         public override bool Equals(object obj)
         {
