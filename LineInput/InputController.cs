@@ -21,7 +21,9 @@ namespace LineInput
             }
             else if (keyInfo.Key == ConsoleKey.DownArrow)
             {
-                InputStateManager.ExecuteCommand(new InsertTextCommand(), "_one-two-three_");
+                // InputStateManager.ExecuteCommand(new InsertTextCommand(), "_one-two-three_");
+                InputStateManager.ExecuteCommand(new AnimatedInsertTextCommand(TimeSpan.FromSeconds(1)), "this-is-some-animated-text");
+
             }
             else if (keyInfo.Key == ConsoleKey.Backspace)
             {

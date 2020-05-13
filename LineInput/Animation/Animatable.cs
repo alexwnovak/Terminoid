@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace LineInput.Animation
 {
@@ -30,5 +31,7 @@ namespace LineInput.Animation
 
             // Console.WriteLine($"Progress {Progress}");
         }
+
+        public virtual void Render(int cursorIndex, StringBuilder output) { }
     }
 }
