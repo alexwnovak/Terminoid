@@ -15,6 +15,14 @@ namespace LineInput.Tests
         }
 
         [Fact]
+        public void WhenCreatingACell_ItIsGivenAnOptionalForeground_TheForegroundIsRetained()
+        {
+            var cell = new Cell('A', new Color(255, 255, 0));
+
+            cell.Foreground.Should().BeEquivalentTo(new Color(255, 255, 0));
+        }
+
+        [Fact]
         public void ByDefault_CellsHaveDefaultGrayForeground()
         {
             var cell = new Cell('A');

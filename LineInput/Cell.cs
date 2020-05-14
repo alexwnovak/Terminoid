@@ -7,5 +7,6 @@ namespace LineInput
         public Color? Background { get; set; }
 
         public Cell(char c) => Char = c;
+        public Cell(char c, Color foreground) : this(c) => Foreground = foreground;
     }
 }
