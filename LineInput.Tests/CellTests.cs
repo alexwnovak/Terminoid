@@ -22,6 +22,12 @@ namespace LineInput.Tests
             cell.Foreground.Should().BeEquivalentTo(new Color(127, 127, 127));
         }
 
+        [Fact]
+        public void ByDefault_ACellHasNoBackground()
+        {
+            var cell = new Cell('A');
 
+            cell.Background.Should().BeNull();
+        }
     }
 }
