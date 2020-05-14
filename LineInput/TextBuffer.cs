@@ -17,9 +17,10 @@ namespace LineInput
 
         public TextBuffer(IEnumerable<Cell> cells)
         {
-            _cells.AddRange(cells);
+            Append(cells);
         }
 
         public void Append(Cell cell) => _cells.Add(cell);
+        public void Append(IEnumerable<Cell> cells) => _cells.AddRange(cells);
     }
 }

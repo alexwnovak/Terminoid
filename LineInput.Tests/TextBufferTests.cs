@@ -53,5 +53,23 @@ namespace LineInput.Tests
             textBuffer[1].Should().Be(cells[1]);
             textBuffer[2].Should().Be(cells[2]);
         }
+
+        [Fact]
+        public void TheBufferHasOneCell_AddingTwoMoreCellsAtOnce_ThereAreThreeCells()
+        {
+            var textBuffer = new TextBuffer();
+            textBuffer.Append(new Cell('A'));
+
+            var cells = new[]
+            {
+                new Cell('B'),
+                new Cell('C')
+            };
+
+            textBuffer.Append(cells);
+
+            textBuffer[1].Should().Be(cells[0]);
+            textBuffer[2].Should().Be(cells[1]);
+        }
     }
 }
