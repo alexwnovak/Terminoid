@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace LineInput
@@ -9,6 +10,15 @@ namespace LineInput
         public int Length => _cells.Count;
 
         public Cell this[int index] => _cells[index];
+
+        public TextBuffer()
+        {
+        }
+
+        public TextBuffer(IEnumerable<Cell> cells)
+        {
+            _cells.AddRange(cells);
+        }
 
         public void Append(Cell cell) => _cells.Add(cell);
     }
