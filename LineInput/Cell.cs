@@ -8,5 +8,6 @@ namespace LineInput
 
         public Cell(char c) => Char = c;
         public Cell(char c, Color foreground) : this(c) => Foreground = foreground;
+        public Cell(char c, Color foreground, Color background) : this(c, foreground) => Background = background;
     }
 }
