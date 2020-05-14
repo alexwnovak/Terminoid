@@ -71,5 +71,22 @@ namespace LineInput.Tests
             textBuffer[1].Should().Be(cells[0]);
             textBuffer[2].Should().Be(cells[1]);
         }
+
+        [Fact]
+        public void TheBufferHasCells_WhenClearingTheBuffer_TheBufferBecomesEmpty()
+        {
+            var cells = new[]
+            {
+                new Cell('A'),
+                new Cell('B'),
+                new Cell('C')
+            };
+
+            var textBuffer = new TextBuffer(cells);
+
+            textBuffer.Clear();
+
+            textBuffer.Length.Should().Be(0);
+        }
     }
 }

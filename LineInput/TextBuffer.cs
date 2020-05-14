@@ -22,5 +22,7 @@ namespace LineInput
 
         public void Append(Cell cell) => _cells.Add(cell);
         public void Append(IEnumerable<Cell> cells) => _cells.AddRange(cells);
+
+        public void Clear() => _cells.Clear();
     }
 }
