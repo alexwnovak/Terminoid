@@ -1,3 +1,5 @@
+using System;
+using System.Diagnostics;
 using Xunit;
 using FluentAssertions;
 using LineInput;
@@ -12,6 +14,16 @@ namespace LineInput.Tests
             var textBuffer = new TextBuffer();
 
             textBuffer.Length.Should().Be(0);
+        }
+
+        [Fact]
+        public void TheBufferIsEmpty_ReadingTheFirstIndex_ThrowsArgumentOutOfRangeException()
+        {
+            var textBuffer = new TextBuffer();
+
+            Action indexer = () => Trace.WriteLine(textBuffer[0]);
+
+            indexer.Should().Throw<ArgumentOutOfRangeException>();
         }
 
         [Fact]
