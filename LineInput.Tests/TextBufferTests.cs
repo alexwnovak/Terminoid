@@ -120,6 +120,30 @@ namespace LineInput.Tests
         }
 
         [Fact]
+        public void TheBufferHasOneCell_InsertingAStringOfTextAtTheStart_TheStringBecomesCellsAtTheStart()
+        {
+            var textBuffer = new TextBuffer();
+            textBuffer.Append(new Cell('C'));
+
+            textBuffer.Insert(0, "AB");
+
+            textBuffer[0].Char.Should().Be('A');
+            textBuffer[1].Char.Should().Be('B');
+        }
+
+        [Fact]
+        public void TheBufferHasOneCell_InsertingAStringOfTextIntoAnIndexThatDoesNotExist_ThrowsArgumentOutOfRangeException()
+        {
+            var textBuffer = new TextBuffer();
+            textBuffer.Append(new Cell('B'));
+
+            var newCell = new Cell('A');
+            Action insert = () => textBuffer.Insert(textBuffer.Length + 1, "AA");
+
+            insert.Should().Throw<ArgumentOutOfRangeException>();
+        }
+
+        [Fact]
         public void TheBufferHasCells_WhenClearingTheBuffer_TheBufferBecomesEmpty()
         {
             var cells = new[]

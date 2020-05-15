@@ -26,6 +26,11 @@ namespace LineInput
 
         public void Insert(int index, Cell cell) => _cells.Insert(index, cell);
         public void Insert(int index, char c) => Insert(index, new Cell(c));
+        public void Insert(int index, string s)
+        {
+            var cells = s.Select(c => new Cell(c));
+            _cells.InsertRange(index, cells);
+        }
 
         public void Clear() => _cells.Clear();
 
