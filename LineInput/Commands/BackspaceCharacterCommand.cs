@@ -1,5 +1,3 @@
-using System;
-
 namespace LineInput.Commands
 {
     public class BackspaceCharacterCommand : IInputStateCommand
@@ -8,7 +6,7 @@ namespace LineInput.Commands
         {
             if (inputState.CursorIndex > 0)
             {
-                inputState.StringBuilder.Remove(inputState.CursorIndex - 1, 1);
+                inputState.TextBuffer.Remove(inputState.CursorIndex - 1);
                 inputState.CursorIndex--;
             }
         }

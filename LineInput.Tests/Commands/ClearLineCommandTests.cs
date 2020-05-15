@@ -15,7 +15,7 @@ namespace LineInput.Tests.Commands
 
             inputStateManager.ExecuteCommand(new ClearLineCommand());
 
-            inputState.Text.Should().BeEmpty();
+            inputState.TextBuffer.ToString().Should().BeEmpty();
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace LineInput.Tests.Commands
             inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'c');
             inputStateManager.ExecuteCommand(new ClearLineCommand());
 
-            inputState.Text.Should().BeEmpty();
+            inputState.TextBuffer.ToString().Should().BeEmpty();
         }
 
         [Fact]

@@ -15,7 +15,7 @@ namespace LineInput.Tests.Commands
 
             inputStateManager.ExecuteCommand(new BackspaceCharacterCommand());
 
-            inputState.Text.Should().BeEmpty();
+            inputState.TextBuffer.ToString().Should().BeEmpty();
         }
 
         [Fact]
@@ -39,7 +39,7 @@ namespace LineInput.Tests.Commands
             inputStateManager.ExecuteCommand(new MoveCursorCommand(), -1);
             inputStateManager.ExecuteCommand(new BackspaceCharacterCommand());
 
-            inputState.Text.Should().Be("a");
+            inputState.TextBuffer.ToString().Should().Be("a");
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace LineInput.Tests.Commands
             inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'a');
             inputStateManager.ExecuteCommand(new BackspaceCharacterCommand());
 
-            inputState.Text.Should().BeEmpty();
+            inputState.TextBuffer.ToString().Should().BeEmpty();
         }
 
         [Fact]
@@ -91,7 +91,7 @@ namespace LineInput.Tests.Commands
             inputStateManager.ExecuteCommand(new MoveCursorCommand(), -1);
             inputStateManager.ExecuteCommand(new BackspaceCharacterCommand());
 
-            inputState.Text.Should().Be("ac");
+            inputState.TextBuffer.ToString().Should().Be("ac");
         }
 
         [Fact]

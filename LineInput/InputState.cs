@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace LineInput
 {
     public class InputState
@@ -25,16 +23,14 @@ namespace LineInput
             }
         }
 
-        private readonly StringBuilder _sb = new StringBuilder();
-        internal StringBuilder StringBuilder => _sb;
-
-        public string Text
+        private readonly TextBuffer _textBuffer = new TextBuffer();
+        public TextBuffer TextBuffer
         {
             get
             {
                 lock (_syncObject)
                 {
-                    return _sb.ToString();
+                    return _textBuffer;
                 }
             }
         }

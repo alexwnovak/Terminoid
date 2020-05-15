@@ -71,5 +71,130 @@ namespace LineInput.Tests
             textBuffer[1].Should().Be(cells[0]);
             textBuffer[2].Should().Be(cells[1]);
         }
+
+        [Fact]
+        public void TheBufferHasOneCell_InsertingACellAtTheStart_TheNewCellIsNowTheFirstCell()
+        {
+            var textBuffer = new TextBuffer();
+            textBuffer.Append(new Cell('B'));
+
+            var newCell = new Cell('A');
+            textBuffer.Insert(0, newCell);
+
+            textBuffer[0].Should().Be(newCell);
+        }
+
+        [Fact]
+        public void TheBufferHasOneCell_InsertingACellIntoAnIndexThatDoesNotExist_ThrowsArgumentOutOfRangeException()
+        {
+            var textBuffer = new TextBuffer();
+            textBuffer.Append(new Cell('B'));
+
+            var newCell = new Cell('A');
+            Action insert = () => textBuffer.Insert(textBuffer.Length + 1, newCell);
+
+            insert.Should().Throw<ArgumentOutOfRangeException>();
+        }
+
+        [Fact]
+        public void TheBufferHasOneCell_InsertingASingleCharacterAtTheStart_TheCharacterIsNowACellAtTheStart()
+        {
+            var textBuffer = new TextBuffer();
+            textBuffer.Append(new Cell('B'));
+
+            textBuffer.Insert(0, 'A');
+
+            textBuffer[0].Char.Should().Be('A');
+        }
+
+        [Fact]
+        public void TheBufferHasOneCell_InsertingACharacterIntoAnIndexThatDoesNotExist_ThrowsArgumentOutOfRangeException()
+        {
+            var textBuffer = new TextBuffer();
+            textBuffer.Append(new Cell('B'));
+
+            var newCell = new Cell('A');
+            Action insert = () => textBuffer.Insert(textBuffer.Length + 1, 'A');
+
+            insert.Should().Throw<ArgumentOutOfRangeException>();
+        }
+
+        [Fact]
+        public void TheBufferHasOneCell_InsertingAStringOfTextAtTheStart_TheStringBecomesCellsAtTheStart()
+        {
+            var textBuffer = new TextBuffer();
+            textBuffer.Append(new Cell('C'));
+
+            textBuffer.Insert(0, "AB");
+
+            textBuffer[0].Char.Should().Be('A');
+            textBuffer[1].Char.Should().Be('B');
+        }
+
+        [Fact]
+        public void TheBufferHasOneCell_InsertingAStringOfTextIntoAnIndexThatDoesNotExist_ThrowsArgumentOutOfRangeException()
+        {
+            var textBuffer = new TextBuffer();
+            textBuffer.Append(new Cell('B'));
+
+            var newCell = new Cell('A');
+            Action insert = () => textBuffer.Insert(textBuffer.Length + 1, "AA");
+
+            insert.Should().Throw<ArgumentOutOfRangeException>();
+        }
+
+        [Fact]
+        public void TheBufferHasOneCell_RemovingTheCellByItsIndex_TheBufferBecomesEmpty()
+        {
+            var textBuffer = new TextBuffer();
+            textBuffer.Append(new Cell('A'));
+
+            textBuffer.Remove(0);
+
+            textBuffer.Length.Should().Be(0);
+        }
+
+        [Fact]
+        public void TheBufferHasOneCell_RemovingAnIndexThatDoesNotExist_ThrowsArgumentOutOfRangeException()
+        {
+            var textBuffer = new TextBuffer();
+            textBuffer.Append(new Cell('A'));
+
+            Action remove = () => textBuffer.Remove(textBuffer.Length + 1);
+
+            remove.Should().Throw<ArgumentOutOfRangeException>();
+        }
+
+        [Fact]
+        public void TheBufferHasCells_WhenClearingTheBuffer_TheBufferBecomesEmpty()
+        {
+            var cells = new[]
+            {
+                new Cell('A'),
+                new Cell('B'),
+                new Cell('C')
+            };
+
+            var textBuffer = new TextBuffer(cells);
+
+            textBuffer.Clear();
+
+            textBuffer.Length.Should().Be(0);
+        }
+
+        [Fact]
+        public void TheBufferHasCells_ConvertingToAString_GivesTheRawText()
+        {
+            var cells = new[]
+            {
+                new Cell('A'),
+                new Cell('B'),
+                new Cell('C')
+            };
+
+            var textBuffer = new TextBuffer(cells);
+
+            textBuffer.ToString().Should().Be("ABC");
+        }
     }
 }

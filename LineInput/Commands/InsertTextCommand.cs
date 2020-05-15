@@ -4,7 +4,7 @@ namespace LineInput.Commands
     {
         public void Execute(IWritableInputState inputState, string parameter)
         {
-            inputState.StringBuilder.Insert(inputState.CursorIndex, parameter);
+            inputState.TextBuffer.Insert(inputState.CursorIndex, parameter);
             inputState.CursorIndex += parameter.Length;
         }
     }
