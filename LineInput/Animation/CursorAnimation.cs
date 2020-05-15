@@ -23,8 +23,8 @@ namespace LineInput.Animation
             }
             else
             {
-                output.Remove(cursorIndex, 1);
                 char under = output[cursorIndex];
+                output.Remove(cursorIndex, 1);
 
                 output.Insert(cursorIndex, $"\x1B[48;2;{R};{G};{B}m{under}\x1B[0m");
 
