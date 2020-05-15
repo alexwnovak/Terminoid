@@ -32,6 +32,8 @@ namespace LineInput
             _cells.InsertRange(index, cells);
         }
 
+        public void Remove(int index) => _cells.RemoveAt(index);
+
         public void Clear() => _cells.Clear();
 
         public override string ToString()

@@ -144,6 +144,28 @@ namespace LineInput.Tests
         }
 
         [Fact]
+        public void TheBufferHasOneCell_RemovingTheCellByItsIndex_TheBufferBecomesEmpty()
+        {
+            var textBuffer = new TextBuffer();
+            textBuffer.Append(new Cell('A'));
+
+            textBuffer.Remove(0);
+
+            textBuffer.Length.Should().Be(0);
+        }
+
+        [Fact]
+        public void TheBufferHasOneCell_RemovingAnIndexThatDoesNotExist_ThrowsArgumentOutOfRangeException()
+        {
+            var textBuffer = new TextBuffer();
+            textBuffer.Append(new Cell('A'));
+
+            Action remove = () => textBuffer.Remove(textBuffer.Length + 1);
+
+            remove.Should().Throw<ArgumentOutOfRangeException>();
+        }
+
+        [Fact]
         public void TheBufferHasCells_WhenClearingTheBuffer_TheBufferBecomesEmpty()
         {
             var cells = new[]
