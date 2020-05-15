@@ -88,5 +88,20 @@ namespace LineInput.Tests
 
             textBuffer.Length.Should().Be(0);
         }
+
+        [Fact]
+        public void TheBufferHasCells_ConvertingToAString_GivesTheRawText()
+        {
+            var cells = new[]
+            {
+                new Cell('A'),
+                new Cell('B'),
+                new Cell('C')
+            };
+
+            var textBuffer = new TextBuffer(cells);
+
+            textBuffer.ToString().Should().Be("ABC");
+        }
     }
 }

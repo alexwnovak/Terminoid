@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LineInput
 {
@@ -24,5 +25,11 @@ namespace LineInput
         public void Append(IEnumerable<Cell> cells) => _cells.AddRange(cells);
 
         public void Clear() => _cells.Clear();
+
+        public override string ToString()
+        {
+            var chars = _cells.Select(c => c.Char).ToArray();
+            return new string(chars);
+        }
     }
 }
