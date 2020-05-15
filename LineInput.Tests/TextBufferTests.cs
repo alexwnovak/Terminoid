@@ -296,5 +296,20 @@ namespace LineInput.Tests
 
             textBuffer.ToString().Should().Be("ABC");
         }
+
+        [Fact]
+        public void GivenTheBufferHasCells_WhenConvertingTheWholeBuffer_ThenItReturnsTheWholeThingIncludingBlankCell()
+        {
+            var cells = new[]
+            {
+                new Cell('A'),
+                new Cell('B'),
+                new Cell('C')
+            };
+
+            var textBuffer = new TextBuffer(cells);
+
+            textBuffer.ToFullString().Should().Be("ABC ");
+        }
     }
 }
