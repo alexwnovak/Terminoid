@@ -19,7 +19,7 @@ namespace LineInput.Tests.Commands
         }
 
         [Fact]
-        public void TheTextIsBlank_MovingCursorOnePositionRight_TheCursorDoesNotMove()
+        public void GivenNoTextHasBeenAdded_WhenMovingCursorOnePositionRight_ThenTheCursorRemainsAtTheEnd()
         {
             var inputState = new InputState();
             var inputStateManager = new InputStateManager(inputState);

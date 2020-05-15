@@ -184,17 +184,17 @@ namespace LineInput.Tests
             textBuffer[2].Char.Should().Be(' ');
         }
 
-        // [Fact]
-        // public void TheBufferHasOneCell_InsertingACellIntoAnIndexThatDoesNotExist_ThrowsArgumentOutOfRangeException()
-        // {
-        //     var textBuffer = new TextBuffer();
-        //     textBuffer.Append(new Cell('B'));
+        [Fact]
+        public void GivenThereIsOneCell_WhenInsertingACellIntoAnIndexThatDoesNotExist_ThenItThrowsArgumentOutOfRangeException()
+        {
+            var textBuffer = new TextBuffer();
+            textBuffer.Append(new Cell('B'));
 
-        //     var newCell = new Cell('A');
-        //     Action insert = () => textBuffer.Insert(textBuffer.Length + 1, newCell);
+            var newCell = new Cell('A');
+            Action insert = () => textBuffer.Insert(textBuffer.Length + 1, newCell);
 
-        //     insert.Should().Throw<ArgumentOutOfRangeException>();
-        // }
+            insert.Should().Throw<ArgumentOutOfRangeException>();
+        }
 
         // [Fact]
         // public void TheBufferHasOneCell_InsertingASingleCharacterAtTheStart_TheCharacterIsNowACellAtTheStart()

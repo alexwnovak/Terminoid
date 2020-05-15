@@ -12,7 +12,7 @@ namespace LineInput.Commands
             }
             else if (newIndex >= inputState.TextBuffer.Length)
             {
-                inputState.CursorIndex = inputState.TextBuffer.Length;
+                inputState.CursorIndex = inputState.TextBuffer.Length - 1;
             }
             else
             {

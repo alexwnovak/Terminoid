@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -66,8 +67,14 @@ namespace LineInput
 
         public override string ToString()
         {
-            var chars = _cells.Select(c => c.Char).ToArray();
+            var chars = _cells.TakeWhile(c => c != _blank).Select(c => c.Char).ToArray();
+            // var chars = _cells.Except().Select(c => c.Char).ToArray();
             return new string(chars);
+        }
+
+        public string ToFullString()
+        {
+            throw new NotImplementedException();
         }
     }
 }
