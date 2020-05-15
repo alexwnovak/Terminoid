@@ -24,6 +24,8 @@ namespace LineInput
         public void Append(Cell cell) => _cells.Add(cell);
         public void Append(IEnumerable<Cell> cells) => _cells.AddRange(cells);
 
+        public void Insert(int index, Cell cell) => _cells.Insert(index, cell);
+
         public void Clear() => _cells.Clear();
 
         public override string ToString()
