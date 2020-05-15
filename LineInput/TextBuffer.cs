@@ -10,6 +10,7 @@ namespace LineInput
         private readonly List<Cell> _cells;
 
         public int Length => _cells.Count;
+        public bool IsEmpty => _cells.Count == 1 && _cells[0] == _blank;
 
         public Cell this[int index] => _cells[index];
 
@@ -63,7 +64,7 @@ namespace LineInput
 
         public void Remove(int index) => _cells.RemoveAt(index);
 
-        public void Clear() => _cells.Clear();
+        public void Clear() => _cells.RemoveRange(0, _cells.Count - 1);
 
         public override string ToString()
         {
