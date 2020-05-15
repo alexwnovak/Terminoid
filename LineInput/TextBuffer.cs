@@ -5,12 +5,8 @@ namespace LineInput
 {
     public class TextBuffer
     {
-        private readonly List<Cell> _cells = new List<Cell>
-        {
-            // This blank cell represents the end of the line where the cursor can safely rest.
-            // Each time we modify the list of cells, this one should always be at the very end.
-            new Cell(' ')
-        };
+        private readonly Cell _blank = new Cell(' ');
+        private readonly List<Cell> _cells;
 
         public int Length => _cells.Count;
 
@@ -18,19 +14,42 @@ namespace LineInput
 
         public TextBuffer()
         {
+            _cells = new List<Cell>
+            {
+                // This blank cell represents the end of the line where the cursor can safely rest.
+                // Each time we modify the list of cells, this one should always be at the very end.
+                _blank
+            };
         }
 
-        public TextBuffer(IEnumerable<Cell> cells)
+        public TextBuffer(IEnumerable<Cell> cells) : this()
         {
             Append(cells);
         }
 
-        public void Append(Cell cell) => _cells.Add(cell);
-        public void Append(IEnumerable<Cell> cells) => _cells.AddRange(cells);
+        private void AddBlankCell() => _cells.Add(_blank);
+        private void RemoveBlankCell() => _cells.Remove(_blank);
+
+        public void Append(Cell cell)
+        {
+            RemoveBlankCell();
+            _cells.Add(cell);
+            AddBlankCell();
+        }
+
+        public void Append(IEnumerable<Cell> cells)
+        {
+            RemoveBlankCell();
+            _cells.AddRange(cells);
+            AddBlankCell();
+        }
+
         public void Append(string s)
         {
-            var cells = s.Select(c => new Cell(c));
-            Append(cells);
+            RemoveBlankCell();
+            var newCells = s.Select(c => new Cell(c));
+            _cells.AddRange(newCells);
+            AddBlankCell();
         }
 
         public void Insert(int index, Cell cell) => _cells.Insert(index, cell);
