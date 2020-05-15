@@ -15,7 +15,7 @@ namespace LineInput.Tests.Commands
 
             inputStateManager.ExecuteCommand(new InsertTextCommand(), "the-text");
 
-            inputState.Text.Should().Be("the-text");
+            inputState.TextBuffer.ToString().Should().Be("the-text");
         }
 
         [Fact]

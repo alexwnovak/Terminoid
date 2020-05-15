@@ -19,7 +19,7 @@ namespace LineInput.Tests
         {
             var inputState = new InputState();
 
-            inputState.Text.Should().BeEmpty();
+            inputState.TextBuffer.ToString().Should().BeEmpty();
         }
     }
 }

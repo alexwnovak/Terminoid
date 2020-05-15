@@ -15,7 +15,7 @@ namespace LineInput.Tests.Commands
 
             inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'a');
 
-            inputState.Text.Should().Be("a");
+            inputState.TextBuffer.ToString().Should().Be("a");
         }
 
         [Fact]
@@ -38,7 +38,7 @@ namespace LineInput.Tests.Commands
             inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'q');
             inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'u');
 
-            inputState.Text.Should().Be("qu");
+            inputState.TextBuffer.ToString().Should().Be("qu");
         }
 
         [Fact]
@@ -51,7 +51,7 @@ namespace LineInput.Tests.Commands
             inputStateManager.ExecuteCommand(new MoveCursorCommand(), -1);
             inputStateManager.ExecuteCommand(new InsertCharacterCommand(), 'a');
 
-            inputState.Text.Should().Be("ab");
+            inputState.TextBuffer.ToString().Should().Be("ab");
         }
     }
 }

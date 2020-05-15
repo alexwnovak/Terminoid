@@ -87,7 +87,7 @@ namespace LineInput
                 lock (_inputState)
                 {
                     cursorIndex = _inputState.CursorIndex;
-                    text = _inputState.Text;
+                    text = _inputState.TextBuffer.ToString();
                 }
 
                 var output = new StringBuilder(text);

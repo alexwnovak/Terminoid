@@ -4,7 +4,7 @@ namespace LineInput.Commands
     {
         public void Execute(IWritableInputState inputState)
         {
-            inputState.StringBuilder.Clear();
+            inputState.TextBuffer.Clear();
             inputState.CursorIndex = 0;
         }
     }

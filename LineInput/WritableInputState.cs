@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace LineInput
 {
     internal class WritableInputState : IWritableInputState
@@ -12,7 +10,7 @@ namespace LineInput
             set => _inputState.CursorIndex = value;
         }
 
-        public StringBuilder StringBuilder => _inputState.StringBuilder;
+        public TextBuffer TextBuffer => _inputState.TextBuffer;
 
         internal WritableInputState(InputState inputState)
         {
