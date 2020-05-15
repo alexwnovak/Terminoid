@@ -5,7 +5,10 @@ namespace LineInput
 {
     public class TextBuffer
     {
-        private readonly List<Cell> _cells = new List<Cell>();
+        private readonly List<Cell> _cells = new List<Cell>
+        {
+            new Cell(' ')
+        };
 
         public int Length => _cells.Count;
 
