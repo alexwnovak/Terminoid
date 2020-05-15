@@ -38,6 +38,18 @@ namespace LineInput.Tests
         }
 
         [Fact]
+        public void TheBufferIsInitiallyEmpty_AddingThreeCharactersAsAString_TheCharactersAreAddedAsCells()
+        {
+            var textBuffer = new TextBuffer();
+
+            textBuffer.Append("ABC");
+
+            textBuffer[0].Char.Should().Be('A');
+            textBuffer[1].Char.Should().Be('B');
+            textBuffer[2].Char.Should().Be('C');
+        }
+
+        [Fact]
         public void CreatingFreshInstance_CreatingUsingCells_TheCellsAreAdded()
         {
             var cells = new[]

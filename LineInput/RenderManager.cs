@@ -61,11 +61,11 @@ namespace LineInput
             }
         }
 
-        private void RenderAnimations(int cursorIndex, StringBuilder output)
+        private void RenderAnimations(int cursorIndex, TextBuffer textBuffer)
         {
             foreach (var animatable in _animationObjects)
             {
-                animatable.Render(cursorIndex, output);
+                animatable.Render(cursorIndex, textBuffer);
             }
         }
 
@@ -83,19 +83,45 @@ namespace LineInput
 
                 int cursorIndex;
                 string text;
+                TextBuffer textBuffer;
 
                 lock (_inputState)
                 {
                     cursorIndex = _inputState.CursorIndex;
-                    text = _inputState.TextBuffer.ToString();
+                    // text = _inputState.TextBuffer.ToString();
+                    textBuffer = _inputState.TextBuffer;
                 }
 
-                var output = new StringBuilder(text);
+                // var output = new StringBuilder(text);
 
                 UpdateAnimation(elapsedTime);
-                RenderAnimations(cursorIndex, output);
+                // RenderAnimations(cursorIndex, output);
+                RenderAnimations(cursorIndex, textBuffer);
 
-                Console.Write($"\x0D{output}");
+                // Format and print
+
+                var stringBuilder = new StringBuilder();
+
+                // Console.WriteLine($"Got {textBuffer.Length}");
+
+                for (int i = 0; i < textBuffer.Length; i++)
+                {
+                    var thisCell = textBuffer[i];
+
+                    if (thisCell.Background != null)
+                    {
+                        var background = thisCell.Background.Value;
+                        stringBuilder.Append($"\x1B[48;2;{background.R};{background.G};{background.B}m{thisCell.Char}\x1B[0m");
+                    }
+                    else
+                    {
+                        stringBuilder.Append(thisCell.Char);
+                    }
+                }
+
+                Console.Write($"\x0D{stringBuilder}");
+                // Console.Write($"\x0D{output}");
+                // Console.Write($"\x0D{textBuffer.ToString()}");
 
                 lastTime = DateTime.Now;
                 Thread.Sleep(30);

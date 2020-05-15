@@ -32,6 +32,6 @@ namespace LineInput.Animation
             // Console.WriteLine($"Progress {Progress}");
         }
 
-        public virtual void Render(int cursorIndex, StringBuilder output) { }
+        public virtual void Render(int cursorIndex, TextBuffer textBuffer) { }
     }
 }

@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 
 namespace LineInput.Animation
 {
@@ -15,22 +14,30 @@ namespace LineInput.Animation
         {
         }
 
-        public override void Render(int cursorIndex, StringBuilder output)
+        public override void Render(int cursorIndex, TextBuffer textBuffer)
         {
-            if (cursorIndex == output.Length)
-            {
-                output.Append($"\x1B[48;2;{R};{G};{B}m \x1B[0m");
-            }
-            else
-            {
-                char under = output[cursorIndex];
-                output.Remove(cursorIndex, 1);
+            // TODO: Animations shouldn't have a Render; they should update and modify
+            // the TextBuffer data structure, NOT rasterize the data into VT sequences.
+            // This should be some part of the RenderManager part--that guy flattens the
+            // data structure into something that can be printed. He deals with the raw output.
 
-                output.Insert(cursorIndex, $"\x1B[48;2;{R};{G};{B}m{under}\x1B[0m");
+            textBuffer[cursorIndex].Background = new Color(255, 0, 0);
 
-                // An extra space at the end will remove the cursor if it was at the end
-                output.Append("\x1B[0m ");
-            }
+            // if (cursorIndex == textBuffer.Length)
+            // {
+            //     textBuffer.Append($"\x1B[48;2;{R};{G};{B}m \x1B[0m");
+            // }
+            // else
+            // {
+            //     var under = textBuffer[cursorIndex];
+            //     under.
+            //     textBuffer.Remove(cursorIndex);
+
+            //     textBuffer.Insert(cursorIndex, $"\x1B[48;2;{R};{G};{B}m{under.Char}\x1B[0m");
+
+            //     // An extra space at the end will remove the cursor if it was at the end
+            //     textBuffer.Append("\x1B[0m ");
+            // }
         }
     }
 }

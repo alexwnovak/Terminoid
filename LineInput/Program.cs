@@ -10,6 +10,7 @@ namespace LineInput
             Console.WriteLine("===== Starting");
 
             var inputState = new InputState();
+            inputState.TextBuffer.Append(new Cell('_'));
             var inputStateManager = new InputStateManager(inputState);
 
             var inputController = new InputController
