@@ -15,12 +15,9 @@ namespace LineInput
 
         public TextBuffer()
         {
-            _cells = new List<Cell>
-            {
-                // This blank cell represents the end of the line where the cursor can safely rest.
-                // Each time we modify the list of cells, this one should always be at the very end.
-                _blank
-            };
+            // This blank cell represents the end of the line where the cursor can safely rest.
+            // Each time we modify the list of cells, this one should always be at the very end.
+            _cells = new List<Cell> { _blank };
         }
 
         public TextBuffer(IEnumerable<Cell> cells) : this()
