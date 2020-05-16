@@ -21,7 +21,7 @@ namespace LineInput.Animation
             // This should be some part of the RenderManager part--that guy flattens the
             // data structure into something that can be printed. He deals with the raw output.
 
-            textBuffer[cursorIndex].Background = new Color(255, 192, 128);
+            textBuffer[cursorIndex].Background = new Color((byte)R, (byte)G, (byte)B);
 
             // if (cursorIndex == textBuffer.Length)
             // {
