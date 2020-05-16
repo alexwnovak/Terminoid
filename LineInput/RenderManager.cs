@@ -74,25 +74,19 @@ namespace LineInput
                 var elapsedTime = DateTime.Now - lastTime;
 
                 int cursorIndex;
-                string text;
                 TextBuffer textBuffer;
 
                 lock (_inputState)
                 {
                     cursorIndex = _inputState.CursorIndex;
-                    // text = _inputState.TextBuffer.ToString();
                     textBuffer = _inputState.TextBuffer.Clone();
                 }
-
-                // var output = new StringBuilder(text);
 
                 UpdateAnimation(elapsedTime, cursorIndex, textBuffer);
 
                 // Format and print
 
                 var stringBuilder = new StringBuilder();
-
-                // Console.WriteLine($"Got {textBuffer.Length}");
 
                 for (int i = 0; i < textBuffer.Length; i++)
                 {
