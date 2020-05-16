@@ -41,13 +41,13 @@ namespace LineInput
             _animationObjects.Add(animatable);
         }
 
-        private void UpdateAnimation(TimeSpan frameTime)
+        private void UpdateAnimation(TimeSpan frameTime, int cursorIndex, TextBuffer textBuffer)
         {
             var completedAnimations = new Queue<Animatable>();
 
             foreach (var animatable in _animationObjects)
             {
-                animatable.AddTime(frameTime);
+                animatable.Update(frameTime, cursorIndex, textBuffer);
 
                 if (animatable.Progress >= 1)
                 {
@@ -58,14 +58,6 @@ namespace LineInput
             foreach (var completedAnimation in completedAnimations)
             {
                 _animationObjects.Remove(completedAnimation);
-            }
-        }
-
-        private void RenderAnimations(int cursorIndex, TextBuffer textBuffer)
-        {
-            foreach (var animatable in _animationObjects)
-            {
-                animatable.Render(cursorIndex, textBuffer);
             }
         }
 
@@ -94,9 +86,7 @@ namespace LineInput
 
                 // var output = new StringBuilder(text);
 
-                UpdateAnimation(elapsedTime);
-                // RenderAnimations(cursorIndex, output);
-                RenderAnimations(cursorIndex, textBuffer);
+                UpdateAnimation(elapsedTime, cursorIndex, textBuffer);
 
                 // Format and print
 
@@ -120,8 +110,6 @@ namespace LineInput
                 }
 
                 Console.Write($"\x0D{stringBuilder}");
-                // Console.Write($"\x0D{output}");
-                // Console.Write($"\x0D{textBuffer.ToString()}");
 
                 lastTime = DateTime.Now;
                 Thread.Sleep(30);

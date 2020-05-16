@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 
 namespace LineInput.Animation
 {
@@ -12,6 +11,14 @@ namespace LineInput.Animation
         public Animatable(TimeSpan duration)
         {
             Duration = duration;
+        }
+
+        public void Update(TimeSpan timeSpan, int cursorIndex, TextBuffer textBuffer)
+        {
+            ElapsedTime += timeSpan;
+            Progress = ElapsedTime.TotalMilliseconds / Duration.TotalMilliseconds;
+
+            OnUpdate(cursorIndex, textBuffer);
         }
 
         public void AddTime(TimeSpan timeSpan)
@@ -32,6 +39,6 @@ namespace LineInput.Animation
             // Console.WriteLine($"Progress {Progress}");
         }
 
-        public virtual void Render(int cursorIndex, TextBuffer textBuffer) { }
+        protected virtual void OnUpdate(int cursorIndex, TextBuffer textBuffer) { }
     }
 }
