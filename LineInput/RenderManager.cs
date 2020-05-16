@@ -81,7 +81,7 @@ namespace LineInput
                 {
                     cursorIndex = _inputState.CursorIndex;
                     // text = _inputState.TextBuffer.ToString();
-                    textBuffer = _inputState.TextBuffer;
+                    textBuffer = _inputState.TextBuffer.Clone();
                 }
 
                 // var output = new StringBuilder(text);

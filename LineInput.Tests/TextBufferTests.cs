@@ -311,5 +311,29 @@ namespace LineInput.Tests
 
             textBuffer.ToFullString().Should().Be("ABC ");
         }
+
+        [Fact]
+        public void GivenTheBufferHasCells_WhenCloningTheTextBuffer_TheDataIsCopiedIntoDifferentCellInstances()
+        {
+            var cells = new[]
+            {
+                new Cell('A'),
+                new Cell('B')
+            };
+
+            var textBuffer = new TextBuffer(cells);
+
+            var clone = textBuffer.Clone();
+
+            clone[0].Should().NotBe(cells[0]);
+            clone[0].Char.Should().Be(cells[0].Char);
+            clone[0].Foreground.Should().Be(cells[0].Foreground);
+            clone[0].Background.Should().Be(cells[0].Background);
+
+            clone[1].Should().NotBe(cells[1]);
+            clone[1].Char.Should().Be(cells[1].Char);
+            clone[1].Foreground.Should().Be(cells[1].Foreground);
+            clone[1].Background.Should().Be(cells[1].Background);
+        }
     }
 }

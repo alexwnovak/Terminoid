@@ -62,6 +62,27 @@ namespace LineInput
 
         public void Clear() => _cells.RemoveRange(0, _cells.Count - 1);
 
+        public TextBuffer Clone()
+        {
+            var cellsCopy = new List<Cell>();
+
+            for (int index = 0; index < _cells.Count; index++)
+            {
+                var thisCell = _cells[index];
+
+                if (thisCell.Background == null)
+                {
+                    cellsCopy.Add(new Cell(thisCell.Char, thisCell.Foreground));
+                }
+                else
+                {
+                    cellsCopy.Add(new Cell(thisCell.Char, thisCell.Foreground, thisCell.Background.Value));
+                }
+            }
+
+            return new TextBuffer(cellsCopy);
+        }
+
         public override string ToString()
         {
             var chars = _cells.TakeWhile(c => c != _blank).Select(c => c.Char).ToArray();
