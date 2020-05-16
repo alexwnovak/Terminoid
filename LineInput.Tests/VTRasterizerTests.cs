@@ -13,4 +13,17 @@ public class VTRasterizerTests
 
         output.Should().Be(" ");
     }
+
+    [Fact]
+    public void GivenOneCharacterWasAdded_WhenRasterizing_TheOutputIsTheCharacterAndBlank()
+    {
+        var rasterizer = new VTRasterizer();
+
+        var textBuffer = new TextBuffer();
+        textBuffer.Append("A");
+
+        string output = rasterizer.Rasterize(textBuffer);
+
+        output.Should().Be("A ");
+    }
 }
