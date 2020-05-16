@@ -31,11 +31,11 @@ namespace LineInput.Tests
         }
 
         [Fact]
-        public void ByDefault_CellsHaveDefaultGrayForeground()
+        public void ByDefault_ACellHasNoForeground()
         {
             var cell = new Cell('A');
 
-            cell.Foreground.Should().BeEquivalentTo(new Color(127, 127, 127));
+            cell.Foreground.Should().BeNull();
         }
 
         [Fact]
