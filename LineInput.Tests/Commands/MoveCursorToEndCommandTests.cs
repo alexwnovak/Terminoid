@@ -8,7 +8,7 @@ namespace LineInput.Tests.Commands
     public class MoveCursorToEndCommandTests
     {
         [Fact]
-        public void TheTextIsBlank_MovingCursorToEnd_CursorDoesNotMove()
+        public void GivenTheTextIsBlank_WhenMovingCursorToEnd_ThenCursorDoesNotMove()
         {
             var inputState = new InputState();
             var inputStateManager = new InputStateManager(inputState);
@@ -19,7 +19,7 @@ namespace LineInput.Tests.Commands
         }
 
         [Fact]
-        public void TheCursorIsInTheMiddleOfTheText_MovingCursorToEnd_TheCursorJumpsToTheEndOfTheLine()
+        public void GivenTheCursorIsInTheMiddleOfTheText_WhenMovingCursorToEnd_ThenTheCursorJumpsToTheEndOfTheLine()
         {
             var inputState = new InputState();
             var inputStateManager = new InputStateManager(inputState);

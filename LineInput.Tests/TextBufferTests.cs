@@ -9,36 +9,25 @@ namespace LineInput.Tests
     public class TextBufferTests
     {
         [Fact]
-        public void ByDefault_WhenReadingLengthProperty_TheLengthIsZero()
+        public void GivenTheTextBufferWasCreated_WhenNoInitialDataIsGiven_TheBlankCellExists()
         {
             var textBuffer = new TextBuffer();
 
-            textBuffer.Length.Should().Be(0);
+            textBuffer[0].Char.Should().Be(' ');
         }
 
         [Fact]
-        public void TheBufferIsEmpty_ReadingTheFirstIndex_ThrowsArgumentOutOfRangeException()
+        public void GivenNoInitialData_WhenReadingAnIndexThatDoesNotExist_ThenItThrowsArgumentOutOfRangeException()
         {
             var textBuffer = new TextBuffer();
 
-            Action indexer = () => Trace.WriteLine(textBuffer[0]);
+            Action indexer = () => Trace.WriteLine(textBuffer[textBuffer.Length + 1]);
 
             indexer.Should().Throw<ArgumentOutOfRangeException>();
         }
 
         [Fact]
-        public void TheBufferIsInitiallyEmpty_AddingACell_TheNewCellCanBeReadByIndexerAndIsTheSameInstance()
-        {
-            var textBuffer = new TextBuffer();
-
-            var cell = new Cell('A');
-            textBuffer.Append(cell);
-
-            textBuffer[0].Should().Be(cell);
-        }
-
-        [Fact]
-        public void CreatingFreshInstance_CreatingUsingCells_TheCellsAreAdded()
+        public void GivenTextBufferWasCreated_WhenPassingCellsDuringCreation_ThenTheCellsAreAdded()
         {
             var cells = new[]
             {
@@ -55,7 +44,106 @@ namespace LineInput.Tests
         }
 
         [Fact]
-        public void TheBufferHasOneCell_AddingTwoMoreCellsAtOnce_ThereAreThreeCells()
+        public void GivenTextBufferWasCreated_WhenPassingCellsDuringCreation_ThenTheBlankCellIsMovedToTheEnd()
+        {
+            var cells = new[]
+            {
+                new Cell('A'),
+                new Cell('B'),
+                new Cell('C')
+            };
+
+            var textBuffer = new TextBuffer(cells);
+
+            textBuffer[3].Char.Should().Be(' ');
+        }
+
+        [Fact]
+        public void GivenNoCellsHaveBeenAdded_WhenAppendingACell_ThenTheNewCellCanBeReadByIndexerAndIsTheSameInstance()
+        {
+            var textBuffer = new TextBuffer();
+
+            var cell = new Cell('A');
+            textBuffer.Append(cell);
+
+            textBuffer[0].Should().Be(cell);
+        }
+
+        [Fact]
+        public void GivenNoCellsHaveBeenAdded_WhenAppendingACell_ThenTheBlankCellMovesToTheEnd()
+        {
+            var textBuffer = new TextBuffer();
+
+            var cell = new Cell('A');
+            textBuffer.Append(cell);
+
+            textBuffer[0].Should().Be(cell);
+        }
+
+        [Fact]
+        public void GivenNoCellsHasBeenAdded_WhenAddingThreeCells_ThenTheThreeCellsAreAdded()
+        {
+            var newCells = new[]
+            {
+                new Cell('A'),
+                new Cell('B'),
+                new Cell('C'),
+            };
+
+            var textBuffer = new TextBuffer();
+
+            textBuffer.Append(newCells);
+
+            textBuffer[0].Should().Be(newCells[0]);
+            textBuffer[1].Should().Be(newCells[1]);
+            textBuffer[2].Should().Be(newCells[2]);
+        }
+
+        [Fact]
+        public void GivenNoCellsHasBeenAdded_WhenAddingThreeCells_ThenTheBlankCellIsMovedToTheEnd()
+        {
+            var newCells = new[]
+            {
+                new Cell('A'),
+                new Cell('B'),
+                new Cell('C'),
+            };
+
+            var textBuffer = new TextBuffer();
+
+            textBuffer.Append(newCells);
+
+            textBuffer[3].Char.Should().Be(' ');
+        }
+
+        [Fact]
+        public void GivenNoCellsHasBeenAdded_WhenAddingThreeCharactersAsAString_ThenTheCharactersAreAddedAsCells()
+        {
+            var textBuffer = new TextBuffer();
+
+            textBuffer.Append("ABC");
+
+            textBuffer[0].Char.Should().Be('A');
+            textBuffer[1].Char.Should().Be('B');
+            textBuffer[2].Char.Should().Be('C');
+        }
+
+        [Fact]
+        public void GivenNoCellsHasBeenAdded_WhenAddingThreeCharactersAsAString_ThenTheBlankCellIsMovedToTheEnd()
+        {
+            var textBuffer = new TextBuffer();
+
+            textBuffer.Append("ABC");
+
+            textBuffer[0].Char.Should().Be('A');
+            textBuffer[1].Char.Should().Be('B');
+            textBuffer[2].Char.Should().Be('C');
+
+            textBuffer[3].Char.Should().Be(' ');
+        }
+
+        [Fact]
+        public void GivenThereIsOneCell_WhenAddingTwoMoreCellsAtOnce_ThenThereAreThreeCells()
         {
             var textBuffer = new TextBuffer();
             textBuffer.Append(new Cell('A'));
@@ -73,7 +161,7 @@ namespace LineInput.Tests
         }
 
         [Fact]
-        public void TheBufferHasOneCell_InsertingACellAtTheStart_TheNewCellIsNowTheFirstCell()
+        public void GivenThereIsOneCell_WhenInsertingACellAtTheStart_ThenTheNewCellIsNowTheFirstCell()
         {
             var textBuffer = new TextBuffer();
             textBuffer.Append(new Cell('B'));
@@ -85,7 +173,19 @@ namespace LineInput.Tests
         }
 
         [Fact]
-        public void TheBufferHasOneCell_InsertingACellIntoAnIndexThatDoesNotExist_ThrowsArgumentOutOfRangeException()
+        public void GivenThereIsOneCell_WhenInsertingACellAtTheStart_ThenTheBlankCellIsStillAtTheEnd()
+        {
+            var textBuffer = new TextBuffer();
+            textBuffer.Append(new Cell('B'));
+
+            var newCell = new Cell('A');
+            textBuffer.Insert(0, newCell);
+
+            textBuffer[2].Char.Should().Be(' ');
+        }
+
+        [Fact]
+        public void GivenThereIsOneCell_WhenInsertingACellIntoAnIndexThatDoesNotExist_ThenItThrowsArgumentOutOfRangeException()
         {
             var textBuffer = new TextBuffer();
             textBuffer.Append(new Cell('B'));
@@ -97,7 +197,7 @@ namespace LineInput.Tests
         }
 
         [Fact]
-        public void TheBufferHasOneCell_InsertingASingleCharacterAtTheStart_TheCharacterIsNowACellAtTheStart()
+        public void GivenTheBufferHasOneCell_WhenInsertingASingleCharacterAtTheStart_ThenTheCharacterIsNowACellAtTheStart()
         {
             var textBuffer = new TextBuffer();
             textBuffer.Append(new Cell('B'));
@@ -108,7 +208,7 @@ namespace LineInput.Tests
         }
 
         [Fact]
-        public void TheBufferHasOneCell_InsertingACharacterIntoAnIndexThatDoesNotExist_ThrowsArgumentOutOfRangeException()
+        public void GivenTheBufferHasOneCell_WhenInsertingACharacterIntoAnIndexThatDoesNotExist_ThenThrowsArgumentOutOfRangeException()
         {
             var textBuffer = new TextBuffer();
             textBuffer.Append(new Cell('B'));
@@ -120,7 +220,7 @@ namespace LineInput.Tests
         }
 
         [Fact]
-        public void TheBufferHasOneCell_InsertingAStringOfTextAtTheStart_TheStringBecomesCellsAtTheStart()
+        public void GivenTheBufferHasOneCell_WhenInsertingAStringOfTextAtTheStart_ThenTheStringBecomesCellsAtTheStart()
         {
             var textBuffer = new TextBuffer();
             textBuffer.Append(new Cell('C'));
@@ -132,7 +232,7 @@ namespace LineInput.Tests
         }
 
         [Fact]
-        public void TheBufferHasOneCell_InsertingAStringOfTextIntoAnIndexThatDoesNotExist_ThrowsArgumentOutOfRangeException()
+        public void GivenTheBufferHasOneCell_WhenInsertingAStringOfTextIntoAnIndexThatDoesNotExist_ThenThrowsArgumentOutOfRangeException()
         {
             var textBuffer = new TextBuffer();
             textBuffer.Append(new Cell('B'));
@@ -144,18 +244,18 @@ namespace LineInput.Tests
         }
 
         [Fact]
-        public void TheBufferHasOneCell_RemovingTheCellByItsIndex_TheBufferBecomesEmpty()
+        public void GivenTheBufferHasOneCell_WhenRemovingTheCellByItsIndex_ThenTheBufferOnlyContainsTheBlankCell()
         {
             var textBuffer = new TextBuffer();
             textBuffer.Append(new Cell('A'));
 
             textBuffer.Remove(0);
 
-            textBuffer.Length.Should().Be(0);
+            textBuffer.IsEmpty.Should().BeTrue();
         }
 
         [Fact]
-        public void TheBufferHasOneCell_RemovingAnIndexThatDoesNotExist_ThrowsArgumentOutOfRangeException()
+        public void GivenTheBufferHasOneCell_WhenRemovingAnIndexThatDoesNotExist_ThenThrowsArgumentOutOfRangeException()
         {
             var textBuffer = new TextBuffer();
             textBuffer.Append(new Cell('A'));
@@ -166,7 +266,7 @@ namespace LineInput.Tests
         }
 
         [Fact]
-        public void TheBufferHasCells_WhenClearingTheBuffer_TheBufferBecomesEmpty()
+        public void GivenTheBufferHasCells_WhenClearingTheBuffer_ThenTheBufferOnlyContainsTheBlankCell()
         {
             var cells = new[]
             {
@@ -179,11 +279,11 @@ namespace LineInput.Tests
 
             textBuffer.Clear();
 
-            textBuffer.Length.Should().Be(0);
+            textBuffer.IsEmpty.Should().BeTrue();
         }
 
         [Fact]
-        public void TheBufferHasCells_ConvertingToAString_GivesTheRawText()
+        public void GivenTheBufferHasCells_WhenConvertingToAString_ThenItGivesTheRawText()
         {
             var cells = new[]
             {
@@ -195,6 +295,45 @@ namespace LineInput.Tests
             var textBuffer = new TextBuffer(cells);
 
             textBuffer.ToString().Should().Be("ABC");
+        }
+
+        [Fact]
+        public void GivenTheBufferHasCells_WhenConvertingTheWholeBuffer_ThenItReturnsTheWholeThingIncludingBlankCell()
+        {
+            var cells = new[]
+            {
+                new Cell('A'),
+                new Cell('B'),
+                new Cell('C')
+            };
+
+            var textBuffer = new TextBuffer(cells);
+
+            textBuffer.ToFullString().Should().Be("ABC ");
+        }
+
+        [Fact]
+        public void GivenTheBufferHasCells_WhenCloningTheTextBuffer_TheDataIsCopiedIntoDifferentCellInstances()
+        {
+            var cells = new[]
+            {
+                new Cell('A'),
+                new Cell('B')
+            };
+
+            var textBuffer = new TextBuffer(cells);
+
+            var clone = textBuffer.Clone();
+
+            clone[0].Should().NotBe(cells[0]);
+            clone[0].Char.Should().Be(cells[0].Char);
+            clone[0].Foreground.Should().Be(cells[0].Foreground);
+            clone[0].Background.Should().Be(cells[0].Background);
+
+            clone[1].Should().NotBe(cells[1]);
+            clone[1].Char.Should().Be(cells[1].Char);
+            clone[1].Foreground.Should().Be(cells[1].Foreground);
+            clone[1].Background.Should().Be(cells[1].Background);
         }
     }
 }

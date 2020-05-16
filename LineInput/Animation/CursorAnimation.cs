@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 
 namespace LineInput.Animation
 {
@@ -15,22 +14,9 @@ namespace LineInput.Animation
         {
         }
 
-        public override void Render(int cursorIndex, StringBuilder output)
+        protected override void OnUpdate(int cursorIndex, TextBuffer textBuffer)
         {
-            if (cursorIndex == output.Length)
-            {
-                output.Append($"\x1B[48;2;{R};{G};{B}m \x1B[0m");
-            }
-            else
-            {
-                char under = output[cursorIndex];
-                output.Remove(cursorIndex, 1);
-
-                output.Insert(cursorIndex, $"\x1B[48;2;{R};{G};{B}m{under}\x1B[0m");
-
-                // An extra space at the end will remove the cursor if it was at the end
-                output.Append("\x1B[0m ");
-            }
+            textBuffer[cursorIndex].Background = new Color((byte)R, (byte)G, (byte)B);
         }
     }
 }

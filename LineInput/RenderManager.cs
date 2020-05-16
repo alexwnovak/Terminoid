@@ -41,13 +41,13 @@ namespace LineInput
             _animationObjects.Add(animatable);
         }
 
-        private void UpdateAnimation(TimeSpan frameTime)
+        private void UpdateAnimation(TimeSpan frameTime, int cursorIndex, TextBuffer textBuffer)
         {
             var completedAnimations = new Queue<Animatable>();
 
             foreach (var animatable in _animationObjects)
             {
-                animatable.AddTime(frameTime);
+                animatable.Update(frameTime, cursorIndex, textBuffer);
 
                 if (animatable.Progress >= 1)
                 {
@@ -58,14 +58,6 @@ namespace LineInput
             foreach (var completedAnimation in completedAnimations)
             {
                 _animationObjects.Remove(completedAnimation);
-            }
-        }
-
-        private void RenderAnimations(int cursorIndex, StringBuilder output)
-        {
-            foreach (var animatable in _animationObjects)
-            {
-                animatable.Render(cursorIndex, output);
             }
         }
 
@@ -83,19 +75,41 @@ namespace LineInput
 
                 int cursorIndex;
                 string text;
+                TextBuffer textBuffer;
 
                 lock (_inputState)
                 {
                     cursorIndex = _inputState.CursorIndex;
-                    text = _inputState.TextBuffer.ToString();
+                    // text = _inputState.TextBuffer.ToString();
+                    textBuffer = _inputState.TextBuffer.Clone();
                 }
 
-                var output = new StringBuilder(text);
+                // var output = new StringBuilder(text);
 
-                UpdateAnimation(elapsedTime);
-                RenderAnimations(cursorIndex, output);
+                UpdateAnimation(elapsedTime, cursorIndex, textBuffer);
 
-                Console.Write($"\x0D{output}");
+                // Format and print
+
+                var stringBuilder = new StringBuilder();
+
+                // Console.WriteLine($"Got {textBuffer.Length}");
+
+                for (int i = 0; i < textBuffer.Length; i++)
+                {
+                    var thisCell = textBuffer[i];
+
+                    if (thisCell.Background != null)
+                    {
+                        var background = thisCell.Background.Value;
+                        stringBuilder.Append($"\x1B[48;2;{background.R};{background.G};{background.B}m{thisCell.Char}\x1B[0m");
+                    }
+                    else
+                    {
+                        stringBuilder.Append(thisCell.Char);
+                    }
+                }
+
+                Console.Write($"\x0D{stringBuilder}");
 
                 lastTime = DateTime.Now;
                 Thread.Sleep(30);
