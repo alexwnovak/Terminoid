@@ -33,7 +33,7 @@ public class VTRasterizerTests
         var rasterizer = new VTRasterizer();
 
         var textBuffer = new TextBuffer();
-        textBuffer[0].Background = new Color(10, 20, 30);
+        textBuffer[0].Background = Color.FromRgb(10, 20, 30);
 
         string output = rasterizer.Rasterize(textBuffer);
 

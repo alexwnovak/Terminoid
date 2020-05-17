@@ -9,7 +9,7 @@ namespace LineInput.Tests
         [Fact]
         public void CreatingAColor_PassesColorComponents_ComponentsAreRetained()
         {
-            var color = new Color(1, 2, 3);
+            var color = Color.FromRgb(1, 2, 3);
 
             color.R.Should().Be(1);
             color.G.Should().Be(2);
@@ -19,8 +19,8 @@ namespace LineInput.Tests
         [Fact]
         public void TwoDifferentColorsExistButHaveSameValues_ComparingForEquality_ColorsAreEqual()
         {
-            var one = new Color(1, 2, 3);
-            var two = new Color(1, 2, 3);
+            var one = Color.FromRgb(1, 2, 3);
+            var two = Color.FromRgb(1, 2, 3);
 
             one.Equals(two).Should().Be(true);
         }
@@ -28,8 +28,8 @@ namespace LineInput.Tests
         [Fact]
         public void TwoDifferentColorsExistButHaveSameValues_ComparingForEqualityUsingOperator_ColorsAreEqual()
         {
-            var one = new Color(1, 2, 3);
-            var two = new Color(1, 2, 3);
+            var one = Color.FromRgb(1, 2, 3);
+            var two = Color.FromRgb(1, 2, 3);
 
             (one == two).Should().Be(true);
         }
@@ -37,8 +37,8 @@ namespace LineInput.Tests
         [Fact]
         public void TwoDifferentColorsExistAndHaveDifferentValues_ComparingForEquality_ColorsAreNotEqual()
         {
-            var one = new Color(1, 2, 3);
-            var two = new Color(7, 8, 9);
+            var one = Color.FromRgb(1, 2, 3);
+            var two = Color.FromRgb(7, 8, 9);
 
             one.Equals(two).Should().Be(false);
         }
@@ -46,8 +46,8 @@ namespace LineInput.Tests
         [Fact]
         public void TwoDifferentColorsExistButHaveDifferentValues_ComparingForEqualityUsingOperator_ColorsAreNotEqual()
         {
-            var one = new Color(1, 2, 3);
-            var two = new Color(7, 8, 9);
+            var one = Color.FromRgb(1, 2, 3);
+            var two = Color.FromRgb(7, 8, 9);
 
             (one != two).Should().Be(true);
         }
@@ -55,8 +55,8 @@ namespace LineInput.Tests
         [Fact]
         public void ThereAreTwoColors_TheColorsAreAddedTogether_AThirdColorIsProducedAsTheSumOfTheTwo()
         {
-            var one = new Color(1, 2, 3);
-            var two = new Color(7, 8, 9);
+            var one = Color.FromRgb(1, 2, 3);
+            var two = Color.FromRgb(7, 8, 9);
 
             var three = one + two;
 
@@ -68,8 +68,8 @@ namespace LineInput.Tests
         [Fact]
         public void ThereAreTwoColorsWhoseValuesSumOverTheMax_AddingColors_ComponentsAreCappedAtTheMaxValue()
         {
-            var one = new Color(200, 200, 200);
-            var two = new Color(200, 200, 200);
+            var one = Color.FromRgb(200, 200, 200);
+            var two = Color.FromRgb(200, 200, 200);
 
             var three = one + two;
 
@@ -81,8 +81,8 @@ namespace LineInput.Tests
         [Fact]
         public void ThereAreTwoColorsWhoseValuesDifferBelowTheMax_SubtractingColors_ComponentsAreCappedAtTheMinValue()
         {
-            var one = new Color(100, 100, 100);
-            var two = new Color(200, 200, 200);
+            var one = Color.FromRgb(100, 100, 100);
+            var two = Color.FromRgb(200, 200, 200);
 
             var three = one - two;
 
@@ -94,7 +94,7 @@ namespace LineInput.Tests
         [Fact]
         public void OneColorExists_AddingJustToTheRedComponent_ANewColorIsProducedWithTheNewRedAndOldGreenAndBlue()
         {
-            var color = new Color(10, 20, 30);
+            var color = Color.FromRgb(10, 20, 30);
 
             var newColor = color + Color.Red(100);
 
@@ -106,7 +106,7 @@ namespace LineInput.Tests
         [Fact]
         public void OneColorExists_AddingEnoughToOverflowRedComponent_RedComponentIsClampedAtMaximum()
         {
-            var color = new Color(200, 20, 30);
+            var color = Color.FromRgb(200, 20, 30);
 
             var newColor = color + Color.Red(200);
 
@@ -116,7 +116,7 @@ namespace LineInput.Tests
         [Fact]
         public void OneColorExists_SubtractingEnoughToUnderflowRedComponent_RedComponentIsClampedAtMinimum()
         {
-            var color = new Color(100, 20, 30);
+            var color = Color.FromRgb(100, 20, 30);
 
             var newColor = color - Color.Red(200);
 
@@ -126,7 +126,7 @@ namespace LineInput.Tests
         [Fact]
         public void OneColorExists_AddingJustToTheGreenComponent_ANewColorIsProducedWithTheNewGreenAndOldRedAndBlue()
         {
-            var color = new Color(10, 20, 30);
+            var color = Color.FromRgb(10, 20, 30);
 
             var newColor = color + Color.Green(100);
 
@@ -138,7 +138,7 @@ namespace LineInput.Tests
         [Fact]
         public void OneColorExists_AddingEnoughToOverflowGreenComponent_GreenComponentIsClampedAtMaximum()
         {
-            var color = new Color(10, 200, 30);
+            var color = Color.FromRgb(10, 200, 30);
 
             var newColor = color + Color.Green(200);
 
@@ -148,7 +148,7 @@ namespace LineInput.Tests
         [Fact]
         public void OneColorExists_SubtractingEnoughToUnderflowGreenComponent_GreenComponentIsClampedAtMinimum()
         {
-            var color = new Color(10, 20, 30);
+            var color = Color.FromRgb(10, 20, 30);
 
             var newColor = color - Color.Green(200);
 
@@ -158,7 +158,7 @@ namespace LineInput.Tests
         [Fact]
         public void OneColorExists_AddingJustToTheBlueComponent_ANewColorIsProducedWithTheNewBlueAndOldRedAndGreen()
         {
-            var color = new Color(10, 20, 30);
+            var color = Color.FromRgb(10, 20, 30);
 
             var newColor = color + Color.Blue(100);
 
@@ -170,7 +170,7 @@ namespace LineInput.Tests
         [Fact]
         public void OneColorExists_AddingEnoughToOverflowBlueComponent_BlueComponentIsClampedAtMaximum()
         {
-            var color = new Color(10, 20, 30);
+            var color = Color.FromRgb(10, 20, 30);
 
             var newColor = color + Color.Blue(240);
 
@@ -180,7 +180,7 @@ namespace LineInput.Tests
         [Fact]
         public void OneColorExists_SubtractingEnoughToUnderflowBlueComponent_BlueComponentIsClampedAtMinimum()
         {
-            var color = new Color(10, 20, 30);
+            var color = Color.FromRgb(10, 20, 30);
 
             var newColor = color - Color.Blue(200);
 
@@ -190,7 +190,7 @@ namespace LineInput.Tests
         [Fact]
         public void OneColorExists_ChainingAdditionsTogetherForAllComponents_TheNewColorHasTheRightValues()
         {
-            var color = new Color(10, 20, 30);
+            var color = Color.FromRgb(10, 20, 30);
 
             var newColor = color + Color.Red(1) + Color.Green(2) + Color.Blue(3);
 
@@ -202,7 +202,7 @@ namespace LineInput.Tests
         [Fact]
         public void GivenAnRGBColorWasCreated_WhenReadingItsEmptyProperty_ThenTheColorIsNotEmpty()
         {
-            var color = new Color(1, 2, 3);
+            var color = Color.FromRgb(1, 2, 3);
 
             color.IsEmpty.Should().BeFalse();
         }
@@ -221,7 +221,7 @@ namespace LineInput.Tests
         [Fact]
         public void GivenTwoColorsExistWithSameValuesButOneIsEmpty_WhenComparing_ThenTheyAreNotEqual()
         {
-            var red = new Color(0, 0, 0);
+            var red = Color.FromRgb(0, 0, 0);
             var empty = Color.Empty();
 
             bool areEqual = red == empty;
