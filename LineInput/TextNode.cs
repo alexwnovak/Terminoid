@@ -8,6 +8,10 @@ namespace LineInput
 
         public TextNode(string text) => Text = text;
 
-        public override void Evaluate(StringBuilder sb) => sb.Append(Text);
+        public override void Evaluate(StringBuilder sb)
+        {
+            sb.Append(Text);
+            EvaluateChildren(sb);
+        }
     }
 }

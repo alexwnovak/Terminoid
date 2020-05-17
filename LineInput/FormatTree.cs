@@ -15,8 +15,22 @@ namespace LineInput
 
         private void BuildTree()
         {
-            // Algorithm to scan TextBuffer into a tree goes here
-            _headNode.Children.Add(new TextNode(_textBuffer.ToFullString()));
+            var run = new StringBuilder();
+            Color? background = null;
+
+            foreach (var cell in _textBuffer)
+            {
+                run.Append(cell.Char);
+
+                if (background != cell.Background)
+                {
+                    _headNode.Children.Add(new BackgroundColorNode(cell.Background.Value));
+                    _headNode.Children.Add(new TextNode(run.ToString()));
+                    run.Clear();
+                }
+            }
+
+            _headNode.Children.Add(new TextNode(run.ToString()));
         }
 
         public string Evaluate()

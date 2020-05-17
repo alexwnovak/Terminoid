@@ -4,7 +4,8 @@ namespace LineInput
     {
         public string Rasterize(TextBuffer textBuffer)
         {
-            return textBuffer.ToFullString();
+            var formatTree = new FormatTree(textBuffer);
+            return formatTree.Evaluate();
         }
     }
 }

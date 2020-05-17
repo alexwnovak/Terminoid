@@ -100,7 +100,6 @@ namespace LineInput
         {
             foreach (var cell in _cells)
             {
-                System.Console.WriteLine($"Doing {cell.Char}");
                 yield return cell;
             }
         }

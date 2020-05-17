@@ -26,4 +26,17 @@ public class VTRasterizerTests
 
         output.Should().Be("A ");
     }
+
+    [Fact]
+    public void GivenTheTextBufferIsEmptyWithABackgroundColor_WhenRasterizing_GeneratesTheCorrectOutput()
+    {
+        var rasterizer = new VTRasterizer();
+
+        var textBuffer = new TextBuffer();
+        textBuffer[0].Background = new Color(10, 20, 30);
+
+        string output = rasterizer.Rasterize(textBuffer);
+
+        output.Should().Be("\x1B[48;2;10;20;30 ");
+    }
 }
