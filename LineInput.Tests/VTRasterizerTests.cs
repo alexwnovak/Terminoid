@@ -4,6 +4,8 @@ using LineInput;
 
 public class VTRasterizerTests
 {
+    public const string _blankCellVT = "\x1B[48;2;10;20;30 ";
+
     [Fact]
     public void GivenTheTextBufferIsEmpty_WhenRasterizing_TheOutputIsTheBlankCharacter()
     {
@@ -37,6 +39,6 @@ public class VTRasterizerTests
 
         string output = rasterizer.Rasterize(textBuffer);
 
-        output.Should().Be("\x1B[48;2;10;20;30 ");
+        output.Should().Be(_blankCellVT);
     }
 }
