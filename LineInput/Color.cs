@@ -4,15 +4,27 @@ namespace LineInput
 {
     public readonly struct Color : IEquatable<Color>
     {
+        public bool IsEmpty { get; }
+
         public byte R { get; }
         public byte G { get; }
         public byte B { get; }
 
-        public Color(byte r, byte g, byte b)
+        public Color(byte r, byte g, byte b) : this(r, g, b, false)
         {
+        }
+
+        private Color(byte r, byte g, byte b, bool isEmpty)
+        {
+            IsEmpty = isEmpty;
             R = r;
             G = g;
             B = b;
+        }
+
+        public static Color Empty()
+        {
+            return new Color(0, 0, 0, true);
         }
 
         public static Red Red(byte value) => new Red(value);
@@ -33,7 +45,7 @@ namespace LineInput
 
         public bool Equals(Color other)
         {
-            return R == other.R && G == other.G && B == other.B;
+            return R == other.R && G == other.G && B == other.B && IsEmpty == other.IsEmpty;
         }
 
         public static bool operator ==(Color lhs, Color rhs) => lhs.Equals(rhs);

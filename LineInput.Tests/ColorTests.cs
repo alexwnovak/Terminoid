@@ -198,5 +198,44 @@ namespace LineInput.Tests
             newColor.G.Should().Be(22);
             newColor.B.Should().Be(33);
         }
+
+        [Fact]
+        public void GivenAnRGBColorWasCreated_WhenReadingItsEmptyProperty_ThenTheColorIsNotEmpty()
+        {
+            var color = new Color(1, 2, 3);
+
+            color.IsEmpty.Should().BeFalse();
+        }
+
+        [Fact]
+        public void GivenAnEmptyColorWasCreated_WhenReadingItsProperties_ThenEmptyIsTrueAndRGBValuesAreZero()
+        {
+            var color = Color.Empty();
+
+            color.IsEmpty.Should().BeTrue();
+            color.R.Should().Be(0);
+            color.G.Should().Be(0);
+            color.B.Should().Be(0);
+        }
+
+        [Fact]
+        public void GivenTwoColorsExistWithSameValuesButOneIsEmpty_WhenComparing_ThenTheyAreNotEqual()
+        {
+            var red = new Color(0, 0, 0);
+            var empty = Color.Empty();
+
+            bool areEqual = red == empty;
+            areEqual.Should().BeFalse();
+        }
+
+        [Fact]
+        public void GivenTwoEmptyColorsExist_WhenComparing_ThenTheyAreEqual()
+        {
+            var emptyOne = Color.Empty();
+            var emptyTwo = Color.Empty();
+
+            bool areEqual = emptyOne == emptyTwo;
+            areEqual.Should().BeTrue();
+        }
     }
 }
