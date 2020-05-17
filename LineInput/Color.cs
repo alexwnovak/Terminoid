@@ -2,7 +2,7 @@ using System;
 
 namespace LineInput
 {
-    public struct Color : IEquatable<Color>
+    public readonly struct Color : IEquatable<Color>
     {
         public byte R { get; }
         public byte G { get; }
