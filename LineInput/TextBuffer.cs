@@ -77,7 +77,7 @@ namespace LineInput
                 }
                 else
                 {
-                    cellsCopy.Add(new Cell(thisCell.Char, thisCell.Foreground, thisCell.Background.Value));
+                    cellsCopy.Add(new Cell(thisCell.Char, thisCell.Foreground, thisCell.Background));
                 }
             }
 

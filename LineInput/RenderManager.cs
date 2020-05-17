@@ -94,7 +94,7 @@ namespace LineInput
 
                     if (thisCell.Background != null)
                     {
-                        var background = thisCell.Background.Value;
+                        var background = thisCell.Background;
                         stringBuilder.Append($"\x1B[48;2;{background.R};{background.G};{background.B}m{thisCell.Char}\x1B[0m");
                     }
                     else

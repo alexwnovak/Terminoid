@@ -16,7 +16,7 @@ namespace LineInput
         private void BuildTree()
         {
             var run = new StringBuilder();
-            Color? background = null;
+            Color background = Color.Empty();
 
             foreach (var cell in _textBuffer)
             {
@@ -24,7 +24,7 @@ namespace LineInput
 
                 if (background != cell.Background)
                 {
-                    _headNode.Children.Add(new BackgroundColorNode(cell.Background.Value));
+                    _headNode.Children.Add(new BackgroundColorNode(cell.Background));
                     _headNode.Children.Add(new TextNode(run.ToString()));
                     run.Clear();
                 }

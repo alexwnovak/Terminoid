@@ -35,7 +35,7 @@ namespace LineInput.Tests
         {
             var cell = new Cell('A');
 
-            cell.Foreground.Should().BeNull();
+            cell.Foreground.IsEmpty.Should().BeTrue();
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace LineInput.Tests
         {
             var cell = new Cell('A');
 
-            cell.Background.Should().BeNull();
+            cell.Background.IsEmpty.Should().BeTrue();
         }
     }
 }
