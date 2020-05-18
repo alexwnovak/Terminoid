@@ -86,24 +86,10 @@ namespace LineInput
 
                 // Format and print
 
-                var stringBuilder = new StringBuilder();
+                var rasterizer = new VTRasterizer();
+                string rasterizedOutput = rasterizer.Rasterize(textBuffer);
 
-                for (int i = 0; i < textBuffer.Length; i++)
-                {
-                    var thisCell = textBuffer[i];
-
-                    if (thisCell.Background != null)
-                    {
-                        var background = thisCell.Background;
-                        stringBuilder.Append($"\x1B[48;2;{background.R};{background.G};{background.B}m{thisCell.Char}\x1B[0m");
-                    }
-                    else
-                    {
-                        stringBuilder.Append(thisCell.Char);
-                    }
-                }
-
-                Console.Write($"\x0D{stringBuilder}");
+                Console.Write($"\x0D{rasterizedOutput}");
 
                 lastTime = DateTime.Now;
                 Thread.Sleep(30);

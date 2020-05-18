@@ -27,8 +27,6 @@ namespace LineInput
 
             foreach (var cell in _textBuffer)
             {
-                run.Append(cell.Char);
-
                 // Detect whether there is any difference
 
                 bool foregroundChanged = formatState.Foreground != cell.Foreground;
@@ -37,6 +35,11 @@ namespace LineInput
 
                 if (hasDifference)
                 {
+                    // Now that the nodes for format change have been emitted, we need to write
+                    // out a text node to conclude everything
+                    _headNode.Children.Add(new TextNode(run.ToString()));
+                    run.Clear();
+
                     // We know something has changed, so we'll emit nodes that transition the
                     // new state into what has changed--this may be multiple nodes
 
@@ -51,12 +54,9 @@ namespace LineInput
                         _headNode.Children.Add(new BackgroundColorNode(cell.Background));
                         formatState.Background = cell.Background;
                     }
-
-                    // Now that the nodes for format change have been emitted, we need to write
-                    // out a text node to conclude everything
-                    _headNode.Children.Add(new TextNode(run.ToString()));
-                    run.Clear();
                 }
+
+                run.Append(cell.Char);
             }
 
             _headNode.Children.Add(new TextNode(run.ToString()));
