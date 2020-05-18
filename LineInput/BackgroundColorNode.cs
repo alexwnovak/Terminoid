@@ -12,11 +12,11 @@ namespace LineInput
         {
             if (Color.IsEmpty)
             {
-                sb.Append($"\x1B[49m");
+                sb.Append(VT.ResetBackground());
             }
             else
             {
-                sb.Append($"\x1B[48;2;{Color.R};{Color.G};{Color.B}m");
+                sb.Append(VT.SetBackgroundRgb(Color));
             }
 
             EvaluateChildren(sb);
