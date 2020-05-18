@@ -16,7 +16,7 @@ namespace LineInput.Animation
 
         protected override void OnUpdate(int cursorIndex, TextBuffer textBuffer)
         {
-            textBuffer[cursorIndex].Background = new Color((byte)R, (byte)G, (byte)B);
+            textBuffer[cursorIndex].Background = Color.FromRgb((byte)R, (byte)G, (byte)B);
         }
     }
 }

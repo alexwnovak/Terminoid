@@ -1,9 +1,10 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace LineInput
 {
-    public class TextBuffer
+    public class TextBuffer : IEnumerable<Cell>
     {
         private readonly Cell _blank = new Cell(' ');
         private readonly List<Cell> _cells;
@@ -76,7 +77,7 @@ namespace LineInput
                 }
                 else
                 {
-                    cellsCopy.Add(new Cell(thisCell.Char, thisCell.Foreground, thisCell.Background.Value));
+                    cellsCopy.Add(new Cell(thisCell.Char, thisCell.Foreground, thisCell.Background));
                 }
             }
 
@@ -94,5 +95,15 @@ namespace LineInput
             var chars = _cells.Select(c => c.Char).ToArray();
             return new string(chars);
         }
+
+        public IEnumerator<Cell> GetEnumerator()
+        {
+            foreach (var cell in _cells)
+            {
+                yield return cell;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

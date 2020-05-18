@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Collections.Generic;
 using Xunit;
 using FluentAssertions;
 using LineInput;
@@ -334,6 +335,27 @@ namespace LineInput.Tests
             clone[1].Char.Should().Be(cells[1].Char);
             clone[1].Foreground.Should().Be(cells[1].Foreground);
             clone[1].Background.Should().Be(cells[1].Background);
+        }
+
+        [Fact]
+        public void GivenThereIsOneCell_WhenIteratingWithForEach_ThenThereIsOneCellFound()
+        {
+            var cells = new[]
+            {
+                new Cell('A')
+            };
+
+            var textBuffer = new TextBuffer(cells);
+
+            var actualCells = new List<Cell>();
+
+            foreach (var cell in textBuffer)
+            {
+                actualCells.Add(cell);
+            }
+
+            actualCells[0].Should().Be(cells[0]);
+            actualCells[1].Char.Should().Be(' ');
         }
     }
 }

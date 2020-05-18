@@ -17,25 +17,25 @@ namespace LineInput.Tests
         [Fact]
         public void WhenCreatingACell_ItIsGivenAnOptionalForeground_TheForegroundIsRetained()
         {
-            var cell = new Cell('A', new Color(255, 255, 0));
+            var cell = new Cell('A', Color.FromRgb(255, 255, 0));
 
-            cell.Foreground.Should().BeEquivalentTo(new Color(255, 255, 0));
+            cell.Foreground.Should().BeEquivalentTo(Color.FromRgb(255, 255, 0));
         }
 
         [Fact]
         public void WhenCreatingACell_ItIsGivenAnOptionalBackground_TheBackgroundIsRetained()
         {
-            var cell = new Cell('A', new Color(255, 255, 0), new Color(0, 0, 64));
+            var cell = new Cell('A', Color.FromRgb(255, 255, 0), Color.FromRgb(0, 0, 64));
 
-            cell.Background.Should().BeEquivalentTo(new Color(0, 0, 64));
+            cell.Background.Should().BeEquivalentTo(Color.FromRgb(0, 0, 64));
         }
 
         [Fact]
-        public void ByDefault_CellsHaveDefaultGrayForeground()
+        public void ByDefault_ACellHasNoForeground()
         {
             var cell = new Cell('A');
 
-            cell.Foreground.Should().BeEquivalentTo(new Color(127, 127, 127));
+            cell.Foreground.IsEmpty.Should().BeTrue();
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace LineInput.Tests
         {
             var cell = new Cell('A');
 
-            cell.Background.Should().BeNull();
+            cell.Background.IsEmpty.Should().BeTrue();
         }
     }
 }
