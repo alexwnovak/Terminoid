@@ -4,7 +4,7 @@ namespace LineInput
 {
     public abstract class InputControllerBase : IInputController
     {
-        public InputStateManager InputStateManager
+        public IInputStateManager InputStateManager
         {
             get;
             set;
