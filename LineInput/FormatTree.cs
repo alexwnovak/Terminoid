@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 namespace LineInput
@@ -28,9 +29,31 @@ namespace LineInput
             {
                 run.Append(cell.Char);
 
-                if (formatState.Background != cell.Background)
+                // Detect whether there is any difference
+
+                bool foregroundChanged = formatState.Foreground != cell.Foreground;
+                bool backgroundChanged = formatState.Background != cell.Background;
+                bool hasDifference = foregroundChanged || backgroundChanged;
+
+                if (hasDifference)
                 {
-                    _headNode.Children.Add(new BackgroundColorNode(cell.Background));
+                    // We know something has changed, so we'll emit nodes that transition the
+                    // new state into what has changed--this may be multiple nodes
+
+                    if (foregroundChanged)
+                    {
+                        _headNode.Children.Add(new ForegroundColorNode(cell.Foreground));
+                        formatState.Foreground = cell.Foreground;
+                    }
+
+                    if (backgroundChanged)
+                    {
+                        _headNode.Children.Add(new BackgroundColorNode(cell.Background));
+                        formatState.Background = cell.Background;
+                    }
+
+                    // Now that the nodes for format change have been emitted, we need to write
+                    // out a text node to conclude everything
                     _headNode.Children.Add(new TextNode(run.ToString()));
                     run.Clear();
                 }
