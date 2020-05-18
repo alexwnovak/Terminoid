@@ -41,6 +41,8 @@ namespace LineInput
             return R == other.R && G == other.G && B == other.B && IsEmpty == other.IsEmpty;
         }
 
+        public override string ToString() => IsEmpty ? "(Empty)" : $"({R},{G},{B})";
+
         public static bool operator ==(Color lhs, Color rhs) => lhs.Equals(rhs);
         public static bool operator !=(Color lhs, Color rhs) => !lhs.Equals(rhs);
 

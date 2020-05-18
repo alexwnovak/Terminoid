@@ -237,5 +237,21 @@ namespace LineInput.Tests
             bool areEqual = emptyOne == emptyTwo;
             areEqual.Should().BeTrue();
         }
+
+        [Fact]
+        public void GivenAnRgbColorExists_WhenConvertingToString_TheRgbComponentsAreReturned()
+        {
+            var color = Color.FromRgb(1, 2, 3);
+
+            color.ToString().Should().Be("(1,2,3)");
+        }
+
+        [Fact]
+        public void GivenAnEmptyColorExists_WhenConvertingToString_TheEmptyValueIsReturned()
+        {
+            var color = Color.Empty();
+
+            color.ToString().Should().Be("(Empty)");
+        }
     }
 }
