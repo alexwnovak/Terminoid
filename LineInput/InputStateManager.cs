@@ -1,6 +1,6 @@
 namespace LineInput
 {
-    public class InputStateManager
+    public class InputStateManager : IInputStateManager
     {
         private readonly InputState _inputState;
 
