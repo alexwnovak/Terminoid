@@ -23,7 +23,14 @@ namespace LineInput
             {
                 // InputStateManager.ExecuteCommand(new InsertTextCommand(), "_one-two-three_");
                 InputStateManager.ExecuteCommand(new AnimatedInsertTextCommand(TimeSpan.FromSeconds(1)), "this-is-some-animated-text");
-
+            }
+            else if (keyInfo.Key == ConsoleKey.Home)
+            {
+                InputStateManager.ExecuteCommand(new MoveCursorToStartCommand());
+            }
+            else if (keyInfo.Key == ConsoleKey.End)
+            {
+                InputStateManager.ExecuteCommand(new MoveCursorToEndCommand());
             }
             else if (keyInfo.Key == ConsoleKey.Backspace)
             {
