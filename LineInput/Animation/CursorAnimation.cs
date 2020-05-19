@@ -6,17 +6,16 @@ namespace LineInput.Animation
     {
         private const double _twoPi = Math.PI * 2;
 
-        public int R => 0;
-        public int G => (int)(64 * Math.Sin(Progress * _twoPi) + 192);
-        public int B => (int)(64 * Math.Sin(Progress * _twoPi) + 192);
-
         public CursorAnimation(TimeSpan duration) : base(duration, RepeatBehavior.Forever)
         {
         }
 
         protected override void OnUpdate(int cursorIndex, TextBuffer textBuffer)
         {
-            textBuffer[cursorIndex].Background = Color.FromRgb((byte)R, (byte)G, (byte)B);
+            byte g = (byte)(64 * Math.Sin(Progress * _twoPi) + 192);
+            byte b = (byte)(64 * Math.Sin(Progress * _twoPi) + 192);
+
+            textBuffer[cursorIndex].Background = Color.FromRgb(0, g, b);
         }
     }
 }

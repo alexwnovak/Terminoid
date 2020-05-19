@@ -66,7 +66,7 @@ namespace LineInput
             _isThreadRunning = true;
             var lastTime = DateTime.Now;
 
-            var cursorAnimation = new CursorAnimation(TimeSpan.FromSeconds(1));
+            var cursorAnimation = new CursorAnimation(TimeSpan.FromSeconds(0.5));
             StartAnimation(cursorAnimation);
 
             while (_isThreadRunning)
