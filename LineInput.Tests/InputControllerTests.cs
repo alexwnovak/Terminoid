@@ -24,5 +24,21 @@ namespace LineInput.Tests
             inputStateManager.LastCommand.Should().BeOfType<MoveCursorCommand>();
             inputStateManager.LastParameter.Should().Be(-1);
         }
+
+        [Fact]
+        public void GivenTheInputControllerExists_WhenTheRightArrowIsPressed_TheMoveCursorCommandIsExecuted()
+        {
+            var inputStateManager = new InputStateManagerDouble();
+
+            var inputController = new InputController
+            {
+                InputStateManager = inputStateManager
+            };
+
+            inputController.PressKey(KeyFactory.FromKey(ConsoleKey.RightArrow));
+
+            inputStateManager.LastCommand.Should().BeOfType<MoveCursorCommand>();
+            inputStateManager.LastParameter.Should().Be(1);
+        }
     }
 }
