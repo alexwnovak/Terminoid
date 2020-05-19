@@ -26,7 +26,7 @@ namespace LineInput
 
         public void StartAsync()
         {
-            Console.WriteLine("===== Starting render thread");
+            // Console.WriteLine("===== Starting render thread");
             _thread.Start();
         }
 
@@ -65,8 +65,8 @@ namespace LineInput
             _isThreadRunning = true;
             var lastTime = DateTime.Now;
 
-            // var cursorAnimation = new CursorAnimation(TimeSpan.FromSeconds(0.5));
-            var cursorAnimation = new BlinkCursorAnimation(Color.FromRgb(192, 0, 0), Color.FromRgb(255, 0, 0), TimeSpan.FromSeconds(1));
+            var cursorAnimation = new CursorAnimation(TimeSpan.FromSeconds(0.5));
+            // var cursorAnimation = new BlinkCursorAnimation(Color.FromRgb(192, 0, 0), Color.FromRgb(255, 0, 0), TimeSpan.FromSeconds(1));
             StartAnimation(cursorAnimation);
 
             while (_isThreadRunning)
@@ -95,7 +95,7 @@ namespace LineInput
                 Thread.Sleep(30);
             }
 
-            Console.WriteLine("===== Stopping render thread");
+            // Console.WriteLine("===== Stopping render thread");
         }
     }
 }

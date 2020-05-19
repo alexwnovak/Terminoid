@@ -2,12 +2,12 @@
 
 namespace LineInput
 {
-    internal static class Program
+    public static class Program
     {
-        private static void Main(string[] args)
+        public static string Get()
         {
             Console.CursorVisible = false;
-            Console.WriteLine("===== Starting");
+            // Console.WriteLine("===== Starting");
 
             var inputState = new InputState();
             var inputStateManager = new InputStateManager(inputState);
@@ -21,6 +21,7 @@ namespace LineInput
             renderManager.StartAsync();
 
             bool isRunning = true;
+            string output = null;
 
             while (isRunning)
             {
@@ -28,7 +29,13 @@ namespace LineInput
 
                 if (keyInfo.Key == ConsoleKey.Escape)
                 {
-                    Console.WriteLine("===== Exiting input loop");
+                    // Console.WriteLine("===== Exiting input loop");
+                    isRunning = false;
+                }
+                if (keyInfo.Key == ConsoleKey.Enter)
+                {
+                    var rasterizer = new VTRasterizer();
+                    output = rasterizer.Rasterize(inputState.TextBuffer);
                     isRunning = false;
                 }
                 else
@@ -39,6 +46,13 @@ namespace LineInput
 
             renderManager.Stop();
             Console.CursorVisible = true;
+
+            return output;
+        }
+
+        public static void Main(string[] args)
+        {
+            Get();
         }
     }
 }
