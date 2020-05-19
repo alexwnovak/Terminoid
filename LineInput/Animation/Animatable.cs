@@ -4,13 +4,17 @@ namespace LineInput.Animation
 {
     public class Animatable
     {
+        public TimeSpan Duration { get; }
+        public RepeatBehavior RepeatBehavior { get; }
+
         public TimeSpan ElapsedTime { get; private set; }
         public double Progress { get; private set; }
-        public TimeSpan Duration { get; }
+        public bool IsComplete => RepeatBehavior == RepeatBehavior.Once && ElapsedTime >= Duration;
 
-        public Animatable(TimeSpan duration)
+        public Animatable(TimeSpan duration, RepeatBehavior repeatBehavior)
         {
             Duration = duration;
+            RepeatBehavior = repeatBehavior;
         }
 
         public void Update(TimeSpan timeSpan, int cursorIndex, TextBuffer textBuffer)
@@ -30,13 +34,6 @@ namespace LineInput.Animation
         protected void UpdateProgress(TimeSpan timeSpan)
         {
             Progress = ElapsedTime.TotalMilliseconds / Duration.TotalMilliseconds;
-
-            // if (Progress >= 1)
-            // {
-            //     Progress = 0;
-            // }
-
-            // Console.WriteLine($"Progress {Progress}");
         }
 
         protected virtual void OnUpdate(int cursorIndex, TextBuffer textBuffer) { }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using LineInput.Animation;
 
@@ -49,9 +48,9 @@ namespace LineInput
             {
                 animatable.Update(frameTime, cursorIndex, textBuffer);
 
-                if (animatable.Progress >= 1)
+                if (animatable.IsComplete)
                 {
-                    // completedAnimations.Enqueue(animatable);
+                    completedAnimations.Enqueue(animatable);
                 }
             }
 
@@ -66,7 +65,8 @@ namespace LineInput
             _isThreadRunning = true;
             var lastTime = DateTime.Now;
 
-            var cursorAnimation = new CursorAnimation(TimeSpan.FromSeconds(1));
+            // var cursorAnimation = new CursorAnimation(TimeSpan.FromSeconds(0.5));
+            var cursorAnimation = new BlinkCursorAnimation(Color.FromRgb(192, 0, 0), Color.FromRgb(255, 0, 0), TimeSpan.FromSeconds(1));
             StartAnimation(cursorAnimation);
 
             while (_isThreadRunning)
