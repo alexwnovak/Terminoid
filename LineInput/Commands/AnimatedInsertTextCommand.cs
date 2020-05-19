@@ -5,7 +5,7 @@ namespace LineInput.Commands
 {
     public class AnimatedInsertTextCommand : Animatable, IInputStateCommand<string>
     {
-        public AnimatedInsertTextCommand(TimeSpan duration) : base(duration)
+        public AnimatedInsertTextCommand(TimeSpan duration) : base(duration, RepeatBehavior.Once)
         {
         }
 

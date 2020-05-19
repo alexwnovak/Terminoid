@@ -10,7 +10,7 @@ namespace LineInput.Animation
         public int G => (int)(64 * Math.Sin(Progress * _twoPi) + 192);
         public int B => (int)(64 * Math.Sin(Progress * _twoPi) + 192);
 
-        public CursorAnimation(TimeSpan duration) : base(duration)
+        public CursorAnimation(TimeSpan duration) : base(duration, RepeatBehavior.Forever)
         {
         }
 

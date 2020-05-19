@@ -49,9 +49,9 @@ namespace LineInput
             {
                 animatable.Update(frameTime, cursorIndex, textBuffer);
 
-                if (animatable.Progress >= 1)
+                if (animatable.IsComplete)
                 {
-                    // completedAnimations.Enqueue(animatable);
+                    completedAnimations.Enqueue(animatable);
                 }
             }
 
