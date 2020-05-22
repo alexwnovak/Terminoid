@@ -25,7 +25,11 @@ namespace LineInput
                 _renderThread.IsBackground = true;
                 _renderThread.Start();
             }
+        }
 
+        public void ShutDown()
+        {
+            _isThreadRunning = false;
         }
 
         private void RenderThreadProc()
