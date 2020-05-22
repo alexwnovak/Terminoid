@@ -1,5 +1,5 @@
 function GetLine {
-    [System.Console]::CursorVisible = $false
+    # [System.Console]::CursorVisible = $false
     [LineInput.Program]::Get()
     # [System.Console]::CursorVisible = $true
 }

@@ -1,2 +1,3 @@
+Remove-Item output/*
 dotnet build ./src/Terminoid -o ./output
-cp ./src/Terminoid/Terminoid.ps?1 ./output
+Copy-Item ./src/Terminoid/Terminoid.ps?1 ./output -force
