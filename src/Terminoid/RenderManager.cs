@@ -7,12 +7,51 @@ namespace LineInput
 {
     public class RenderManager
     {
-        private readonly InputState _inputState;
-        private readonly Thread _thread;
+        public static RenderManager Instance { get; } = new RenderManager();
+
+        private bool _isInitialized;
+        private Thread _renderThread;
 
         private bool _isThreadRunning;
 
+        public void Initialize()
+        {
+            Console.WriteLine("===== Initializing");
+
+            if (!_isInitialized)
+            {
+                _isInitialized = true;
+                _renderThread = new Thread(RenderThreadProc);
+                _renderThread.IsBackground = true;
+                _renderThread.Start();
+            }
+
+        }
+
+        private void RenderThreadProc()
+        {
+            _isThreadRunning = true;
+
+            Console.WriteLine("===== Starting render thread");
+
+            while (_isThreadRunning)
+            {
+                Thread.Sleep(2000);
+                Console.Write("RT");
+            }
+
+            Console.WriteLine("===== Stopping render thread");
+        }
+
+        private readonly InputState _inputState;
+        private readonly Thread _thread;
+
+
         private readonly List<Animatable> _animationObjects = new List<Animatable>();
+
+        private RenderManager()
+        {
+        }
 
         public RenderManager(InputState inputState)
         {
@@ -25,7 +64,7 @@ namespace LineInput
         public void StartAsync()
         {
             // Console.WriteLine("===== Starting render thread");
-            _thread.Start();
+            // _thread.Start();
         }
 
         public void Stop()

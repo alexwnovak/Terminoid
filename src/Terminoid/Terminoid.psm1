@@ -4,4 +4,8 @@ function GetLine {
     # [System.Console]::CursorVisible = $true
 }
 
-Set-Item Function:\PSConsoleHostReadline -Value ${function:GetLine}
+Write-Host "Initializing..."
+
+[LineInput.RenderManager]::Instance.Initialize()
+
+# Set-Item Function:\PSConsoleHostReadline -Value ${function:GetLine}
