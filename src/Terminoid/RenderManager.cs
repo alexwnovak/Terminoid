@@ -8,7 +8,6 @@ namespace LineInput
     public class RenderManager
     {
         private readonly InputState _inputState;
-        private readonly CursorPainter _cursorPainter;
         private readonly Thread _thread;
 
         private bool _isThreadRunning;
@@ -18,7 +17,6 @@ namespace LineInput
         public RenderManager(InputState inputState)
         {
             _inputState = inputState;
-            _cursorPainter = new CursorPainter();
 
             _thread = new Thread(ThreadProc);
             _isThreadRunning = false;
