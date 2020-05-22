@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LineInput\LineInput.csproj" />
+    <ProjectReference Include="..\Terminoid\Terminoid.csproj" />
   </ItemGroup>
 
 </Project>
