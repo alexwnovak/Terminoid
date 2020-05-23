@@ -78,7 +78,7 @@ namespace LineInput
         {
             _inputState = inputState;
 
-            var cursorAnimation = new CursorAnimation(TimeSpan.FromSeconds(0.5));
+            var cursorAnimation = new CursorAnimation(TimeSpan.FromSeconds(0.5), Color.FromRgb(18, 55, 64), Color.FromRgb(84, 154, 171));
             StartAnimation(cursorAnimation);
 
             _hasFocus = true;
