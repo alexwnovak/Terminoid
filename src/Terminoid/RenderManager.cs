@@ -7,30 +7,89 @@ namespace LineInput
 {
     public class RenderManager
     {
-        private readonly InputState _inputState;
-        private readonly CursorPainter _cursorPainter;
-        private readonly Thread _thread;
+        public static RenderManager Instance { get; } = new RenderManager();
 
+        private bool _isInitialized;
         private bool _isThreadRunning;
+        private bool _hasFocus;
+
+        private Thread _renderThread;
+        private InputState _inputState;
 
         private readonly List<Animatable> _animationObjects = new List<Animatable>();
 
-        public RenderManager(InputState inputState)
+        private RenderManager()
+        {
+        }
+
+        public void Initialize()
+        {
+            Console.WriteLine("===== Initializing");
+
+            if (!_isInitialized)
+            {
+                _isInitialized = true;
+                _renderThread = new Thread(RenderThreadProc);
+                _renderThread.IsBackground = true;
+                _renderThread.Start();
+            }
+        }
+
+        private void RenderThreadProc()
+        {
+            _isThreadRunning = true;
+
+            Console.WriteLine("===== Starting render thread");
+
+            var lastTime = DateTime.Now;
+
+            while (_isThreadRunning)
+            {
+                var elapsedTime = DateTime.Now - lastTime;
+
+                if (_hasFocus)
+                {
+                    int cursorIndex;
+                    TextBuffer textBuffer;
+
+                    lock (_inputState)
+                    {
+                        cursorIndex = _inputState.CursorIndex;
+                        textBuffer = _inputState.TextBuffer.Clone();
+                    }
+
+                    RenderThreadUpdate(elapsedTime, cursorIndex, textBuffer);
+                }
+
+                lastTime = DateTime.Now;
+                Thread.Sleep(30);
+            }
+
+            Console.WriteLine("===== Stopping render thread");
+        }
+
+        private void RenderThreadUpdate(TimeSpan frameTime, int cursorIndex, TextBuffer textBuffer)
+        {
+            UpdateAnimation(frameTime, cursorIndex, textBuffer);
+            WriteTextBuffer(textBuffer);
+        }
+
+        public void EnableFocus(InputState inputState)
         {
             _inputState = inputState;
-            _cursorPainter = new CursorPainter();
 
-            _thread = new Thread(ThreadProc);
-            _isThreadRunning = false;
+            var cursorAnimation = new CursorAnimation(TimeSpan.FromSeconds(0.5));
+            StartAnimation(cursorAnimation);
+
+            _hasFocus = true;
         }
 
-        public void StartAsync()
+        public void DisableFocus()
         {
-            // Console.WriteLine("===== Starting render thread");
-            _thread.Start();
+            _hasFocus = false;
         }
 
-        public void Stop()
+        public void ShutDown()
         {
             _isThreadRunning = false;
         }
@@ -60,42 +119,12 @@ namespace LineInput
             }
         }
 
-        private void ThreadProc(object parameter)
+        private void WriteTextBuffer(TextBuffer textBuffer)
         {
-            _isThreadRunning = true;
-            var lastTime = DateTime.Now;
+            var rasterizer = new VTRasterizer();
+            string rasterizedOutput = rasterizer.Rasterize(textBuffer);
 
-            var cursorAnimation = new CursorAnimation(TimeSpan.FromSeconds(0.5));
-            // var cursorAnimation = new BlinkCursorAnimation(Color.FromRgb(192, 0, 0), Color.FromRgb(255, 0, 0), TimeSpan.FromSeconds(1));
-            StartAnimation(cursorAnimation);
-
-            while (_isThreadRunning)
-            {
-                var elapsedTime = DateTime.Now - lastTime;
-
-                int cursorIndex;
-                TextBuffer textBuffer;
-
-                lock (_inputState)
-                {
-                    cursorIndex = _inputState.CursorIndex;
-                    textBuffer = _inputState.TextBuffer.Clone();
-                }
-
-                UpdateAnimation(elapsedTime, cursorIndex, textBuffer);
-
-                // Format and print
-
-                var rasterizer = new VTRasterizer();
-                string rasterizedOutput = rasterizer.Rasterize(textBuffer);
-
-                Console.Write($"\x0D{rasterizedOutput}");
-
-                lastTime = DateTime.Now;
-                Thread.Sleep(30);
-            }
-
-            // Console.WriteLine("===== Stopping render thread");
+            Console.Write($"\x0D{rasterizedOutput}");
         }
     }
 }
