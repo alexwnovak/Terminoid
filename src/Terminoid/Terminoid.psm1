@@ -1,7 +1,5 @@
 function GetLine {
-    # [System.Console]::CursorVisible = $false
-    [LineInput.Program]::Get()
-    # [System.Console]::CursorVisible = $true
+    [Terminoid.LineInput]::ReadLine()
 }
 
 Write-Host "Initializing..."
@@ -12,4 +10,4 @@ $ExecutionContext.SessionState.Module.OnRemove = {
     [LineInput.RenderManager]::Instance.ShutDown()
 }
 
-# Set-Item Function:\PSConsoleHostReadline -Value ${function:GetLine}
+Set-Item Function:\PSConsoleHostReadline -Value ${function:GetLine}

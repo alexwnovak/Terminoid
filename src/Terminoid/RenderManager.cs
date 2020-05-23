@@ -10,6 +10,7 @@ namespace LineInput
         public static RenderManager Instance { get; } = new RenderManager();
 
         private bool _isInitialized;
+        private bool _hasFocus;
         private Thread _renderThread;
 
         private bool _isThreadRunning;
@@ -27,6 +28,18 @@ namespace LineInput
             }
         }
 
+        public void EnableFocus(InputState inputState)
+        {
+            _inputState = inputState;
+
+            var cursorAnimation = new CursorAnimation(TimeSpan.FromSeconds(0.5));
+            StartAnimation(cursorAnimation);
+
+            _hasFocus = true;
+        }
+
+        public void DisableFocus() => _hasFocus = false;
+
         public void ShutDown()
         {
             _isThreadRunning = false;
@@ -38,16 +51,32 @@ namespace LineInput
 
             Console.WriteLine("===== Starting render thread");
 
+            var lastTime = DateTime.Now;
+
             while (_isThreadRunning)
             {
-                Thread.Sleep(2000);
-                Console.Write("RT");
+                var elapsedTime = DateTime.Now - lastTime;
+
+                if (_hasFocus)
+                {
+                    RenderThreadUpdate(elapsedTime);
+                }
+
+                lastTime = DateTime.Now;
+                Thread.Sleep(300);
             }
 
             Console.WriteLine("===== Stopping render thread");
         }
 
-        private readonly InputState _inputState;
+        private void RenderThreadUpdate(TimeSpan frameTime)
+        {
+            Console.WriteLine($"====== Frame time: {frameTime}");
+            // UpdateAnimation(elapsedTime, cursorIndex, textBuffer);
+            // Console.WriteLine("===== Render Thread Update");
+        }
+
+        private InputState _inputState;
         private readonly Thread _thread;
 
 

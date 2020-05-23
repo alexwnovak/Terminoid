@@ -7,7 +7,6 @@ namespace LineInput
         public static string Get()
         {
             Console.CursorVisible = false;
-            // Console.WriteLine("===== Starting");
 
             var inputState = new InputState();
             var inputStateManager = new InputStateManager(inputState);
