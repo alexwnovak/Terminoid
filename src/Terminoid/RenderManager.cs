@@ -9,18 +9,30 @@ namespace LineInput
     {
         public static RenderManager Instance { get; } = new RenderManager();
 
-        private readonly List<Animatable> _animationObjects = new List<Animatable>();
-
         private bool _isInitialized;
+        private bool _isThreadRunning;
         private bool _hasFocus;
 
         private Thread _renderThread;
         private InputState _inputState;
 
-        private bool _isThreadRunning;
+        private readonly List<Animatable> _animationObjects = new List<Animatable>();
 
         private RenderManager()
         {
+        }
+
+        public void Initialize()
+        {
+            Console.WriteLine("===== Initializing");
+
+            if (!_isInitialized)
+            {
+                _isInitialized = true;
+                _renderThread = new Thread(RenderThreadProc);
+                _renderThread.IsBackground = true;
+                _renderThread.Start();
+            }
         }
 
         private void RenderThreadProc()
@@ -60,19 +72,6 @@ namespace LineInput
         {
             UpdateAnimation(frameTime, cursorIndex, textBuffer);
             WriteTextBuffer(textBuffer);
-        }
-
-        public void Initialize()
-        {
-            Console.WriteLine("===== Initializing");
-
-            if (!_isInitialized)
-            {
-                _isInitialized = true;
-                _renderThread = new Thread(RenderThreadProc);
-                _renderThread.IsBackground = true;
-                _renderThread.Start();
-            }
         }
 
         public void EnableFocus(InputState inputState)
