@@ -81,11 +81,7 @@ namespace LineInput
         private void RenderThreadUpdate(TimeSpan frameTime, int cursorIndex, TextBuffer textBuffer)
         {
             UpdateAnimation(frameTime, cursorIndex, textBuffer);
-
-            var rasterizer = new VTRasterizer();
-            string rasterizedOutput = rasterizer.Rasterize(textBuffer);
-
-            Console.Write($"\x0D{rasterizedOutput}");
+            WriteTextBuffer(textBuffer);
         }
 
         private InputState _inputState;
@@ -129,6 +125,14 @@ namespace LineInput
             {
                 _animationObjects.Remove(completedAnimation);
             }
+        }
+
+        private void WriteTextBuffer(TextBuffer textBuffer)
+        {
+            var rasterizer = new VTRasterizer();
+            string rasterizedOutput = rasterizer.Rasterize(textBuffer);
+
+            Console.Write($"\x0D{rasterizedOutput}");
         }
 
         private void ThreadProc(object parameter)
