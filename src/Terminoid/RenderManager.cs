@@ -59,21 +59,33 @@ namespace LineInput
 
                 if (_hasFocus)
                 {
-                    RenderThreadUpdate(elapsedTime);
+                    int cursorIndex;
+                    TextBuffer textBuffer;
+
+                    lock (_inputState)
+                    {
+                        cursorIndex = _inputState.CursorIndex;
+                        textBuffer = _inputState.TextBuffer.Clone();
+                    }
+
+                    RenderThreadUpdate(elapsedTime, cursorIndex, textBuffer);
                 }
 
                 lastTime = DateTime.Now;
-                Thread.Sleep(300);
+                Thread.Sleep(30);
             }
 
             Console.WriteLine("===== Stopping render thread");
         }
 
-        private void RenderThreadUpdate(TimeSpan frameTime)
+        private void RenderThreadUpdate(TimeSpan frameTime, int cursorIndex, TextBuffer textBuffer)
         {
-            Console.WriteLine($"====== Frame time: {frameTime}");
-            // UpdateAnimation(elapsedTime, cursorIndex, textBuffer);
-            // Console.WriteLine("===== Render Thread Update");
+            UpdateAnimation(frameTime, cursorIndex, textBuffer);
+
+            var rasterizer = new VTRasterizer();
+            string rasterizedOutput = rasterizer.Rasterize(textBuffer);
+
+            Console.Write($"\x0D{rasterizedOutput}");
         }
 
         private InputState _inputState;
