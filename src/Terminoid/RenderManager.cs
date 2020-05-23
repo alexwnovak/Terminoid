@@ -94,17 +94,6 @@ namespace LineInput
             _isThreadRunning = false;
         }
 
-        public void StartAsync()
-        {
-            // Console.WriteLine("===== Starting render thread");
-            // _thread.Start();
-        }
-
-        public void Stop()
-        {
-            _isThreadRunning = false;
-        }
-
         private void StartAnimation(Animatable animatable)
         {
             _animationObjects.Add(animatable);
@@ -164,8 +153,6 @@ namespace LineInput
                 lastTime = DateTime.Now;
                 Thread.Sleep(30);
             }
-
-            // Console.WriteLine("===== Stopping render thread");
         }
     }
 }
