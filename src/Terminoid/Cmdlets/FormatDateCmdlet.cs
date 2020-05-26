@@ -21,7 +21,8 @@ namespace Terminoid.Cmdlets
         private const int _twoMillennia = _oneMillennium * 2;
 
         [Parameter(
-            Mandatory = true
+            Mandatory = true,
+            ValueFromPipeline = true
         )]
         public DateTime Date { get; set; }
 

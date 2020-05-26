@@ -27,6 +27,10 @@ When 'I format the date' {
     $script:FormattedDate = Format-Date -Date $script:Date
 }
 
+When 'I pipe the date to the formatter' {
+    $script:FormattedDate = $script:Date | Format-Date
+}
+
 Then "it should read '(.*)'" {
     param ($Actual)
     $script:FormattedDate | Should -Be $Actual
