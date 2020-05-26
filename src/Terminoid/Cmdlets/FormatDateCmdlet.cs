@@ -20,6 +20,10 @@ namespace Terminoid.Cmdlets
             {
                 WriteObject("1 minute ago");
             }
+            else if (elapsedTime.TotalMinutes > 2)
+            {
+                WriteObject($"{(int)elapsedTime.TotalMinutes} minutes ago");
+            }
             else
             {
                 WriteObject("just now");

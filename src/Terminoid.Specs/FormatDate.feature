@@ -9,3 +9,8 @@ Scenario: Formatting a date from between one and two minutes ago
     Given I have a date from a minute and a half ago
     When I format the date
     Then it should read '1 minute ago'
+
+Scenario: Formatting a date from between two minutes and 60 minutes ago
+    Given I have a date from 30 minutes ago
+    When I format the date
+    Then it should read '30 minutes ago'

@@ -6,6 +6,10 @@ Given 'I have a date from a minute and a half ago' {
     $script:Date = (Get-Date).AddSeconds(-90)
 }
 
+Given 'I have a date from 30 minutes ago' {
+    $script:Date = (Get-Date).AddMinutes(-30)
+}
+
 When 'I format the date' {
     $script:FormattedDate = Format-Date -Date $script:Date
 }
