@@ -10,7 +10,11 @@ Scenario: Piping in the size
     When I pipe the size to the formatter
     Then the formatted size should read '123 B'
 
-Scenario: Formatting a size of 123 bytes
-    Given I have a size of 123 bytes
+Scenario Outline: Formatting a variety of sizes in bytes
+    Given I have a size of <size> bytes
     When I format the size
-    Then the formatted size should read '123 B'
+    Then the formatted size should read '<formattedSize>'
+    Examples:
+    | size | formattedSize |
+    | 123  | 123 B         |
+
