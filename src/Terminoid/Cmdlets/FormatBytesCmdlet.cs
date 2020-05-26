@@ -2,8 +2,8 @@ using System.Management.Automation;
 
 namespace Terminoid.Cmdlets
 {
-    [Cmdlet(VerbsCommon.Format, "Size")]
-    public class FormatSizeCmdlet : PSCmdlet
+    [Cmdlet(VerbsCommon.Format, "Bytes")]
+    public class FormatBytesCmdlet : PSCmdlet
     {
         [Parameter(
             Mandatory = true,

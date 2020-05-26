@@ -4,15 +4,15 @@ Given 'I have a size of (.*) bytes' {
 }
 
 When 'I format the size' {
-    $script:FormattedSize = Format-Size -Size $script:Size
+    $script:FormattedSize = Format-Bytes -Size $script:Size
 }
 
 When 'I pass the size as a positional argument' {
-    $script:FormattedSize = Format-Size $script:Size
+    $script:FormattedSize = Format-Bytes $script:Size
 }
 
 When 'I pipe the size to the formatter' {
-    $script:FormattedSize = $script:Size | Format-Size
+    $script:FormattedSize = $script:Size | Format-Bytes
 }
 
 Then "the formatted size should read '(.*)'" {
