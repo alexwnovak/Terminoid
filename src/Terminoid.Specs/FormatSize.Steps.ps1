@@ -7,7 +7,15 @@ When 'I format the size' {
     $script:FormattedSize = Format-Size -Size $script:Size
 }
 
-Then "the formatted size should be '(.*)'" {
+When 'I pass the size as a positional argument' {
+    $script:FormattedSize = Format-Size $script:Size
+}
+
+When 'I pipe the size to the formatter' {
+    $script:FormattedSize = $script:Size | Format-Size
+}
+
+Then "the formatted size should read '(.*)'" {
     param ($Actual)
     $script:FormattedSize | Should -Be $Actual
 }

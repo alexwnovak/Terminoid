@@ -6,7 +6,9 @@ namespace Terminoid.Cmdlets
     public class FormatSizeCmdlet : PSCmdlet
     {
         [Parameter(
-            Mandatory = true
+            Mandatory = true,
+            Position = 0,
+            ValueFromPipeline = true
         )]
         public long Size { get; set; }
 
