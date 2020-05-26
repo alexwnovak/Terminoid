@@ -14,7 +14,16 @@ namespace Terminoid.Cmdlets
 
         protected override void ProcessRecord()
         {
-            WriteObject("just now");
+            var elapsedTime = DateTime.Now - Date;
+
+            if (elapsedTime.TotalMinutes >= 1 && elapsedTime.TotalMinutes <= 2)
+            {
+                WriteObject("1 minute ago");
+            }
+            else
+            {
+                WriteObject("just now");
+            }
         }
     }
 }
