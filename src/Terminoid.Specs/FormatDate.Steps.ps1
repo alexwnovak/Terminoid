@@ -27,6 +27,10 @@ When 'I format the date' {
     $script:FormattedDate = Format-Date -Date $script:Date
 }
 
+When 'I pass the date via positional argument' {
+    $script:FormattedDate = Format-Date $script:Date
+}
+
 When 'I pipe the date to the formatter' {
     $script:FormattedDate = $script:Date | Format-Date
 }

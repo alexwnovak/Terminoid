@@ -22,6 +22,7 @@ namespace Terminoid.Cmdlets
 
         [Parameter(
             Mandatory = true,
+            Position = 0,
             ValueFromPipeline = true
         )]
         public DateTime Date { get; set; }

@@ -1,5 +1,10 @@
 Feature: Formatting a date into a human readable form, relative to right now
 
+Scenario: Passing in the date via positional argument
+    Given I have a date from 5 seconds ago
+    When I pass the date via positional argument
+    Then it should read 'just now'
+
 Scenario: Piping in the date
     Given I have a date from 5 seconds ago
     When I pipe the date to the formatter
