@@ -1,13 +1,26 @@
-Given 'I have a date from a few seconds ago' {
-    $script:Date = (Get-Date).AddSeconds(-5)
+Given 'I have a date from (.*) seconds ago' {
+    param ($Seconds)
+    $script:Date = (Get-Date).AddSeconds(-$Seconds)
 }
 
-Given 'I have a date from a minute and a half ago' {
-    $script:Date = (Get-Date).AddSeconds(-90)
+Given 'I have a date from (.*) minutes ago' {
+    param ($Minutes)
+    $script:Date = (Get-Date).AddMinutes(-$Minutes)
 }
 
-Given 'I have a date from 30 minutes ago' {
-    $script:Date = (Get-Date).AddMinutes(-30)
+Given 'I have a date from (.*) hours ago' {
+    param ($Hours)
+    $script:Date = (Get-Date).AddHours(-$Hours)
+}
+
+Given 'I have a date from (.*) days ago' {
+    param ($Days)
+    $script:Date = (Get-Date).AddDays(-$Days)
+}
+
+Given 'I have a date from (.*) years ago' {
+    param ($Years)
+    $script:Date = (Get-Date).AddYears(-$Years)
 }
 
 When 'I format the date' {
@@ -16,6 +29,5 @@ When 'I format the date' {
 
 Then "it should read '(.*)'" {
     param ($Actual)
-
     $script:FormattedDate | Should -Be $Actual
 }
