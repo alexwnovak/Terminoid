@@ -22,3 +22,12 @@ Scenario Outline: Formatting a variety of whole sizes in different byte units
     | 123GB  | 123 GB        |
     | 123TB  | 123 TB        |
     | 123PB  | 123 PB        |
+
+Scenario Outline: Formatting fractional sizes will format with one decimal place by default
+    Given I have a size of <size> bytes
+    When I format the size
+    Then the formatted size should read '<formattedSize>'
+    Examples:
+    | size   | formattedSize |
+    | 1.25KB | 1.2 KB        |
+

@@ -1,3 +1,4 @@
+using System;
 using System.Management.Automation;
 
 namespace Terminoid.Cmdlets
@@ -32,7 +33,9 @@ namespace Terminoid.Cmdlets
             {
                 if (Size > _sizeTable[index])
                 {
-                    double unitSize = Size / _sizeTable[index];
+                    double unitSize = (double)Size / _sizeTable[index];
+                    unitSize = Math.Round(unitSize, 1);
+
                     WriteObject($"{unitSize} {_labelTable[index]}");
                     return;
                 }
