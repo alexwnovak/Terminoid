@@ -30,4 +30,8 @@ Scenario Outline: Formatting fractional sizes will format with one decimal place
     Examples:
     | size   | formattedSize |
     | 1.25KB | 1.2 KB        |
+    | 1.25MB | 1.2 MB        |
+    | 1.25GB | 1.2 GB        |
+    | 1.25TB | 1.2 TB        |
+    | 1.25PB | 1.2 PB        |
 
