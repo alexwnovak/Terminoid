@@ -4,7 +4,7 @@ Describe 'Format-Size' {
     Context 'the size is less than a kilobyte' {
         It 'formats as bytes when less than a kilobyte' {
             Format-Size -Size 123 | Should -Be '123 B'
-        }        
+        }
     }
 
     Context 'the size is should be measured in kilobytes' {
