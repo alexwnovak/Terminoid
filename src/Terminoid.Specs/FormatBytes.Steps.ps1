@@ -7,6 +7,11 @@ When 'I format the size' {
     $script:FormattedSize = Format-Bytes -Size $script:Size
 }
 
+When 'I format the size with (.*) decimal places' {
+    param ($Places)
+    $script:FormattedSize = Format-Bytes -Size $script:Size -Places $Places
+}
+
 When 'I pass the size as a positional argument' {
     $script:FormattedSize = Format-Bytes $script:Size
 }

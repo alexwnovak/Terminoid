@@ -27,6 +27,9 @@ namespace Terminoid.Cmdlets
         )]
         public long Size { get; set; }
 
+        [Parameter]
+        public int Places { get; set; } = 1;
+
         protected override void ProcessRecord()
         {
             for (int index = 0; index < _sizeTable.Length; index++)
@@ -34,7 +37,7 @@ namespace Terminoid.Cmdlets
                 if (Size > _sizeTable[index])
                 {
                     double unitSize = (double)Size / _sizeTable[index];
-                    unitSize = Math.Round(unitSize, 1);
+                    unitSize = Math.Round(unitSize, Places);
 
                     WriteObject($"{unitSize} {_labelTable[index]}");
                     return;
