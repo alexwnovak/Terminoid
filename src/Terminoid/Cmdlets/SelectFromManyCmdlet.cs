@@ -9,13 +9,49 @@ namespace Terminoid.Cmdlets
         private int _selectedIndex = 0;
 
         [Parameter(
-            Mandatory = true
+            Mandatory = true,
+            Position = 0
         )]
         public object[] Choices { get; set; }
 
         protected override void ProcessRecord()
         {
             RenderChoices();
+
+            bool exit = false;
+            object selectedValue = null;
+
+            while (!exit)
+            {
+                var key = Console.ReadKey(true);
+
+                switch (key.Key)
+                {
+                    case ConsoleKey.Enter:
+                        selectedValue = Choices[_selectedIndex];
+                        exit = true;
+                        break;
+                    case ConsoleKey.Escape:
+                        exit = true;
+                        break;
+                    case ConsoleKey.UpArrow:
+                        _selectedIndex = _selectedIndex == 0 ? 0 : _selectedIndex - 1;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        _selectedIndex = _selectedIndex == Choices.Length - 1 ? Choices.Length - 1 : _selectedIndex + 1;
+                        break;
+                }
+
+                if (exit)
+                {
+                    break;
+                }
+
+                Console.WriteLine($"\x1B[{Choices.Length + 1}A");
+                RenderChoices();
+            }
+
+            WriteObject(selectedValue);
         }
 
         private void RenderChoices()
