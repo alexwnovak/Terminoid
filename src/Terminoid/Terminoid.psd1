@@ -69,7 +69,8 @@
     CmdletsToExport    = @(
         'Test-SampleCmdlet',
         'Format-Date',
-        'Format-Bytes'
+        'Format-Bytes',
+        'Select-FromMany'
     )
 
     # Variables to export from this module
