@@ -17,23 +17,22 @@ namespace Terminoid.Cmdlets
         protected override void ProcessRecord()
         {
             RenderChoices();
+            var choice = GetChoice();
+            WriteObject(choice);
+        }
 
-            bool exit = false;
-            object selectedValue = null;
-
-            while (!exit)
+        private object GetChoice()
+        {
+            while (true)
             {
                 var key = Console.ReadKey(true);
 
                 switch (key.Key)
                 {
                     case ConsoleKey.Enter:
-                        selectedValue = Choices[_selectedIndex];
-                        exit = true;
-                        break;
+                        return Choices[_selectedIndex];
                     case ConsoleKey.Escape:
-                        exit = true;
-                        break;
+                        return null;
                     case ConsoleKey.UpArrow:
                         _selectedIndex = _selectedIndex == 0 ? 0 : _selectedIndex - 1;
                         break;
@@ -42,16 +41,9 @@ namespace Terminoid.Cmdlets
                         break;
                 }
 
-                if (exit)
-                {
-                    break;
-                }
-
                 Console.WriteLine($"\x1B[{Choices.Length + 1}A");
                 RenderChoices();
             }
-
-            WriteObject(selectedValue);
         }
 
         private void RenderChoices()
