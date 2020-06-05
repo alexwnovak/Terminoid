@@ -7,6 +7,12 @@ namespace Terminoid
     {
         private readonly List<string> _sections = new List<string>();
 
+        public void PushForeground(ConsoleColor color)
+        {
+            string format = VT.SetForeground(color);
+            _sections.Add(format);
+        }
+
         public void Append(string text)
         {
             _sections.Add(text);

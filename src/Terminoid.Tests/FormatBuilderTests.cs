@@ -19,9 +19,20 @@ namespace Terminoid.Tests
         public void GivenTheBuilderIsEmpty_WhenAppendingPlainText_ThenTheOutputIsJustPlainText()
         {
             var formatBuilder = new FormatBuilder();
+
             formatBuilder.Append("Plaintext");
 
             formatBuilder.ToString().Should().Be("Plaintext");
+        }
+
+        [Fact]
+        public void GivenTheBuilderIsEmpty_WhenAForegroundIsPushed_ThenTheOutputChangesTheForeground()
+        {
+            var formatBuilder = new FormatBuilder();
+
+            formatBuilder.PushForeground(ConsoleColor.Red);
+
+            formatBuilder.ToString().Should().Be("\x1B[31m");
         }
     }
 }
