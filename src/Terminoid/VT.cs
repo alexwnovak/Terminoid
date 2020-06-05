@@ -16,7 +16,14 @@ namespace Terminoid
             [ConsoleColor.DarkMagenta] = "35",
             [ConsoleColor.DarkCyan] = "36",
             [ConsoleColor.Gray] = "37",
-            [ConsoleColor.DarkGray] = "1;30"
+            [ConsoleColor.DarkGray] = "1;30",
+            [ConsoleColor.Red] = "1;31",
+            [ConsoleColor.Green] = "1;32",
+            [ConsoleColor.Yellow] = "1;33",
+            [ConsoleColor.Blue] = "1;34",
+            [ConsoleColor.Magenta] = "1;35",
+            [ConsoleColor.Cyan] = "1;36",
+            [ConsoleColor.White] = "1;37",
         };
 
         public static string SetForeground(ConsoleColor color) => $"\x1B[{_consoleColorTable[color]}m";
