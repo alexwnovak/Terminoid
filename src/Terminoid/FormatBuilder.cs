@@ -6,17 +6,24 @@ namespace Terminoid
     public class FormatBuilder
     {
         private readonly List<string> _sections = new List<string>();
+        private bool _hasForeground;
 
         public void PushForeground(ConsoleColor color)
         {
             string format = VT.SetForeground(color);
             _sections.Add(format);
+
+            _hasForeground = true;
         }
 
         public void PopForeground()
         {
-            string format = VT.ResetForeground();
-            _sections.Add(format);
+            if (_hasForeground)
+            {
+                string format = VT.ResetForeground();
+                _sections.Add(format);
+                _hasForeground = false;
+            }
         }
 
         public void Append(string text)

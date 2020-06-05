@@ -45,5 +45,15 @@ namespace Terminoid.Tests
 
             formatBuilder.ToString().Should().EndWith("\x1B[39m");
         }
+
+        [Fact]
+        public void GivenTheBuilderHasNoForegroundSet_WhenPoppingTheForeground_ThenNoReversionOccurs()
+        {
+            var formatBuilder = new FormatBuilder();
+
+            formatBuilder.PopForeground();
+
+            formatBuilder.ToString().Should().BeEmpty();
+        }
     }
 }
