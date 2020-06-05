@@ -6,16 +6,17 @@ namespace Terminoid
 {
     internal static class VT
     {
-        private static readonly Dictionary<ConsoleColor, int> _consoleColorTable = new Dictionary<ConsoleColor, int>
+        private static readonly Dictionary<ConsoleColor, string> _consoleColorTable = new Dictionary<ConsoleColor, string>
         {
-            [ConsoleColor.Black] = 30,
-            [ConsoleColor.Red] = 31,
-            [ConsoleColor.Green] = 32,
-            [ConsoleColor.Yellow] = 33,
-            [ConsoleColor.Blue] = 34,
-            [ConsoleColor.Magenta] = 35,
-            [ConsoleColor.Cyan] = 36,
-            [ConsoleColor.Gray] = 37
+            [ConsoleColor.Black] = "30",
+            [ConsoleColor.DarkRed] = "31",
+            [ConsoleColor.DarkGreen] = "32",
+            [ConsoleColor.DarkYellow] = "33",
+            [ConsoleColor.DarkBlue] = "34",
+            [ConsoleColor.DarkMagenta] = "35",
+            [ConsoleColor.DarkCyan] = "36",
+            [ConsoleColor.Gray] = "37",
+            [ConsoleColor.DarkGray] = "1;30"
         };
 
         public static string SetForeground(ConsoleColor color) => $"\x1B[{_consoleColorTable[color]}m";
