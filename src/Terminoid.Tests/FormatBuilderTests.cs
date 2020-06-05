@@ -25,14 +25,22 @@ namespace Terminoid.Tests
             formatBuilder.ToString().Should().Be("Plaintext");
         }
 
-        [Fact]
-        public void GivenTheBuilderIsEmpty_WhenAForegroundIsPushed_ThenTheOutputChangesTheForeground()
+        [Theory]
+        [InlineData(ConsoleColor.Black, 30)]
+        [InlineData(ConsoleColor.Red, 31)]
+        [InlineData(ConsoleColor.Green, 32)]
+        [InlineData(ConsoleColor.Yellow, 33)]
+        [InlineData(ConsoleColor.Blue, 34)]
+        [InlineData(ConsoleColor.Magenta, 35)]
+        [InlineData(ConsoleColor.Cyan, 36)]
+        [InlineData(ConsoleColor.Gray, 37)]
+        public void GivenTheBuilderIsEmpty_WhenAForegroundIsPushed_ThenTheOutputChangesTheForeground(ConsoleColor color, int expected)
         {
             var formatBuilder = new FormatBuilder();
 
-            formatBuilder.PushForeground(ConsoleColor.Red);
+            formatBuilder.PushForeground(color);
 
-            formatBuilder.ToString().Should().Be("\x1B[31m");
+            formatBuilder.ToString().Should().Be($"\x1B[{expected}m");
         }
 
         [Fact]

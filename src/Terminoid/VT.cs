@@ -8,7 +8,14 @@ namespace Terminoid
     {
         private static readonly Dictionary<ConsoleColor, int> _consoleColorTable = new Dictionary<ConsoleColor, int>
         {
-            [ConsoleColor.Red] = 31
+            [ConsoleColor.Black] = 30,
+            [ConsoleColor.Red] = 31,
+            [ConsoleColor.Green] = 32,
+            [ConsoleColor.Yellow] = 33,
+            [ConsoleColor.Blue] = 34,
+            [ConsoleColor.Magenta] = 35,
+            [ConsoleColor.Cyan] = 36,
+            [ConsoleColor.Gray] = 37
         };
 
         public static string SetForeground(ConsoleColor color) => $"\x1B[{_consoleColorTable[color]}m";
