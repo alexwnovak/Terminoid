@@ -8,6 +8,14 @@ namespace Terminoid.Tests
     public class FormatBuilderTests
     {
         [Fact]
+        public void GivenTheBuilderIsEmpty_WhenNothingHasChanged_ThenTheOutputIsAnEmptyString()
+        {
+            var formatBuilder = new FormatBuilder();
+
+            formatBuilder.ToString().Should().BeEmpty();
+        }
+
+        [Fact]
         public void GivenTheBuilderIsEmpty_WhenAppendingPlainText_ThenTheOutputIsJustPlainText()
         {
             var formatBuilder = new FormatBuilder();
