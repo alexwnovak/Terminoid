@@ -72,11 +72,22 @@ namespace Terminoid.Tests
         }
 
         [Fact]
-        public void GivenTheBuilderHasAForeground_WhenPoppingTheForeground_ThenTheForegroundIsReverted()
+        public void GivenAConsoleColorWasPushed_WhenPoppingTheForeground_ThenTheForegroundIsReverted()
         {
             var formatBuilder = new FormatBuilder();
 
             formatBuilder.PushForeground(ConsoleColor.Red);
+            formatBuilder.PopForeground();
+
+            formatBuilder.ToString().Should().EndWith("\x1B[39m");
+        }
+
+        [Fact]
+        public void GivenAnRgbColorWasPushed_WhenPoppingTheForeground_ThenTheForegroundIsReverted()
+        {
+            var formatBuilder = new FormatBuilder();
+
+            formatBuilder.PushForeground(Color.FromRgb(20, 40, 60));
             formatBuilder.PopForeground();
 
             formatBuilder.ToString().Should().EndWith("\x1B[39m");

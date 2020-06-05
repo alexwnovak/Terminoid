@@ -21,6 +21,8 @@ namespace Terminoid
         {
             string format = VT.SetForegroundRgb(color);
             _sections.Add(format);
+
+            _hasForeground = true;
         }
 
         public void PopForeground()
