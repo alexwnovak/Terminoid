@@ -2,6 +2,7 @@ using System;
 using Xunit;
 using FluentAssertions;
 using Terminoid;
+using LineInput;
 
 namespace Terminoid.Tests
 {
@@ -59,6 +60,16 @@ namespace Terminoid.Tests
             formatBuilder.PushForeground(brightColor);
 
             formatBuilder.ToString().Should().Be($"\x1B[1;{expected}m");
+        }
+
+        [Fact]
+        public void GivenTheBuilderIsEmpty_WhenAnRgbColorIsPushed_ThenTheOutputChangesTheForeground()
+        {
+            var formatBuilder = new FormatBuilder();
+
+            formatBuilder.PushForeground(Color.FromRgb(20, 40, 60));
+
+            formatBuilder.ToString().Should().Be("\x1B[38;2;20;40;60m");
         }
 
         [Fact]

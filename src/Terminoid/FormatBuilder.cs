@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using LineInput;
 
 namespace Terminoid
 {
@@ -14,6 +15,12 @@ namespace Terminoid
             _sections.Add(format);
 
             _hasForeground = true;
+        }
+
+        public void PushForeground(Color color)
+        {
+            string format = VT.SetForegroundRgb(color);
+            _sections.Add(format);
         }
 
         public void PopForeground()
