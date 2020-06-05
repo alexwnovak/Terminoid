@@ -34,5 +34,16 @@ namespace Terminoid.Tests
 
             formatBuilder.ToString().Should().Be("\x1B[31m");
         }
+
+        [Fact]
+        public void GivenTheBuilderHasAForeground_WhenPoppingTheForeground_ThenTheForegroundIsReverted()
+        {
+            var formatBuilder = new FormatBuilder();
+
+            formatBuilder.PushForeground(ConsoleColor.Red);
+            formatBuilder.PopForeground();
+
+            formatBuilder.ToString().Should().EndWith("\x1B[39m");
+        }
     }
 }
