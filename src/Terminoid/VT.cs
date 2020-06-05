@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using LineInput;
 
-namespace LineInput
+namespace Terminoid
 {
     internal static class VT
     {
