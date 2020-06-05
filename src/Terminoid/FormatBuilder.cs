@@ -1,45 +1,51 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using LineInput;
 
 namespace Terminoid
 {
     public class FormatBuilder
     {
-        private readonly List<string> _sections = new List<string>();
-        private bool _hasForeground;
+        private readonly List<FormatTreeNode> _formatList = new List<FormatTreeNode>();
+        private readonly Stack<FormatTreeNode> _foregroundRevertStack = new Stack<FormatTreeNode>();
 
         public void PushForeground(ConsoleColor color)
         {
-            string format = VT.SetForeground(color);
-            _sections.Add(format);
-
-            _hasForeground = true;
+            _formatList.Add(new ForegroundColorNode(color));
+            _foregroundRevertStack.Push(new ResetForegroundNode());
         }
 
         public void PushForeground(Color color)
         {
-            string format = VT.SetForegroundRgb(color);
-            _sections.Add(format);
-
-            _hasForeground = true;
+            _formatList.Add(new ForegroundColorNode(color));
+            _foregroundRevertStack.Push(new ResetForegroundNode());
         }
 
         public void PopForeground()
         {
-            if (_hasForeground)
+            if (_foregroundRevertStack.Count > 0)
             {
-                string format = VT.ResetForeground();
-                _sections.Add(format);
-                _hasForeground = false;
+                _formatList.Add(_foregroundRevertStack.Pop());
             }
         }
 
         public void Append(string text)
         {
-            _sections.Add(text);
+            var textNode = new TextNode(text);
+            _formatList.Add(textNode);
         }
 
-        public override string ToString() => string.Join(string.Empty, _sections);
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            foreach (var node in _formatList)
+            {
+                node.Evaluate(sb);
+            }
+
+            return sb.ToString();
+        }
     }
 }
