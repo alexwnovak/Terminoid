@@ -2,7 +2,6 @@ using System;
 using Xunit;
 using FluentAssertions;
 using Terminoid;
-using LineInput;
 
 namespace Terminoid.Tests
 {

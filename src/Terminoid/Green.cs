@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace LineInput
+namespace Terminoid
 {
     [ExcludeFromCodeCoverage]
     public struct Green : IEquatable<Green>

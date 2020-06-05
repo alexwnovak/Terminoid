@@ -1,6 +1,7 @@
 using Xunit;
 using FluentAssertions;
 using LineInput;
+using Terminoid;
 
 namespace LineInput.Tests
 {

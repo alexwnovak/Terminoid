@@ -1,3 +1,5 @@
+using Terminoid;
+
 namespace LineInput
 {
     public class Cell

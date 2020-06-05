@@ -1,4 +1,5 @@
 using System;
+using Terminoid;
 
 namespace LineInput.Animation
 {
