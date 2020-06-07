@@ -9,6 +9,7 @@ namespace Terminoid
     {
         private readonly List<FormatTreeNode> _formatList = new List<FormatTreeNode>();
         private readonly Stack<FormatTreeNode> _foregroundRevertStack = new Stack<FormatTreeNode>();
+        private readonly Stack<FormatTreeNode> _backgroundRevertStack = new Stack<FormatTreeNode>();
 
         public void PushForeground(ConsoleColor color)
         {
@@ -22,11 +23,31 @@ namespace Terminoid
             _foregroundRevertStack.Push(new ResetForegroundNode());
         }
 
+        public void PushBackground(ConsoleColor color)
+        {
+            _formatList.Add(new BackgroundColorNode(color));
+            _backgroundRevertStack.Push(new ResetBackgroundNode());
+        }
+
+        public void PushBackground(Color color)
+        {
+            _formatList.Add(new BackgroundColorNode(color));
+            _backgroundRevertStack.Push(new ResetBackgroundNode());
+        }
+
         public void PopForeground()
         {
             if (_foregroundRevertStack.Count > 0)
             {
                 _formatList.Add(_foregroundRevertStack.Pop());
+            }
+        }
+
+        public void PopBackground()
+        {
+            if (_backgroundRevertStack.Count > 0)
+            {
+                _formatList.Add(_backgroundRevertStack.Pop());
             }
         }
 
