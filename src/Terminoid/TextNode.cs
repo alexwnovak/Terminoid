@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace LineInput
+namespace Terminoid
 {
     internal class TextNode : FormatTreeNode
     {

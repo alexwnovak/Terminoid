@@ -1,11 +1,11 @@
 using System;
 using Xunit;
 using FluentAssertions;
-using LineInput;
-using LineInput.Commands;
-using LineInput.Tests.Internal;
+using Terminoid;
+using Terminoid.Commands;
+using Terminoid.Tests.Internal;
 
-namespace LineInput.Tests
+namespace Terminoid.Tests
 {
     public class InputControllerTests
     {

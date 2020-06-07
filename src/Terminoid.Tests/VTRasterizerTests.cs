@@ -1,6 +1,6 @@
 using Xunit;
 using FluentAssertions;
-using LineInput;
+using Terminoid;
 
 public class VTRasterizerTests
 {

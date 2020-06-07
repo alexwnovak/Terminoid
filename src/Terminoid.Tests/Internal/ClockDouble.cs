@@ -1,7 +1,7 @@
 using System;
-using LineInput.Animation;
+using Terminoid.Animation;
 
-namespace LineInput.Tests.Internal
+namespace Terminoid.Tests.Internal
 {
     internal class ClockDouble : Clock
     {

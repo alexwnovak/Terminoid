@@ -1,6 +1,6 @@
 using System;
 
-namespace LineInput
+namespace Terminoid
 {
     public abstract class InputControllerBase : IInputController
     {

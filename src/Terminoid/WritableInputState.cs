@@ -1,4 +1,4 @@
-namespace LineInput
+namespace Terminoid
 {
     internal class WritableInputState : IWritableInputState
     {

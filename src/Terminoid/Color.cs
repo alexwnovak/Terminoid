@@ -1,6 +1,6 @@
 using System;
 
-namespace LineInput
+namespace Terminoid
 {
     public readonly struct Color : IEquatable<Color>
     {

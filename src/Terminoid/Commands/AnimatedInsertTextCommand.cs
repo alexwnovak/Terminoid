@@ -1,7 +1,7 @@
 using System;
-using LineInput.Animation;
+using Terminoid.Animation;
 
-namespace LineInput.Commands
+namespace Terminoid.Commands
 {
     public class AnimatedInsertTextCommand : Animatable, IInputStateCommand<string>
     {

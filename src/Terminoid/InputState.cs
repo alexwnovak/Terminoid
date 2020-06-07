@@ -1,4 +1,4 @@
-namespace LineInput
+namespace Terminoid
 {
     public class InputState
     {

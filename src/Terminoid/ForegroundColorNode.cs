@@ -1,22 +1,43 @@
+using System;
 using System.Text;
+using Terminoid;
 
-namespace LineInput
+namespace Terminoid
 {
     internal class ForegroundColorNode : FormatTreeNode
     {
-        public Color Color { get; }
+        private readonly Color? _color;
+        private readonly ConsoleColor? _consoleColor;
 
-        public ForegroundColorNode(Color color) => Color = color;
+        public ForegroundColorNode(Color color) => _color = color;
+        public ForegroundColorNode(ConsoleColor color) => _consoleColor = color;
 
-        public override void Evaluate(StringBuilder sb)
+        private void EvaluateRgb(StringBuilder sb)
         {
-            if (Color.IsEmpty)
+            if (_color.Value.IsEmpty)
             {
                 sb.Append(VT.ResetForeground());
             }
             else
             {
-                sb.Append(VT.SetForegroundRgb(Color));
+                sb.Append(VT.SetForegroundRgb(_color.Value));
+            }
+        }
+
+        private void EvaluateConsoleColor(StringBuilder sb)
+        {
+            sb.Append(VT.SetForeground(_consoleColor.Value));
+        }
+
+        public override void Evaluate(StringBuilder sb)
+        {
+            if (_color != null)
+            {
+                EvaluateRgb(sb);
+            }
+            else if (_consoleColor != null)
+            {
+                EvaluateConsoleColor(sb);
             }
 
             EvaluateChildren(sb);

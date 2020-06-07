@@ -1,4 +1,6 @@
-namespace LineInput
+using Terminoid;
+
+namespace Terminoid
 {
     public class Cell
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace LineInput.Tests.Internal
+namespace Terminoid.Tests.Internal
 {
     internal static class KeyFactory
     {

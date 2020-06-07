@@ -1,7 +1,8 @@
 using System;
 using System.Text;
+using Terminoid;
 
-namespace LineInput
+namespace Terminoid
 {
     internal class FormatTree
     {
