@@ -1,10 +1,10 @@
 using System;
 using Xunit;
 using FluentAssertions;
-using LineInput.Animation;
-using LineInput.Tests.Internal;
+using Terminoid.Animation;
+using Terminoid.Tests.Internal;
 
-namespace LineInput.Tests.Animation
+namespace Terminoid.Tests.Animation
 {
     public class ClockTests
     {

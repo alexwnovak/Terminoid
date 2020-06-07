@@ -1,4 +1,4 @@
-namespace LineInput.Animation
+namespace Terminoid.Animation
 {
     public enum RepeatBehavior
     {

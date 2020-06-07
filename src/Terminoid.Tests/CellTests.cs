@@ -1,9 +1,8 @@
 using Xunit;
 using FluentAssertions;
-using LineInput;
 using Terminoid;
 
-namespace LineInput.Tests
+namespace Terminoid.Tests
 {
     public class CellTests
     {

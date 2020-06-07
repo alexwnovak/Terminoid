@@ -1,7 +1,4 @@
-using LineInput;
-using LineInput.Commands;
-
-namespace LineInput.Tests.Internal
+namespace Terminoid.Tests.Internal
 {
     internal class InputStateManagerDouble : IInputStateManager
     {

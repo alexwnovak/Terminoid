@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LineInput
+namespace Terminoid
 {
     internal abstract class FormatTreeNode
     {

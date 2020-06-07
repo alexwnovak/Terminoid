@@ -52,7 +52,13 @@ namespace Terminoid.Cmdlets
             {
                 if (index == _selectedIndex)
                 {
+                    var formatBuilder = new FormatBuilder();
+                    formatBuilder.PushForeground(Color.FromRgb(119, 144, 203));
+                    formatBuilder.Append("\uE0B6");
+                    formatBuilder.PushForeground(Color.FromRgb(255, 255, 255));
+
                     string pill = "\x1B[38;2;119;144;203m\uE0B6\x1B[38;2;255;255;255m\x1B[48;2;119;144;203m {0} \x1B[38;2;119;144;203m\x1B[49m\uE0B4\x1B[0m";
+
                     Console.WriteLine(string.Format(pill, Choices[index]));
                 }
                 else

@@ -1,7 +1,6 @@
 using System;
-using Terminoid;
 
-namespace LineInput.Animation
+namespace Terminoid.Animation
 {
     public class BlinkCursorAnimation : Animatable
     {

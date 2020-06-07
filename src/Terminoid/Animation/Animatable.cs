@@ -1,6 +1,6 @@
 using System;
 
-namespace LineInput.Animation
+namespace Terminoid.Animation
 {
     public class Animatable
     {

@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using LineInput.Animation;
-using Terminoid;
+using Terminoid.Animation;
 
-namespace LineInput
+namespace Terminoid
 {
     public class RenderManager
     {

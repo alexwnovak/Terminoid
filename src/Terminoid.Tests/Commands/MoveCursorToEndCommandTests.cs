@@ -1,9 +1,8 @@
 using Xunit;
 using FluentAssertions;
-using LineInput;
-using LineInput.Commands;
+using Terminoid.Commands;
 
-namespace LineInput.Tests.Commands
+namespace Terminoid.Tests.Commands
 {
     public class MoveCursorToEndCommandTests
     {

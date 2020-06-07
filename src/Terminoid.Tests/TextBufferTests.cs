@@ -3,9 +3,8 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using Xunit;
 using FluentAssertions;
-using LineInput;
 
-namespace LineInput.Tests
+namespace Terminoid.Tests
 {
     public class TextBufferTests
     {

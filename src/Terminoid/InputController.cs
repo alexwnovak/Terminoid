@@ -1,7 +1,7 @@
 using System;
-using LineInput.Commands;
+using Terminoid.Commands;
 
-namespace LineInput
+namespace Terminoid
 {
     public class InputController : InputControllerBase
     {

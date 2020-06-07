@@ -1,4 +1,4 @@
-namespace LineInput.Commands
+namespace Terminoid.Commands
 {
     public class ClearLineCommand : IInputStateCommand
     {
