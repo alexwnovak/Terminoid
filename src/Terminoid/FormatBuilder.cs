@@ -10,6 +10,11 @@ namespace Terminoid
         private readonly Stack<FormatTreeNode> _foregroundRevertStack = new Stack<FormatTreeNode>();
         private readonly Stack<FormatTreeNode> _backgroundRevertStack = new Stack<FormatTreeNode>();
 
+        public void ResetAllFormatting()
+        {
+            _formatList.Add(new ResetAllFormattingNode());
+        }
+
         public void PushForeground(ConsoleColor color)
         {
             _formatList.Add(new ForegroundColorNode(color));
