@@ -1,3 +1,8 @@
+using System;
+using Xunit;
+using FluentAssertions;
+using Terminoid;
+
 namespace Terminoid.Tests
 {
     public class FormatBuilderForegroundColorTests
@@ -49,7 +54,7 @@ namespace Terminoid.Tests
         }
 
         [Fact]
-        public void GivenAConsoleColorWasPushed_WhenPoppingTheForeground_ThenTheForegroundIsReverted()
+        public void GivenAForegroundConsoleColorWasPushed_WhenPoppingTheForeground_ThenTheForegroundIsReverted()
         {
             var formatBuilder = new FormatBuilder();
 
@@ -60,7 +65,7 @@ namespace Terminoid.Tests
         }
 
         [Fact]
-        public void GivenAnRgbColorWasPushed_WhenPoppingTheForeground_ThenTheForegroundIsReverted()
+        public void GivenAForegroundRgbColorWasPushed_WhenPoppingTheForeground_ThenTheForegroundIsReverted()
         {
             var formatBuilder = new FormatBuilder();
 
